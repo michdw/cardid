@@ -126,5 +126,16 @@ namespace Cardid.Controllers
             return RedirectToAction("EditCardInitD", new { cardID = newValues.CardID, deckID = deck.DeckID });
         }
 
+
+        public ActionResult SearchCards(string text)
+        {
+            string userID = Session["userid"].ToString();
+            ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
+
+            List<Card> matchingCards = cardSql.SearchCardsForText(text);
+            ViewBag.SearchText = text;
+            return View("MainCardView", matchingCards);
+        }
+
     }
 }
