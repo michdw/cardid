@@ -1,0 +1,332 @@
+﻿
+/* layout */
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    background: url('Backgrounds/arrowbg5.png') no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    font-family: Helvetica, sans-serif;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.pageview {
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.page-header {
+    background: rgba(0,0,0,.15);
+    padding: 20px 0;
+    /*border-bottom: 1px solid rgba(255,255,255,.3);*/
+}
+
+.container {
+    padding: 1em;
+    margin-bottom: 3em;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    background: rgba(0,0,0,.5);
+    padding: 4px;
+    color: #fff;
+}
+
+.page-title, .top-menu {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    opacity: .8;
+}
+
+    .page-title h1 {
+        font-size: 3em;
+        font-family: 'Gugi', sans-serif;
+        margin: 0;
+        opacity: .8;
+    }
+
+    .page-title p {
+        position: absolute;
+        transform: translate(10.5em, .36em);
+        margin: 0;
+        font-size: .9em;
+        margin-top: 0;
+    }
+
+.bold {
+    font-weight: bold;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+/* forms */
+
+.form-label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+/* buttons */
+
+.btn {
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-radius: 4px;
+    opacity: .9;
+}
+
+    .btn:hover {
+        text-decoration: none;
+        opacity: .7;
+    }
+
+.top-btn {
+    width: 10vw;
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+.top-btn, .main-btn, .card-button {
+    background: #333;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+    .top-btn:hover, .main-btn:hover, .card-button:hover {
+        background: #fff;
+        color: #333;
+        border: 1px solid #333;
+    }
+
+.delete-btn {
+    background: #993737;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+    .delete-btn:hover {
+        background: #fff;
+        color: #993737;
+        border: 1px solid #993737;
+    }
+
+
+/* cards */
+
+.card-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-bothsides {
+    display: inline-block;
+    position: relative;
+    overflow: auto;
+    padding: 15px;
+    padding-top: 20px;
+    margin: 15px;
+    height: 30vh;
+    min-height: 300px;
+    width: 25%;
+    min-width: 350px;
+    background: rgba(255,255,255,0.25);
+    color: black;
+}
+
+.front-field, .back-field {
+    background: #fff;
+    margin: 10px;
+    padding: 10px;
+}
+
+.front-field {
+    top: 0;
+}
+
+.back-field {
+    bottom: 0;
+}
+
+.card-options {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.card-button {
+    margin: 10px;
+}
+
+.cardview-deck {
+    background: rgba(255,255,255,.5);
+    color: #000;
+    font-size: .9em;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+
+/* decks */
+
+.remove-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1em;
+    padding: 2px;
+    line-height: 1em;
+    font-size: 1.6em;
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+    .remove-card:hover {
+        color: #993737;
+    }
+
+.delete-submit {
+    display: inline-block;
+    padding: 10px;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+}
+
+.tag-container {
+}
+
+.tag {
+    margin: 4px;
+    padding: 4px;
+    color: #fff;
+}
+
+.active-tag {
+    background: #394272;
+}
+
+.inactive-tag {
+    background: #777;
+}
+
+
+/* study session */
+
+.study-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+}
+
+.card-frame {
+    position: relative;
+    width: 550px;
+    max-width: 90vw;
+    height: 350px;
+    max-height: 60vw;
+}
+
+.studycard {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.8);
+    color: #000;
+    font-size: 2em;
+    transition: all .3s ease;
+}
+
+.new-card {
+    transform: translateX(100vw);
+}
+
+.old-card {
+    transform: translateX(-100vw);
+}
+
+.studynav {
+    margin: 10px;
+    text-decoration-style: none;
+    background: #333;
+    color: #fff;
+}
+
+    .studynav:hover, .finish:hover {
+        cursor: pointer;
+    }
+
+.flip {
+    padding: 10px;
+}
+
+.mark-frame div {
+    display: inline-block;
+    padding: 10px;
+}
+
+.mark-right:hover {
+    background: #379937;
+    color: #fff;
+}
+
+.mark-wrong:hover {
+    background: #993737;
+    color: #fff;
+}
+
+.score div {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+}
+
+.resultsFrame a {
+    color: #000;
+}

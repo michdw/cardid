@@ -1,0 +1,31 @@
+﻿@using Cardid.Models
+@model Deck
+@{
+    ViewBag.Title = "CardsInDeck";
+}
+
+
+<h2>View Cards In Deck</h2>
+
+<div class="card-container">
+
+    @foreach (Card thisCard in Model.Cards)
+    {
+        <div class="card-bothsides">
+            <div class="front-field">@thisCard.Front</div>
+            <div class="back-field">@thisCard.Back</div>
+            @Html.ActionLink("Add to a different deck", "ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn card-button" })
+        </div>
+    }
+
+</div>
+
+<div class="tag-container">
+    <h4 class="bold">Tags</h4>
+
+    @foreach (Tag tag in Model.Tags)
+    {
+        <span class="deck-tag">@tag.TagName</span>
+    }
+
+</div>

@@ -1,0 +1,27 @@
+﻿@using Cardid.Models
+@model User
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
+{
+    @Html.ValidationMessage("invalid-credentials")
+    if (ViewBag.RegisterInstead == true)
+    {
+        @Html.ActionLink("Sign up here", "BeginRegister", "Home");
+    }
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
+    </div>
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password)
+    </div>
+
+    <button type="submit" class="btn main-btn">Flash Forward >></button>
+}

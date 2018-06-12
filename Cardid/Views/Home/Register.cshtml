@@ -1,0 +1,39 @@
+﻿@using Cardid.Models;
+@model User
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<h2>Register</h2>
+
+@using (Html.BeginForm("CompleteRegister", "Home", FormMethod.Post))
+{
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.DisplayName, new { autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.DisplayName)
+    </div>
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.EditorFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password", new { @class = "form-label"})
+        @Html.PasswordFor(m => m.ConfirmPassword)
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    </div>
+
+
+
+    <button type="submit" class="btn main-btn">Flash Forward</button>
+}

@@ -1,0 +1,22 @@
+﻿@using Cardid.Models
+@model Deck
+@{
+    ViewBag.Title = "CreateDeck";
+}
+
+
+<h2>Create Deck</h2>
+
+@using (Html.BeginForm("CreateDeckSubmit", "Deck", FormMethod.Post))
+{
+
+    <div>
+        @Html.Label("Name", "Deck Name: ")
+        @Html.TextBoxFor(m => m.Name)
+        <button class="btn main-btn">Add deck</button>
+    </div>
+
+
+
+}
+

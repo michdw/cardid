@@ -1,0 +1,69 @@
+﻿
+@using Cardid.Models
+@model Study
+@{
+    ViewBag.Title = "Study Session";
+    Deck deck = ViewBag.Deck;
+    int cardCount = deck.Cards.Count;
+}
+
+
+
+
+<h2 class="title">Study Session</h2>
+
+
+<div class="study-frame">
+
+    <div>
+        <div class="flip studynav">Flip card</div>
+        <div class="mark-frame hidden">
+            <div class="mark-wrong studynav">Mark wrong</div>
+            <div class="mark-right studynav">Mark right</div>
+        </div>
+    </div>
+
+    <div class="card-frame">
+        @{
+            foreach (Card currentCard in deck.Cards)
+            {
+                <div class="studycard new-card">
+                    <div class="front-view">
+                        <p>@currentCard.Front</p>
+                    </div>
+                    <div class="back-view hidden">
+                        <p>@currentCard.Back</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="score">
+        <div class="total-correct"></div>
+        <span>of</span>
+        <div class="total-viewed"></div>
+        <span>correct-</span>
+    </div>
+
+</div>
+
+
+@using (Html.BeginForm("StudyLog", "Deck", FormMethod.Post, new { @id = "complete" }))
+{
+    @Html.HiddenFor(m => m.DeckID, deck.DeckID)
+    @Html.HiddenFor(m => m.UserID, deck.UserID)
+    @Html.HiddenFor(m => m.TotalScore, new { id = "totalScore" })
+    @Html.HiddenFor(m => m.PossibleScore, new { id = "possibleScore" })
+}
+
+<div hidden id="cardCount" data-name="@cardCount"></div>
+
+@*<script>
+
+    $(document).ready(function () {
+        alert('js');
+    });
+
+</script>*@
+<script type="text/javascript" src="../../Content/studySession.js"></script>

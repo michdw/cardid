@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "CreateCard";
+}
+
+@using Cardid.Models
+@model Card
+
+<h2>Create a New Card</h2>
+
+@using (Html.BeginForm("CreateCardSubmit", "Card", FormMethod.Post))
+{
+    <div>
+        <p>front of card:</p>
+        @Html.TextAreaFor(m => m.Front)
+
+        <p>back of card:</p>
+        @Html.TextAreaFor(m => m.Back)
+
+    </div>
+
+    <button class="btn main-btn">Add card</button>
+}

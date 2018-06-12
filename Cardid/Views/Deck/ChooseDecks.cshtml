@@ -1,0 +1,16 @@
+﻿@using Cardid.Models
+@model List<Deck>
+@{
+    ViewBag.Title = "Choose Decks For Card";
+}
+
+
+
+<h2>Add Card to Decks</h2>
+
+@foreach (Deck thisDeck in Model)
+{
+
+        @Html.ActionLink(thisDeck.Name, "ChooseDecksSubmit", new { cardID = ViewBag.Card.CardID, deckID = thisDeck.DeckID }, new {@class="btn main-btn" })
+
+}

@@ -1,0 +1,51 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Flashcards</title>
+    <link rel="stylesheet" href="~/Content/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+    <div class="pageview">
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Cardid.</h1>
+                <p>Candid flashcards.</p>
+            </div>
+            <div class="top-menu">
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn top-btn" })
+                @Html.ActionLink("Decks", "Index", "Deck", null, new { @class = "btn top-btn" })
+                @Html.ActionLink("Cards", "Index", "Card", null, new { @class = "btn top-btn" })
+                @if (Session["userid"] == null)
+                {
+                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "btn top-btn" })
+                    @Html.ActionLink("Register", "BeginRegister", "Home", null, new { @class = "btn top-btn" })
+                }
+                @if (Session["userid"] != null)
+                {
+                    @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn top-btn" })
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+
+        <div class="page-footer">
+            <div>
+                2018 Michael D Weaver
+            </div>
+        </div>
+    </div>
+</body>
+</html>

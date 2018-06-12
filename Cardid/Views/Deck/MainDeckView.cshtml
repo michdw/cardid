@@ -1,0 +1,73 @@
+﻿@using Cardid.Models
+@model List<Deck>
+@{
+    ViewBag.Title = "MainDeckView";
+    string userID = ViewBag.UserID;
+    int counter = 0;
+}
+
+@if (TempData["loginname"] != null)
+{
+    <div>Thank you for logging in, @TempData["loginname"]</div>
+}
+
+
+
+<h2>Decks</h2>
+
+
+
+<h4 class="bold">Your decks</h4>
+
+@Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
+
+@{
+    foreach (Deck deck in Model)
+    {
+        if (deck.UserID == userID)
+        {
+            counter++;
+            <div>
+                @deck.Name
+                @Html.ActionLink("View Cards and Edit", "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+                @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+
+            </div>
+        }
+    }
+    if (counter == 0)
+    {
+        <div>You currently have no decks.</div>
+    }
+    if (counter > 10)
+    {
+        @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
+    }
+}
+
+
+<h4 class="bold">Public decks</h4>
+@{
+    counter = 0;
+    foreach (Deck deck in Model)
+    {
+        if (deck.UserID != userID)
+        {
+            counter++;
+            <div>
+                @deck.Name
+            </div>
+            <div>
+                Shared by @deck.Creator.DisplayName
+            </div>
+            @Html.ActionLink("View Cards", "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+            @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+        }
+    }
+    if (counter == 0)
+    {
+        <div>No decks currently shared by other users.</div>
+    }
+}
+
+

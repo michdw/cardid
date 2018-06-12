@@ -1,0 +1,22 @@
+﻿
+@using Cardid.Models
+@model Study
+@{
+    ViewBag.Title = "SessionComplete";
+}
+
+<h2>SessionComplete</h2>
+
+<div class="results-frame">
+    <div class="final-score">
+        <p>
+            You got @Model.TotalScore out of @Model.PossibleScore correct.
+        </p>
+    </div>
+    <div>
+        @Html.ActionLink("Study again", "StudyBegin", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+    </div>
+    <div>
+        @Html.ActionLink("Return to your decks", "Index", "Deck", new { @class = "btn main-btn" })
+    </div>
+</div>
