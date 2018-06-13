@@ -10,6 +10,15 @@
     <div>Thank you for logging in, @TempData["loginname"]</div>
 }
 
+@if (ViewBag.SearchString == null)
+{
+    <h1 class="view-title">All Your Cards</h1>
+}
+else
+{
+    <h1 class="view-title">Search Results</h1>
+}
+
 <div class="flex flex-center">
 
     <div class="option">
@@ -29,25 +38,24 @@
 </div>
 
 <div class="flex flex-center">
-    <div class="container-header">
 
-        @if (ViewBag.SearchString != null)
-        {
-            if (Model.Count > 0)
+
+    @if (ViewBag.SearchString != null)
+    {
+        <div class="container-header">
+
+            @if (Model.Count > 0)
             {
-                <h1 class="title-font">Search results for "@ViewBag.SearchString":</h1>
+                <h1 class="view-title">Search results for "@ViewBag.SearchString":</h1>
             }
             else
             {
                 <h4 class="bold">No cards found containing "@ViewBag.SearchString"</h4>
             }
             @Html.ActionLink("View all your cards", "Index", "Card", null, new { @class = "btn main-btn" })
-        }
-        else
-        {
-            <h1 class="title-font">All Your Cards</h1>
-        }
-    </div>
+        </div>
+    }
+
 
     <div class="card-container">
 

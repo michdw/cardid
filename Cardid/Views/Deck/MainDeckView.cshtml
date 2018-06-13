@@ -2,7 +2,8 @@
 @model List<Deck>
 @{
     ViewBag.Title = "MainDeckView";
-    List<Tag> allTags = ViewBag.Tags;
+    List<Tag> tagsByName = ViewBag.TagsByName;
+    List<Tag> tagsByPopularity = ViewBag.TagsByPopularity;
     string userID = ViewBag.UserID;
     int counter = 0;
 }
@@ -37,10 +38,32 @@
         <div class="option">
             <h4 class="bold">Search decks by tag</h4>
 
-            @foreach (Tag tag in allTags)
-            {
-                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
-            }
+            <div class="tagviews">
+                <span class="tagview-pop bold">sort by popularity</span>
+                <span class="tagview-alph pointer">sort alphabetically</span>
+            </div>
+
+            <div class="tag-container">
+
+                <div class="tags-pop">
+
+                    @foreach (Tag tag in tagsByPopularity)
+                    {
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+                    }
+                </div>
+
+                <div class="tags-alph hidden">
+
+                    @foreach (Tag tag in tagsByName)
+                    {
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+                    }
+                </div>
+
+            </div>
+
+
         </div>
 
     </div>
@@ -83,7 +106,7 @@
 
             else
             {
-                <h1 class="title-font">All Decks</h1>
+                <h1 class="view-title">All Decks</h1>
             }
         </div>
 
@@ -168,6 +191,7 @@
 
 
 
+<script type="text/javascript" src="../../Content/deckTags.js"></script>
 
 
 

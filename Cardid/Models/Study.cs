@@ -11,5 +11,6 @@ namespace Cardid.Models
         public string UserID { get; set; }
         public int TotalScore { get; set; }
         public int PossibleScore { get; set; }
+
     }
 }

@@ -27,7 +27,8 @@ namespace Cardid.Controllers
 
             string userID = Session["userid"].ToString();
             ViewBag.UserID = userID;
-            ViewBag.Tags = tagSql.GetAllTags();
+            ViewBag.TagsByName = tagSql.GetAllTagsByName();
+            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
             List<Deck> allDecks = deckSql.GetAllDecks(userID);
             return View("MainDeckView", allDecks);
         }
@@ -130,9 +131,13 @@ namespace Cardid.Controllers
             return RedirectToAction("Index");
         }
 
+
         public ActionResult EditDeck(string deckID)
         {
             Deck deck = deckSql.GetDeckByID(deckID);
+
+            ViewBag.OtherTagsByName = tagSql.GetOtherTagsByName(deckID);
+            ViewBag.OtherTagsByPopularity = tagSql.GetOtherTagsByPopularity(deckID);
             return View(deck);
         }
 
@@ -172,7 +177,8 @@ namespace Cardid.Controllers
         public ActionResult SearchDeckNames(string searchString)
         {
             ViewBag.UserID = Session["userid"].ToString();
-            ViewBag.Tags = tagSql.GetAllTags();
+            ViewBag.TagsByName = tagSql.GetAllTagsByName();
+            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
 
             List<Deck> matchingDecks = deckSql.SearchDecksByName(searchString);
             ViewBag.SearchName = searchString;
@@ -183,7 +189,9 @@ namespace Cardid.Controllers
         public ActionResult SearchDeckTags(string searchString)
         {
             ViewBag.UserID = Session["userid"].ToString();
-            ViewBag.Tags = tagSql.GetAllTags();
+            ViewBag.TagsByName = tagSql.GetAllTagsByName();
+            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
+
             List<Deck> matchingDecks = deckSql.SearchDecksByTag(searchString);
             ViewBag.SearchTag = searchString;
             return View("MainDeckView", matchingDecks);
@@ -193,12 +201,13 @@ namespace Cardid.Controllers
         public ActionResult StudyBegin(string deckID)
         {
             Deck deck = deckSql.GetDeckByID(deckID);
+            ViewBag.Deck = deck;
+
+            //randomize cards based on bool parameter from view
 
             Study study = new Study();
-            study.UserID = deck.UserID;
             study.DeckID = deckID;
-
-            ViewBag.Deck = deck;
+            study.UserID = Session["userid"].ToString();
             return View("Study", study);
         }
 

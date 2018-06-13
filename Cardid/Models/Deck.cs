@@ -36,15 +36,6 @@ namespace Cardid.Models
             }
         }
 
-        public List<Tag> OtherTags
-        {
-            get
-            {
-                TagSqlDAL tagSql = new TagSqlDAL(connectionString);
-                return tagSql.TagsNotWithDeck(DeckID);
-            }
-        }
-
         public User Creator
         {
             get

@@ -176,6 +176,7 @@
     <Content Include="Content\Backgrounds\arrowbg7.png" />
     <Content Include="Content\Backgrounds\arrowbg8.png" />
     <Content Include="Content\Backgrounds\arrowbg9.png" />
+    <Content Include="Content\deckTags.js" />
     <Content Include="Content\editCard.js" />
     <Content Include="Content\editDeck.js" />
     <Content Include="Content\studySession.js" />

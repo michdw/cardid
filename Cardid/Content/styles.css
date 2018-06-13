@@ -18,6 +18,10 @@ a {
     text-decoration: none;
 }
 
+.pointer:hover {
+    cursor: pointer;
+}
+
 .pageview {
     height: 100%;
     min-height: 100vh;
@@ -30,6 +34,7 @@ a {
 }
 
 .container {
+    position: relative;
     padding: 1em;
     margin-bottom: 3em;
 }
@@ -50,29 +55,29 @@ a {
     color: #fff;
 }
 
-.page-title p {
-    opacity: .7;
-}
+    .page-title p {
+        opacity: .7;
+    }
 
-.title-font {
+.view-title {
     font-family: 'Gugi', sans-serif;
     color: #fff;
     opacity: .7;
 }
 
-    .page-title h1 {
-        font-size: 3em;
-        margin: 0;
-        opacity: .5;
-    }
+.page-title h1 {
+    font-size: 3em;
+    margin: 0;
+    opacity: .5;
+}
 
-    .page-title p {
-        position: absolute;
-        transform: translate(10.5em, .36em);
-        margin: 0;
-        font-size: .9em;
-        margin-top: 0;
-    }
+.page-title p {
+    position: absolute;
+    transform: translate(10.5em, .36em);
+    margin: 0;
+    font-size: .9em;
+    margin-top: 0;
+}
 
 .bold {
     font-weight: bold;
@@ -116,6 +121,8 @@ a {
 }
 
 .option {
+    position: relative;
+    clear: both;
 }
 
 /* forms */
@@ -249,7 +256,6 @@ a {
 }
 
 .deckview-right {
-    min-width: 600px;
 }
 
 .editdeck-left {
@@ -291,7 +297,34 @@ a {
     color: #fff;
 }
 
+/* tags */
+
+.tagviews {
+    position: relative;
+    height: 1.5em;
+}
+
+    .tagviews span {
+        position: absolute;
+        margin: 0;
+    }
+
+.tagview-pop {
+    left: 0;
+}
+
+.tagview-alph {
+    right: 0;
+}
+
 .tag-container {
+    clear: both;
+    overflow: auto;
+    padding: 1em;
+}
+
+.tags-alph, .tags-pop {
+    float: left;
 }
 
 .tag {

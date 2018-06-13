@@ -15,9 +15,6 @@ namespace Cardid.Controllers
 
         public ActionResult Index()
         {
-            //temporary user id
-            //Session["userid"] = "1";
-
             Session["anon"] = "Home";
 
             return View();

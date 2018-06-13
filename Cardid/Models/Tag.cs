@@ -19,8 +19,8 @@ namespace Cardid.Models
         {
             get
             {
-                TagSqlDAL tagSql = new TagSqlDAL(connectionString);
-                return tagSql.GetDecksByTagID(TagID);
+                DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+                return deckSql.GetDecksByTagID(TagID);
             }
         }
 

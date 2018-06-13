@@ -21,9 +21,11 @@ namespace Cardid.DAL
         private string createDeck = "INSERT INTO [decks] (Name, IsPublic, UserID) VALUES (@name, @isPublic, @userID)";
         private string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID)";
         private string getDeckByID = "SELECT * FROM [decks] WHERE DeckID = @deckID";
-        private string getDecksByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID WHERE CardID = @cardID";
+        private string getDecksByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
+            + "WHERE CardID = @cardID";
         private string getDecksByUserID = "SELECT * FROM [decks] WHERE (UserID = @userID)";
-        private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID WHERE deck_tag.TagID = @tagID";
+        private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID "
+            + "WHERE deck_tag.TagID = @tagID";
         private string makeDeckPrivate = "UPDATE [decks] set IsPublic = 0 WHERE DeckID = @deckID";
         private string makeDeckPublic = "UPDATE [decks] set IsPublic = 1 WHERE DeckID = @deckID";
         private string removeAllCardsFromDeck = "DELETE FROM [card_deck] WHERE DeckID = @deckID";

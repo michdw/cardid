@@ -17,12 +17,13 @@ namespace Cardid.DAL
         }
 
         private string addCardToDeck = "INSERT INTO card_deck (CardID, DeckID) VALUES (@cardID, @deckID);";
-        private string cardsNotWithDeck = "SELECT * FROM [cards] WHERE CardID NOT IN (SELECT CardID FROM [card_deck] WHERE DeckID = @deckID)"
-            + "AND UserID = @userID";
+        private string cardsNotWithDeck = "SELECT * FROM [cards] WHERE CardID NOT IN (SELECT CardID FROM [card_deck] "
+            + "WHERE DeckID = @deckID) AND UserID = @userID";
         private string createCard = "INSERT INTO [cards] (Front, Back, UserID) VALUES (@front, @back, @userID);";
         private string editCard = "UPDATE [cards] SET Front = @front, Back = @back WHERE CardID = @cardID";
         private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
-        private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID WHERE card_deck.DeckID = @deckID";
+        private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
+            + "WHERE card_deck.DeckID = @deckID";
         private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID";
         private string removeDecksFromCard = "DELETE FROM [card_deck] WHERE CardID = @cardID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
