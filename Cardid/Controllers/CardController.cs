@@ -127,13 +127,13 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult SearchCards(string text)
+        public ActionResult SearchCards(string searchString)
         {
             string userID = Session["userid"].ToString();
             ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
 
-            List<Card> matchingCards = cardSql.SearchCardsForText(text);
-            ViewBag.SearchText = text;
+            List<Card> matchingCards = cardSql.SearchCardsForText(searchString);
+            ViewBag.SearchString = searchString;
             return View("MainCardView", matchingCards);
         }
 

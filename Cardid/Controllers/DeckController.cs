@@ -24,9 +24,10 @@ namespace Cardid.Controllers
                 Session["anon"] = "Deck";
                 return RedirectToAction("Login", "Home");
             }
-            string userID = Session["userid"].ToString();
 
+            string userID = Session["userid"].ToString();
             ViewBag.UserID = userID;
+            ViewBag.Tags = tagSql.GetAllTags();
             List<Deck> allDecks = deckSql.GetAllDecks(userID);
             return View("MainDeckView", allDecks);
         }
@@ -165,6 +166,27 @@ namespace Cardid.Controllers
             tagSql.RemoveTagFromDeck(deckID, tagID);
 
             return RedirectToAction("EditDeck", new { deckID });
+        }
+
+
+        public ActionResult SearchDeckNames(string searchString)
+        {
+            ViewBag.UserID = Session["userid"].ToString();
+            ViewBag.Tags = tagSql.GetAllTags();
+
+            List<Deck> matchingDecks = deckSql.SearchDecksByName(searchString);
+            ViewBag.SearchName = searchString;
+            return View("MainDeckView", matchingDecks);
+        }
+
+
+        public ActionResult SearchDeckTags(string searchString)
+        {
+            ViewBag.UserID = Session["userid"].ToString();
+            ViewBag.Tags = tagSql.GetAllTags();
+            List<Deck> matchingDecks = deckSql.SearchDecksByTag(searchString);
+            ViewBag.SearchTag = searchString;
+            return View("MainDeckView", matchingDecks);
         }
 
 

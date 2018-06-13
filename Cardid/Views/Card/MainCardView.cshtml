@@ -12,15 +12,15 @@
 }
 
 
-@if (ViewBag.SearchText != null)
+@if (ViewBag.SearchString != null)
 {
     if (Model.Count > 0)
     {
-        <h3>Search results for "@ViewBag.SearchText":</h3>
+        <h3>Search results for "@ViewBag.SearchString":</h3>
     }
     else
     {
-        <h3>No cards found containing "@ViewBag.SearchText"</h3>
+        <h3>No cards found containing "@ViewBag.SearchString"</h3>
     }
     @Html.ActionLink("View all your cards", "Index", "Card", null, new { @class = "btn main-btn" })
 }
@@ -32,7 +32,7 @@ else
 
 @using (Html.BeginForm("SearchCards", "Card"))
 {
-    <input type="text" name="text" />
+    <input type="text" name="searchString" />
     <button type="submit" class="btn main-btn">Search for text in cards</button>
 }
 
@@ -40,7 +40,10 @@ else
 
 @if (Model.Count == 0)
 {
-    <p>You currently have no cards.</p>
+    if (ViewBag.SearchString == null)
+    {
+        <div>You currently have no decks.</div>
+    }
 }
 else
 {

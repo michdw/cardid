@@ -31,6 +31,9 @@ namespace Cardid.DAL
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
         private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
+        private string searchDecksByName = "SELECT * FROM decks WHERE Name LIKE @text";
+        private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
+            + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE tags.TagName = @text";
 
 
         public Deck CreateDeck(string deckName, string userID)
@@ -160,6 +163,33 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(removeCardFromDeck, new { cardID, deckID });
+            }
+        }
+
+        public List<Deck> SearchDecksByName (string text)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Deck> list = db.Query<Deck>(searchDecksByName, new { text = "%" + text + "%" }).ToList<Deck>();
+                foreach (Deck deck in list)
+                {
+                    deck.TrimValues();
+                }
+                return list;
+            }
+        }
+
+
+        public List<Deck> SearchDecksByTag(string text)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Deck> list = db.Query<Deck>(searchDecksByTag, new { text }).ToList<Deck>();
+                foreach (Deck deck in list)
+                {
+                    deck.TrimValues();
+                }
+                return list;
             }
         }
 

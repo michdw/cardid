@@ -2,6 +2,7 @@
 @model List<Deck>
 @{
     ViewBag.Title = "MainDeckView";
+    List<Tag> allTags = ViewBag.Tags;
     string userID = ViewBag.UserID;
     int counter = 0;
 }
@@ -11,15 +12,62 @@
     <div>Thank you for logging in, @TempData["loginname"]</div>
 }
 
+@if (ViewBag.SearchName != null)
+{
+    if (Model.Count > 0)
+    {
+        <h3>Search results for "@ViewBag.SearchName":</h3>
+    }
+    else
+    {
+        <h3>No decks found matching "@ViewBag.SearchName"</h3>
+    }
+    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+}
+
+else if (ViewBag.SearchTag != null)
+{
+    if (Model.Count > 0)
+    {
+        <h3>
+            Search results for <span class="tag active-tag">@ViewBag.SearchTag:</span>
+        </h3>
+    }
+    else
+    {
+        <h3>
+            No decks found with the tag <span class="tag active-tag">@ViewBag.SearchTag</span>
+        </h3>
+    }
+    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+}
+
+else
+{
+    <h2>All Decks</h2>
+}
 
 
-<h2>Decks</h2>
 
+<h3>Search decks by tag</h3>
+<div class="tag-search">
 
+    @foreach (Tag tag in allTags)
+    {
+        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+    }
 
-<h4 class="bold">Your decks</h4>
+</div>
+
+@using (Html.BeginForm("SearchDeckNames", "Deck"))
+{
+    <input type="text" name="searchString" />
+    <button type="submit" class="btn main-btn">Search by deck name</button>
+}
 
 @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
+
+
 
 @{
     foreach (Deck deck in Model)
@@ -31,7 +79,6 @@
                 @deck.Name
                 @Html.ActionLink("View Cards and Edit", "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
                 @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
-
             </div>
         }
     }
@@ -39,11 +86,8 @@
     {
         <div>You currently have no decks.</div>
     }
-    if (counter > 10)
-    {
-        @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
-    }
 }
+
 
 
 <h4 class="bold">Public decks</h4>
@@ -69,5 +113,4 @@
         <div>No decks currently shared by other users.</div>
     }
 }
-
 

@@ -18,6 +18,7 @@ namespace Cardid.DAL
 
         private string addTagToDeck = "INSERT INTO [deck_tag] (DeckID, TagID) VALUES (@deckID, @tagID)";
         private string createTag = "INSERT INTO [tags] (TagName, UserID) VALUES (@tagName, @userID)";
+        private string getAllTags = "SELECT * FROM [tags] ORDER BY TagName DESC";
         private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID WHERE deck_tag.TagID = @tagID";
         private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
         private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID WHERE deck_tag.DeckID = @deckID";
@@ -57,6 +58,20 @@ namespace Cardid.DAL
             {
                 db.Execute(removeTagFromAllDecks, new { tagID });
                 db.Execute(removeTag, new { tagID });
+            }
+        }
+
+
+        public List<Tag> GetAllTags()
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Tag> list = db.Query<Tag>(getAllTags).ToList();
+                foreach (Tag tag in list)
+                {
+                    tag.TagName = tag.TagName.Trim();
+                }
+                return list;
             }
         }
 
