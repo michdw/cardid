@@ -10,7 +10,7 @@ $(document).ready(function () {
         });
         $('.btn').hover(function () {
             $(this).css({
-                opacity: '1',
+                opacity: '.9',
                 cursor: 'default'
             });
         });

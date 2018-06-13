@@ -6,43 +6,56 @@
 @using Cardid.Models
 @model Card
 
-<div class="page-header">
-    <div class="float-left">
-        <h2 class="">Edit card</h2>
-    </div>
-    @if (Session["currentdeck"] != null)
-    {
-        Deck currentDeck = Session["currentDeck"] as Deck;
-        string deckName = currentDeck.Name;
-        <div class="float-right">
-            @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
-        </div>
-    }
-    else
-    {
-        <div class="float-right">
-            @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
-            <div class="">All changes saved automatically</div>
-        </div>
-    }
-</div>
-<div class="card-content">
-    <div>
-        @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
-        {
+
+<h1 class="title-font">Edit card</h1>
+
+<div class="flex flex-baseline">
+
+    <div class="editcard">
+        <div class="card-content">
             <div>
-                @Html.HiddenFor(m => m.CardID)
-                <h4 class="bold">Front of card:</h4>
-                @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
-                <h4 class="bold">Back of card:</h4>
-                @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
+
+                @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
+                {
+                    <div>
+                        @Html.HiddenFor(m => m.CardID)
+                        <h4 class="bold">Front of card:</h4>
+                        @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
+                        <h4 class="bold">Back of card:</h4>
+                        @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
+                    </div>
+                }
             </div>
+        </div>
+
+        @using (Html.BeginForm("DeleteCard", "Card", new { cardID = Model.CardID }, FormMethod.Post))
+        {
+            <button class="btn delete-btn">Delete This Card</button>
         }
     </div>
+
+    <div class="editcard">
+        @if (Session["currentdeck"] != null)
+        {
+            Deck currentDeck = Session["currentDeck"] as Deck;
+            string deckName = currentDeck.Name;
+
+            @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
+            <div class="">All changes saved automatically</div>
+        }
+        else
+        {
+
+            @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
+            <div class="">All changes saved automatically</div>
+        }
+
+    </div>
+
 </div>
-@using (Html.BeginForm("DeleteCard", "Card", new { cardID = Model.CardID }, FormMethod.Post))
-{
-    <button class="btn delete-btn">Delete This Card</button>
-}
+
+
+
+
 <script type="text/javascript" src="../../Content/editCard.js"></script>
 

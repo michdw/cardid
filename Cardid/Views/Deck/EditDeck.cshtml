@@ -6,36 +6,99 @@
 
 
 
-<h2>Edit @Model.Name</h2>
 
-<div class="deck-option">
-    @Html.ActionLink("Back to decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+<div class="flex flex-left">
+
+    <div class="editdeck-left">
+
+        <h1 class="title-font">Edit @Model.Name</h1>
+
+        <div>
+            <div class="option">
+                @Html.ActionLink("Back to decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+            </div>
+
+            <div class="option">
+                @Html.ActionLink("Study this deck", "StudyBegin", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+            </div>
+
+            <div class="option">
+                @if (Model.IsPublic == false)
+                {
+                    <p>This deck is visible only to you.</p>
+                    @Html.ActionLink("Make public", "MakeDeckPublic", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                }
+                else
+                {
+                    <p>This deck is visible to everyone.</p>
+                    @Html.ActionLink("Make private", "MakeDeckPrivate", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                }
+            </div>
+
+            <div class="option">
+                <button class="btn delete-btn delete-init">Delete This Deck</button>
+
+                @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
+                {
+                    <p>Deleting a deck will also delete all cards that exist only in that deck. Continue?</p>
+                    <button type="submit" class="btn delete-btn">Confirm Delete</button>
+                    <button type="reset" class="btn main-btn cancel-btn">Cancel</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="editdeck-right">
+        <div class="tag-container">
+            <h4 class="bold">Tags</h4>
+
+            @foreach (Tag tag in Model.Tags)
+            {
+                @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
+            }
+        </div>
+
+        <div class="tag-container">
+            <h4 class="bold">Add Other Tags</h4>
+
+            @foreach (Tag tag in Model.OtherTags)
+            {
+                @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
+            }
+        </div>
+
+        <div class="option">
+            <h4 class="bold">Create a new tag for this deck:</h4>
+
+            @using (Html.BeginForm("CreateTag", "Deck", FormMethod.Post))
+            {
+                @Html.TextBoxFor(m => m.NewTag.TagName)
+
+                @Html.HiddenFor(m => Model.DeckID)
+
+                <button type="submit" class="btn main-btn">
+                    Add new tag
+                </button>
+            }
+        </div>
+
+    </div>
 </div>
 
-<div class="deck-option">
-    @Html.ActionLink("Study this deck", "StudyBegin", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
-</div>
 
-<div class="deck-option">
-    @if (Model.IsPublic == false)
-    {
-        <p>This deck is visible only to you.</p>
-        @Html.ActionLink("Make public", "MakeDeckPublic", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
-    }
-    else
-    {
-        <p>This deck is visible to everyone.</p>
-        @Html.ActionLink("Make private", "MakeDeckPrivate", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
-    }
-</div>
-
-<div class="card-container">
+<div class="flex flex-center">
 
     @if (Model.Cards.Count != 0)
     {
-        <h4 class="bold">Cards in this deck:</h4>
-        @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+        <div class="container-header">
+
+            <h1 class="title-font">Cards in this deck:</h1>
+            @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+
+        </div>
+
         <div class="card-container">
+
             @foreach (var card in Model.Cards)
             {
                 <div class="card-bothsides">
@@ -54,7 +117,6 @@
                             &#x2297;
                         </button>
                     }
-
                 </div>
             }
         </div>
@@ -69,49 +131,6 @@
 
 </div>
 
-<div class="tag-container">
-    <h4 class="bold">Tags</h4>
-
-    @foreach (Tag tag in Model.Tags)
-    {
-        @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
-    }
-
-</div>
-
-<div class="tag-container">
-    <h4 class="bold">Add Other Tags</h4>
-
-    @foreach (Tag tag in Model.OtherTags)
-    {
-        @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
-    }
-
-</div>
-
-<h4 class="bold">Create a new tag for this deck:</h4>
-<div>
-    @using (Html.BeginForm("CreateTag", "Deck", FormMethod.Post))
-    {
-        @Html.TextBoxFor(m => m.NewTag.TagName)
-
-        @Html.HiddenFor(m => Model.DeckID)
-
-        <button type="submit" class="btn main-btn">
-            Add new tag
-        </button>
-    }
-</div>
-
-
-<button class="btn delete-btn delete-init">Delete This Deck</button>
-
-@using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
-{
-    <p>Deleting a deck will also delete all cards that exist only in that deck. Continue?</p>
-    <button type="submit" class="btn delete-btn">Confirm Delete</button>
-    <button type="reset" class="btn main-btn cancel-btn">Cancel</button>
-}
 
 
 <script type="text/javascript" src="../../Content/editDeck.js"></script>

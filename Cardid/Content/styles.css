@@ -27,7 +27,6 @@ a {
 .page-header {
     background: rgba(0,0,0,.15);
     padding: 20px 0;
-    /*border-bottom: 1px solid rgba(255,255,255,.3);*/
 }
 
 .container {
@@ -51,15 +50,20 @@ a {
     color: #fff;
 }
 
-.page-title {
-    opacity: .8;
+.page-title p {
+    opacity: .7;
+}
+
+.title-font {
+    font-family: 'Gugi', sans-serif;
+    color: #fff;
+    opacity: .7;
 }
 
     .page-title h1 {
         font-size: 3em;
-        font-family: 'Gugi', sans-serif;
         margin: 0;
-        opacity: .8;
+        opacity: .5;
     }
 
     .page-title p {
@@ -86,6 +90,34 @@ a {
     display: none;
 }
 
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-baseline {
+    justify-content: center;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-left {
+    justify-content: flex-start;
+}
+
+.flex > * {
+    margin: 12px;
+}
+
+.container-header {
+}
+
+.option {
+}
+
 /* forms */
 
 .form-label {
@@ -104,9 +136,9 @@ a {
     cursor: pointer;
     user-select: none;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 12px;
+    margin: 5px;
     font-size: 14px;
-    line-height: 1.4;
     border-radius: 4px;
     opacity: .9;
 }
@@ -148,6 +180,10 @@ a {
 
 
 /* cards */
+
+.editcard {
+    padding: 0 5%;
+}
 
 .card-container {
     width: 100%;
@@ -208,6 +244,28 @@ a {
 
 
 /* decks */
+
+.deckview-left {
+}
+
+.deckview-right {
+    min-width: 600px;
+}
+
+.editdeck-left {
+}
+
+.editdeck-right {
+    min-width: 60%;
+}
+
+.deck-listing {
+    background: rgba(0,0,0,.15);
+    color: #fff;
+    padding: 1em;
+    clear: both;
+    overflow: auto;
+}
 
 .remove-card {
     position: absolute;

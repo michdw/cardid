@@ -7,110 +7,176 @@
     int counter = 0;
 }
 
-@if (TempData["loginname"] != null)
-{
-    <div>Thank you for logging in, @TempData["loginname"]</div>
-}
-
-@if (ViewBag.SearchName != null)
-{
-    if (Model.Count > 0)
-    {
-        <h3>Search results for "@ViewBag.SearchName":</h3>
-    }
-    else
-    {
-        <h3>No decks found matching "@ViewBag.SearchName"</h3>
-    }
-    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
-}
-
-else if (ViewBag.SearchTag != null)
-{
-    if (Model.Count > 0)
-    {
-        <h3>
-            Search results for <span class="tag active-tag">@ViewBag.SearchTag:</span>
-        </h3>
-    }
-    else
-    {
-        <h3>
-            No decks found with the tag <span class="tag active-tag">@ViewBag.SearchTag</span>
-        </h3>
-    }
-    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
-}
-
-else
-{
-    <h2>All Decks</h2>
-}
 
 
 
-<h3>Search decks by tag</h3>
-<div class="tag-search">
+<div class="flex flex-center">
 
-    @foreach (Tag tag in allTags)
-    {
-        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
-    }
+    <div class="deckview-left">
 
+        @if (TempData["loginname"] != null)
+        {
+            <div>Thank you for logging in, @TempData["loginname"]</div>
+        }
+
+        <div class="option">
+
+            @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
+
+        </div>
+
+        <div class="option">
+
+            @using (Html.BeginForm("SearchDeckNames", "Deck"))
+            {
+                <input type="text" name="searchString" />
+                <button type="submit" class="btn main-btn">Search by deck name</button>
+            }
+        </div>
+
+        <div class="option">
+            <h4 class="bold">Search decks by tag</h4>
+
+            @foreach (Tag tag in allTags)
+            {
+                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+            }
+        </div>
+
+    </div>
+
+    <div class="deckview-right">
+        <div class="container-header">
+
+            @if (ViewBag.SearchName != null)
+            {
+                if (Model.Count > 0)
+                {
+                    <h2 class="bold">Search results for "@ViewBag.SearchName":</h2>
+                }
+                else
+                {
+                    <h4 class="bold">No decks found matching "@ViewBag.SearchName"</h4>
+                }
+                @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+            }
+
+            else if (ViewBag.SearchTag != null)
+            {
+                if (Model.Count > 0)
+                {
+                    <h2 style="display: inline-block">
+                        Decks with tag:
+                    </h2>
+                    <span class="tag active-tag">@ViewBag.SearchTag</span>
+                }
+                else
+                {
+                    <h4 class="bold">
+                        No decks found with the tag <span class="tag active-tag">@ViewBag.SearchTag</span>
+                    </h4>
+                }
+                <div class="option">
+                    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+                </div>
+            }
+
+            else
+            {
+                <h1 class="title-font">All Decks</h1>
+            }
+        </div>
+
+        <div class="deck-list">
+            @if (Model.Count > 0)
+            {
+                <h4 class="bold">Your decks</h4>
+
+                foreach (Deck deck in Model)
+                {
+                    if (deck.UserID == userID)
+                    {
+                        counter++;
+                        <div class="deck-listing">
+                            @deck.Name
+                            @Html.ActionLink("View and Edit", "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn float-right" })
+                            @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn float-right" })
+                        </div>
+                    }
+                }
+                if (counter == 0)
+                {
+                    if (ViewBag.SearchName != null)
+                    {
+                        <div>No decks matching that name.</div>
+                    }
+                    else if (ViewBag.SearchTag != null)
+                    {
+                        <div>No decks with that tag.</div>
+                    }
+                    else
+                    {
+                        <div>You currently have no decks.</div>
+                    }
+                }
+            }
+        </div>
+
+        <div class="deck-list">
+
+            @if (Model.Count > 0)
+            {
+                <h4 class="bold">Public decks</h4>
+
+                counter = 0;
+                foreach (Deck deck in Model)
+                {
+                    if (deck.UserID != userID)
+                    {
+                        counter++;
+                        <div>
+                            @deck.Name
+                        </div>
+                        <div>
+                            Shared by @deck.Creator.DisplayName
+                        </div>
+                        @Html.ActionLink("View Cards", "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+                        @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
+                    }
+                }
+                if (counter == 0)
+                {
+                    if (ViewBag.SearchName != null)
+                    {
+                        <div>No decks matching that name.</div>
+                    }
+                    else if (ViewBag.SearchTag != null)
+                    {
+                        <div>No decks with that tag.</div>
+                    }
+                    else
+                    {
+                        <div>No decks currently shared by other users.</div>
+                    }
+                }
+            }
+        </div>
+
+    </div>
 </div>
 
-@using (Html.BeginForm("SearchDeckNames", "Deck"))
-{
-    <input type="text" name="searchString" />
-    <button type="submit" class="btn main-btn">Search by deck name</button>
-}
-
-@Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
 
 
 
-@{
-    foreach (Deck deck in Model)
-    {
-        if (deck.UserID == userID)
-        {
-            counter++;
-            <div>
-                @deck.Name
-                @Html.ActionLink("View Cards and Edit", "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
-                @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
-            </div>
-        }
-    }
-    if (counter == 0)
-    {
-        <div>You currently have no decks.</div>
-    }
-}
 
 
 
-<h4 class="bold">Public decks</h4>
-@{
-    counter = 0;
-    foreach (Deck deck in Model)
-    {
-        if (deck.UserID != userID)
-        {
-            counter++;
-            <div>
-                @deck.Name
-            </div>
-            <div>
-                Shared by @deck.Creator.DisplayName
-            </div>
-            @Html.ActionLink("View Cards", "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
-            @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn" })
-        }
-    }
-    if (counter == 0)
-    {
-        <div>No decks currently shared by other users.</div>
-    }
-}
+
+
+
+
+
+
+
+
 
