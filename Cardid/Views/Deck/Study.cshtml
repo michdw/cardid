@@ -4,7 +4,19 @@
 @{
     ViewBag.Title = "Study Session";
     Deck deck = ViewBag.Deck;
-    int cardCount = deck.Cards.Count;
+
+    bool wholedeck;
+    List<Card> cards = new List<Card>();
+    if (ViewBag.Redo != null)
+    {
+        cards = ViewBag.Redo;
+        wholedeck = false;
+    }
+    else
+    {
+        cards = deck.Cards;
+        wholedeck = true;
+    }
 }
 
 
@@ -25,9 +37,12 @@
 
     <div class="card-frame">
         @{
-            foreach (Card currentCard in deck.Cards)
+            foreach (Card currentCard in cards)
             {
                 <div class="studycard new-card">
+                    <div hidden class="card-ID">
+                        @currentCard.CardID
+                    </div>
                     <div class="front-view">
                         <p>@currentCard.Front</p>
                     </div>
@@ -48,16 +63,18 @@
 
 </div>
 
-
-@using (Html.BeginForm("StudyLog", "Deck", FormMethod.Post, new { @id = "complete" }))
+<div hidden id="cardsToRedo"></div>
+@using (Html.BeginForm("StudyLog", "Deck", new { wholedeck }, FormMethod.Post, new { @id = "complete" }))
 {
     @Html.HiddenFor(m => m.DeckID, deck.DeckID)
     @Html.HiddenFor(m => m.UserID, deck.UserID)
     @Html.HiddenFor(m => m.TotalScore, new { id = "totalScore" })
     @Html.HiddenFor(m => m.PossibleScore, new { id = "possibleScore" })
+    @Html.HiddenFor(m => m.Date, DateTime.Now)
+    @Html.HiddenFor(m => m.ToRedo, new { id = "toRedo" })
 }
 
-<div hidden id="cardCount" data-name="@cardCount"></div>
+<div hidden id="cardCount" data-name="@cards.Count"></div>
 
 
 

@@ -205,18 +205,49 @@ namespace Cardid.Controllers
 
             //randomize cards based on bool parameter from view
 
-            Study study = new Study();
-            study.DeckID = deckID;
-            study.UserID = Session["userid"].ToString();
+            Study study = new Study
+            {
+                DeckID = deckID,
+                UserID = Session["userid"].ToString()
+            };
             return View("Study", study);
         }
 
 
         [HttpPost]
-        public ActionResult StudyLog(Study study)
+        public ActionResult StudyLog(Study study, bool wholeDeck)
         {
-            studySql.LogStudySession(study);
+            if (wholeDeck)
+            {
+                studySql.LogStudySession(study);
+            }
             return View("StudyComplete", study);
+        }
+
+
+        public ActionResult StudyRedo(string redo, string deckID)
+        {
+            Deck deck = deckSql.GetDeckByID(deckID);
+            ViewBag.Deck = deck;
+
+            List<string> redoList = redo.Split(',').ToList();
+            List<Card> redoCards = new List<Card>();
+            foreach (string cardID in redoList)
+            {
+                Card card = cardSql.GetCardByID(cardID);
+                redoCards.Add(card);
+            }
+
+            //randomize cards based on bool parameter from view
+
+            Study study = new Study
+            {
+                DeckID = deckID,
+                UserID = Session["userid"].ToString()
+            };
+
+            ViewBag.Redo = redoCards;
+            return View("Study", study);
         }
 
     }

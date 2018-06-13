@@ -33,6 +33,7 @@ $(document).ready(function () {
     var flipped = false;
     var totalCorrect = 0;
     var totalViewed = 0;
+    var toRedo = '';
 
     updateScore(totalCorrect, totalViewed);
 
@@ -47,13 +48,18 @@ $(document).ready(function () {
         totalCorrect++;
     });
 
-    $('.mark-right, .mark-wrong').click(function () {
+    $('.mark-wrong').click(function () {
+        var cardID = $('.active-card .card-ID').text().trim();
+        toRedo += cardID + ',';
+    });
 
+    $('.mark-right, .mark-wrong').click(function () {
         totalViewed++;
 
         if (totalViewed == cardCount) {
             $('#totalScore').val(totalCorrect);
             $('#possibleScore').val(cardCount);
+            $('#toRedo').val(toRedo.slice(0,-1));
             $('#complete').submit();
         }
 
@@ -63,5 +69,7 @@ $(document).ready(function () {
             nextCard();
         }
     });
+
+
 
 });

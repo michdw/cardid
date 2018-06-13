@@ -12,5 +12,7 @@ namespace Cardid.Models
         public int TotalScore { get; set; }
         public int PossibleScore { get; set; }
 
+        public DateTime Date { get; set; }
+        public string ToRedo { get; set; }
     }
 }

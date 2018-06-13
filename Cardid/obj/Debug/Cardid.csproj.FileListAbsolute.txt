@@ -1,3 +1,9 @@
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.IO.Compression.dll
+C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\ApplicationInsights.config
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Cardid.dll.config
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Cardid.dll
@@ -9,13 +15,9 @@ C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\csi.exe
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\csi.exe.config
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\csi.rsp
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\Microsoft.Win32.Primitives.dll
@@ -25,7 +27,6 @@ C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.Console.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.Diagnostics.Process.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.Diagnostics.StackTrace.dll
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.IO.Compression.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.IO.FileSystem.Primitives.dll
@@ -48,7 +49,6 @@ C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\System.Xml.XPath.XDocument.
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\vbc.exe
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\vbc.exe.config
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\vbc.rsp
-C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Antlr3.Runtime.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Dapper.dll
@@ -86,8 +86,8 @@ C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.DependencyCollector.x
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.Web.xml
+C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csprojResolveAssemblyReference.cache
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CoreCompileInputs.cache
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.pdb
-C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csprojResolveAssemblyReference.cache
