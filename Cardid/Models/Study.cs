@@ -11,8 +11,8 @@ namespace Cardid.Models
         public string UserID { get; set; }
         public int TotalScore { get; set; }
         public int PossibleScore { get; set; }
+        public DateTime TimeOf { get; set; }
 
-        public DateTime Date { get; set; }
         public string ToRedo { get; set; }
     }
 }

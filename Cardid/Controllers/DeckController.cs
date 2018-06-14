@@ -219,6 +219,7 @@ namespace Cardid.Controllers
         {
             if (wholeDeck)
             {
+                study.TimeOf = DateTime.Now;
                 studySql.LogStudySession(study);
             }
             return View("StudyComplete", study);

@@ -16,7 +16,9 @@ namespace Cardid.DAL
             this.connectionString = connectionString;
         }
 
-        private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID) VALUES (@deckID, @userID)";
+        private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
+            + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
+
 
 
 
@@ -25,7 +27,14 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                db.Execute(logStudySession, new { deckID = study.DeckID, userID = study.UserID });
+                db.Execute(logStudySession, new
+                {
+                    deckID = study.DeckID,
+                    userID = study.UserID,
+                    totalScore = study.TotalScore,
+                    possibleScore = study.PossibleScore,
+                    timeOf = study.TimeOf
+                });
             }
         }
     }

@@ -70,6 +70,4 @@ $(document).ready(function () {
         }
     });
 
-
-
 });
