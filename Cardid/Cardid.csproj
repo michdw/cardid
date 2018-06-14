@@ -158,7 +158,6 @@
     </Compile>
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Deck.cs" />
-    <Compile Include="Models\Randomize.cs" />
     <Compile Include="Models\Study.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
