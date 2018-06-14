@@ -201,6 +201,7 @@ a {
 }
 
 .card-bothsides {
+    background: rgba(255,255,255,.25);
     display: inline-block;
     position: relative;
     overflow: auto;
@@ -211,7 +212,6 @@ a {
     min-height: 300px;
     width: 25%;
     min-width: 350px;
-    background: rgba(255,255,255,0.25);
     color: black;
 }
 
@@ -273,17 +273,18 @@ a {
     overflow: auto;
 }
 
+.card-indeck {
+    background: rgba(255,255,255,0.25);
+    padding: 1em;
+}
+
+.card-listing {
+    display: inline-block;
+    padding: 4px;
+    background: #fff;
+}
+
 .remove-card {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 1em;
-    padding: 2px;
-    line-height: 1em;
-    font-size: 1.6em;
-    background: none;
-    border: none;
-    font-weight: bold;
 }
 
     .remove-card:hover {
@@ -291,7 +292,7 @@ a {
     }
 
 .delete-submit {
-    display: inline-block;
+    display: none;
     padding: 10px;
     background: rgba(0,0,0,.5);
     color: #fff;

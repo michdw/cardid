@@ -1,5 +1,4 @@
-﻿$('.delete-submit').hide();
-
+﻿
 function deactivate(buttons) {
     buttons.prop('disabled', true);
 
@@ -35,14 +34,17 @@ function reactivate(buttons) {
     });
 }
 
+
 $(document).ready(function () {
+
     $('.delete-init').on('click', function () {
         $(this).hide();
-        $('.delete-submit').show();
+        $("html, body").animate({ scrollTop: $(document).height() }, 400);
+        $('.delete-submit').css('display', 'inline-block');
     });
 
     $('.cancel-btn').on('click', function () {
-        $('.delete-submit').hide();
+        $('.delete-submit').css('display', 'none');
         $('.delete-init').show();
     });
 });

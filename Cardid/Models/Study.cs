@@ -14,5 +14,10 @@ namespace Cardid.Models
         public DateTime TimeOf { get; set; }
 
         public string ToRedo { get; set; }
+
+        public decimal GetPercentage()
+        {
+            return TotalScore / PossibleScore;
+        }
     }
 }

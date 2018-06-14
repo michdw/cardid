@@ -4,13 +4,8 @@
     ViewBag.Title = "Choose Cards For Deck";
 }
 
-
-
 <h1 class="view-title">Add Cards to Deck: @ViewBag.Deck.Name</h1>
-
-<div class="card-container">
-
-
+<div class="flex flex-left">
     @if (Model.Count == 0)
     {
         <p>No cards currently available.</p>
@@ -20,18 +15,17 @@
     {
         foreach (Card thisCard in Model)
         {
-            <div class="card-bothsides">
+            <div class="card-indeck">
 
-                <div class="front-field">@thisCard.Front</div>
-                <div class="back-field">@thisCard.Back</div>
+                <div class="card-listing">@thisCard.Front</div>
 
-                <div class="card-options">
-                    @Html.ActionLink("Add to deck", "ChooseDecksSubmit", "Deck", new { cardID = thisCard.CardID, deckID = ViewBag.Deck.DeckID }, new { @class = "btn card-button" })
-                </div>
+                <div class="card-listing">@thisCard.Back</div>
+
+                @Html.ActionLink("Add to deck", "ChooseDecksSubmit", "Deck", new { cardID = thisCard.CardID, deckID = ViewBag.Deck.DeckID }, new { @class = "btn card-button" })
+
             </div>
         }
 
     }
-
 
 </div>

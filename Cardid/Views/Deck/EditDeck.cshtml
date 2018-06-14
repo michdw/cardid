@@ -14,7 +14,6 @@
 
     <div class="editdeck-left">
 
-
         <div>
             <div class="option">
                 @Html.ActionLink("Back to decks", "Index", "Deck", null, new { @class = "btn main-btn" })
@@ -36,32 +35,24 @@
                     @Html.ActionLink("Make private", "MakeDeckPrivate", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
                 }
             </div>
-
-            <div class="option">
-                <button class="btn delete-btn delete-init">Delete This Deck</button>
-
-                @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
-                {
-                    <p>Deleting a deck will also delete all cards that exist only in that deck. Continue?</p>
-                    <button type="submit" class="btn delete-btn">Confirm Delete</button>
-                    <button type="reset" class="btn main-btn cancel-btn">Cancel</button>
-                }
-            </div>
         </div>
     </div>
 
     <div class="editdeck-right">
-        <div class="tag-container">
-            <h4 class="bold">Tags</h4>
+        @if (Model.Tags.Count > 0)
+        {
+            <div class="tag-container">
+                <h4 class="bold">Tags</h4>
 
-            @foreach (Tag tag in Model.Tags)
-            {
-                @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
-            }
-        </div>
+                @foreach (Tag tag in Model.Tags)
+                {
+                    @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
+                }
+            </div>
+        }
 
         <div class="option">
-            <h4 class="bold">Add Other Tags</h4>
+            <h4 class="bold">Add Tags</h4>
             <div class="tagviews">
                 <span class="tagview-pop bold">sort by popularity</span>
                 <span class="tagview-alph pointer">sort alphabetically</span>
@@ -116,30 +107,22 @@
 
     </div>
 
-    <div class="flex flex-center">
-        <div class="card-container">
+    <div class="flex flex-left">
 
-            @foreach (var card in Model.Cards)
-            {
-                <div class="card-bothsides">
+        @foreach (var card in Model.Cards)
+        {
+            <div class="card-indeck">
 
-                    <div class="front-field">@card.Front</div>
+                <div class="card-listing">@card.Front</div>
 
-                    <div class="back-field">@card.Back</div>
+                <div class="card-listing">@card.Back</div>
 
-                    <div class="card_options">
-                        @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = card.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn" })
-                    </div>
+                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = card.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn" })
 
-                    @using (Html.BeginForm("RemoveCardFromDeck", "Deck", new { cardID = card.CardID, deckID = Model.DeckID }))
-                    {
-                        <button class="remove-card">
-                            &#x2297;
-                        </button>
-                    }
-                </div>
-            }
-        </div>
+                @Html.ActionLink("X", "RemoveCardFromDeck", "Deck", new { cardID = card.CardID, deckID = Model.DeckID }, new { @class = "remove-card" })
+
+            </div>
+        }
     </div>
 }
 else
@@ -150,7 +133,16 @@ else
     </p>
 }
 
+<div class="option">
+    <button class="btn delete-btn delete-init">Delete This Deck</button>
 
+    @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
+    {
+        <p>Deleting a deck will also delete all cards that exist only in that deck. Continue?</p>
+        <button type="submit" class="btn delete-btn">Confirm Delete</button>
+        <button type="reset" class="btn main-btn cancel-btn">Cancel</button>
+    }
+</div>
 
 
 <script type="text/javascript" src="../../Content/editDeck.js"></script>
