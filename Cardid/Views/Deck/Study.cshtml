@@ -4,17 +4,14 @@
 @{
     ViewBag.Title = "Study Session";
     Deck deck = ViewBag.Deck;
-
+    List<Card> cards = ViewBag.Cards;
     bool wholedeck;
-    List<Card> cards = new List<Card>();
     if (ViewBag.Redo != null)
     {
-        cards = ViewBag.Redo;
         wholedeck = false;
     }
     else
     {
-        cards = deck.Cards;
         wholedeck = true;
     }
 }

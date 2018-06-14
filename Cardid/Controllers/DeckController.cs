@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using Cardid.DAL;
@@ -15,6 +16,18 @@ namespace Cardid.Controllers
         DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+
+        private List<Card> RedoCards(string redo)
+        {
+            List<string> redoList = redo.Split(',').ToList();
+            List<Card> redoCards = new List<Card>();
+            foreach (string cardID in redoList)
+            {
+                Card card = cardSql.GetCardByID(cardID);
+                redoCards.Add(card);
+            }
+            return redoCards;
+        }
 
 
         public ActionResult Index()
@@ -203,7 +216,9 @@ namespace Cardid.Controllers
             Deck deck = deckSql.GetDeckByID(deckID);
             ViewBag.Deck = deck;
 
-            //randomize cards based on bool parameter from view
+            List<Card> cards = deck.Cards;
+            cards.Shuffle();
+            ViewBag.Cards = cards;
 
             Study study = new Study
             {
@@ -231,25 +246,37 @@ namespace Cardid.Controllers
             Deck deck = deckSql.GetDeckByID(deckID);
             ViewBag.Deck = deck;
 
-            List<string> redoList = redo.Split(',').ToList();
-            List<Card> redoCards = new List<Card>();
-            foreach (string cardID in redoList)
-            {
-                Card card = cardSql.GetCardByID(cardID);
-                redoCards.Add(card);
-            }
-
-            //randomize cards based on bool parameter from view
+            List<Card> redoCards = RedoCards(redo);
+            redoCards.Shuffle();
+            ViewBag.Cards = redoCards;
 
             Study study = new Study
             {
                 DeckID = deckID,
                 UserID = Session["userid"].ToString()
             };
-
-            ViewBag.Redo = redoCards;
             return View("Study", study);
         }
 
+    }
+
+    public static class Randomize
+    {
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            int n = list.Count;
+            while (n > 1)
+            {
+                byte[] box = new byte[1];
+                do provider.GetBytes(box);
+                while (!(box[0] < n * (Byte.MaxValue / n)));
+                int k = (box[0] % n);
+                n--;
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }
