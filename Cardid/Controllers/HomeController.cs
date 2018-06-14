@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Cardid.DAL;
 using Cardid.Models;
 
@@ -55,6 +56,7 @@ namespace Cardid.Controllers
 
             Session["userid"] = currentUser.UserID;
             TempData["loginname"] = currentUser.DisplayName;
+            FormsAuthentication.SetAuthCookie("username", false);
             switch (Session["anon"].ToString())
             {
                 case "Card":
@@ -92,6 +94,7 @@ namespace Cardid.Controllers
 
             Session["userid"] = currentUser.UserID;
             TempData["newuser"] = currentUser.DisplayName;
+            FormsAuthentication.SetAuthCookie("userid", false);
             switch (Session["anon"].ToString())
             {
                 case "Card":
