@@ -23,8 +23,8 @@ namespace Cardid.DAL
         private string editCard = "UPDATE [cards] SET Front = @front, Back = @back WHERE CardID = @cardID";
         private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
         private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
-            + "WHERE card_deck.DeckID = @deckID";
-        private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID";
+            + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
+        private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID ORDER BY Front ASC";
         private string removeDecksFromCard = "DELETE FROM [card_deck] WHERE CardID = @cardID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string searchCardsForText = "SELECT * FROM cards WHERE Front LIKE @text OR Back LIKE @text";

@@ -119,6 +119,27 @@ namespace Cardid.Controllers
 
 
         //other actions
+        public ActionResult About()
+        {
+            return View();
+        }
+
+
+        public ActionResult ChangeInfoInit()
+        {
+            GetUser();
+
+            return View("ChangeUserInfo");
+        }
+
+
+        public ActionResult ChangeInfoSubmit()
+        {
+            GetUser();
+
+            return RedirectToAction("UserPage");
+        }
+
         public ActionResult Logout()
         {
             TempData["loginname"] = null;
@@ -130,15 +151,10 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult About()
-        {
-            return View();
-        }
-
-
         public ActionResult UserPage()
         {
             GetUser();
+
             return View();
         }
     }

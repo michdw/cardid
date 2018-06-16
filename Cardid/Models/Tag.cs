@@ -15,12 +15,25 @@ namespace Cardid.Models
         public string TagName { get; set; }
         public string UserID { get; set; }
 
-        public List<Deck> DecksUsing
+        public List<Deck> Decks
         {
             get
             {
                 DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
                 return deckSql.GetDecksByTagID(TagID);
+            }
+        }
+
+        public HashSet<string> CurrentUsers
+        {
+            get
+            {
+                HashSet<string> userIDs = new HashSet<string>();
+                foreach (Deck deck in Decks)
+                {
+                    userIDs.Add(deck.UserID);
+                }
+                return userIDs;
             }
         }
 

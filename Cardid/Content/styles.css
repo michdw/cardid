@@ -18,6 +18,10 @@ a {
     text-decoration: none;
 }
 
+.at-top {
+    margin-top: 0;
+}
+
 .pointer:hover {
     cursor: pointer;
 }
@@ -134,6 +138,7 @@ a {
     font-family: 'Gugi', sans-serif;
     color: #fff;
     opacity: .7;
+    margin: 0;
 }
 
 .page-title h1 {
@@ -306,27 +311,18 @@ a {
 /* tags */
 
 .tagviews {
-    position: relative;
     height: 1.5em;
 }
 
-    .tagviews span {
-        position: absolute;
-        margin: 0;
-    }
+.tagviews > span{
 
-.tagview-pop {
-    left: 0;
-}
-
-.tagview-alph {
-    right: 0;
 }
 
 .tag-container {
     clear: both;
     overflow: auto;
-    padding: 1em;
+    padding: 1em 0;
+    padding-bottom: 2em;
 }
 
 .tags-alph, .tags-pop {

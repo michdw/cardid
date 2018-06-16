@@ -234,6 +234,7 @@
     <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Deck\Tags.cshtml" />
+    <Content Include="Views\Home\ChangeUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
