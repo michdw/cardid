@@ -9,32 +9,27 @@ namespace Cardid.Models
 {
     public class Tag
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
-
         public string TagID { get; set; }
         public string TagName { get; set; }
         public string UserID { get; set; }
 
-        public List<Deck> Decks
+
+        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+
+        public List<Deck> Decks()
         {
-            get
-            {
-                DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-                return deckSql.GetDecksByTagID(TagID);
-            }
+            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+            return deckSql.GetDecksByTagID(TagID);
         }
 
-        public HashSet<string> CurrentUserIDs
+        public HashSet<string> CurrentUserIDs()
         {
-            get
+            HashSet<string> userIDs = new HashSet<string>();
+            foreach (Deck deck in Decks())
             {
-                HashSet<string> userIDs = new HashSet<string>();
-                foreach (Deck deck in Decks)
-                {
-                    userIDs.Add(deck.UserID);
-                }
-                return userIDs;
+                userIDs.Add(deck.UserID);
             }
+            return userIDs;
         }
 
     }

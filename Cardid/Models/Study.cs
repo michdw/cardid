@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using Cardid.DAL;
 
 namespace Cardid.Models
 {
@@ -15,9 +17,18 @@ namespace Cardid.Models
 
         public string ToRedo { get; set; }
 
-        public decimal GetPercentage()
+        public decimal Percentage()
         {
             return TotalScore / PossibleScore;
+        }
+
+        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+
+        public string DeckName()
+        {
+            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+            Deck deck = deckSql.GetDeckByID(DeckID);
+            return deck.Name;
         }
     }
 }

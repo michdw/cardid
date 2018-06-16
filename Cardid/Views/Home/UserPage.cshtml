@@ -9,10 +9,30 @@
 <h2 class="view-title">@Model.DisplayName</h2>
 
 <div>
-    @Html.ActionLink("Manage Tags", "TagView", "Deck")
+    @Html.ActionLink(Model.Cards().Count.ToString() + "Cards", "Index", "Card")
 </div>
+
+<div>
+    @Html.ActionLink(Model.Decks().Count.ToString() + "Decks", "Index", "Card")
+</div>
+
+<div>
+    @Html.ActionLink(Model.Tags().Count.ToString() + "Tags", "TagView", "Deck", new { userTags = Model.Tags() }, null)
+</div>
+
+<div>
+    Study sessions logged: @Model.Sessions().Count
+</div>
+@foreach (Study session in Model.Sessions())
+{
+    <div>
+        @session.DeckName()
+        @session.Percentage() %
+        @session.TimeOf
+    </div>
+}
 
 
 <div>
-    @Html.ActionLink("Change your information", "ChangeInfoInit", "Home")
+    @Html.ActionLink("Change your account information", "ChangeInfoInit", "Home")
 </div>

@@ -11,21 +11,10 @@ namespace Cardid.Models
 {
     public class Card
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
-
         public string CardID { get; set; }
         public string UserID { get; set; }
         public string Front { get; set; }
         public string Back { get; set; }
-
-        public List<Deck> Decks
-        {
-            get
-            {
-                DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-                return deckSql.GetDecksByCardID(CardID);
-            }
-        }
 
         public Card TrimValues()
         {
@@ -34,6 +23,13 @@ namespace Cardid.Models
             Front = Front.Trim();
             Back = Back.Trim();
             return this;
+        }
+
+        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+        public List<Deck> Decks()
+        {
+            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+            return deckSql.GetDecksByCardID(CardID);
         }
 
     }

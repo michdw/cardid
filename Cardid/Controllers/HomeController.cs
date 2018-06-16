@@ -220,7 +220,7 @@ namespace Cardid.Controllers
             List<Tag> userTags = tagSql.GetTagsByUserID(userID);
             foreach (Tag tag in userTags)
             {
-                if (tag.CurrentUserIDs.Count <= 1)
+                if (tag.CurrentUserIDs().Count <= 1)
                 {
                     tagSql.DeleteTag(tag.TagID);
                 }

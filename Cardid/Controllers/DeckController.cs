@@ -160,7 +160,7 @@ namespace Cardid.Controllers
 
             foreach (Card card in cardsInDeck)
             {
-                if (card.Decks.Count > 1)
+                if (card.Decks().Count > 1)
                 {
                     cardsInDeck.Remove(card);
                 }
@@ -267,7 +267,7 @@ namespace Cardid.Controllers
             Deck deck = deckSql.GetDeckByID(deckID);
             ViewBag.Deck = deck;
 
-            List<Card> cards = deck.Cards;
+            List<Card> cards = deck.Cards();
             cards.Shuffle();
             ViewBag.Cards = cards;
 
@@ -315,10 +315,9 @@ namespace Cardid.Controllers
 
 
 
-        public ActionResult TagView()
+        public ActionResult TagView(List<Tag> userTags)
         {
-            string userID = GetUser();
-            List<Tag> userTags = tagSql.GetTagsByUserID(userID);
+            GetUser();
 
             return View("ManageTags", userTags);
         }

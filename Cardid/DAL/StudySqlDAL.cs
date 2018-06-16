@@ -16,12 +16,19 @@ namespace Cardid.DAL
             this.connectionString = connectionString;
         }
 
+        private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID";
         private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
 
 
 
-
+        public List<Study> GetSessionsByUserID(string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                return db.Query<Study>(getSessionsByUserID, new { userID }).ToList();
+            }
+        }
 
         public void LogStudySession(Study study)
         {
