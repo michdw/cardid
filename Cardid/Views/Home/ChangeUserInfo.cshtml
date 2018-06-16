@@ -1,7 +1,61 @@
 ﻿
+@using Cardid.Models
+@model User
+
 @{
     ViewBag.Title = "ChangeUserInfo";
 }
 
+@if (TempData["result"] != null)
+{
+    <p>
+        @TempData["result"].ToString()
+    </p>
+}
+
 <h2 class="view-title">Change User Info</h2>
 
+
+@using (Html.BeginForm("ChangeName", "Home", FormMethod.Post))
+{
+    <div class="formValidationGroup">
+        @Html.HiddenFor(m => m.UserID)
+        @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
+    </div>
+
+    <button type="submit">Submit</button>
+}
+
+@using (Html.BeginForm("ChangeEmail", "Home", FormMethod.Post))
+{
+    <div class="formValidationGroup">
+        @Html.HiddenFor(m => m.UserID)
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
+    </div>
+
+    <button type="submit">Submit</button>
+}
+
+@using (Html.BeginForm("ChangePassword", "Home", FormMethod.Post))
+{
+
+    <div class="formValidationGroup">
+        @Html.HiddenFor(m => m.UserID)
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password)
+    </div>
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password", new { @class = "form-label" })
+        @Html.PasswordFor(m => m.ConfirmPassword)
+    </div>
+
+    <button type="submit">Submit</button>
+}
+
+@using (Html.BeginForm("DeleteUser", "Home", FormMethod.Post))
+{
+
+}

@@ -11,11 +11,13 @@ namespace Cardid.DAL
     public class UserSqlDAL
     {
         private string connectionString;
-        private string checkForEmail = "SELECT * from [users] WHERE Email = @email";
         private string getAllUsers = "SELECT * FROM [users]";
-        private string getUserByID = "SELECT UserID, Email, Password, DisplayName FROM [users] where UserID = @userID";
-        private string getUserInfo = "SELECT UserID, Email, Password, DisplayName FROM [users] WHERE Email = @email;";
+        private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
+        private string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
         private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
+        private string updateEmail = "UPDATE [users] SET Email = @email WHERE UserID = @userID";
+        private string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
+        private string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
 
         public UserSqlDAL(string connectionString)
         {
@@ -27,7 +29,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<User> list = db.Query<User>(checkForEmail, new { email }).ToList();
+                List<User> list = db.Query<User>(getUserByEmail, new { email }).ToList();
                 return list.Count > 0;
             }
         }
@@ -50,17 +52,21 @@ namespace Cardid.DAL
         }
 
 
-        public User GetUserInfo(string email)
+        public User GetUserByEmail(string email)
         {
-            User user = new User();
+            User nullUser = new User();
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<User> users = db.Query<User>(getUserInfo, new { email }).ToList();
-                if (users.Count > 0)
+                List<User> users = db.Query<User>(getAllUsers).ToList();
+                foreach (User user in users)
                 {
-                    user = users.FirstOrDefault<User>().TrimValues();
+                    user.TrimValues();
+                    if (user.Email == email)
+                    {
+                        return user;
+                    }
                 }
-                return user;
+                return nullUser;
             }
         }
 
@@ -70,6 +76,33 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(registerUser, new { email = user.Email, password = user.Password, displayName = user.DisplayName });
+            }
+        }
+
+
+        public void UpdateEmail(string email, string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(updateEmail, new { email, userID });
+            }
+        }
+
+
+        public void UpdateName(string displayName, string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(updateName, new { displayName, userID });
+            }
+        }
+
+
+        public void UpdatePassword(string password, string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(updatePassword, new { password, userID });
             }
         }
 

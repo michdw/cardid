@@ -46,7 +46,7 @@ namespace Cardid.Controllers
                 return View("Login", user);
             }
 
-            User currentUser = userSql.GetUserInfo(user.Email);
+            User currentUser = userSql.GetUserByEmail(user.Email);
 
             if (currentUser.Email == null)
             {
@@ -101,7 +101,7 @@ namespace Cardid.Controllers
             }
 
             userSql.RegisterUser(newUser);
-            User currentUser = userSql.GetUserInfo(newUser.Email);
+            User currentUser = userSql.GetUserByEmail(newUser.Email);
 
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
@@ -119,6 +119,14 @@ namespace Cardid.Controllers
 
 
         //other actions
+        public ActionResult UserPage()
+        {
+            GetUser();
+
+            return View();
+        }
+
+
         public ActionResult About()
         {
             return View();
@@ -127,18 +135,79 @@ namespace Cardid.Controllers
 
         public ActionResult ChangeInfoInit()
         {
-            GetUser();
+            string userID = GetUser();
+            User user = userSql.GetUserByID(userID);
 
-            return View("ChangeUserInfo");
+            return View("ChangeUserInfo", user);
         }
 
 
-        public ActionResult ChangeInfoSubmit()
+        public ActionResult ChangeName(User user)
         {
-            GetUser();
+            string userID = GetUser();
+            User oldInfo = userSql.GetUserByID(userID);
 
-            return RedirectToAction("UserPage");
+            var displayName = ModelState["DisplayName"];
+            if (displayName == null || displayName.Errors.Any())
+            {
+                TempData["result"] = "Invalid Input: Your name hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            userSql.UpdateName(user.DisplayName, userID);
+            user = userSql.GetUserByID(userID);
+
+            TempData["result"] = "Name changed successfully";
+            return RedirectToAction("ChangeInfoInit", user);
         }
+
+
+        public ActionResult ChangeEmail(User user)
+        {
+            string userID = GetUser();
+            User oldInfo = userSql.GetUserByID(userID);
+
+            var userEmail = ModelState["Email"];
+            if (userEmail == null || userEmail.Errors.Any())
+            {
+                TempData["result"] = "Invalid Input: Your email hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            userSql.UpdateEmail(user.Email, userID);
+            user = userSql.GetUserByID(userID);
+
+            TempData["result"] = "Email changed successfully";
+            return RedirectToAction("ChangeInfoInit", user);
+        }
+
+
+        public ActionResult ChangePassword(User user)
+        {
+            string userID = GetUser();
+            User oldInfo = userSql.GetUserByID(userID);
+
+            var password = ModelState["Password"];
+            var confirmPassword = ModelState["ConfirmPassword"];
+            if (password == null || password.Errors.Any())
+            {
+                TempData["result"] = "Invalid input: your password hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            else if (confirmPassword == null) {
+                TempData["result"] = "Please enter your password twice; password hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            else if (confirmPassword.Errors.Any())
+            {
+                TempData["result"] = "Passwords didn't match; password hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            userSql.UpdatePassword(user.Password, userID);
+            user = userSql.GetUserByID(userID);
+
+            TempData["result"] = "Password changed successfully";
+            return RedirectToAction("ChangeInfoInit", user);
+        }
+
 
         public ActionResult Logout()
         {
@@ -148,14 +217,6 @@ namespace Cardid.Controllers
             Session["currentdeck"] = null;
             Session["anon"] = "Home";
             return View("Index");
-        }
-
-
-        public ActionResult UserPage()
-        {
-            GetUser();
-
-            return View();
         }
     }
 }
