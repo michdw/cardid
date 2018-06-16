@@ -12,7 +12,11 @@ namespace Cardid.Controllers
         // GET: Error
         public ActionResult Index()
         {
-            return View();
+            if (Session["userid"] == null)
+            {
+                ViewBag.LoggedOut = true;
+            }
+            return View("Default");
         }
 
         public ActionResult NotFound()

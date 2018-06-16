@@ -1,22 +1,40 @@
-﻿@{
-    ViewBag.Title = "CreateCard";
-}
-
+﻿
 @using Cardid.Models
 @model Card
-
-<h1 class="view-title">Create a New Card</h1>
-
-@using (Html.BeginForm("CreateCardSubmit", "Card", FormMethod.Post))
-{
-    <div>
-        <p>front of card:</p>
-        @Html.TextAreaFor(m => m.Front)
-
-        <p>back of card:</p>
-        @Html.TextAreaFor(m => m.Back)
-
-    </div>
-
-    <button class="btn main-btn">Add card</button>
+@{
+    ViewBag.Title = "Create Card";
 }
+
+@if (ViewBag.Deck == null)
+{
+    <h1 class="view-title">Create a New Card</h1>
+
+    using (Html.BeginForm("CreateCardSubmit", "Card", FormMethod.Post))
+    {
+        <div>
+            <p>front of card:</p>
+            @Html.TextAreaFor(m => m.Front)
+            <p>back of card:</p>
+            @Html.TextAreaFor(m => m.Back)
+        </div>
+
+        <button class="btn main-btn">Add card</button>
+    }
+}
+else
+{
+    <h1 class="view-title">Create Card For Deck: @ViewBag.Deck.Name</h1>
+
+    using (Html.BeginForm("CreateCardSubmitD", "Card", new { deckID = ViewBag.Deck.DeckID }, FormMethod.Post))
+    {
+        <div>
+            <p>front of card:</p>
+            @Html.TextAreaFor(m => m.Front)
+            <p>back of card:</p>
+            @Html.TextAreaFor(m => m.Back)
+        </div>
+
+        <button class="btn main-btn">Add card to deck</button>
+    }
+}
+

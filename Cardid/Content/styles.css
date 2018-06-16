@@ -1,5 +1,5 @@
 ﻿
-/* layout */
+/* general styles */
 
 body {
     margin: 0;
@@ -20,63 +20,6 @@ a {
 
 .pointer:hover {
     cursor: pointer;
-}
-
-.pageview {
-    height: 100%;
-    min-height: 100vh;
-    position: relative;
-}
-
-.page-header {
-    background: rgba(0,0,0,.15);
-    padding: 20px 0;
-}
-
-.container {
-    position: relative;
-    padding: 1em;
-    margin-bottom: 3em;
-}
-
-.page-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2em;
-    background: rgba(0,0,0,.5);
-    padding: 4px;
-    color: #fff;
-}
-
-.page-title, .top-menu {
-    display: flex;
-    justify-content: center;
-    color: #fff;
-}
-
-    .page-title p {
-        opacity: .7;
-    }
-
-.view-title {
-    font-family: 'Gugi', sans-serif;
-    color: #fff;
-    opacity: .7;
-}
-
-.page-title h1 {
-    font-size: 3em;
-    margin: 0;
-    opacity: .5;
-}
-
-.page-title p {
-    position: absolute;
-    transform: translate(10.5em, .36em);
-    margin: 0;
-    font-size: .9em;
-    margin-top: 0;
 }
 
 .bold {
@@ -125,6 +68,89 @@ a {
     clear: both;
 }
 
+.pageview {
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.white {
+    color: #fff;
+}
+
+.small-type {
+    font-size: .85em;
+}
+
+
+/* layout */
+
+.page-header {
+    position: relative;
+    background: rgba(0,0,0,.15);
+    padding: 20px 0;
+}
+
+.container {
+    position: relative;
+    padding: 1em;
+    margin-bottom: 3em;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    background: rgba(0,0,0,.5);
+    padding: 4px;
+    color: #fff;
+}
+
+.user-info, .site-info {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 8px;
+}
+
+.top-menu {
+    position: relative;
+}
+
+.page-title, .top-menu {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+    .page-title p {
+        opacity: .7;
+    }
+
+.view-title {
+    font-family: 'Gugi', sans-serif;
+    color: #fff;
+    opacity: .7;
+}
+
+.page-title h1 {
+    font-size: 3em;
+    margin: 0;
+    opacity: .5;
+}
+
+.page-title p {
+    position: absolute;
+    transform: translate(10.5em, .36em);
+    margin: 0;
+    font-size: .9em;
+    margin-top: 0;
+}
+
+
 /* forms */
 
 .form-label {
@@ -144,7 +170,6 @@ a {
     user-select: none;
     display: inline-block;
     padding: 8px 12px;
-    margin: 5px;
     font-size: 14px;
     border-radius: 4px;
     opacity: .9;
@@ -164,6 +189,7 @@ a {
 .top-btn, .main-btn, .card-button {
     background: #333;
     color: #fff;
+    margin: 4px;
     border: 1px solid #fff;
 }
 
@@ -201,49 +227,39 @@ a {
 }
 
 .card-bothsides {
-    background: rgba(255,255,255,.25);
-    display: inline-block;
-    position: relative;
-    overflow: auto;
-    padding: 15px;
-    padding-top: 20px;
-    margin: 15px;
-    height: 30vh;
-    min-height: 300px;
-    width: 25%;
-    min-width: 350px;
-    color: black;
+    width: 20%;
+    min-width: 200px;
+    background: rgba(255,255,255,0.25);
+    padding: 1em;
 }
 
-.front-field, .back-field {
+.card-field {
+    margin: 8px 4px;
+    padding: 8px 4px;
     background: #fff;
-    margin: 10px;
-    padding: 10px;
-}
-
-.front-field {
-    top: 0;
-}
-
-.back-field {
-    bottom: 0;
 }
 
 .card-options {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
+    clear: both;
+    overflow: auto;
+    margin-bottom: 1em;
 }
 
-.card-button {
-    margin: 10px;
+.card-decks {
+    margin: 0 4px;
 }
 
-.cardview-deck {
+.deck-incard {
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    padding: 4px 12px;
+    margin: 8px;
+    margin-left: 0;
+}
+
+.deck-listing {
     background: rgba(255,255,255,.5);
     color: #000;
-    font-size: .9em;
     font-weight: bold;
     margin-right: 5px;
     padding: 5px;
@@ -271,17 +287,6 @@ a {
     padding: 1em;
     clear: both;
     overflow: auto;
-}
-
-.card-indeck {
-    background: rgba(255,255,255,0.25);
-    padding: 1em;
-}
-
-.card-listing {
-    display: inline-block;
-    padding: 4px;
-    background: #fff;
 }
 
 .remove-card {

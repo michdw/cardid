@@ -1,4 +1,11 @@
 ﻿
+@{
+    if (Session["username"] != null)
+    {
+        ViewBag.UserName = Session["username"].ToString();
+    }
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +24,7 @@
 <body>
     <div class="pageview">
         <div class="page-header">
+            <p class="user-info">@ViewBag.UserName</p>
             <div class="page-title">
                 <h1 class="view-title">Cardid.</h1>
                 <p>Candid flashcards.</p>
@@ -30,8 +38,9 @@
                     @Html.ActionLink("Login", "Login", "Home", null, new { @class = "btn top-btn" })
                     @Html.ActionLink("Register", "BeginRegister", "Home", null, new { @class = "btn top-btn" })
                 }
-                @if (Session["userid"] != null)
+                else
                 {
+                    @Html.ActionLink("Account", "UserPage", "Home", null, new { @class = "btn top-btn" })
                     @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn top-btn" })
                 }
             </div>
@@ -42,9 +51,9 @@
         </div>
 
         <div class="page-footer">
-            <div>
-                2018 Michael D Weaver
-            </div>
+            <p class="site-info small-type">
+                2018 | Michael D Weaver
+            </p>
         </div>
     </div>
 </body>

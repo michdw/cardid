@@ -1,14 +1,14 @@
 ﻿@using Cardid.Models
 @model Deck
 @{
-    ViewBag.Title = "EditDeck";
+    ViewBag.Title = "Edit Deck: " + Model.Name;
     List<Tag> otherTagsByName = ViewBag.OtherTagsByName;
     List<Tag> otherTagsByPopularity = ViewBag.OtherTagsByPopularity;
 }
 
 
 
-<h1 class="view-title">Edit Deck: @Model.Name</h1>
+<h1 class="view-title">@Model.Name</h1>
 
 <div class="flex flex-left">
 
@@ -105,21 +105,22 @@
         <h1 class="view-title">Cards in this deck:</h1>
         @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
 
+        @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </div>
 
     <div class="flex flex-left">
 
-        @foreach (var card in Model.Cards)
+        @foreach (Card thisCard in Model.Cards)
         {
-            <div class="card-indeck">
+            <div class="card-bothsides">
 
-                <div class="card-listing">@card.Front</div>
+                <div class="card-field">@thisCard.Front</div>
 
-                <div class="card-listing">@card.Back</div>
+                <div class="card-field">@thisCard.Back</div>
 
-                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = card.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn" })
 
-                @Html.ActionLink("X", "RemoveCardFromDeck", "Deck", new { cardID = card.CardID, deckID = Model.DeckID }, new { @class = "remove-card" })
+                @Html.ActionLink("X", "RemoveCardFromDeck", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "remove-card" })
 
             </div>
         }

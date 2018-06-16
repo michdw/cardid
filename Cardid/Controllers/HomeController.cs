@@ -55,8 +55,8 @@ namespace Cardid.Controllers
             }
 
             Session["userid"] = currentUser.UserID;
+            Session["username"] = currentUser.DisplayName;
             TempData["loginname"] = currentUser.DisplayName;
-            FormsAuthentication.SetAuthCookie("username", false);
             switch (Session["anon"].ToString())
             {
                 case "Card":
@@ -93,6 +93,7 @@ namespace Cardid.Controllers
             User currentUser = userSql.GetUserInfo(newUser.Email);
 
             Session["userid"] = currentUser.UserID;
+            Session["username"] = currentUser.DisplayName;
             TempData["newuser"] = currentUser.DisplayName;
             FormsAuthentication.SetAuthCookie("userid", false);
             switch (Session["anon"].ToString())
@@ -112,6 +113,8 @@ namespace Cardid.Controllers
         {
             TempData["loginname"] = null;
             Session["userid"] = null;
+            Session["username"] = null;
+            Session["currentdeck"] = null;
             Session["anon"] = "Home";
             return View("Index");
         }

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Default Error";
+}
+
+<h2 class="view-title">Error</h2>
+<div style="color:#fff;">
+    <p>
+        An error occurred while processing your request.
+    </p>
+    @if (ViewBag.LoggedOut == true)
+    {
+        <p>
+            You may need to <u>@Html.ActionLink("log in", "Login", "Home")</u> to reach your destination.
+        </p>
+    }
+
+</div>
+

@@ -17,7 +17,12 @@ namespace Cardid.Controllers
         StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
-        private List<Card> RedoCards(string redo)
+        private string GetUser()
+        {
+            return Session["userid"].ToString();
+        }
+
+        private List<Card> CardsToRedo(string redo)
         {
             List<string> redoList = redo.Split(',').ToList();
             List<Card> redoCards = new List<Card>();
@@ -37,9 +42,9 @@ namespace Cardid.Controllers
                 Session["anon"] = "Deck";
                 return RedirectToAction("Login", "Home");
             }
-
-            string userID = Session["userid"].ToString();
+            string userID = GetUser();
             ViewBag.UserID = userID;
+
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
             ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
             List<Deck> allDecks = deckSql.GetAllDecks(userID);
@@ -49,6 +54,8 @@ namespace Cardid.Controllers
 
         public ActionResult AddDeckTag(string deckID, string tagID)
         {
+            GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
             Tag tag = tagSql.GetTagByID(tagID);
             tagSql.AddTagToDeck(deckID, tagID);
@@ -59,6 +66,8 @@ namespace Cardid.Controllers
 
         public ActionResult CardsInDeck(string deckID)
         {
+            GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
             return View(deck);
         }
@@ -66,6 +75,8 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseDecksInit(string cardID)
         {
+            GetUser();
+
             Card card = cardSql.GetCardByID(cardID);
             List<Deck> availableDecks = deckSql.DecksNotWithCard(card);
 
@@ -76,6 +87,8 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseDecksSubmit(string cardID, string deckID)
         {
+            GetUser();
+
             Card card = cardSql.GetCardByID(cardID);
             cardSql.AddCardToDeck(card, deckID);
 
@@ -86,7 +99,7 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseOtherDeck(string cardID)
         {
-            string userID = Session["userid"].ToString();
+            string userID = GetUser();
             Card publicCard = cardSql.GetCardByID(cardID);
 
             Card userCard = new Card();
@@ -99,6 +112,7 @@ namespace Cardid.Controllers
 
         public ActionResult CreateDeckInit()
         {
+            GetUser();
             return View("CreateDeck");
         }
 
@@ -106,8 +120,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CreateDeckSubmit(Deck newDeck)
         {
-            string userID = Session["userid"].ToString();
-
+            string userID = GetUser();
             newDeck = deckSql.CreateDeck(newDeck.Name, userID);
 
             return RedirectToAction("EditDeck", new { deckID = newDeck.DeckID });
@@ -116,6 +129,8 @@ namespace Cardid.Controllers
 
         public ActionResult CreateTag(Deck deck)
         {
+            GetUser();
+
             Tag newTag = deck.NewTag;
             deck = deckSql.GetDeckByID(deck.DeckID);
             newTag = tagSql.CreateTag(newTag.TagName, deck.UserID);
@@ -128,10 +143,12 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult DeleteDeck(string deckID)
         {
-            Deck deck = deckSql.GetDeckByID(deckID);
+            GetUser();
 
+            Deck deck = deckSql.GetDeckByID(deckID);
             List<Card> cardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
             List<Card> cardsOnlyInDeck = new List<Card>();
+
             foreach (Card card in cardsInDeck)
             {
                 if (card.Decks.Count == 1)
@@ -147,6 +164,8 @@ namespace Cardid.Controllers
 
         public ActionResult EditDeck(string deckID)
         {
+            GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
 
             ViewBag.OtherTagsByName = tagSql.GetOtherTagsByName(deckID);
@@ -157,20 +176,28 @@ namespace Cardid.Controllers
 
         public ActionResult MakeDeckPrivate(string deckID)
         {
+            GetUser();
+
             deckSql.MakeDeckPrivate(deckID);
+
             return RedirectToAction("EditDeck", new { deckID });
         }
 
 
         public ActionResult MakeDeckPublic(string deckID)
         {
+            GetUser();
+
             deckSql.MakeDeckPublic(deckID);
+
             return RedirectToAction("EditDeck", new { deckID });
         }
 
 
         public ActionResult RemoveCardFromDeck(string cardID, string deckID)
         {
+            GetUser();
+
             deckSql.RemoveCardFromDeck(cardID, deckID);
 
             return RedirectToAction("EditDeck", new { deckID });
@@ -179,6 +206,8 @@ namespace Cardid.Controllers
 
         public ActionResult RemoveDeckTag(string deckID, string tagID)
         {
+            GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
             Tag tag = tagSql.GetTagByID(tagID);
             tagSql.RemoveTagFromDeck(deckID, tagID);
@@ -189,7 +218,8 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckNames(string searchString)
         {
-            ViewBag.UserID = Session["userid"].ToString();
+            string userID = GetUser();
+            ViewBag.UserID = userID;
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
             ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
 
@@ -201,7 +231,8 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckTags(string searchString)
         {
-            ViewBag.UserID = Session["userid"].ToString();
+            string userID = GetUser();
+            ViewBag.UserID = userID;
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
             ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
 
@@ -213,6 +244,8 @@ namespace Cardid.Controllers
 
         public ActionResult StudyBegin(string deckID)
         {
+            GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
             ViewBag.Deck = deck;
 
@@ -232,6 +265,8 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult StudyLog(Study study, bool wholeDeck)
         {
+            GetUser();
+
             if (wholeDeck)
             {
                 study.TimeOf = DateTime.Now;
@@ -243,17 +278,19 @@ namespace Cardid.Controllers
 
         public ActionResult StudyRedo(string redo, string deckID)
         {
+            string userID = GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
             ViewBag.Deck = deck;
 
-            List<Card> redoCards = RedoCards(redo);
+            List<Card> redoCards = CardsToRedo(redo);
             redoCards.Shuffle();
             ViewBag.Cards = redoCards;
 
             Study study = new Study
             {
                 DeckID = deckID,
-                UserID = Session["userid"].ToString()
+                UserID = userID
             };
             return View("Study", study);
         }

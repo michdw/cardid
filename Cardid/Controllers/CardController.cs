@@ -14,6 +14,11 @@ namespace Cardid.Controllers
         CardSqlDAL cardSql = new CardSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
+        private string GetUser()
+        {
+            return Session["userid"].ToString();
+        }
+
         public ActionResult Index()
         {
             if (Session["userid"] == null)
@@ -21,7 +26,7 @@ namespace Cardid.Controllers
                 Session["anon"] = "Card";
                 return RedirectToAction("Login", "Home");
             }
-            string userID = Session["userid"].ToString();
+            string userID = GetUser();
 
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
             ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
@@ -29,9 +34,10 @@ namespace Cardid.Controllers
         }
 
 
-        //add cards to deck
         public ActionResult ChooseCardsInit(string deckID)
         {
+            string userID = GetUser();
+
             Deck deck = deckSql.GetDeckByID(deckID);
 
             List<Card> availableCards = cardSql.CardsNotWithDeck(deck);
@@ -43,6 +49,8 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseCardsSubmit(string cardID, string deckID)
         {
+            GetUser();
+
             Card card = cardSql.GetCardByID(cardID);
             cardSql.AddCardToDeck(card, deckID);
 
@@ -51,9 +59,19 @@ namespace Cardid.Controllers
         }
 
 
-        //create cards
         public ActionResult CreateCardInit()
         {
+            GetUser();
+
+            return View("CreateCard");
+        }
+
+
+        public ActionResult CreateCardInitD(string deckID)
+        {
+            GetUser();
+
+            ViewBag.Deck = deckSql.GetDeckByID(deckID);
             return View("CreateCard");
         }
 
@@ -61,6 +79,8 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CreateCardSubmit(Card newCard)
         {
+            GetUser();
+
             string userID = Session["userid"].ToString();
 
             newCard = cardSql.CreateCard(newCard, userID);
@@ -72,11 +92,27 @@ namespace Cardid.Controllers
 
 
         [HttpPost]
-        public ActionResult DeleteCard(string cardID)
+        public ActionResult CreateCardSubmitD(Card newCard, string deckID)
         {
-            cardSql.DeleteCard(cardID);
+            GetUser();
 
             string userID = Session["userid"].ToString();
+
+            newCard = cardSql.CreateCard(newCard, userID);
+            cardSql.AddCardToDeck(newCard, deckID);
+
+            
+            return RedirectToAction("EditDeck", "Deck", new { deckID });
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteCard(string cardID)
+        {
+            string userID = GetUser();
+
+            cardSql.DeleteCard(cardID);
+
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
 
             return RedirectToAction("Index", userCards);
@@ -86,6 +122,8 @@ namespace Cardid.Controllers
         //edit card contents from card view
         public ActionResult EditCardInit(string cardID)
         {
+            GetUser();
+
             Session["currentdeck"] = null;
 
             Card card = cardSql.GetCardByID(cardID);
@@ -98,6 +136,8 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult EditCardSubmit(Card newValues)
         {
+            GetUser();
+
             cardSql.EditCard(newValues);
 
             return RedirectToAction("EditCardInit", new { cardID = newValues.CardID });
@@ -107,6 +147,8 @@ namespace Cardid.Controllers
         //edit card contents from deck view
         public ActionResult EditCardInitD(string cardID, string deckID)
         {
+            GetUser();
+
             Session["currentdeck"] = deckSql.GetDeckByID(deckID);
 
             Card card = cardSql.GetCardByID(cardID);
@@ -119,6 +161,8 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult EditCardSubmitD(Card newValues)
         {
+            GetUser();
+
             Deck deck = Session["currentdeck"] as Deck;
 
             cardSql.EditCard(newValues);
@@ -129,7 +173,8 @@ namespace Cardid.Controllers
 
         public ActionResult SearchCards(string searchString)
         {
-            string userID = Session["userid"].ToString();
+            string userID =GetUser();
+
             ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
 
             List<Card> matchingCards = cardSql.SearchCardsForText(searchString);
