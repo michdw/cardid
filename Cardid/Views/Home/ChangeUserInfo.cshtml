@@ -55,7 +55,7 @@
     <button type="submit">Submit</button>
 }
 
-@using (Html.BeginForm("DeleteUser", "Home", FormMethod.Post))
+@using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post))
 {
-
+    <button type="submit">Delete account</button>
 }

@@ -12,6 +12,7 @@ namespace Cardid.Controllers
     public class HomeController : Controller
     {
         UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
         private string GetUser()
         {
@@ -142,6 +143,7 @@ namespace Cardid.Controllers
         }
 
 
+        [HttpPost]
         public ActionResult ChangeName(User user)
         {
             string userID = GetUser();
@@ -161,6 +163,7 @@ namespace Cardid.Controllers
         }
 
 
+        [HttpPost]
         public ActionResult ChangeEmail(User user)
         {
             string userID = GetUser();
@@ -180,6 +183,7 @@ namespace Cardid.Controllers
         }
 
 
+        [HttpPost]
         public ActionResult ChangePassword(User user)
         {
             string userID = GetUser();
@@ -206,6 +210,23 @@ namespace Cardid.Controllers
 
             TempData["result"] = "Password changed successfully";
             return RedirectToAction("ChangeInfoInit", user);
+        }
+
+
+        [HttpPost]
+        public ActionResult RemoveUser(string userID)
+        {
+            List<Tag> userTags = tagSql.GetTagsByUserID(userID);
+            foreach (Tag tag in userTags)
+            {
+                if (tag.CurrentUserIDs.Count == 1 || tag.Decks.Count == 0)
+                {
+                    tagSql.DeleteTag(tag.TagID);
+                }
+            }
+            
+            userSql.RemoveUser(userID);
+            return RedirectToAction("Logout");
         }
 
 

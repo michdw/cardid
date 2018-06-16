@@ -148,16 +148,15 @@ namespace Cardid.Controllers
 
             Deck deck = deckSql.GetDeckByID(deckID);
             List<Card> cardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
-            List<Card> cardsOnlyInDeck = new List<Card>();
 
             foreach (Card card in cardsInDeck)
             {
-                if (card.Decks.Count == 1)
+                if (card.Decks.Count > 1)
                 {
-                    cardsOnlyInDeck.Add(card);
+                    cardsInDeck.Remove(card);
                 }
             }
-            deckSql.DeleteDeck(deckID, cardsOnlyInDeck);
+            deckSql.DeleteDeck(deckID, cardsInDeck);
 
             return RedirectToAction("Index");
         }

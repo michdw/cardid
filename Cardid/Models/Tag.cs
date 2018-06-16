@@ -24,7 +24,7 @@ namespace Cardid.Models
             }
         }
 
-        public HashSet<string> CurrentUsers
+        public HashSet<string> CurrentUserIDs
         {
             get
             {

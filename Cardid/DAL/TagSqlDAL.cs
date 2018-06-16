@@ -26,7 +26,7 @@ namespace Cardid.DAL
             + "(SELECT TagID FROM [deck_tag] WHERE deck_tag.DeckID = @deckID) ORDER BY tags.TagName ASC";
         private string getOtherTagsByPopularity = "SELECT tags.TagID FROM[tags] "
             + "FULL OUTER JOIN[deck_tag] ON deck_tag.TagID = tags.TagID "
-            + "WHERE tags.TagID NOT IN(SELECT TagID FROM[deck_tag] WHERE deck_tag.DeckID = 1) "
+            + "WHERE tags.TagID NOT IN(SELECT TagID FROM[deck_tag] WHERE deck_tag.DeckID = @deckID) "
             + "GROUP BY DeckID, tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
         private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
         private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
@@ -150,6 +150,20 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 List<Tag> list = db.Query<Tag>(getTagsByDeckID, new { deckID }).ToList();
+                foreach (Tag tag in list)
+                {
+                    tag.TagName = tag.TagName.Trim();
+                }
+                return list;
+            }
+        }
+
+
+        public List<Tag> GetTagsByUserID(string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Tag> list = db.Query<Tag>(getTagsByUserID, new { userID }).ToList();
                 foreach (Tag tag in list)
                 {
                     tag.TagName = tag.TagName.Trim();

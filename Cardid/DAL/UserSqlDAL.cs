@@ -15,6 +15,12 @@ namespace Cardid.DAL
         private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
         private string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
         private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
+        private string removeUser = 
+            "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; "
+            + "DELETE FROM [cards] WHERE UserID = @userID; "
+            + "DELETE FROM [decks] WHERE UserID = @userID; "
+            + "DELETE FROM [sessions] WHERE UserID = @userID; "
+            + "DELETE FROM [users] WHERE UserID = @userID;";
         private string updateEmail = "UPDATE [users] SET Email = @email WHERE UserID = @userID";
         private string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
         private string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
@@ -76,6 +82,15 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(registerUser, new { email = user.Email, password = user.Password, displayName = user.DisplayName });
+            }
+        }
+
+
+        public void RemoveUser(string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(removeUser, new { userID });
             }
         }
 
