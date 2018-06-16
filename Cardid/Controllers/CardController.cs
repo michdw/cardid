@@ -19,6 +19,8 @@ namespace Cardid.Controllers
             return Session["userid"].ToString();
         }
 
+
+
         public ActionResult Index()
         {
             if (Session["userid"] == null)

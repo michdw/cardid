@@ -11,13 +11,25 @@ namespace Cardid.DAL
     public class UserSqlDAL
     {
         private string connectionString;
-        private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
+        private string checkForEmail = "SELECT * from [users] WHERE Email = @email";
+        private string getAllUsers = "SELECT * FROM [users]";
         private string getUserByID = "SELECT UserID, Email, Password, DisplayName FROM [users] where UserID = @userID";
         private string getUserInfo = "SELECT UserID, Email, Password, DisplayName FROM [users] WHERE Email = @email;";
+        private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
 
         public UserSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+
+
+        public bool CheckForEmail(string email)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<User> list = db.Query<User>(checkForEmail, new { email }).ToList();
+                return list.Count > 0;
+            }
         }
 
 

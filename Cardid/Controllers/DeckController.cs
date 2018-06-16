@@ -21,7 +21,7 @@ namespace Cardid.Controllers
         {
             return Session["userid"].ToString();
         }
-
+        
         private List<Card> CardsToRedo(string redo)
         {
             List<string> redoList = redo.Split(',').ToList();
@@ -33,6 +33,7 @@ namespace Cardid.Controllers
             }
             return redoCards;
         }
+
 
 
         public ActionResult Index()
@@ -295,7 +296,16 @@ namespace Cardid.Controllers
             return View("Study", study);
         }
 
+
+        public ActionResult TagPage()
+        {
+            GetUser();
+            return View();
+        }
+
     }
+
+
 
     public static class Randomize
     {

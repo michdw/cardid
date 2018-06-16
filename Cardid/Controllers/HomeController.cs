@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Cardid.DAL;
 using Cardid.Models;
 
@@ -13,6 +12,13 @@ namespace Cardid.Controllers
     public class HomeController : Controller
     {
         UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+
+        private string GetUser()
+        {
+            return Session["userid"].ToString();
+        }
+
+
 
         public ActionResult Index()
         {
@@ -81,13 +87,18 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CompleteRegister(User newUser)
         {
+            bool emailExists = userSql.CheckForEmail(newUser.Email);
+            if (emailExists)
+            {
+                ModelState.AddModelError("invalid-credentials", "That email has already been used to register on this site.");
+                ViewBag.LoginInstead = true;
+                return View("Register", newUser);
+            }
 
             if (!ModelState.IsValid)
             {
                 return View("Register", newUser);
             }
-
-            //check for duplicate email???
 
             userSql.RegisterUser(newUser);
             User currentUser = userSql.GetUserInfo(newUser.Email);
@@ -95,7 +106,6 @@ namespace Cardid.Controllers
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
             TempData["newuser"] = currentUser.DisplayName;
-            FormsAuthentication.SetAuthCookie("userid", false);
             switch (Session["anon"].ToString())
             {
                 case "Card":
@@ -108,7 +118,7 @@ namespace Cardid.Controllers
         }
 
 
-        //
+        //other actions
         public ActionResult Logout()
         {
             TempData["loginname"] = null;
@@ -119,5 +129,17 @@ namespace Cardid.Controllers
             return View("Index");
         }
 
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+
+        public ActionResult UserPage()
+        {
+            GetUser();
+            return View();
+        }
     }
 }
