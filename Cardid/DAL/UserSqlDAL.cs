@@ -15,15 +15,16 @@ namespace Cardid.DAL
         private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
         private string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
         private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
-        private string removeUser = 
-            "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; "
-            + "DELETE FROM [cards] WHERE UserID = @userID; "
-            + "DELETE FROM [decks] WHERE UserID = @userID; "
-            + "DELETE FROM [sessions] WHERE UserID = @userID; "
-            + "DELETE FROM [users] WHERE UserID = @userID;";
         private string updateEmail = "UPDATE [users] SET Email = @email WHERE UserID = @userID";
         private string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
         private string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
+
+        //steps to remove user
+        private string removeUserCardDecks = "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; ";
+        private string removeUserCards = "DELETE FROM [cards] WHERE UserID = @userID; ";
+        private string removeUserDecks = "DELETE FROM [decks] WHERE UserID = @userID; ";
+        private string removeUserSessions = "DELETE FROM [sessions] WHERE UserID = @userID; ";
+        private string removeUser = "DELETE FROM [users] WHERE UserID = @userID;";
 
         public UserSqlDAL(string connectionString)
         {
@@ -90,6 +91,10 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
+                db.Execute(removeUserCardDecks, new { userID });
+                db.Execute(removeUserCards, new { userID });
+                db.Execute(removeUserDecks, new { userID });
+                db.Execute(removeUserSessions, new { userID });
                 db.Execute(removeUser, new { userID });
             }
         }
