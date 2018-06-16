@@ -62,7 +62,11 @@
                 </div>
 
             </div>
-
+            @using (Html.BeginForm("CreateTag", "Deck"))
+            {
+                <input type="text" name="tagName" />
+                <button type="submit" class="btn main-btn">Create a new tag</button>
+            }
 
         </div>
 
@@ -111,9 +115,9 @@
         </div>
 
         <div class="deck-list">
+            <h4 class="bold">Your decks</h4>
             @if (Model.Count > 0)
             {
-                <h4 class="bold">Your decks</h4>
 
                 foreach (Deck deck in Model)
                 {
@@ -136,19 +140,19 @@
                     {
                         <div>No decks with that tag.</div>
                     }
-                    else
-                    {
-                        <div>You currently have no decks.</div>
-                    }
                 }
+            }
+            else
+            {
+                <div>You currently have no decks.</div>
             }
         </div>
 
         <div class="deck-list">
 
+            <h4 class="bold">Public decks</h4>
             @if (Model.Count > 0)
             {
-                <h4 class="bold">Public decks</h4>
 
                 counter = 0;
                 foreach (Deck deck in Model)
@@ -173,11 +177,11 @@
                     {
                         <div>No decks with that tag.</div>
                     }
-                    else
-                    {
-                        <div>No decks currently shared by other users.</div>
-                    }
                 }
+            }
+            else
+            {
+                <div>No decks currently shared by other users.</div>
             }
         </div>
 

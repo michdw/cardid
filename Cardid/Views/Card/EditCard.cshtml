@@ -28,10 +28,8 @@
             </div>
         </div>
 
-        @using (Html.BeginForm("DeleteCard", "Card", new { cardID = Model.CardID }, FormMethod.Post))
-        {
-            <button class="btn delete-btn">Delete This Card</button>
-        }
+        @Html.ActionLink("Delete this card", "Delete Card", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
+
     </div>
 
     <div class="editcard">

@@ -79,7 +79,7 @@
         <div class="option">
             <h4 class="bold">Create a new tag for this deck:</h4>
 
-            @using (Html.BeginForm("CreateTag", "Deck", FormMethod.Post))
+            @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
             {
                 @Html.TextBoxFor(m => m.NewTag.TagName)
 

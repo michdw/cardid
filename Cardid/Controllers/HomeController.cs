@@ -122,9 +122,10 @@ namespace Cardid.Controllers
         //other actions
         public ActionResult UserPage()
         {
-            GetUser();
+            string userID = GetUser();
+            User user = userSql.GetUserByID(userID);
 
-            return View();
+            return View(user);
         }
 
 
@@ -219,7 +220,7 @@ namespace Cardid.Controllers
             List<Tag> userTags = tagSql.GetTagsByUserID(userID);
             foreach (Tag tag in userTags)
             {
-                if (tag.CurrentUserIDs.Count == 1 || tag.Decks.Count == 0)
+                if (tag.CurrentUserIDs.Count <= 1)
                 {
                     tagSql.DeleteTag(tag.TagID);
                 }

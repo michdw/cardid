@@ -108,7 +108,6 @@ namespace Cardid.Controllers
         }
 
 
-        [HttpPost]
         public ActionResult DeleteCard(string cardID)
         {
             string userID = GetUser();

@@ -1,0 +1,27 @@
+﻿
+@using Cardid.Models
+@model List<Tag>
+
+@{
+    ViewBag.Title = "Tags";
+}
+
+<h2 class="view-title">Manage Your Tags</h2>
+
+@foreach (Tag tag in Model)
+{
+    if (tag.Decks.Count > 0)
+    {
+        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchstring = tag.TagName }, new { @class = "active-tag" })
+    }
+    else
+    {
+        <span class="inactive-tag">@tag.TagName</span>
+    }
+
+    if (tag.CurrentUserIDs.Count <= 1)
+    {
+        @Html.ActionLink("X", "DeleteTag", "Deck", new { tagID = tag.TagID }, null)
+    }
+
+}

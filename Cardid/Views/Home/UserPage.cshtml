@@ -1,8 +1,18 @@
 ﻿
+@using Cardid.Models
+@model User
+
 @{
-    ViewBag.Title = "Your Account: " + ViewBag.UserName;
+    ViewBag.Title = "Your Account: " + Model.DisplayName;
 }
 
-<h2 class="view-title">@ViewBag.UserName</h2>
+<h2 class="view-title">@Model.DisplayName</h2>
 
-@Html.ActionLink("Change your information", "ChangeInfoInit", "Home")
+<div>
+    @Html.ActionLink("Manage Tags", "TagView", "Deck")
+</div>
+
+
+<div>
+    @Html.ActionLink("Change your information", "ChangeInfoInit", "Home")
+</div>

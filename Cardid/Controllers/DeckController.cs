@@ -128,7 +128,16 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult CreateTag(Deck deck)
+        public ActionResult CreateTag(string tagName)
+        {
+            string userID = GetUser();
+            tagSql.CreateTag(tagName, userID);
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateTagForDeck(Deck deck)
         {
             GetUser();
 
@@ -159,6 +168,15 @@ namespace Cardid.Controllers
             deckSql.DeleteDeck(deckID, cardsInDeck);
 
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult DeleteTag(string tagID)
+        {
+            GetUser();
+
+            tagSql.DeleteTag(tagID);
+            return RedirectToAction("TagView");
         }
 
 
@@ -296,10 +314,13 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult TagPage()
+
+        public ActionResult TagView()
         {
-            GetUser();
-            return View();
+            string userID = GetUser();
+            List<Tag> userTags = tagSql.GetTagsByUserID(userID);
+
+            return View("ManageTags", userTags);
         }
 
     }
