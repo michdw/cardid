@@ -143,7 +143,7 @@ namespace Cardid.Controllers
 
             cardSql.EditCard(newValues);
 
-            ViewBag.CardChanged = true;
+            TempData["cardchanged"] = true;
             return RedirectToAction("EditCardInit", new { cardID = newValues.CardID });
         }
 

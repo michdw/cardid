@@ -35,6 +35,17 @@
                     @Html.ActionLink("Make private", "MakeDeckPrivate", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
                 }
             </div>
+
+            <div class="option">
+
+                @using (Html.BeginForm("ChangeDeckName", "Deck"))
+                {
+                    @Html.HiddenFor(m => m.DeckID)
+                    @Html.TextBoxFor(m => m.Name)
+                    <button type="submit" class="btn main-btn">Rename deck</button>
+                }
+
+            </div>
         </div>
     </div>
 
@@ -101,9 +112,12 @@
     <div class="container-header">
 
         <h1 class="view-title">Cards in this deck:</h1>
-        @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
-
-        @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+        <div class="option">
+            @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+        </div>
+        <div class="option">
+            @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+        </div>
     </div>
 
     <div class="flex flex-left">

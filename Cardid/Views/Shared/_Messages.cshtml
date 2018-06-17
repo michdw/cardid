@@ -2,6 +2,39 @@
 @using Cardid.Models
 
 
+
+@if (TempData["addedcard"] != null)
+{
+    Card card = TempData["addedcard"] as Card;
+    <div class="view-msg">Card for @card.Front successfully added to deck</div>
+}
+
+@if (TempData["addedtag"] != null)
+{
+    Tag tag = TempData["addedtag"] as Tag;
+    <div class="view-msg">Tag for @tag.TagName successfully added to deck</div>
+}
+
+@if (TempData["cardchanged"] != null)
+{
+    <div class="view-msg">Card changed successfully</div>
+}
+
+@if (TempData["decknamechanged"] != null)
+{
+    <div class="view-msg">Deck name has been changed</div>
+}
+
+@if (TempData["deletedcard"] != null)
+{
+    <div class="view-msg">Card has been deleted</div>
+}
+
+@if (TempData["deletedtag"] != null)
+{
+    <div class="view-msg">Tag has been deleted</div>
+}
+
 @if (TempData["loginname"] != null)
 {
     <div class="view-msg">Welcome back, @TempData["loginname"].ToString()!</div>
@@ -11,32 +44,25 @@ else if (TempData["newuser"] != null)
     <div class="view-msg">Welcome, @TempData["newuser"]!</div>
 }
 
-@if (TempData["addedcard"] != null)
+
+@if (ViewBag.AddedCard != null)
 {
-    Card card = TempData["addedcard"] as Card;
-    <div class="view-msg">Card for @card.Front successfully added to deck</div>
+    Card card = ViewBag.AddedCard;
+    <div class="view-msg">Card for @card.Front created successfully</div>
 }
 
-@if (TempData["deletedcard"] != null)
+@if (ViewBag.LoggedOut == true)
 {
-    <div class="view-msg">Card has been deleted</div>
-}
-
-@if (TempData["addedtag"] != null)
-{
-    Tag tag = TempData["addedtag"] as Tag;
-    <div class="view-msg">Tag for @tag.TagName successfully added to deck</div>
-}
-
-@if (TempData["deletedtag"] != null)
-{
-    <div class="view-msg">Tag has been deleted</div>
-}
-
-@if (ViewBag.CardChanged == true)
-{
-    <div class="view-msg">Card changed successfully</div>
+    <div class="view-msg">You have been logged out</div>
 }
 
 
+<script>
 
+    $(document).ready(function () {
+
+        $('.view-msg').delay(1800).slideUp();
+
+    });
+
+</script>

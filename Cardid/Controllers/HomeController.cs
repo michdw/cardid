@@ -238,6 +238,7 @@ namespace Cardid.Controllers
             Session["username"] = null;
             Session["currentdeck"] = null;
             Session["anon"] = "Home";
+            ViewBag.LoggedOut = true;
             return View("Index");
         }
     }

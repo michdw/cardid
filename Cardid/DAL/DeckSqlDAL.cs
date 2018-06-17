@@ -16,9 +16,10 @@ namespace Cardid.DAL
             this.connectionString = connectionString;
         }
 
+        private string changeDeckName = "UPDATE [decks] SET Name = @name WHERE DeckID = @deckID";
+        private string createDeck = "INSERT INTO [decks] (Name, IsPublic, UserID) VALUES (@name, @isPublic, @userID)";
         private string decksNotWithCard = "SELECT * FROM [decks] WHERE DeckID not in "
             + "(SELECT DeckID from [card_deck] WHERE CardID = @cardID) AND UserID = @userID";
-        private string createDeck = "INSERT INTO [decks] (Name, IsPublic, UserID) VALUES (@name, @isPublic, @userID)";
         private string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID)";
         private string getDeckByID = "SELECT * FROM [decks] WHERE DeckID = @deckID";
         private string getDecksByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
@@ -36,6 +37,15 @@ namespace Cardid.DAL
         private string searchDecksByName = "SELECT * FROM decks WHERE Name LIKE @text";
         private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
             + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE tags.TagName = @text";
+
+
+        public void ChangeDeckName(string name, string deckID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(changeDeckName, new { name, deckID });
+            }
+        }
 
 
         public Deck CreateDeck(string deckName, string userID)
@@ -168,7 +178,7 @@ namespace Cardid.DAL
             }
         }
 
-        public List<Deck> SearchDecksByName (string text)
+        public List<Deck> SearchDecksByName(string text)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {

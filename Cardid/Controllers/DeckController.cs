@@ -174,6 +174,17 @@ namespace Cardid.Controllers
         }
 
 
+        public ActionResult ChangeDeckName(Deck deck)
+        {
+            Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
+            deckSql.ChangeDeckName(deck.Name, deck.DeckID);
+            deck = deckSql.GetDeckByID(deck.DeckID);
+
+            TempData["decknamechanged"] = true;
+            return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
+        }
+
+
         public ActionResult DeleteTag(string tagID)
         {
             GetUser();
