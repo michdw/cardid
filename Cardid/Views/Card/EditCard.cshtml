@@ -9,30 +9,10 @@
 
 <h1 class="view-title">Edit card</h1>
 
-<div class="flex flex-baseline">
+<div class="flex flex-left">
 
-    <div class="editcard">
-        <div class="card-content">
-            <div>
+    <div class="card-column">
 
-                @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
-                {
-                    <div>
-                        @Html.HiddenFor(m => m.CardID)
-                        <h4 class="bold">Front of card:</h4>
-                        @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
-                        <h4 class="bold">Back of card:</h4>
-                        @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
-                    </div>
-                }
-            </div>
-        </div>
-
-        @Html.ActionLink("Delete this card", "Delete Card", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
-
-    </div>
-
-    <div class="editcard">
         @if (Session["currentdeck"] != null)
         {
             Deck currentDeck = Session["currentDeck"] as Deck;
@@ -48,9 +28,30 @@
             <div class="">All changes saved automatically</div>
         }
 
-    </div>
+        <div class="card-content">
 
+            @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.CardID)
+                <div class="edit-field">
+                    @Html.LabelFor(m => m.Front, "Front of Card:")
+                    @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
+                </div>
+                <div class="edit-field">
+                    @Html.LabelFor(m => m.Back, "Back of Card:")
+                    @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
+                </div>
+            }
+        </div>
+
+        @Html.ActionLink("Delete this card", "Delete Card", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
+
+    </div>
 </div>
+
+
+
+
 
 
 

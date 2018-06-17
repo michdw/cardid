@@ -10,20 +10,30 @@
 
 
 
+@if (ViewBag.SearchName != null)
+{
+    <h1 class="view-title">Search results for "@ViewBag.SearchName":</h1>
+}
+
+else if (ViewBag.SearchTag != null)
+{
+    <h1 class="view-title" : inline-block">
+        Tag Search Results:
+    </h1>
+    <span class="tag active-tag">@ViewBag.SearchTag</span>
+}
+
+else
+{
+    <h1 class="view-title">All Decks</h1>
+}
+
 
 <div class="flex flex-center">
-
-    <div class="deckview-left">
-
-        @if (TempData["loginname"] != null)
-        {
-            <div>Thank you for logging in, @TempData["loginname"]</div>
-        }
-
+    <div class="deck-column">
         <div class="option">
 
             @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
-
         </div>
 
         <div class="option">
@@ -39,8 +49,8 @@
             <h4 class="bold">Search decks by tag</h4>
 
             <div class="tagviews">
-                <span class="tagview-pop bold">sort by popularity</span>
-                <span class="tagview-alph pointer">sort alphabetically</span>
+                <p class="tagview-pop bold">sort by popularity</p>
+                <p class="tagview-alph pointer">sort alphabetically</p>
             </div>
 
             <div class="tag-container">
@@ -72,50 +82,10 @@
 
     </div>
 
-    <div class="deckview-right">
-        <div class="container-header">
-
-            @if (ViewBag.SearchName != null)
-            {
-                if (Model.Count > 0)
-                {
-                    <h2 class="bold">Search results for "@ViewBag.SearchName":</h2>
-                }
-                else
-                {
-                    <h4 class="bold">No decks found matching "@ViewBag.SearchName"</h4>
-                }
-                @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
-            }
-
-            else if (ViewBag.SearchTag != null)
-            {
-                if (Model.Count > 0)
-                {
-                    <h2 style="display: inline-block">
-                        Decks with tag:
-                    </h2>
-                    <span class="tag active-tag">@ViewBag.SearchTag</span>
-                }
-                else
-                {
-                    <h4 class="bold">
-                        No decks found with the tag <span class="tag active-tag">@ViewBag.SearchTag</span>
-                    </h4>
-                }
-                <div class="option">
-                    @Html.ActionLink("View all decks", "Index", "Deck", null, new { @class = "btn main-btn" })
-                </div>
-            }
-
-            else
-            {
-                <h1 class="view-title">All Decks</h1>
-            }
-        </div>
-
+    <div class="deck-column">
         <div class="deck-list">
             <h4 class="bold">Your decks</h4>
+
             @if (Model.Count > 0)
             {
 
@@ -140,17 +110,32 @@
                     {
                         <div>No decks with that tag.</div>
                     }
+                    else
+                    {
+                        <div>
+                            You currently have no decks.
+                            @Html.ActionLink("Create one here.", "CreateDeckInit", "Deck")
+                        </div>
+                    }
                 }
             }
             else
             {
-                <div>You currently have no decks.</div>
+                if (ViewBag.SearchName != null)
+                {
+                    <div>No decks matching that name.</div>
+                }
+                else if (ViewBag.SearchTag != null)
+                {
+                    <div>No decks with that tag.</div>
+                }
             }
         </div>
 
-        <div class="deck-list">
 
+        <div class="deck-list">
             <h4 class="bold">Public decks</h4>
+
             @if (Model.Count > 0)
             {
 
@@ -163,7 +148,7 @@
                         @Html.ActionLink(@deck.Name, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "float-left" })
                         @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn float-right" })
                         <div>
-                            Shared by @deck.Creator.DisplayName
+                            Shared by @deck.Creator().DisplayName
                         </div>
                     }
                 }
@@ -177,14 +162,24 @@
                     {
                         <div>No decks with that tag.</div>
                     }
+                    else
+                    {
+                        <div>No decks currently shared by other users.</div>
+                    }
                 }
             }
             else
             {
-                <div>No decks currently shared by other users.</div>
+                if (ViewBag.SearchName != null)
+                {
+                    <div>No decks matching that name.</div>
+                }
+                else if (ViewBag.SearchTag != null)
+                {
+                    <div>No decks with that tag.</div>
+                }
             }
         </div>
-
     </div>
 </div>
 
@@ -192,15 +187,3 @@
 
 
 <script type="text/javascript" src="../../Content/deckTags.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-

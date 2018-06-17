@@ -12,7 +12,7 @@ namespace Cardid.Models
     {
         public string UserID { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name to use on this site.")]
+        [Required(ErrorMessage = "Please enter a username.")]
         public string DisplayName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]

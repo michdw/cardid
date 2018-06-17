@@ -173,7 +173,7 @@ namespace Cardid.Controllers
             var userEmail = ModelState["Email"];
             if (userEmail == null || userEmail.Errors.Any())
             {
-                TempData["result"] = "Invalid Input: Your email hasn't been changed.";
+                TempData["result"] = "Invalid input: Your email hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
             userSql.UpdateEmail(user.Email, userID);

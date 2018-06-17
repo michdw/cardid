@@ -39,12 +39,12 @@
     </div>
 
     <div class="editdeck-right">
-        @if (Model.Tags.Count > 0)
+        @if (Model.Tags().Count > 0)
         {
             <div class="tag-container">
                 <h4 class="bold at-top">Tags</h4>
 
-                @foreach (Tag tag in Model.Tags)
+                @foreach (Tag tag in Model.Tags())
                 {
                     @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
                 }
@@ -96,7 +96,7 @@
 
 
 
-@if (Model.Cards.Count != 0)
+@if (Model.Cards().Count != 0)
 {
     <div class="container-header">
 
@@ -108,7 +108,7 @@
 
     <div class="flex flex-left">
 
-        @foreach (Card thisCard in Model.Cards)
+        @foreach (Card thisCard in Model.Cards())
         {
             <div class="card-bothsides">
 

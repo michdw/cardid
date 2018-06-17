@@ -2,13 +2,5 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (TempData["loginname"] != null)
-{
-    <div>Thank you for logging in, @TempData["loginname"]</div>
-}
-else if (TempData["newuser"] != null)
-{
-    <div>Welcome, @TempData["newuser"]!</div>
-}
 
 <div>index page!</div>

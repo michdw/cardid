@@ -20,7 +20,7 @@
 {
     <div class="formValidationGroup">
         @Html.HiddenFor(m => m.UserID)
-        @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+        @Html.LabelFor(m => m.DisplayName)
         @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
     </div>
 
@@ -31,7 +31,7 @@
 {
     <div class="formValidationGroup">
         @Html.HiddenFor(m => m.UserID)
-        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.LabelFor(m => m.Email)
         @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
     </div>
 
@@ -43,12 +43,12 @@
 
     <div class="formValidationGroup">
         @Html.HiddenFor(m => m.UserID)
-        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.LabelFor(m => m.Password)
         @Html.PasswordFor(m => m.Password)
     </div>
 
     <div class="formValidationGroup">
-        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password", new { @class = "form-label" })
+        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
         @Html.PasswordFor(m => m.ConfirmPassword)
     </div>
 

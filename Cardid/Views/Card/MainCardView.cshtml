@@ -5,10 +5,7 @@
     int userDecksCount = ViewBag.DecksCount;
 }
 
-@if (TempData["loginname"] != null)
-{
-    <div>Thank you for logging in, @TempData["loginname"]</div>
-}
+
 
 @if (ViewBag.SearchString == null)
 {
@@ -19,21 +16,25 @@ else
     <h1 class="view-title">Search Results</h1>
 }
 
-<div class="flex flex-center">
+<div class="flex flex-left">
 
-    <div class="option">
+    <div class="card-column">
 
-        @using (Html.BeginForm("SearchCards", "Card"))
-        {
-            <input type="text" name="searchString" />
-            <button type="submit" class="btn main-btn">Search for text in cards</button>
-        }
-    </div>
+        <div class="option">
+            @Html.ActionLink("Create a new card", "CreateCardInit", "Card", null, new { @class = "btn main-btn" })
+        </div>
 
-    <div class="option">
-
-        @Html.ActionLink("Create a new card", "CreateCardInit", "Card", null, new { @class = "btn main-btn" })
-
+        <div class="option">
+            @using (Html.BeginForm("SearchCards", "Card", null, FormMethod.Get, new { @class = "vertical-form" }))
+            {
+                <div>
+                    <input type="text" name="searchString" />
+                </div>
+                <div>
+                    <button type="submit" class="btn main-btn">Search for text in cards</button>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -73,16 +74,16 @@ else
                 <div class="card-field">@thisCard.Back</div>
                 <div class="card-options">
                     @Html.ActionLink("Edit", "EditCardInit", "Card", new { cardID = thisCard.CardID }, new { @class = "btn float-left card-button" })
-                    @if (userDecksCount > thisCard.Decks.Count)
+                    @if (userDecksCount > thisCard.Decks().Count)
                     {
                         @Html.ActionLink("Add to decks", "ChooseDecksInit", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn float-right card-button" })
                     }
                 </div>
                 <div class="card-decks">
-                    @for (int i = 0; i < thisCard.Decks.Count; i++)
+                    @for (int i = 0; i < thisCard.Decks().Count; i++)
                     {
                         <p class="small-type">Currently in:</p>
-                        Deck deck = thisCard.Decks[i];
+                        Deck deck = thisCard.Decks()[i];
                         @Html.ActionLink(deck.Name, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard" })
                     }
                 </div>

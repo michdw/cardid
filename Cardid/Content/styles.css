@@ -78,16 +78,17 @@ a {
 .option {
     position: relative;
     clear: both;
+    padding: 8px 0;
 }
+
+
+/* layout */
 
 .pageview {
     height: 100%;
     min-height: 100vh;
     position: relative;
 }
-
-
-/* layout */
 
 .page-header {
     position: relative;
@@ -109,15 +110,6 @@ a {
     background: rgba(0,0,0,.5);
     padding: 4px;
     color: #fff;
-}
-
-.user-info, .site-info {
-    position: absolute;
-    color: #fff;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 8px;
 }
 
 .top-menu {
@@ -147,12 +139,12 @@ a {
     }
 
 .header-option {
-    min-width: 6vw;
     text-align: center;
-    border-radius: 4px;
+    min-width: 6vw;
     padding: 1vh 2vw;
     margin: 0 1vw;
     margin-top: 10px;
+    border-radius: 4px;
 }
 
     .header-option:hover {
@@ -164,19 +156,53 @@ a {
 }
 
 .view-title {
+    margin: 0;
     color: #fff;
     opacity: .7;
+}
+
+.view-msg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 4px;
+    background: #333;
+    color: #fff;
+}
+
+.site-info {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
     margin: 0;
+    padding: 8px;
 }
 
 
 /* forms */
 
-.form-label {
+input {
+    padding: 6px;
+    margin: 4px 0;
+    border: 1px solid rgba(0,0,0,.4);
+}
+
+label {
     display: inline-block;
-    width: 100px;
+    width: 150px;
     text-align: right;
 }
+
+.card-content label {
+    text-align: left;
+}
+
+textarea {
+    display: block;
+}
+
 
 /* buttons */
 
@@ -208,7 +234,7 @@ a {
 .top-btn, .main-btn, .card-button {
     background: #333;
     color: #fff;
-    margin: 4px;
+    margin: 4px 0;
     border: 1px solid #fff;
 }
 
@@ -233,8 +259,9 @@ a {
 
 /* cards */
 
-.editcard {
-    padding: 0 5%;
+.card-column {
+    width: 40vw;
+    min-width: 300px;
 }
 
 .card-container {
@@ -253,7 +280,7 @@ a {
 }
 
 .card-field {
-    margin: 8px 4px;
+    margin: 8px 0;
     padding: 8px 4px;
     background: #fff;
 }
@@ -269,7 +296,7 @@ a {
 }
 
 .deck-incard {
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.15);
     color: #fff;
     padding: 4px 12px;
     margin: 8px;
@@ -284,13 +311,16 @@ a {
     padding: 5px;
 }
 
+.edit-field {
+    margin: 1em 0;
+}
+
 
 /* decks */
 
-.deckview-left {
-}
-
-.deckview-right {
+.deck-column {
+    width: 40vw;
+    min-width: 300px;
 }
 
 .editdeck-left {
@@ -323,13 +353,6 @@ a {
 }
 
 /* tags */
-
-.tagviews {
-    height: 1.5em;
-}
-
-    .tagviews > span {
-    }
 
 .tag-container {
     clear: both;
