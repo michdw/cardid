@@ -25,34 +25,26 @@
     <div class="pageview">
         <div class="page-header">
 
-            @if (TempData["loginname"] != null)
-            {
-                <div class="view-msg">Welcome back, @TempData["loginname"].ToString()!</div>
-            }
-            else if (TempData["newuser"] != null)
-            {
-                <div class="view-msg">Welcome, @TempData["newuser"]!</div>
-            }
-
+            @Html.Partial("_Messages")
 
             <div class="page-title">
                 <h1 class="header-title">Cardid.</h1>
-                <p>Candid flashcards.</p> 
+                <p>Candid flashcards.</p>
             </div>
             <div class="top-menu">
                 @Html.ActionLink("Home", "Index", "Home", null, new { @class = "header-option" })
                 @Html.ActionLink("Decks", "Index", "Deck", null, new { @class = "header-option" })
                 @Html.ActionLink("Cards", "Index", "Card", null, new { @class = "header-option" })
                 @if (Session["userid"] == null)
-                {
-                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "header-option" })
-                    @Html.ActionLink("Register", "BeginRegister", "Home", null, new { @class = "header-option" })
-                }
-                else
-                {
-                    @Html.ActionLink("Account", "UserPage", "Home", null, new { @class = "header-option" })
-                    @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "header-option" })
-                }
+        {
+            @Html.ActionLink("Login", "Login", "Home", null, new { @class = "header-option" })
+            @Html.ActionLink("Register", "BeginRegister", "Home", null, new { @class = "header-option" })
+}
+else
+{
+        @Html.ActionLink("Account", "UserPage", "Home", null, new { @class = "header-option" })
+        @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "header-option" })
+}
             </div>
         </div>
 

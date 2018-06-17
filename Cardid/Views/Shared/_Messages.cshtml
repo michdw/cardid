@@ -1,0 +1,42 @@
+﻿
+@using Cardid.Models
+
+
+@if (TempData["loginname"] != null)
+{
+    <div class="view-msg">Welcome back, @TempData["loginname"].ToString()!</div>
+}
+else if (TempData["newuser"] != null)
+{
+    <div class="view-msg">Welcome, @TempData["newuser"]!</div>
+}
+
+@if (TempData["addedcard"] != null)
+{
+    Card card = TempData["addedcard"] as Card;
+    <div class="view-msg">Card for @card.Front successfully added to deck</div>
+}
+
+@if (TempData["deletedcard"] != null)
+{
+    <div class="view-msg">Card has been deleted</div>
+}
+
+@if (TempData["addedtag"] != null)
+{
+    Tag tag = TempData["addedtag"] as Tag;
+    <div class="view-msg">Tag for @tag.TagName successfully added to deck</div>
+}
+
+@if (TempData["deletedtag"] != null)
+{
+    <div class="view-msg">Tag has been deleted</div>
+}
+
+@if (ViewBag.CardChanged == true)
+{
+    <div class="view-msg">Card changed successfully</div>
+}
+
+
+

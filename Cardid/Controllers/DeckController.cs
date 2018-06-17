@@ -48,6 +48,7 @@ namespace Cardid.Controllers
 
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
             ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
+
             List<Deck> allDecks = deckSql.GetAllDecks(userID);
             return View("MainDeckView", allDecks);
         }
@@ -58,8 +59,10 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            Tag tag = tagSql.GetTagByID(tagID);
             tagSql.AddTagToDeck(deckID, tagID);
+
+            Tag tag = tagSql.GetTagByID(tagID);
+            TempData["addedtag"] = tag;
 
             return RedirectToAction("EditDeck", new { deckID });
         }
@@ -176,6 +179,7 @@ namespace Cardid.Controllers
             GetUser();
 
             tagSql.DeleteTag(tagID);
+            TempData["deletedtag"] = true;
             return RedirectToAction("TagView");
         }
 

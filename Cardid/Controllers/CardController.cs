@@ -89,6 +89,7 @@ namespace Cardid.Controllers
 
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
             ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
+            ViewBag.AddedCard = newCard;
             return View("MainCardView", userCards);
         }
 
@@ -103,7 +104,7 @@ namespace Cardid.Controllers
             newCard = cardSql.CreateCard(newCard, userID);
             cardSql.AddCardToDeck(newCard, deckID);
 
-            
+            TempData["addedcard"] = newCard;
             return RedirectToAction("EditDeck", "Deck", new { deckID });
         }
 
@@ -116,6 +117,7 @@ namespace Cardid.Controllers
 
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
 
+            TempData["deletedcard"] = true;
             return RedirectToAction("Index", userCards);
         }
 
@@ -141,6 +143,7 @@ namespace Cardid.Controllers
 
             cardSql.EditCard(newValues);
 
+            ViewBag.CardChanged = true;
             return RedirectToAction("EditCardInit", new { cardID = newValues.CardID });
         }
 

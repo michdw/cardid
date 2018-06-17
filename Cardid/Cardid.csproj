@@ -235,6 +235,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ChangeUserInfo.cshtml" />
     <Content Include="Views\Deck\ManageTags.cshtml" />
+    <Content Include="Views\Shared\_Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
