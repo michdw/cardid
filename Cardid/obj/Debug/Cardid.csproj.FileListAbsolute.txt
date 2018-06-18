@@ -86,7 +86,6 @@ C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.DependencyCollector.x
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Micha\source\repos\Cardid\Cardid\bin\Microsoft.AI.Web.xml
-C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csprojResolveAssemblyReference.cache
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CoreCompileInputs.cache
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.dll

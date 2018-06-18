@@ -67,7 +67,7 @@ GO
 CREATE TABLE [decks]
 (
  [DeckID]   INT IDENTITY (1, 1) NOT NULL ,
- [Name]     NCHAR(50) NOT NULL ,
+ [DeckName] NCHAR(50) NOT NULL ,
  [IsPublic] BIT NOT NULL ,
  [UserID]   INT NOT NULL ,
 
@@ -104,9 +104,12 @@ GO
 
 CREATE TABLE [sessions]
 (
- [SessionID] INT IDENTITY (1, 1) NOT NULL ,
- [UserID]    INT NOT NULL ,
- [DeckID]    INT NOT NULL ,
+ [SessionID]     INT IDENTITY (1, 1) NOT NULL ,
+ [UserID]        INT NOT NULL ,
+ [DeckID]        INT NOT NULL ,
+ [TotalScore]    INT NOT NULL ,
+ [PossibleScore] INT NOT NULL ,
+ [TimeOf]        DATETIME2(7) NOT NULL ,
 
  CONSTRAINT [PK_sessions] PRIMARY KEY CLUSTERED ([SessionID] ASC),
  CONSTRAINT [FK_137] FOREIGN KEY ([UserID])

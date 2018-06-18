@@ -19,8 +19,8 @@ namespace Cardid.DAL
         private string addTagToDeck = "INSERT INTO [deck_tag] (DeckID, TagID) VALUES (@deckID, @tagID)";
         private string createTag = "INSERT INTO [tags] (TagName, UserID) VALUES (@tagName, @userID)";
         private string getAllTagsByName = "SELECT * FROM [tags] ORDER BY TagName ASC";
-        private string getAllTagsByPopularity = "SELECT tags.TagID FROM[tags] "
-            + "FULL OUTER JOIN[deck_tag] ON deck_tag.TagID = tags.TagID "
+        private string getAllTagsByPopularity = "SELECT tags.TagID FROM [tags] "
+            + "FULL OUTER JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
             + "GROUP BY DeckID, tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
         private string getOtherTagsByName = "SELECT * FROM [tags] WHERE TagID NOT IN "
             + "(SELECT TagID FROM [deck_tag] WHERE deck_tag.DeckID = @deckID) ORDER BY tags.TagName ASC";

@@ -13,6 +13,7 @@ namespace Cardid.Controllers
     {
         UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
         private string GetUser()
         {
@@ -24,6 +25,9 @@ namespace Cardid.Controllers
         public ActionResult Index()
         {
             Session["anon"] = "Home";
+
+            ViewBag.MostActiveUsers = studySql.GetUsersByActivity();
+            ViewBag.MostPopularDecks = studySql.GetDecksByActivity();
 
             return View();
         }
@@ -64,6 +68,7 @@ namespace Cardid.Controllers
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
             TempData["loginname"] = currentUser.DisplayName;
+
             switch (Session["anon"].ToString())
             {
                 case "Card":
