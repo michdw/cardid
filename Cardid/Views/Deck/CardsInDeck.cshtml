@@ -9,7 +9,7 @@
 
 <div class="card-container">
 
-    @foreach (Card thisCard in Model.Cards)
+    @foreach (Card thisCard in Model.Cards())
     {
         <div class="card-bothsides">
             <div class="front-field">@thisCard.Front</div>
@@ -23,7 +23,7 @@
 <div class="tag-container">
     <h4 class="bold">Tags</h4>
 
-    @foreach (Tag tag in Model.Tags)
+    @foreach (Tag tag in Model.Tags())
     {
         <span class="deck-tag">@tag.TagName</span>
     }

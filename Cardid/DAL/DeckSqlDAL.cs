@@ -16,8 +16,8 @@ namespace Cardid.DAL
             this.connectionString = connectionString;
         }
 
-        private string changeDeckName = "UPDATE [decks] SET Name = @name WHERE DeckID = @deckID";
-        private string createDeck = "INSERT INTO [decks] (Name, IsPublic, UserID) VALUES (@name, @isPublic, @userID)";
+        private string changeDeckName = "UPDATE [decks] SET DeckName = @deckName WHERE DeckID = @deckID";
+        private string createDeck = "INSERT INTO [decks] (DeckName, IsPublic, UserID) VALUES (@deckName, @isPublic, @userID)";
         private string decksNotWithCard = "SELECT * FROM [decks] WHERE DeckID not in "
             + "(SELECT DeckID from [card_deck] WHERE CardID = @cardID) AND UserID = @userID";
         private string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID)";
@@ -34,16 +34,16 @@ namespace Cardid.DAL
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
         private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
-        private string searchDecksByName = "SELECT * FROM decks WHERE Name LIKE @text";
+        private string searchDecksByName = "SELECT * FROM decks WHERE DeckName LIKE @text";
         private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
             + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE tags.TagName = @text";
 
 
-        public void ChangeDeckName(string name, string deckID)
+        public void ChangeDeckName(string deckName, string deckID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                db.Execute(changeDeckName, new { name, deckID });
+                db.Execute(changeDeckName, new { deckName, deckID });
             }
         }
 
@@ -52,7 +52,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                db.Execute(createDeck, new { name = deckName, isPublic = 0, userID });
+                db.Execute(createDeck, new { deckName, isPublic = 0, userID });
                 List<Deck> userDecks = db.Query<Deck>(getDecksByUserID, new { userID }).ToList<Deck>();
                 return userDecks.Last().TrimValues();
             }

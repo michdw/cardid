@@ -125,7 +125,7 @@ namespace Cardid.Controllers
         public ActionResult CreateDeckSubmit(Deck newDeck)
         {
             string userID = GetUser();
-            newDeck = deckSql.CreateDeck(newDeck.Name, userID);
+            newDeck = deckSql.CreateDeck(newDeck.DeckName, userID);
 
             return RedirectToAction("EditDeck", new { deckID = newDeck.DeckID });
         }
@@ -174,10 +174,12 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult ChangeDeckName(Deck deck)
+        public ActionResult ChangeDeck
+            
+            (Deck deck)
         {
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
-            deckSql.ChangeDeckName(deck.Name, deck.DeckID);
+            deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
             deck = deckSql.GetDeckByID(deck.DeckID);
 
             TempData["decknamechanged"] = true;

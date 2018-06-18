@@ -28,7 +28,7 @@ namespace Cardid.Models
         {
             DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
             Deck deck = deckSql.GetDeckByID(DeckID);
-            return deck.Name;
+            return deck.DeckName;
         }
     }
 }

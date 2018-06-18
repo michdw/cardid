@@ -23,7 +23,7 @@
 }
 else
 {
-    <h1 class="view-title">Create Card For Deck: @ViewBag.Deck.Name</h1>
+    <h1 class="view-title">Create Card For Deck: @ViewBag.Deck.DeckName</h1>
 
     using (Html.BeginForm("CreateCardSubmitD", "Card", new { deckID = ViewBag.Deck.DeckID }, FormMethod.Post))
     {

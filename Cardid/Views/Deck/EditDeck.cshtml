@@ -1,14 +1,14 @@
 ﻿@using Cardid.Models
 @model Deck
 @{
-    ViewBag.Title = "Edit Deck: " + Model.Name;
+    ViewBag.Title = "Edit Deck: " + Model.DeckName;
     List<Tag> otherTagsByName = ViewBag.OtherTagsByName;
     List<Tag> otherTagsByPopularity = ViewBag.OtherTagsByPopularity;
 }
 
 
 
-<h1 class="view-title">@Model.Name</h1>
+<h1 class="view-title">@Model.DeckName</h1>
 
 <div class="flex flex-left">
 
@@ -41,7 +41,7 @@
                 @using (Html.BeginForm("ChangeDeckName", "Deck"))
                 {
                     @Html.HiddenFor(m => m.DeckID)
-                    @Html.TextBoxFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.DeckName)
                     <button type="submit" class="btn main-btn">Rename deck</button>
                 }
 

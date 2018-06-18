@@ -16,7 +16,7 @@
         @if (Session["currentdeck"] != null)
         {
             Deck currentDeck = Session["currentDeck"] as Deck;
-            string deckName = currentDeck.Name;
+            string deckName = currentDeck.DeckName;
 
             @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
             <div class="">All changes saved automatically</div>

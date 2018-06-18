@@ -11,7 +11,7 @@ namespace Cardid.Models
     {
         public string DeckID { get; set; }
         public string UserID { get; set; }
-        public string Name { get; set; }
+        public string DeckName { get; set; }
         public bool IsPublic { get; set; }
 
         public Tag NewTag { get; set; }
@@ -20,7 +20,7 @@ namespace Cardid.Models
         {
             DeckID = DeckID.Trim();
             UserID = UserID.Trim();
-            Name = Name.Trim();
+            DeckName = DeckName.Trim();
             return this;
         }
 
