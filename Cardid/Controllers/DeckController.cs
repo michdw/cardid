@@ -134,6 +134,7 @@ namespace Cardid.Controllers
         public ActionResult CreateTag(string tagName)
         {
             string userID = GetUser();
+            tagName = tagName.ToLower();
             tagSql.CreateTag(tagName, userID);
             return RedirectToAction("Index");
         }
@@ -145,8 +146,11 @@ namespace Cardid.Controllers
             GetUser();
 
             Tag newTag = deck.NewTag;
+            string tagName = newTag.TagName;
+            tagName = tagName.ToLower();
+            
             deck = deckSql.GetDeckByID(deck.DeckID);
-            newTag = tagSql.CreateTag(newTag.TagName, deck.UserID);
+            newTag = tagSql.CreateTag(tagName, deck.UserID);
             tagSql.AddTagToDeck(deck.DeckID, newTag.TagID);
 
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });

@@ -90,3 +90,4 @@ C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CoreCompileInp
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.pdb
+C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csprojResolveAssemblyReference.cache
