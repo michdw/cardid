@@ -20,7 +20,8 @@
             </div>
 
             <div class="option">
-                @Html.ActionLink("Study this deck", "StudyBegin", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
+                @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
             </div>
 
             <div class="option">
@@ -144,6 +145,9 @@ else
         Currently no cards in this deck.
         @Html.ActionLink("Add some here", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </p>
+    <div class="option">
+        @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+    </div>
 }
 
 <div class="option">

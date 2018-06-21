@@ -25,9 +25,24 @@
     <div class="view-msg">Card has been deleted</div>
 }
 
+@if (TempData["addedtag"] != null)
+{
+    <div class="view-msg">The tag "@TempData["addedtag"].ToString()" has been added to your deck</div>
+}
+
 @if (TempData["deletedtag"] != null)
 {
     <div class="view-msg">Tag has been deleted</div>
+}
+
+@if (TempData["existingtag"] != null)
+{
+    <div class="view-msg">The tag already exists</div>
+}
+
+@if (TempData["newtag"] != null)
+{
+    <div class="view-msg">The tag "@TempData["newtag"].ToString()" has been created</div>
 }
 
 @if (TempData["loginname"] != null)

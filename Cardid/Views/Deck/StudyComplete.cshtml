@@ -22,8 +22,8 @@
         </div>
     }
     <div>
-        @Html.ActionLink("Study the whole deck again (view front first)", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
-        @Html.ActionLink("Study the whole deck again (view back first)", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
+        @Html.ActionLink("Study the whole deck again front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
+        @Html.ActionLink("Study the whole deck again back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
     </div>
     <div>
         @Html.ActionLink("Return to your decks", "Index", "Deck", new { @class = "btn main-btn" })

@@ -19,9 +19,9 @@ namespace Cardid.DAL
         private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID";
         private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
-        private string getDecksByActivity = "SELECT DeckID, COUNT(DeckID) AS count FROM[sessions] "
+        private string getDecksByActivity = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
             + "GROUP BY DeckID ORDER BY COUNT(DeckID) DESC";
-        private string getUsersByActivity = "SELECT UserID, COUNT(UserID) AS count FROM[sessions] "
+        private string getUsersByActivity = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
             + "GROUP BY UserID ORDER BY COUNT(UserID) DESC";
 
 
@@ -31,7 +31,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 return db.Query(getDecksByActivity).ToDictionary(
-                    row => (string)row.DeckID,
+                    row => (string)row.DeckID.ToString(),
                     row => (int)row.Count);
             }
         }
@@ -41,7 +41,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 return db.Query(getUsersByActivity).ToDictionary(
-                    row => (string)row.UserID,
+                    row => (string)row.UserID.ToString(),
                     row => (int)row.Count);
             }
         }

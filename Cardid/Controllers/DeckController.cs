@@ -128,6 +128,8 @@ namespace Cardid.Controllers
             string userID = GetUser();
             newDeck = deckSql.CreateDeck(newDeck.DeckName, userID);
 
+
+
             return RedirectToAction("EditDeck", new { deckID = newDeck.DeckID });
         }
 
@@ -143,11 +145,13 @@ namespace Cardid.Controllers
             {
                 if (tagName == tag.TagName)
                 {
+                    TempData["existingtag"] = tag.TagName;
                     return RedirectToAction("Index");
                 }
             }
 
             tagSql.CreateTag(tagName, userID);
+            TempData["newtag"] = tagName;
             return RedirectToAction("Index");
         }
 
@@ -175,6 +179,7 @@ namespace Cardid.Controllers
             newTag = tagSql.CreateTag(tagName, deck.UserID);
             tagSql.AddTagToDeck(deck.DeckID, newTag.TagID);
 
+            TempData["addedtag"] = newTag.TagName;
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
         }
 

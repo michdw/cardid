@@ -24,7 +24,8 @@ namespace Cardid.DAL
         private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
         private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
             + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
-        private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID ORDER BY Front ASC";
+        private string getUserCardsByName = "SELECT * FROM [cards] WHERE UserID = @userID ORDER BY Front ASC";
+        private string getNewUserCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
         private string removeDecksFromCard = "DELETE FROM [card_deck] WHERE CardID = @cardID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string searchCardsForText = "SELECT * FROM cards WHERE Front LIKE @text OR Back LIKE @text";
@@ -59,8 +60,8 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createCard, new { front = card.Front, back = card.Back, userID });
-                List<Card> allCards = db.Query<Card>(getCardsByUserID, new { userID }).ToList<Card>();
-                return allCards.Last().TrimValues();
+                Card newCard = db.Query<Card>(getNewUserCard, new { userID }).ToList().FirstOrDefault<Card>();
+                return newCard.TrimValues();
             }
         }
 
@@ -111,7 +112,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(getCardsByUserID, new { userID }).ToList<Card>();
+                List<Card> list = db.Query<Card>(getUserCardsByName, new { userID }).ToList<Card>();
                 foreach (Card card in list)
                 {
                     card.TrimValues();

@@ -12,9 +12,9 @@ function viewBack() {
 
 function flipCard() {
     if ($('.back-view').hasClass('hidden')) {
-        viewFront();
-    } else {
         viewBack();
+    } else {
+        viewFront();
     }
     $('.flip').addClass('hidden');
     $('.mark-frame').removeClass('hidden');
@@ -23,9 +23,9 @@ function flipCard() {
 
 function nextCard() {
     if ($('.front-view').hasClass('hidden')) {
-        viewBack();
-    } else {
         viewFront();
+    } else {
+        viewBack();
     }
     $('.flip').removeClass('hidden');
     $('.mark-frame').addClass('hidden');
