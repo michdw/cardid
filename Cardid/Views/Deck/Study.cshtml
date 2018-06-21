@@ -40,12 +40,24 @@
                     <div hidden class="card-ID">
                         @currentCard.CardID
                     </div>
-                    <div class="front-view">
-                        <p>@currentCard.Front</p>
-                    </div>
-                    <div class="back-view hidden">
-                        <p>@currentCard.Back</p>
-                    </div>
+                    @if (Model.FrontFirst == true)
+                    {
+                        <div class="front-view">
+                            <p>@currentCard.Front</p>
+                        </div>
+                        <div class="back-view hidden">
+                            <p>@currentCard.Back</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="front-view hidden">
+                            <p>@currentCard.Front</p>
+                        </div>
+                        <div class="back-view">
+                            <p>@currentCard.Back</p>
+                        </div>
+                    }
                 </div>
             }
         }

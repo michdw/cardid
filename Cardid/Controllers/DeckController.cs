@@ -21,7 +21,7 @@ namespace Cardid.Controllers
         {
             return Session["userid"].ToString();
         }
-        
+
         private List<Card> CardsToRedo(string redo)
         {
             List<string> redoList = redo.Split(',').ToList();
@@ -105,10 +105,11 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
             Card publicCard = cardSql.GetCardByID(cardID);
-
-            Card userCard = new Card();
-            userCard.Front = publicCard.Front;
-            userCard.Back = publicCard.Back;
+            Card userCard = new Card
+            {
+                Front = publicCard.Front,
+                Back = publicCard.Back
+            };
             userCard = cardSql.CreateCard(userCard, userID);
             return RedirectToAction("ChooseDecksInit", new { cardID = userCard.CardID });
         }
@@ -135,6 +136,17 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
             tagName = tagName.ToLower();
+
+            //check if tag name exists already
+            List<Tag> allTags = tagSql.GetAllTagsByName();
+            foreach (Tag tag in allTags)
+            {
+                if (tagName == tag.TagName)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
             tagSql.CreateTag(tagName, userID);
             return RedirectToAction("Index");
         }
@@ -148,7 +160,17 @@ namespace Cardid.Controllers
             Tag newTag = deck.NewTag;
             string tagName = newTag.TagName;
             tagName = tagName.ToLower();
-            
+
+            //if tag name exists already, add it to deck
+            List<Tag> allTags = tagSql.GetAllTagsByName();
+            foreach (Tag tag in allTags)
+            {
+                if (tagName == tag.TagName)
+                {
+                    tagSql.AddTagToDeck(deck.DeckID, tag.TagID);
+                }
+            }
+
             deck = deckSql.GetDeckByID(deck.DeckID);
             newTag = tagSql.CreateTag(tagName, deck.UserID);
             tagSql.AddTagToDeck(deck.DeckID, newTag.TagID);
@@ -179,7 +201,7 @@ namespace Cardid.Controllers
 
 
         public ActionResult ChangeDeck
-            
+
             (Deck deck)
         {
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
@@ -281,7 +303,7 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult StudyBegin(string deckID)
+        public ActionResult StudyBegin(string deckID, bool frontFirst)
         {
             GetUser();
 
@@ -295,7 +317,8 @@ namespace Cardid.Controllers
             Study study = new Study
             {
                 DeckID = deckID,
-                UserID = Session["userid"].ToString()
+                UserID = Session["userid"].ToString(),
+                FrontFirst = frontFirst
             };
             return View("Study", study);
         }

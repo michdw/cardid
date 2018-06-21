@@ -96,7 +96,8 @@ else
                         counter++;
                         <div class="deck-listing">
                             @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "float-left" })
-                            @Html.ActionLink("Study", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn float-right" })
+                            @Html.ActionLink("Study (View Front First)", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                            @Html.ActionLink("Study (View Back First", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
                         </div>
                     }
                 }
@@ -146,7 +147,8 @@ else
                     {
                         counter++;
                         @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "float-left" })
-                        @Html.ActionLink("Study This Deck", "StudyBegin", "Deck", new { deckID = deck.DeckID }, new { @class = "btn main-btn float-right" })
+                        @Html.ActionLink("Study This Deck (View Front First)", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                        @Html.ActionLink("Study This Deck (View Back First", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
                         <div>
                             Shared by @deck.Creator().DisplayName
                         </div>

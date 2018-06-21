@@ -1,15 +1,32 @@
 ﻿
-function flipCard() {
+function viewFront() {
+    $('.back-view').addClass('hidden');
+    $('.front-view').removeClass('hidden');
+}
+
+function viewBack() {
     $('.front-view').addClass('hidden');
     $('.back-view').removeClass('hidden');
+}
+
+
+function flipCard() {
+    if ($('.back-view').hasClass('hidden')) {
+        viewFront();
+    } else {
+        viewBack();
+    }
     $('.flip').addClass('hidden');
     $('.mark-frame').removeClass('hidden');
 }
 
 
 function nextCard() {
-    $('.front-view').removeClass('hidden');
-    $('.back-view').addClass('hidden');
+    if ($('.front-view').hasClass('hidden')) {
+        viewBack();
+    } else {
+        viewFront();
+    }
     $('.flip').removeClass('hidden');
     $('.mark-frame').addClass('hidden');
 
@@ -59,7 +76,7 @@ $(document).ready(function () {
         if (totalViewed == cardCount) {
             $('#totalScore').val(totalCorrect);
             $('#possibleScore').val(cardCount);
-            $('#toRedo').val(toRedo.slice(0,-1));
+            $('#toRedo').val(toRedo.slice(0, -1));
             $('#complete').submit();
         }
 
