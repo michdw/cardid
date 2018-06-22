@@ -1,5 +1,5 @@
 ﻿@using Cardid.Models
-@model List<Deck>
+@model Card
 @{
     ViewBag.Title = "Choose Decks For Card";
 }
@@ -8,10 +8,10 @@
 
 <h1 class="view-title">Add Card to Decks</h1>
 
-<p class="card-bothsides">@ViewBag.Card.Front</p>
-<p class="card-bothsides">@ViewBag.Card.Back</p>
+<p class="card-bothsides">@Model.Front</p>
+<p class="card-bothsides">@Model.Back</p>
 
-@foreach (Deck thisDeck in Model)
+@foreach (Deck thisDeck in Model.AvailableDecks())
 {
 
         @Html.ActionLink(thisDeck.DeckName, "ChooseDecksSubmit", new { cardID = ViewBag.Card.CardID, deckID = thisDeck.DeckID }, new {@class="btn main-btn" })

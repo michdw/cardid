@@ -3,8 +3,6 @@
 @model Study
 @{
     ViewBag.Title = "Study Session";
-    Deck deck = ViewBag.Deck;
-    List<Card> cards = ViewBag.Cards;
     bool wholedeck;
     if (ViewBag.Redo != null)
     {
@@ -19,7 +17,7 @@
 
 
 
-<h1 class="view-title">Study Session: @deck.DeckName</h1>
+<h1 class="view-title">Study Session: @Model.DeckName()</h1>
 
 
 <div class="study-frame">
@@ -34,7 +32,7 @@
 
     <div class="card-frame">
         @{
-            foreach (Card currentCard in cards)
+            foreach (Card currentCard in Model.Cards)
             {
                 <div class="studycard new-card">
                     <div hidden class="card-ID">
@@ -75,14 +73,14 @@
 <div hidden id="cardsToRedo"></div>
 @using (Html.BeginForm("StudyLog", "Deck", new { wholedeck }, FormMethod.Post, new { @id = "complete" }))
 {
-    @Html.HiddenFor(m => m.DeckID, deck.DeckID)
-    @Html.HiddenFor(m => m.UserID, deck.UserID)
+    @Html.HiddenFor(m => m.DeckID, Model.DeckID)
+    @Html.HiddenFor(m => m.UserID, Model.UserID)
     @Html.HiddenFor(m => m.TotalScore, new { id = "totalScore" })
     @Html.HiddenFor(m => m.PossibleScore, new { id = "possibleScore" })
     @Html.HiddenFor(m => m.ToRedo, new { id = "toRedo" })
 }
 
-<div hidden id="cardCount" data-name="@cards.Count"></div>
+<div hidden id="cardCount" data-name="@Model.Cards.Count"></div>
 
 
 

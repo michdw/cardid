@@ -32,10 +32,28 @@ namespace Cardid.Models
             return cardSql.GetCardsByDeckID(DeckID);
         }
 
+        public List<Card> AvailableCards()
+        {
+            CardSqlDAL cardSql = new CardSqlDAL(connectionString);
+            return cardSql.CardsNotWithDeck(DeckID, UserID);
+        }
+
         public List<Tag> Tags()
         {
             TagSqlDAL tagSql = new TagSqlDAL(connectionString);
             return tagSql.GetTagsByDeckID(DeckID);
+        }
+
+        public List<Tag> OtherTagsByName()
+        {
+            TagSqlDAL tagSql = new TagSqlDAL(connectionString);
+            return tagSql.GetOtherTagsByName(DeckID);
+        }
+
+        public List<Tag> OtherTagsByPopularity()
+        {
+            TagSqlDAL tagSql = new TagSqlDAL(connectionString);
+            return tagSql.GetOtherTagsByPopularity(DeckID);
         }
 
         public User Creator()

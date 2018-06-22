@@ -77,15 +77,23 @@ namespace Cardid.Controllers
         }
 
 
+        public ActionResult ChangeDeckName(Deck deck)
+        {
+            Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
+            deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
+            deck = deckSql.GetDeckByID(deck.DeckID);
+
+            TempData["decknamechanged"] = true;
+            return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
+        }
+
+
         public ActionResult ChooseDecksInit(string cardID)
         {
             GetUser();
 
             Card card = cardSql.GetCardByID(cardID);
-            List<Deck> availableDecks = deckSql.DecksNotWithCard(card);
-
-            ViewBag.Card = card;
-            return View("ChooseDecks", availableDecks);
+            return View("ChooseDecks", card);
         }
 
 
@@ -205,19 +213,6 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult ChangeDeck
-
-            (Deck deck)
-        {
-            Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
-            deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
-            deck = deckSql.GetDeckByID(deck.DeckID);
-
-            TempData["decknamechanged"] = true;
-            return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
-        }
-
-
         public ActionResult DeleteTag(string tagID)
         {
             GetUser();
@@ -233,9 +228,6 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-
-            ViewBag.OtherTagsByName = tagSql.GetOtherTagsByName(deckID);
-            ViewBag.OtherTagsByPopularity = tagSql.GetOtherTagsByPopularity(deckID);
             return View(deck);
         }
 
@@ -310,20 +302,18 @@ namespace Cardid.Controllers
 
         public ActionResult StudyBegin(string deckID, bool frontFirst)
         {
-            GetUser();
+            string userID = GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            ViewBag.Deck = deck;
-
             List<Card> cards = deck.Cards();
             cards.Shuffle();
-            ViewBag.Cards = cards;
 
             Study study = new Study
             {
                 DeckID = deckID,
-                UserID = Session["userid"].ToString(),
-                FrontFirst = frontFirst
+                UserID = userID,
+                FrontFirst = frontFirst,
+                Cards = cards
             };
             return View("Study", study);
         }
@@ -348,16 +338,14 @@ namespace Cardid.Controllers
             string userID = GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            ViewBag.Deck = deck;
-
             List<Card> redoCards = CardsToRedo(redo);
             redoCards.Shuffle();
-            ViewBag.Cards = redoCards;
 
             Study study = new Study
             {
                 DeckID = deckID,
-                UserID = userID
+                UserID = userID,
+                Cards = redoCards
             };
             return View("Study", study);
         }

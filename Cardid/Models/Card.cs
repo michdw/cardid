@@ -26,10 +26,17 @@ namespace Cardid.Models
         }
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+
         public List<Deck> Decks()
         {
             DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
             return deckSql.GetDecksByCardID(CardID);
+        }
+
+        public List<Deck> AvailableDecks()
+        {
+            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+            return deckSql.DecksNotWithCard(CardID, UserID);
         }
 
     }

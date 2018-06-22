@@ -16,6 +16,7 @@ namespace Cardid.Models
         public int PossibleScore { get; set; }
         public DateTime TimeOf { get; set; }
 
+        public List<Card> Cards { get; set; }
         public string ToRedo { get; set; }
 
         public decimal Percentage()
@@ -24,7 +25,6 @@ namespace Cardid.Models
         }
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
-
         public string DeckName()
         {
             DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);

@@ -59,11 +59,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Deck> DecksNotWithCard(Card card)
+        public List<Deck> DecksNotWithCard(string cardID, string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(decksNotWithCard, new { cardID = card.CardID, userID = card.UserID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(decksNotWithCard, new { cardID, userID }).ToList<Deck>();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();

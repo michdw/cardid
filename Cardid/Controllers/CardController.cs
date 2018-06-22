@@ -38,14 +38,10 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseCardsInit(string deckID)
         {
-            string userID = GetUser();
+            GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-
-            List<Card> availableCards = cardSql.CardsNotWithDeck(deck);
-
-            ViewBag.Deck = deck;
-            return View("ChooseCards", availableCards);
+            return View("ChooseCards", deck);
         }
 
 

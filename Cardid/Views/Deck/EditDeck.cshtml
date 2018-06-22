@@ -2,8 +2,6 @@
 @model Deck
 @{
     ViewBag.Title = "Edit Deck: " + Model.DeckName;
-    List<Tag> otherTagsByName = ViewBag.OtherTagsByName;
-    List<Tag> otherTagsByPopularity = ViewBag.OtherTagsByPopularity;
 }
 
 
@@ -72,7 +70,7 @@
         <div class="tag-container">
             <div class="tags-pop">
 
-                @foreach (Tag tag in otherTagsByPopularity)
+                @foreach (Tag tag in Model.OtherTagsByPopularity())
                 {
                     @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
                 }
@@ -80,7 +78,7 @@
 
             <div class="tags-alph hidden">
 
-                @foreach (Tag tag in otherTagsByName)
+                @foreach (Tag tag in Model.OtherTagsByName())
                 {
                     @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag inactive-tag" });
                 }

@@ -85,9 +85,9 @@ a {
 /* layout */
 
 .pageview {
+    position: relative;
     height: 100%;
     min-height: 100vh;
-    position: relative;
 }
 
 .page-header {
@@ -266,11 +266,11 @@ textarea {
 }
 
 .card-container {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .card-bothsides {
@@ -305,9 +305,9 @@ textarea {
 }
 
 .deck-listing {
+    font-weight: bold;
     background: rgba(255,255,255,.5);
     color: #000;
-    font-weight: bold;
     margin-right: 5px;
     padding: 5px;
 }
@@ -332,11 +332,11 @@ textarea {
 }
 
 .deck-listing {
+    clear: both;
+    overflow: auto;
     background: rgba(0,0,0,.15);
     color: #fff;
     padding: 1em;
-    clear: both;
-    overflow: auto;
 }
 
 .remove-card {
@@ -367,9 +367,9 @@ textarea {
 }
 
 .tag {
+    color: #fff;
     margin: 4px;
     padding: 4px;
-    color: #fff;
 }
 
 .active-tag {
@@ -423,10 +423,10 @@ textarea {
 }
 
 .studynav {
-    margin: 10px;
     text-decoration-style: none;
     background: #333;
     color: #fff;
+    margin: 10px;
 }
 
     .studynav:hover, .finish:hover {
