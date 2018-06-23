@@ -62,7 +62,7 @@ namespace Cardid.Controllers
             tagSql.AddTagToDeck(deckID, tagID);
 
             Tag tag = tagSql.GetTagByID(tagID);
-            TempData["addedtag"] = tag;
+            TempData["tag-added"] = tag;
 
             return RedirectToAction("EditDeck", new { deckID });
         }
@@ -83,7 +83,7 @@ namespace Cardid.Controllers
             deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
             deck = deckSql.GetDeckByID(deck.DeckID);
 
-            TempData["decknamechanged"] = true;
+            TempData["deckname-changed"] = true;
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
         }
 
@@ -104,7 +104,7 @@ namespace Cardid.Controllers
             Card card = cardSql.GetCardByID(cardID);
             cardSql.AddCardToDeck(card, deckID);
 
-            TempData["addedCard"] = card;
+            TempData["card-added"] = card;
             return RedirectToAction("EditDeck", new { deckID });
         }
 
@@ -153,13 +153,13 @@ namespace Cardid.Controllers
             {
                 if (tagName == tag.TagName)
                 {
-                    TempData["existingtag"] = tag.TagName;
+                    TempData["tag-exists"] = tag.TagName;
                     return RedirectToAction("Index");
                 }
             }
 
             tagSql.CreateTag(tagName, userID);
-            TempData["newtag"] = tagName;
+            TempData["tag-added"] = tagName;
             return RedirectToAction("Index");
         }
 
@@ -187,7 +187,7 @@ namespace Cardid.Controllers
             newTag = tagSql.CreateTag(tagName, deck.UserID);
             tagSql.AddTagToDeck(deck.DeckID, newTag.TagID);
 
-            TempData["addedtag"] = newTag.TagName;
+            TempData["tag-added"] = newTag.TagName;
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
         }
 
@@ -218,7 +218,7 @@ namespace Cardid.Controllers
             GetUser();
 
             tagSql.DeleteTag(tagID);
-            TempData["deletedtag"] = true;
+            TempData["tag-deleted"] = true;
             return RedirectToAction("TagView");
         }
 
@@ -258,6 +258,7 @@ namespace Cardid.Controllers
 
             deckSql.RemoveCardFromDeck(cardID, deckID);
 
+            TempData["card-removed"] = true;
             return RedirectToAction("EditDeck", new { deckID });
         }
 
@@ -312,19 +313,20 @@ namespace Cardid.Controllers
             {
                 DeckID = deckID,
                 UserID = userID,
+                Cards = cards,
                 FrontFirst = frontFirst,
-                Cards = cards
+                WholeDeck = true
             };
             return View("Study", study);
         }
 
 
         [HttpPost]
-        public ActionResult StudyLog(Study study, bool wholeDeck)
+        public ActionResult StudyLog(Study study)
         {
             GetUser();
 
-            if (wholeDeck)
+            if (study.WholeDeck)
             {
                 study.TimeOf = DateTime.Now;
                 studySql.LogStudySession(study);
@@ -333,7 +335,7 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult StudyRedo(string redo, string deckID)
+        public ActionResult StudyRedo(string redo, string deckID, bool frontFirst)
         {
             string userID = GetUser();
 
@@ -345,7 +347,9 @@ namespace Cardid.Controllers
             {
                 DeckID = deckID,
                 UserID = userID,
-                Cards = redoCards
+                Cards = redoCards,
+                FrontFirst = frontFirst,
+                WholeDeck = false
             };
             return View("Study", study);
         }

@@ -11,10 +11,12 @@ namespace Cardid.Models
     {
         public string DeckID { get; set; }
         public string UserID { get; set; }
-        public bool FrontFirst { get; set; }
         public int TotalScore { get; set; }
         public int PossibleScore { get; set; }
         public DateTime TimeOf { get; set; }
+
+        public bool FrontFirst { get; set; }
+        public bool WholeDeck { get; set; }
 
         public List<Card> Cards { get; set; }
         public string ToRedo { get; set; }

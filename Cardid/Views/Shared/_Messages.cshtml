@@ -3,55 +3,49 @@
 
 
 
-@if (TempData["addedcard"] != null)
+@if (TempData["card-added"] != null)
 {
-    Card card = TempData["addedcard"] as Card;
+    Card card = TempData["card-added"] as Card;
     <div class="view-msg">Card for @card.Front successfully added to deck</div>
 }
 
-@if (TempData["addedtag"] != null)
-{
-    Tag tag = TempData["addedtag"] as Tag;
-    <div class="view-msg">Tag for @tag.TagName successfully added to deck</div>
-}
-
-@if (TempData["decknamechanged"] != null)
+@if (TempData["deckname-changed"] != null)
 {
     <div class="view-msg">Deck name has been changed</div>
 }
 
-@if (TempData["deletedcard"] != null)
+@if (TempData["card-deleted"] != null)
 {
     <div class="view-msg">Card has been deleted</div>
 }
 
-@if (TempData["addedtag"] != null)
+@if (TempData["tag-added"] != null)
 {
-    <div class="view-msg">The tag "@TempData["addedtag"].ToString()" has been added to your deck</div>
+    <div class="view-msg">The tag "@TempData["tag-added"].ToString()" has been added to your deck</div>
 }
 
-@if (TempData["deletedtag"] != null)
+@if (TempData["tag-created"] != null)
+{
+    <div class="view-msg">The tag "@TempData["tag-created"].ToString()" has been created</div>
+}
+
+@if (TempData["tag-deleted"] != null)
 {
     <div class="view-msg">Tag has been deleted</div>
 }
 
-@if (TempData["existingtag"] != null)
+@if (TempData["tag-exists"] != null)
 {
     <div class="view-msg">The tag already exists</div>
 }
 
-@if (TempData["newtag"] != null)
+@if (TempData["login-name"] != null)
 {
-    <div class="view-msg">The tag "@TempData["newtag"].ToString()" has been created</div>
+    <div class="view-msg">Welcome back, @TempData["login-name"].ToString()!</div>
 }
-
-@if (TempData["loginname"] != null)
+else if (TempData["new-user"] != null)
 {
-    <div class="view-msg">Welcome back, @TempData["loginname"].ToString()!</div>
-}
-else if (TempData["newuser"] != null)
-{
-    <div class="view-msg">Welcome, @TempData["newuser"]!</div>
+    <div class="view-msg">Welcome, @TempData["new-user"]!</div>
 }
 
 

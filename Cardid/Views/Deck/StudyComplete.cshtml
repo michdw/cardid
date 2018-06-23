@@ -18,7 +18,7 @@
     else
     {
         <div>
-            @Html.ActionLink("Review the cards you got incorrect", "StudyRedo", "Deck", new { redo = Model.ToRedo, deckID = Model.DeckID }, new { @class = "btn main-btn" })
+            @Html.ActionLink("Review the cards you got incorrect", "StudyRedo", "Deck", new { redo = Model.ToRedo, deckID = Model.DeckID, frontFirst = Model.FrontFirst }, new { @class = "btn main-btn" })
         </div>
     }
     <div>

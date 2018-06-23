@@ -67,7 +67,7 @@ namespace Cardid.Controllers
 
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
-            TempData["loginname"] = currentUser.DisplayName;
+            TempData["login-name"] = currentUser.DisplayName;
 
             switch (Session["anon"].ToString())
             {
@@ -111,7 +111,7 @@ namespace Cardid.Controllers
 
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
-            TempData["newuser"] = currentUser.DisplayName;
+            TempData["new-user"] = currentUser.DisplayName;
             switch (Session["anon"].ToString())
             {
                 case "Card":
@@ -238,7 +238,7 @@ namespace Cardid.Controllers
 
         public ActionResult Logout()
         {
-            TempData["loginname"] = null;
+            TempData["login-name"] = null;
             Session["userid"] = null;
             Session["username"] = null;
             Session["currentdeck"] = null;
