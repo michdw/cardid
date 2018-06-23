@@ -4,16 +4,14 @@
     ViewBag.Title = "Choose Decks For Card";
 }
 
-
-
 <h1 class="view-title">Add Card to Decks</h1>
 
-<p class="card-bothsides">@Model.Front</p>
-<p class="card-bothsides">@Model.Back</p>
+<div class="card-bothsides">
+    <p class="card-listing">@Model.Front</p>
+    <p class="card-listing">@Model.Back</p>
+</div>
 
 @foreach (Deck thisDeck in Model.AvailableDecks())
 {
-
-        @Html.ActionLink(thisDeck.DeckName, "ChooseDecksSubmit", new { cardID = ViewBag.Card.CardID, deckID = thisDeck.DeckID }, new {@class="btn main-btn" })
-
+    @Html.ActionLink(thisDeck.DeckName, "ChooseDecksSubmit", "Deck", new { cardID = Model.CardID, deckID = thisDeck.DeckID }, new { @class = "btn main-btn" })
 }

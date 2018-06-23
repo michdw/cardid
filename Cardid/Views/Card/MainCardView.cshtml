@@ -74,6 +74,9 @@ else
                 <div class="card-field">@thisCard.Back</div>
                 <div class="card-options">
                     @Html.ActionLink("Edit", "EditCardInit", "Card", new { cardID = thisCard.CardID }, new { @class = "btn float-left card-button" })
+                    @{
+                        int decks = thisCard.Decks().Count;
+                    }
                     @if (userDecksCount > thisCard.Decks().Count)
                     {
                         @Html.ActionLink("Add to decks", "ChooseDecksInit", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn float-right card-button" })

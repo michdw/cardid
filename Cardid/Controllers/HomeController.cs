@@ -158,13 +158,13 @@ namespace Cardid.Controllers
             var displayName = ModelState["DisplayName"];
             if (displayName == null || displayName.Errors.Any())
             {
-                TempData["result"] = "Invalid Input: Your name hasn't been changed.";
+                TempData["change-result"] = "Invalid Input: Your name hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
             userSql.UpdateName(user.DisplayName, userID);
             user = userSql.GetUserByID(userID);
 
-            TempData["result"] = "Name changed successfully";
+            TempData["change-result"] = "Name changed successfully";
             return RedirectToAction("ChangeInfoInit", user);
         }
 
@@ -174,17 +174,23 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
             User oldInfo = userSql.GetUserByID(userID);
+            bool emailExists = userSql.CheckForEmail(user.Email);
 
             var userEmail = ModelState["Email"];
             if (userEmail == null || userEmail.Errors.Any())
             {
-                TempData["result"] = "Invalid input: Your email hasn't been changed.";
+                TempData["change-result"] = "Invalid input: Your email hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            else if (emailExists)
+            {
+                TempData["change-result"] = "Invalid input: That email is associated with a different user.";
                 return View("ChangeUserInfo", oldInfo);
             }
             userSql.UpdateEmail(user.Email, userID);
             user = userSql.GetUserByID(userID);
 
-            TempData["result"] = "Email changed successfully";
+            TempData["change-result"] = "Email changed successfully";
             return RedirectToAction("ChangeInfoInit", user);
         }
 
@@ -199,22 +205,22 @@ namespace Cardid.Controllers
             var confirmPassword = ModelState["ConfirmPassword"];
             if (password == null || password.Errors.Any())
             {
-                TempData["result"] = "Invalid input: your password hasn't been changed.";
+                TempData["change-result"] = "Invalid input: your password hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
             else if (confirmPassword == null) {
-                TempData["result"] = "Please enter your password twice; password hasn't been changed.";
+                TempData["change-result"] = "Please enter your password twice; password hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
             else if (confirmPassword.Errors.Any())
             {
-                TempData["result"] = "Passwords didn't match; password hasn't been changed.";
+                TempData["change-result"] = "Passwords didn't match; password hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
             userSql.UpdatePassword(user.Password, userID);
             user = userSql.GetUserByID(userID);
 
-            TempData["result"] = "Password changed successfully";
+            TempData["change-result"] = "Password changed successfully";
             return RedirectToAction("ChangeInfoInit", user);
         }
 

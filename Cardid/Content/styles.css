@@ -286,6 +286,11 @@ textarea {
     background: #fff;
 }
 
+.card-listing {
+    background: #fff;
+    opacity: .7;
+}
+
 .card-options {
     clear: both;
     overflow: auto;
@@ -302,14 +307,6 @@ textarea {
     padding: 4px 12px;
     margin: 8px;
     margin-left: 0;
-}
-
-.deck-listing {
-    font-weight: bold;
-    background: rgba(255,255,255,.5);
-    color: #000;
-    margin-right: 5px;
-    padding: 5px;
 }
 
 .edit-field {
@@ -336,7 +333,12 @@ textarea {
     overflow: auto;
     background: rgba(0,0,0,.15);
     color: #fff;
+    margin-top: 1em;
     padding: 1em;
+}
+
+.deckname-listing {
+    font-weight: bold;
 }
 
 .remove-card {

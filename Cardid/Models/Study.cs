@@ -21,9 +21,9 @@ namespace Cardid.Models
         public List<Card> Cards { get; set; }
         public string ToRedo { get; set; }
 
-        public decimal Percentage()
+        public int Percentage()
         {
-            return TotalScore / PossibleScore;
+            return (int)(Decimal.Divide(TotalScore, PossibleScore) * 100);
         }
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;

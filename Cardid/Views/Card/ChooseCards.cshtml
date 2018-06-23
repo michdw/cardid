@@ -21,7 +21,7 @@
 
                 <div class="card-listing">@thisCard.Back</div>
 
-                @Html.ActionLink("Add to deck", "ChooseDecksSubmit", "Deck", new { cardID = thisCard.CardID, deckID = ViewBag.Deck.DeckID }, new { @class = "btn card-button" })
+                @Html.ActionLink("Add to deck", "ChooseDecksSubmit", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn card-button" })
 
             </div>
         }
