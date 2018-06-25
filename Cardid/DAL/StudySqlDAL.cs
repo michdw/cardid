@@ -19,29 +19,29 @@ namespace Cardid.DAL
         private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID";
         private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
-        private string getDecksByActivity = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
+        private string mostActiveDecks = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
             + "GROUP BY DeckID ORDER BY COUNT(DeckID) DESC";
-        private string getUsersByActivity = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
+        private string mostActiveUsers = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
             + "GROUP BY UserID ORDER BY COUNT(UserID) DESC";
 
 
 
-        public Dictionary<string, int> GetDecksByActivity()
+        public Dictionary<int, int> MostActiveDecks()
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query(getDecksByActivity).ToDictionary(
-                    row => (string)row.DeckID.ToString(),
+                return db.Query(mostActiveDecks).ToDictionary(
+                    row => (int)row.DeckID,
                     row => (int)row.Count);
             }
         }
 
-        public Dictionary<string, int> GetUsersByActivity()
+        public Dictionary<int, int> MostActiveUsers()
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query(getUsersByActivity).ToDictionary(
-                    row => (string)row.UserID.ToString(),
+                return db.Query(mostActiveUsers).ToDictionary(
+                    row => (int)row.UserID,
                     row => (int)row.Count);
             }
         }

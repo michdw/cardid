@@ -11,9 +11,10 @@ namespace Cardid.Controllers
 {
     public class HomeController : Controller
     {
-        UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
-        TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
         private string GetUser()
         {
@@ -26,10 +27,42 @@ namespace Cardid.Controllers
         {
             Session["anon"] = "Home";
 
-            ViewBag.MostActiveUsers = studySql.GetUsersByActivity();
-            ViewBag.MostPopularDecks = studySql.GetDecksByActivity();
+            Dictionary<int, int> activeUsersSql = studySql.MostActiveUsers();
+            Dictionary<string, int> activeUsers = new Dictionary<string, int>();
+            foreach (KeyValuePair<int, int> kvp in activeUsersSql)
+            {
+                User user = userSql.GetUserByID(kvp.Key.ToString());
+                string name = user.DisplayName;
+                activeUsers.Add(name, kvp.Value);
+            }
 
-            return View();
+            Dictionary<int, int> activeDecksSql = studySql.MostActiveDecks();
+            Dictionary<string, int> activeDecks = new Dictionary<string, int>();
+            foreach (KeyValuePair<int, int> kvp in activeDecksSql)
+            {
+                Deck deck = deckSql.GetDeckByID(kvp.Key.ToString());
+                string name = deck.DeckName;
+                activeDecks.Add(name, kvp.Value);
+            }
+
+            List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
+            Dictionary<string, int> popularTags = new Dictionary<string, int>();
+            foreach (Tag tag in popularTagsSql)
+            {
+                string name = tag.TagName;
+                int decksUsing = tag.Decks().Count;
+                popularTags.Add(name, decksUsing);
+            }
+
+
+            Stats stats = new Stats
+            {
+                ActiveDecks = activeDecks,
+                ActiveUsers = activeUsers,
+                PopularTags = popularTags
+            };
+
+            return View(stats);
         }
 
 
@@ -208,7 +241,8 @@ namespace Cardid.Controllers
                 TempData["change-result"] = "Invalid input: your password hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
-            else if (confirmPassword == null) {
+            else if (confirmPassword == null)
+            {
                 TempData["change-result"] = "Please enter your password twice; password hasn't been changed.";
                 return View("ChangeUserInfo", oldInfo);
             }
@@ -236,7 +270,7 @@ namespace Cardid.Controllers
                     tagSql.DeleteTag(tag.TagID);
                 }
             }
-            
+
             userSql.RemoveUser(userID);
             return RedirectToAction("Logout");
         }

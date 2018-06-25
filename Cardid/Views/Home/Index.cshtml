@@ -1,6 +1,29 @@
-﻿@{
+﻿
+@using Cardid.Models
+@model Stats
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2 class="view-title">Most Active Users</h2>
 
-<div>index page!</div>
+@foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
+{
+    <p>@kvp.Key / @kvp.Value</p>
+}
+
+
+<h2 class="view-title">Most Active Decks</h2>
+
+@foreach (KeyValuePair<string, int> kvp in Model.ActiveDecks)
+{
+    <p>@kvp.Key / @kvp.Value</p>
+}
+
+
+<h2 class="view-title">Most Popular Tags</h2>
+
+@foreach (KeyValuePair<string, int> kvp in Model.PopularTags)
+{
+    <p>@kvp.Key / @kvp.Value</p>
+}
