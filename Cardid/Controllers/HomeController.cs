@@ -27,6 +27,12 @@ namespace Cardid.Controllers
         {
             Session["anon"] = "Home";
 
+            bool loggedIn = false;
+            if (Session["userid"] != null)
+            {
+                loggedIn = true;
+            }
+
             Dictionary<int, int> activeUsersSql = studySql.MostActiveUsers();
             Dictionary<string, int> activeUsers = new Dictionary<string, int>();
             foreach (KeyValuePair<int, int> kvp in activeUsersSql)
@@ -59,7 +65,7 @@ namespace Cardid.Controllers
             {
                 ActiveDecks = activeDecks,
                 ActiveUsers = activeUsers,
-                PopularTags = popularTags
+                PopularTags = popularTags,
             };
 
             return View(stats);
