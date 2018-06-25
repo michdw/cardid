@@ -5,9 +5,10 @@
 }
 
 
-<h1 class="view-title">View Cards In Deck</h1>
+<h1 class="view-title">View Cards In Deck: @Model.DeckName</h1>
+<p>Shared by @Model.Creator().DisplayName</p>
 
-<div class="card-container">
+<div class="flex flex-left">
 
     @foreach (Card thisCard in Model.Cards())
     {

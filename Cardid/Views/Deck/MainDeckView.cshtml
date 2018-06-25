@@ -29,7 +29,7 @@ else
 }
 
 
-<div class="flex flex-center">
+<div class="flex flex-baseline">
     <div class="deck-column">
         <div class="option">
 
@@ -99,11 +99,17 @@ else
                                 @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
                             </p>
                             <p>
-                                @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
+                                @deck.Cards().Count cards
                             </p>
-                            <p>
-                                @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
-                            </p>
+                            @if (deck.Cards().Count > 0)
+                            {
+                                <p>
+                                    @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
+                                </p>
+                                <p>
+                                    @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                                </p>
+                            }
                         </div>
                     }
                 }
@@ -120,7 +126,7 @@ else
                     else
                     {
                         <div>
-                            You currently have no decks.
+                            You don't have any decks yet.
                             @Html.ActionLink("Create one here.", "CreateDeckInit", "Deck")
                         </div>
                     }

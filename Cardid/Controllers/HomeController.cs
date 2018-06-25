@@ -125,7 +125,7 @@ namespace Cardid.Controllers
 
 
         //other actions
-        public ActionResult UserPage()
+        public ActionResult Account()
         {
             string userID = GetUser();
             User user = userSql.GetUserByID(userID);

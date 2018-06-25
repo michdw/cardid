@@ -13,20 +13,6 @@
 
     <div class="card-column">
 
-        @if (Session["currentdeck"] != null)
-        {
-            Deck currentDeck = Session["currentDeck"] as Deck;
-            string deckName = currentDeck.DeckName;
-
-            @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
-            <div class="">All changes saved automatically</div>
-        }
-        else
-        {
-
-            @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
-            <div class="">All changes saved automatically</div>
-        }
 
         <div class="card-content">
 
@@ -44,6 +30,20 @@
             }
         </div>
 
+        @if (Session["currentdeck"] != null)
+        {
+            Deck currentDeck = Session["currentDeck"] as Deck;
+            string deckName = currentDeck.DeckName;
+
+            @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
+            <div class="">All changes saved automatically</div>
+        }
+        else
+        {
+
+            @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
+            <div class="">All changes saved automatically</div>
+        }
         @Html.ActionLink("Delete this card", "DeleteCard", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
 
     </div>

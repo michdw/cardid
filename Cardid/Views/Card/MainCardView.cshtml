@@ -73,7 +73,7 @@ else
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
                 <div class="card-options">
-                    @Html.ActionLink("Edit", "EditCardInit", "Card", new { cardID = thisCard.CardID }, new { @class = "btn float-left card-button" })
+                    @Html.ActionLink("Edit", "EditCardInit", "Card", new { cardID = thisCard.CardID }, new { @class = "btn float-left card-button", @id = "edit-link" })
                     @{
                         int decks = thisCard.Decks().Count;
                     }
@@ -97,6 +97,7 @@ else
 
 
 
+<script type="text/javascript" src="../../Content/cardView.js"></script>
 
 
 

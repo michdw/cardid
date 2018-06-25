@@ -265,14 +265,6 @@ textarea {
     min-width: 300px;
 }
 
-.card-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
 .card-bothsides {
     width: 20%;
     min-width: 200px;
@@ -281,6 +273,7 @@ textarea {
 }
 
 .card-field {
+    user-select: none;
     margin: 8px 0;
     padding: 8px 4px;
     background: #fff;
@@ -331,7 +324,7 @@ textarea {
 .deck-listing {
     clear: both;
     overflow: auto;
-    background: rgba(0,0,0,.15);
+    background: rgba(0,0,0,.3);
     color: #fff;
     margin-top: 1em;
     padding: 1em;

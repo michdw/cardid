@@ -177,6 +177,7 @@
     <Content Include="Content\Backgrounds\arrowbg7.png" />
     <Content Include="Content\Backgrounds\arrowbg8.png" />
     <Content Include="Content\Backgrounds\arrowbg9.png" />
+    <Content Include="Content\cardView.js" />
     <Content Include="Content\deckTags.js" />
     <Content Include="Content\editCard.js" />
     <Content Include="Content\editDeck.js" />
@@ -231,11 +232,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Default.cshtml" />
-    <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ChangeUserInfo.cshtml" />
     <Content Include="Views\Deck\ManageTags.cshtml" />
     <Content Include="Views\Shared\_Messages.cshtml" />
+    <Content Include="Views\Home\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
