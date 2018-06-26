@@ -10,29 +10,48 @@
 {
     <div class="view-header">
         <div>
-            <h2>Welcome, @TempData["new-user"].ToString()</h2>
+            <h2 class="view-title">Welcome, @TempData["new-user"].ToString()</h2>
             <p>
                 Here's how you can get started:
             </p>
         </div>
         <div>
             <p>
-                &#9679; @Html.ActionLink("Create some cards", "CreateCardInit", "Card")
+                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", new { @class = "link-inline-dark" })
             </p>
             <p>
-                &#9679; @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck")
+                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", new { @class = "link-inline-dark" })
             </p>
             <p>
-                &#9679; @Html.ActionLink("Study decks that other users have shared", "Index", "Deck")
+                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " View and study decks that other users have shared", "Index", "Deck", new { @class = "link-inline-dark" })
             </p>
         </div>
     </div>
 }
-else if (TempData["login-name"] != null)
+else if (TempData["user-login"] != null)
 {
-    <div class="view-header">
-        <div>
-            <h2>Welcome back, @TempData["login-name"].ToString()!</h2>
+    User user = TempData["user-login"] as User;
+
+    <div class="home-header">
+        <div class="home-headcolumn">
+            <h3 class="bold">Welcome back, @user.DisplayName</h3>
+            <p>
+                You currently have
+                <strong> @user.Cards().Count </strong>cards, and
+                <strong> @user.Decks().Count </strong>decks, and have logged
+                <strong> @user.Sessions().Count </strong>study sessions.
+            </p>
+        </div>
+        <div class="home-headcolumn">
+            <p>
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", new { @class = "link-inline-dark" })
+            </p>
+            <p>
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", new { @class = "link-inline-dark" })
+            </p>
+            <p>
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " View and study decks that other users have shared", "Index", "Deck", new { @class = "link-inline-dark" })
+            </p>
         </div>
     </div>
 }
@@ -68,17 +87,17 @@ else if (TempData["login-name"] != null)
                 by number of times studied
             </span>
             @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
-    {
-        Deck deck = kvp.Key;
-        <p>
-            <span class="left-span">
-                @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, null)
-            </span>
-            <span class="right-span">
-                @kvp.Value
-            </span>
-        </p>
-}
+            {
+                Deck deck = kvp.Key;
+                <p>
+                    <span class="left-span">
+                        @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
+                    </span>
+                    <span class="right-span">
+                        @kvp.Value
+                    </span>
+                </p>
+            }
         </div>
 
 

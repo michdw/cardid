@@ -101,7 +101,7 @@ namespace Cardid.Controllers
 
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
-            TempData["login-name"] = currentUser.DisplayName;
+            TempData["user-login"] = currentUser;
 
             switch (Session["anon"].ToString())
             {
@@ -128,9 +128,16 @@ namespace Cardid.Controllers
         public ActionResult CompleteRegister(User newUser)
         {
             bool emailExists = userSql.CheckForEmail(newUser.Email);
+            bool nameExists = userSql.CheckForName(newUser.DisplayName);
             if (emailExists)
             {
                 ModelState.AddModelError("invalid-credentials", "That email has already been used to register on this site.");
+                ViewBag.LoginInstead = true;
+                return View("Register", newUser);
+            }
+            else if (nameExists)
+            {
+                ModelState.AddModelError("invalid-credentials", "That name is already in use by a different user.");
                 ViewBag.LoginInstead = true;
                 return View("Register", newUser);
             }
@@ -188,11 +195,17 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
             User oldInfo = userSql.GetUserByID(userID);
+            bool nameExists = userSql.CheckForName(user.DisplayName);
 
             var displayName = ModelState["DisplayName"];
             if (displayName == null || displayName.Errors.Any())
             {
                 TempData["change-result"] = "Invalid Input: Your name hasn't been changed.";
+                return View("ChangeUserInfo", oldInfo);
+            }
+            else if (nameExists)
+            {
+                TempData["change-result"] = "Invalid input: That name is already in use by a different user.";
                 return View("ChangeUserInfo", oldInfo);
             }
             userSql.UpdateName(user.DisplayName, userID);

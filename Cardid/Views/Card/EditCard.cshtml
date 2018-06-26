@@ -1,34 +1,31 @@
 ﻿
+@using Cardid.Models
+@model Card
 @{
     ViewBag.Title = "EditCard";
     string formAction = ViewBag.FormAction;
 }
-@using Cardid.Models
-@model Card
 
 
 <h1 class="view-title">Edit card</h1>
 
-<div class="flex flex-left">
-
-    <div class="card-column">
+<div class="flex flex-baseline">
 
 
-        <div class="card-content">
+    <div class="card-bothsides">
 
-            @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
-            {
-                @Html.HiddenFor(m => m.CardID)
-                <div class="edit-field">
-                    @Html.LabelFor(m => m.Front, "Front of Card:")
-                    @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
-                </div>
-                <div class="edit-field">
-                    @Html.LabelFor(m => m.Back, "Back of Card:")
-                    @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
-                </div>
-            }
-        </div>
+        @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.CardID)
+            <div class="edit-field">
+                @Html.LabelFor(m => m.Front, "Front of Card:")
+                @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
+            </div>
+            <div class="edit-field">
+                @Html.LabelFor(m => m.Back, "Back of Card:")
+                @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
+            </div>
+        }
 
         @if (Session["currentdeck"] != null)
         {
@@ -36,17 +33,18 @@
             string deckName = currentDeck.DeckName;
 
             @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
-            <div class="">All changes saved automatically</div>
         }
         else
         {
-
             @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
-            <div class="">All changes saved automatically</div>
         }
+
+        <p class="small-type">All changes saved automatically</p>
         @Html.ActionLink("Delete this card", "DeleteCard", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
 
     </div>
+
+
 </div>
 
 

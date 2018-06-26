@@ -39,15 +39,6 @@
     <div class="view-msg">Please enter a name for your deck</div>
 }
 
-@if (TempData["login-name"] != null)
-{
-    <div class="view-msg">Login successful</div>
-}
-else if (TempData["new-user"] != null)
-{
-    <div class="view-msg">Registration successful</div>
-}
-
 @if (TempData["tag-added"] != null)
 {
     <div class="view-msg">Tag successfully added to your deck</div>
@@ -66,6 +57,15 @@ else if (TempData["new-user"] != null)
 @if (TempData["tag-exists"] != null)
 {
     <div class="view-msg">The tag already exists</div>
+}
+
+@if (TempData["user-login"] != null)
+{
+    <div class="view-msg">Login successful</div>
+}
+else if (TempData["new-user"] != null)
+{
+    <div class="view-msg">Registration successful</div>
 }
 
 

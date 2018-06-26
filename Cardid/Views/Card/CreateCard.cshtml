@@ -5,20 +5,23 @@
     ViewBag.Title = "Create Card";
 }
 
+
 @if (ViewBag.Deck == null)
 {
     <h1 class="view-title">Create a New Card</h1>
 
     using (Html.BeginForm("CreateCardSubmit", "Card", FormMethod.Post))
     {
-        <div>
-            <p>front of card:</p>
-            @Html.TextAreaFor(m => m.Front)
-            <p>back of card:</p>
-            @Html.TextAreaFor(m => m.Back)
-        </div>
+        <div class="flex flex-baseline">
+            <div class="card-bothsides">
+                <p>front of card:</p>
+                @Html.TextAreaFor(m => m.Front)
+                <p>back of card:</p>
+                @Html.TextAreaFor(m => m.Back)
 
-        <button class="btn main-btn">Add card</button>
+                <button class="btn main-btn">Add card</button>
+            </div>
+        </div>
     }
 }
 else
@@ -27,14 +30,17 @@ else
 
     using (Html.BeginForm("CreateCardSubmitD", "Card", new { deckID = ViewBag.Deck.DeckID }, FormMethod.Post))
     {
-        <div>
-            <p>front of card:</p>
-            @Html.TextAreaFor(m => m.Front)
-            <p>back of card:</p>
-            @Html.TextAreaFor(m => m.Back)
-        </div>
+        <div class="flex flex-baseline">
+            <div class="card-bothsides">
+                <p>front of card:</p>
+                @Html.TextAreaFor(m => m.Front)
+                <p>back of card:</p>
+                @Html.TextAreaFor(m => m.Back)
 
-        <button class="btn main-btn">Add card to deck</button>
+                <button class="btn main-btn">Add card to deck</button>
+            </div>
+        </div>
     }
 }
+
 

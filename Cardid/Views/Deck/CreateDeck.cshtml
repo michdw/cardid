@@ -4,21 +4,18 @@
     ViewBag.Title = "CreateDeck";
 }
 
-
 <h1 class="view-title">Create Deck</h1>
 
-@using (Html.BeginForm("CreateDeckSubmit", "Deck", FormMethod.Post))
-{
+<div class="flex flex-baseline ">
+    @using (Html.BeginForm("CreateDeckSubmit", "Deck", FormMethod.Post))
+    {
 
-    <div class="deck-listing">
-        @Html.Label("Name", "Enter a name for your deck: ", new { @class = "wide-label" })
-        <span class="tab"></span>
-        @Html.TextBoxFor(m => m.DeckName)
-        <span class="tab"></span>
-        <button class="btn main-btn">Continue</button>
-    </div>
-
-
-
-}
-
+        <div class="module">
+            @Html.Label("Name", "Enter a name for your deck: ", new { @class = "wide-label" })
+            <span class="tab"></span>
+            @Html.TextBoxFor(m => m.DeckName)
+            <span class="tab"></span>
+            <button class="btn main-btn">Continue</button>
+        </div>
+    }
+</div>

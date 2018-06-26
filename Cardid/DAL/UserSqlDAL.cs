@@ -11,6 +11,7 @@ namespace Cardid.DAL
     public class UserSqlDAL
     {
         private string connectionString;
+        private string checkForName = "SELECT * FROM [users] WHERE DisplayName = @name;";
         private string getAllUsers = "SELECT * FROM [users]";
         private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
         private string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
@@ -37,6 +38,16 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 List<User> list = db.Query<User>(getUserByEmail, new { email }).ToList();
+                return list.Count > 0;
+            }
+        }
+
+
+        public bool CheckForName(string name)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<User> list = db.Query<User>(checkForName, new { name }).ToList();
                 return list.Count > 0;
             }
         }
