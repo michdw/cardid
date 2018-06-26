@@ -5,29 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["userid"] != null)
-{
-    <h2 class="view-title">Most Active Users</h2>
+<div class="flex flex-baseline">
 
-    foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
+    @if (Session["userid"] != null)
     {
-        <p>@kvp.Key / @kvp.Value</p>
+        <div class="home-column">
+            <h2 class="view-title">Most Active Users</h2>
+            @foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
+            {
+                <p>@kvp.Key / @kvp.Value</p>
+            }
+        </div>
+
+
+        <div class="home-column">
+            <h2 class="view-title">Most Active Decks</h2>
+            @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
+            {
+                <p>
+                    @Html.ActionLink(kvp.Key.DeckName + " / " + kvp.Value, "CardsInDeck", "Deck", new { deckID = kvp.Key.DeckID }, null)
+                </p>
+            }
+        </div>
+
+
+
+        <div class="home-column">
+            <h2 class="view-title">Most Popular Tags</h2>
+            @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
+            {
+                <p>@kvp.Key.TagName / @kvp.Value</p>
+            }
+        </div>
+
+
+
     }
-
-
-    <h2 class="view-title">Most Active Decks</h2>
-
-    foreach (KeyValuePair<string, int> kvp in Model.ActiveDecks)
-    {
-        <p>@kvp.Key / @kvp.Value</p>
-    }
-
-
-    <h2 class="view-title">Most Popular Tags</h2>
-
-    foreach (KeyValuePair<string, int> kvp in Model.PopularTags)
-    {
-        <p>@kvp.Key / @kvp.Value</p>
-    }
-
-}
+</div>

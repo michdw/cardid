@@ -257,6 +257,15 @@ textarea {
         border: 1px solid #993737;
     }
 
+/* homepage */
+
+.home-column {
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    width: 25%;
+    min-width: 150px;
+    padding: 8px;
+}
 
 /* cards */
 
