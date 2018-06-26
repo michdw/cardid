@@ -84,7 +84,7 @@ else
 
     <div class="deck-column">
         <div class="deck-list">
-            <h4 class="bold">Your decks</h4>
+            <h2 class="view-title deck-heading">Your decks</h2>
 
             @if (Model.Count > 0)
             {
@@ -117,17 +117,21 @@ else
                 {
                     if (ViewBag.SearchName != null)
                     {
-                        <div>No decks matching that name.</div>
+                        <div class="deck-listing">
+                            No decks matching that name.
+                        </div>
                     }
                     else if (ViewBag.SearchTag != null)
                     {
-                        <div>No decks with that tag.</div>
+                        <div class="deck-listing">
+                            No decks with that tag.
+                        </div>
                     }
                     else
                     {
-                        <div>
-                            You don't have any decks yet.
-                            @Html.ActionLink("Create one here.", "CreateDeckInit", "Deck")
+                        <div class="deck-listing">
+                            <span>You don't have any decks yet...</span>
+                            @Html.ActionLink("Create one here!", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn float-right" })
                         </div>
                     }
                 }
@@ -136,18 +140,22 @@ else
             {
                 if (ViewBag.SearchName != null)
                 {
-                    <div>No decks matching that name.</div>
+                    <div class="deck-listing">
+                        No decks matching that name.
+                    </div>
                 }
                 else if (ViewBag.SearchTag != null)
                 {
-                    <div>No decks with that tag.</div>
+                    <div class="deck-listing">
+                        No decks with that tag.
+                    </div>
                 }
             }
         </div>
 
 
         <div class="deck-list">
-            <h4 class="bold">Public decks</h4>
+            <h2 class="view-title deck-heading">Public decks</h2>
 
             @if (Model.Count > 0)
             {
@@ -159,20 +167,25 @@ else
                     {
                         counter++;
                         <div class="deck-listing">
-                            <p>
-                                @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
-                            </p>
-                            <p>
-                                @deck.Cards().Count cards
-                            </p>
+
+                            @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
+
+                            <div class="deck-info">
+                                <p class="small-type narrow-line">
+                                    @deck.Cards().Count cards
+                                </p>
+                                <p class="narrow-line">
+                                    <span class="small-type">Shared by</span> @deck.Creator().DisplayName
+                                </p>
+                            </div>
+
                             @if (deck.Cards().Count > 0)
                             {
-                                @Html.ActionLink("Study Back->Front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
-                                @Html.ActionLink("Study Front->Back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                                <div>
+                                    @Html.ActionLink("Study Back->Front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
+                                    @Html.ActionLink("Study Front->Back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                                </div>
                             }
-                            <p>
-                                Shared by @deck.Creator().DisplayName
-                            </p>
                         </div>
                     }
                 }
@@ -180,15 +193,15 @@ else
                 {
                     if (ViewBag.SearchName != null)
                     {
-                        <div>No decks matching that name.</div>
+                        <div class="deck-listing">
+                            No public decks matching that name.
+                        </div>
                     }
                     else if (ViewBag.SearchTag != null)
                     {
-                        <div>No decks with that tag.</div>
-                    }
-                    else
-                    {
-                        <div>No decks currently shared by other users.</div>
+                        <div class="deck-listing">
+                            No public decks with that tag.
+                        </div>
                     }
                 }
             }
@@ -196,11 +209,15 @@ else
             {
                 if (ViewBag.SearchName != null)
                 {
-                    <div>No decks matching that name.</div>
+                    <div class="deck-listing">
+                        No public decks matching that name.
+                    </div>
                 }
                 else if (ViewBag.SearchTag != null)
                 {
-                    <div>No decks with that tag.</div>
+                    <div class="deck-listing">
+                        No public decks with that tag.
+                    </div>
                 }
             }
         </div>

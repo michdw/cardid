@@ -22,24 +22,8 @@ a {
     margin-top: 0;
 }
 
-.pointer:hover {
-    cursor: pointer;
-}
-
 .bold {
     font-weight: bold;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.hidden {
-    display: none;
 }
 
 .flex {
@@ -60,25 +44,56 @@ a {
     justify-content: flex-start;
 }
 
-.flex > * {
+.flex > div {
     margin: 12px;
 }
 
-.white {
-    color: #fff;
+.float-left {
+    float: left;
 }
 
-.small-type {
-    font-size: .85em;
+.float-right {
+    float: right;
 }
 
-.container-header {
+.hidden {
+    display: none;
+}
+
+.link-inline {
+    font-weight: bold;
+    opacity: .8;
+}
+
+    .link-inline:hover {
+        opacity: 1;
+    }
+
+.narrow-line {
+    margin: 0;
 }
 
 .option {
     position: relative;
     clear: both;
     padding: 8px 0;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.small-type {
+    font-size: .85em;
+}
+
+.tab {
+    display: inline-block;
+    width: 1em;
+}
+
+.white {
+    color: #fff;
 }
 
 
@@ -138,6 +153,12 @@ a {
         margin-top: 0;
     }
 
+@media screen and (max-width: 450px) {
+    .page-title p {
+        transform: translateY(3.5em);
+    }
+}
+
 .header-option {
     text-align: center;
     min-width: 6vw;
@@ -161,12 +182,25 @@ a {
     opacity: .7;
 }
 
+.view-header {
+    background: rgba(0,0,0,.7);
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    width: 100vw;
+    color: #fff;
+    transform: translate(-1em, -1em);
+    display: flex;
+}
+
+    .view-header > div {
+        margin-left: 5em;
+    }
+
 .view-msg {
     display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
-    padding: 4px 8px;
+    padding: .5em 1em;
     background: #333;
     color: #fff;
     font-size: .9em;
@@ -196,12 +230,16 @@ label {
     text-align: right;
 }
 
+textarea {
+    display: block;
+}
+
 .card-content label {
     text-align: left;
 }
 
-textarea {
-    display: block;
+.wide-label {
+    width: auto;
 }
 
 
@@ -261,6 +299,7 @@ textarea {
 
 .home-column {
     background: rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.3);
     color: #fff;
     width: 28%;
     min-width: 250px;
@@ -281,11 +320,16 @@ textarea {
 }
 
 .left-span {
-    width: 90%;
+    width: 80%;
+    text-align: right;
     display: inline-block;
 }
 
 .right-span {
+    font-weight: bold;  
+    margin-left: 1em;
+    padding: 4px 1em;
+    background: rgba(0,0,0,.7);
 }
 
 @media screen and (max-width: 670px) {
@@ -347,29 +391,49 @@ textarea {
 /* decks */
 
 .deck-column {
-    width: 40vw;
+    width: 45%;
     min-width: 300px;
 }
 
-.editdeck-left {
+@media screen and (max-width: 700px) {
+    .deck-column {
+        width: 100%;
+    }
 }
 
-.editdeck-right {
-    min-width: 60%;
+.deck-heading {
+    margin: 0;
+}
+
+.deck-info {
+    padding: .5em .6em;
+    margin-top: 4px;
 }
 
 .deck-listing {
     clear: both;
     overflow: auto;
     background: rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.3);
     color: #fff;
     margin-top: 1em;
     padding: 1em;
 }
 
+    .deck-listing:last-of-type {
+        margin-bottom: 2em;
+    }
+
 .deckname-listing {
-    font-weight: bold;
+    font-size: 1.2em;
+    padding: .5em;
+    margin: 0;
+    border-radius: 4px;
 }
+
+    .deckname-listing:hover {
+        background: rgba(0,0,0,.3);
+    }
 
 .remove-card {
 }
@@ -383,6 +447,13 @@ textarea {
     padding: 10px;
     background: rgba(0,0,0,.5);
     color: #fff;
+}
+
+.editdeck-left {
+}
+
+.editdeck-right {
+    min-width: 60%;
 }
 
 /* tags */

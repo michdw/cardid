@@ -19,18 +19,33 @@
     <div class="view-msg">Card has been deleted</div>
 }
 
+@if (TempData["deck-created"] != null)
+{
+    <div class="view-msg">New deck created</div>
+}
+
+@if (TempData["deck-deleted"] != null)
+{
+    <div class="view-msg">Deck has been deleted</div>
+}
+
 @if (TempData["deckname-changed"] != null)
 {
     <div class="view-msg">Deck name has been changed</div>
 }
 
+@if (TempData["deckname-missing"] != null)
+{
+    <div class="view-msg">Please enter a name for your deck</div>
+}
+
 @if (TempData["login-name"] != null)
 {
-    <div class="view-msg">Welcome back, @TempData["login-name"].ToString()!</div>
+    <div class="view-msg">Login successful</div>
 }
 else if (TempData["new-user"] != null)
 {
-    <div class="view-msg">Welcome, @TempData["new-user"]!</div>
+    <div class="view-msg">Registration successful</div>
 }
 
 @if (TempData["tag-added"] != null)

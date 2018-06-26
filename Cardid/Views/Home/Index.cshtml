@@ -5,12 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@if (TempData["new-user"] != null)
+{
+    <div class="view-header">
+        <div>
+            <h2>Welcome, @TempData["new-user"].ToString()</h2>
+            <p>
+                Here's how you can get started:
+            </p>
+        </div>
+        <div>
+            <p>
+                &#9679; @Html.ActionLink("Create some cards", "CreateCardInit", "Card")
+            </p>
+            <p>
+                &#9679; @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck")
+            </p>
+            <p>
+                &#9679; @Html.ActionLink("Study decks that other users have shared", "Index", "Deck")
+            </p>
+        </div>
+    </div>
+}
+else if (TempData["login-name"] != null)
+{
+    <div class="view-header">
+        <div>
+            <h2>Welcome back, @TempData["login-name"].ToString()!</h2>
+        </div>
+    </div>
+}
+
+
+
 <div class="flex flex-baseline">
 
     @if (Session["userid"] != null)
     {
         <div class="home-column">
             <h2 class="view-title">Most Active Users</h2>
+            <span class="small-type">
+                by study sessions logged
+            </span>
             @foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
             {
                 <p>
@@ -26,19 +63,22 @@
 
 
         <div class="home-column">
-            <h2 class="view-title">Most Active Decks</h2>
+            <h2 class="view-title">Most Popular Decks</h2>
+            <span class="small-type">
+                by number of times studied
+            </span>
             @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
-            {
-                Deck deck = kvp.Key;
-                <p>
-                    <span class="left-span">
-                        @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, null)
-                    </span>
-                    <span class="right-span">
-                        @kvp.Value
-                    </span>
-                </p>
-            }
+    {
+        Deck deck = kvp.Key;
+        <p>
+            <span class="left-span">
+                @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, null)
+            </span>
+            <span class="right-span">
+                @kvp.Value
+            </span>
+        </p>
+}
         </div>
 
 

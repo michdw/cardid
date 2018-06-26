@@ -134,10 +134,16 @@ namespace Cardid.Controllers
         public ActionResult CreateDeckSubmit(Deck newDeck)
         {
             string userID = GetUser();
+
+            if (newDeck.DeckName == null)
+            {
+                TempData["deckname-missing"] = true;
+                return View("CreateDeck");
+            }
+
             newDeck = deckSql.CreateDeck(newDeck.DeckName, userID);
 
-
-
+            TempData["deck-created"] = true;
             return RedirectToAction("EditDeck", new { deckID = newDeck.DeckID });
         }
 
@@ -208,7 +214,7 @@ namespace Cardid.Controllers
                 }
             }
             deckSql.DeleteDeck(deckID, cardsInDeck);
-
+            TempData["deck-deleted"] = true;
             return RedirectToAction("Index");
         }
 

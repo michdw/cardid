@@ -10,10 +10,12 @@
 @using (Html.BeginForm("CreateDeckSubmit", "Deck", FormMethod.Post))
 {
 
-    <div>
-        @Html.Label("Name", "Deck Name: ")
+    <div class="deck-listing">
+        @Html.Label("Name", "Enter a name for your deck: ", new { @class = "wide-label" })
+        <span class="tab"></span>
         @Html.TextBoxFor(m => m.DeckName)
-        <button class="btn main-btn">Add deck</button>
+        <span class="tab"></span>
+        <button class="btn main-btn">Continue</button>
     </div>
 
 

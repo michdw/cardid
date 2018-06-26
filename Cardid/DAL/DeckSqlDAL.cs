@@ -30,6 +30,7 @@ namespace Cardid.DAL
         private string makeDeckPrivate = "UPDATE [decks] set IsPublic = 0 WHERE DeckID = @deckID";
         private string makeDeckPublic = "UPDATE [decks] set IsPublic = 1 WHERE DeckID = @deckID";
         private string removeAllCardsFromDeck = "DELETE FROM [card_deck] WHERE DeckID = @deckID";
+        private string removeAllSessionsWithDeck = "DELETE FROM [sessions] WHERE DeckID = @deckID";
         private string removeAllTagsFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
@@ -78,6 +79,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(removeAllCardsFromDeck, new { deckID });
+                db.Execute(removeAllSessionsWithDeck, new { deckID });
                 db.Execute(removeAllTagsFromDeck, new { deckID });
                 foreach (Card card in cardsOnlyInDeck)
                 {
