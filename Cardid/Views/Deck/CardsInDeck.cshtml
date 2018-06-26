@@ -4,12 +4,15 @@
     ViewBag.Title = "CardsInDeck";
 }
 
-
 <h1 class="view-title">View Cards In Deck: @Model.DeckName</h1>
 <p>Shared by @Model.Creator().DisplayName</p>
 
-<div class="flex flex-left">
+<div class="option">
+    @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
+    @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
+</div>
 
+<div class="flex flex-left">
     @foreach (Card thisCard in Model.Cards())
     {
         <div class="card-bothsides">
@@ -18,15 +21,12 @@
             @Html.ActionLink("Add to a different deck", "ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn card-button" })
         </div>
     }
-
 </div>
 
 <div class="tag-container">
     <h4 class="bold">Tags</h4>
-
     @foreach (Tag tag in Model.Tags())
     {
         <span class="deck-tag">@tag.TagName</span>
     }
-
 </div>

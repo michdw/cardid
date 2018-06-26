@@ -41,7 +41,10 @@ namespace Cardid.Controllers
             foreach (KeyValuePair<int, int> kvp in activeDecksSql)
             {
                 Deck deck = deckSql.GetDeckByID(kvp.Key.ToString());
-                activeDecks.Add(deck, kvp.Value);
+                if (deck.IsPublic)
+                {
+                    activeDecks.Add(deck, kvp.Value);
+                }
             }
 
             List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
