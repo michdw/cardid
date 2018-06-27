@@ -16,6 +16,7 @@ namespace Cardid.Controllers
         DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
+        UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
         private string GetUser()
         {
@@ -362,9 +363,12 @@ namespace Cardid.Controllers
 
 
 
-        public ActionResult TagView(List<Tag> userTags)
+        public ActionResult TagView(string userID)
         {
             GetUser();
+
+            User user = userSql.GetUserByID(userID);
+            List<Tag> userTags = user.Tags();
 
             return View("ManageTags", userTags);
         }

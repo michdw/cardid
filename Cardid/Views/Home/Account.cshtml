@@ -17,7 +17,7 @@
 </div>
 
 <div>
-    @Html.ActionLink(Model.Tags().Count.ToString() + "Tags", "TagView", "Deck", new { userTags = Model.Tags() }, null)
+    @Html.ActionLink(Model.Tags().Count.ToString() + "Tags", "TagView", "Deck", new { userID = Model.UserID }, null)
 </div>
 
 <div>
