@@ -370,7 +370,7 @@ namespace Cardid.Controllers
             User user = userSql.GetUserByID(userID);
             List<Tag> userTags = user.Tags();
 
-            return View("ManageTags", userTags);
+            return View("TagView", userTags);
         }
 
     }

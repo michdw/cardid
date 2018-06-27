@@ -30,9 +30,8 @@
         @if (Session["currentdeck"] != null)
         {
             Deck currentDeck = Session["currentDeck"] as Deck;
-            string deckName = currentDeck.DeckName;
 
-            @Html.ActionLink("Return to deck: " + deckName, "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
+            @Html.ActionLink("Return to deck", "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
         }
         else
         {

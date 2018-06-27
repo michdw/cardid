@@ -27,10 +27,10 @@ namespace Cardid.DAL
         private string getOtherTagsByPopularity = "SELECT tags.TagID FROM[tags] "
             + "FULL OUTER JOIN[deck_tag] ON deck_tag.TagID = tags.TagID "
             + "WHERE tags.TagID NOT IN(SELECT TagID FROM[deck_tag] WHERE deck_tag.DeckID = @deckID) "
-            + "GROUP BY DeckID, tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
+            + "GROUP BY tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
         private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
         private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
-            + "WHERE deck_tag.DeckID = @deckID";
+            + "WHERE deck_tag.DeckID = @deckID ORDER BY tags.TagName ASC";
         private string getTagsByUserID = "SELECT * FROM [tags] WHERE UserID = @userID";
         private string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
         private string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";

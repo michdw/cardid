@@ -5,6 +5,9 @@
 }
 
 <h1 class="view-title">Add Cards to Deck: @Model.DeckName</h1>
+
+@Html.ActionLink("Go back to deck", "EditDeck", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+
 <div class="flex flex-left">
     @if (Model.AvailableCards().Count == 0)
     {
@@ -20,6 +23,15 @@
                 <div class="card-listing">@thisCard.Front</div>
 
                 <div class="card-listing">@thisCard.Back</div>
+
+                <div class="card-decks">
+                    @for (int i = 0; i < thisCard.Decks().Count; i++)
+                    {
+                        <p class="small-type at-bottom">Currently in:</p>
+                        Deck deck = thisCard.Decks()[i];
+                        @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+                    }
+                </div>
 
                 @Html.ActionLink("Add to deck", "ChooseDecksSubmit", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn card-button" })
 

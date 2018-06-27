@@ -5,7 +5,7 @@
 }
 
 
-
+<h2 class="view-title">Edit Your Deck</h2>
 <h1 class="view-title">@Model.DeckName</h1>
 
 <div class="flex flex-left">
@@ -56,7 +56,11 @@
 
                 @foreach (Tag tag in Model.Tags())
                 {
-                    @Html.ActionLink(tag.TagName, "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag active-tag" });
+                    <span>
+                        <span class="tag active-tag">@tag.TagName</span>
+                        @Html.ActionLink("X", "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, null)
+                        <span class="tab"></span>
+                    </span>
                 }
             </div>
         }
@@ -126,7 +130,7 @@
             <div class="card-bothsides">
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
-                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn", @id="edit-link" })
+                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn", @id = "edit-link" })
                 @Html.ActionLink("X", "RemoveCardFromDeck", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "remove-card" })
             </div>
         }

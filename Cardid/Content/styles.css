@@ -22,6 +22,10 @@ a {
     text-align: right;
 }
 
+.at-bottom {
+    margin-bottom: 0;
+}
+
 .at-top {
     margin-top: 0;
 }
@@ -388,6 +392,8 @@ textarea {
 .card-listing {
     background: #fff;
     opacity: .7;
+    margin-bottom: 8px;
+    padding: 4px;
 }
 
 .card-options {
@@ -401,11 +407,16 @@ textarea {
 }
 
 .deck-incard {
+    display: inline-block;
     background: rgba(0,0,0,.15);
     color: #fff;
     padding: 4px 12px;
     margin: 8px;
     margin-left: 0;
+}
+
+.deck-incard:hover {
+    background: rgba(0,0,0,.25);
 }
 
 .edit-field {
@@ -475,13 +486,30 @@ textarea {
 }
 
 .editdeck-left {
+    width: 30%;
+    min-width: 250px;
 }
 
 .editdeck-right {
-    min-width: 60%;
+    width: 60%;
+    min-width: 250px;
 }
 
 /* tags */
+
+.tagview {
+    clear: both;
+    overflow: auto;
+}
+
+.tagview-pop {
+    float: left;
+}
+
+.tagview-alph {
+    float: right;
+    margin-right: 10%;
+}
 
 .tag-container {
     clear: both;
