@@ -222,11 +222,11 @@ namespace Cardid.Controllers
 
         public ActionResult DeleteTag(string tagID)
         {
-            GetUser();
+            string userID = GetUser();
 
             tagSql.DeleteTag(tagID);
             TempData["tag-deleted"] = true;
-            return RedirectToAction("TagView");
+            return RedirectToAction("TagView", new { userID });
         }
 
 
