@@ -85,6 +85,7 @@ namespace Cardid.Controllers
                 return View("Login", user);
             }
 
+            user.Email = user.Email.ToLower();
             User currentUser = userSql.GetUserByEmail(user.Email);
 
             if (currentUser.Email == null)
@@ -127,6 +128,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CompleteRegister(User newUser)
         {
+            newUser.Email = newUser.Email.ToLower();
             bool emailExists = userSql.CheckForEmail(newUser.Email);
             bool nameExists = userSql.CheckForName(newUser.DisplayName);
             if (emailExists)
@@ -219,6 +221,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(User user)
         {
+            user.Email = user.Email.ToLower();
             string userID = GetUser();
             User oldInfo = userSql.GetUserByID(userID);
             bool emailExists = userSql.CheckForEmail(user.Email);
@@ -234,6 +237,7 @@ namespace Cardid.Controllers
                 TempData["change-result"] = "Invalid input: That email is associated with a different user.";
                 return View("ChangeUserInfo", oldInfo);
             }
+
             userSql.UpdateEmail(user.Email, userID);
             user = userSql.GetUserByID(userID);
 

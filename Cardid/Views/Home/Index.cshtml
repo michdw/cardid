@@ -8,22 +8,20 @@
 
 @if (TempData["new-user"] != null)
 {
-    <div class="view-header">
-        <div>
-            <h2 class="view-title">Welcome, @TempData["new-user"].ToString()</h2>
-            <p>
-                Here's how you can get started:
-            </p>
+    <div class="home-header">
+        <div class="home-headcolumn align-right">
+            <p class="bold large-type">Welcome, @TempData["new-user"].ToString()!</p>
+            <p>Here's how you can get started:</p>
         </div>
-        <div>
+        <div class="home-headcolumn">
             <p>
-                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", new { @class = "link-inline-dark" })
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", new { @class = "link-inline-dark" })
             </p>
             <p>
-                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", new { @class = "link-inline-dark" })
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", new { @class = "link-inline-dark" })
             </p>
             <p>
-                &#9679; @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " View and study decks that other users have shared", "Index", "Deck", new { @class = "link-inline-dark" })
+                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " View and study decks that other users have shared", "Index", "Deck", new { @class = "link-inline-dark" })
             </p>
         </div>
     </div>
