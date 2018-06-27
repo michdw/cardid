@@ -19,9 +19,9 @@ namespace Cardid.DAL
         private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID";
         private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
-        private string mostActiveDecks = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
+        private string mostActiveDecks = "SELECT TOP 15 DeckID, COUNT(DeckID) AS Count FROM[sessions] "
             + "GROUP BY DeckID ORDER BY COUNT(DeckID) DESC";
-        private string mostActiveUsers = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
+        private string mostActiveUsers = "SELECT TOP 15 UserID, COUNT(UserID) AS Count FROM[sessions] "
             + "GROUP BY UserID ORDER BY COUNT(UserID) DESC";
 
 

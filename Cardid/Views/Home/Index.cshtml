@@ -60,52 +60,88 @@ else if (TempData["user-login"] != null)
 
     @if (Session["userid"] != null)
     {
-        <div class="home-column">
+        <div class="leaderboard">
             <h2 class="view-title">Most Active Users</h2>
-            <span class="small-type">
-                by study sessions logged
-            </span>
-            @foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
-            {
-                <p>
-                    <span class="left-span">
-                        @kvp.Key
-                    </span>
-                    <span class="right-span">
-                        @kvp.Value
-                    </span>
-                </p>
-            }
+            <p class="small-type">
+                by study sessions logged:
+            </p>
+            <div class="leaderboard-list">
+                @foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
+                {
+                    <p class="leaderboard-listing">
+                        <span class="listing-left">
+                            @kvp.Key
+                        </span>
+                        <span class="listing-right">
+                            @kvp.Value
+                        </span>
+                    </p>
+                }
+            </div>
         </div>
 
 
-        <div class="home-column">
+        <div class="leaderboard">
             <h2 class="view-title">Most Popular Decks</h2>
-            <span class="small-type">
-                by number of times studied
-            </span>
-            @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
-            {
-                Deck deck = kvp.Key;
-                <p>
-                    <span class="left-span">
-                        @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
-                    </span>
-                    <span class="right-span">
-                        @kvp.Value
-                    </span>
-                </p>
-            }
+            <p class="small-type">
+                by number of times studied:
+            </p>
+            <div class="leaderboard-list">
+                @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
+                {
+                    Deck deck = kvp.Key;
+                    <p class="leaderboard-listing">
+                        <span class="listing-left">
+                            @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
+                        </span>
+                        <span class="listing-right">
+                            @kvp.Value
+                        </span>
+                    </p>
+                }
+            </div>
         </div>
 
 
-
-        <div class="home-column">
+        <div class="leaderboard">
             <h2 class="view-title">Most Popular Tags</h2>
-            @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
-            {
-                <p>@kvp.Key.TagName / @kvp.Value</p>
-            }
+            <p class="small-type">
+                by number of decks:
+            </p>
+            <div class="leaderboard-list">
+                @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
+                {
+                    <p class="leaderboard-listing">
+                        <span class="listing-left">
+                            @Html.ActionLink(kvp.Key.TagName, "SearchDeckTags", "Deck", new { searchString = kvp.Key.TagName }, new { @class = "link-inline" })
+                        </span>
+                        <span class="listing-right">
+                            @kvp.Value
+                        </span>
+                    </p>
+                }
+            </div>
+        </div>
+
+
+        <div class="tag-leaderboard">
+            <h2 class="view-title">Most Popular Tags</h2>
+            <p class="small-type">
+                by number of decks:
+            </p>
+            <div class="leaderboard-list">
+                @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
+                {
+                    <div class="tag-listing">
+                        <span class="tag-listing-left">
+                            @Html.ActionLink(kvp.Key.TagName, "SearchDeckTags", "Deck", new { searchString = kvp.Key.TagName }, new { @class = "link-inline" })
+                        </span>
+                        <span class="tag-listing-right">
+                            @kvp.Value
+                        </span>
+                    </div>
+                }
+            </div>
         </div>
 
 

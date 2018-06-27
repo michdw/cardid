@@ -27,6 +27,7 @@ namespace Cardid.Controllers
         {
             Session["anon"] = "Home";
 
+            //leaderboard
             Dictionary<int, int> activeUsersSql = studySql.MostActiveUsers();
             Dictionary<string, int> activeUsers = new Dictionary<string, int>();
             foreach (KeyValuePair<int, int> kvp in activeUsersSql)
@@ -49,12 +50,12 @@ namespace Cardid.Controllers
 
             List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
             Dictionary<Tag, int> popularTags = new Dictionary<Tag, int>();
-            foreach (Tag tag in popularTagsSql)
+            for (int i = 0; i < 15; i++)
             {
+                Tag tag = popularTagsSql[i];
                 int decksUsing = tag.Decks().Count;
                 popularTags.Add(tag, decksUsing);
             }
-
 
             Stats stats = new Stats
             {

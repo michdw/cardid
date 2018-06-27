@@ -5,24 +5,29 @@
 }
 
 
-<h2 class="view-title">Edit Your Deck</h2>
-<h1 class="view-title">@Model.DeckName</h1>
+<h2 class="view-title">
+    Edit Your Deck |
+    <span class="large-type">
+        @Model.DeckName
+    </span>
+</h2>
+
 
 <div class="flex flex-left">
 
     <div class="editdeck-left">
 
         <div>
-            <div class="option">
+            <div>
                 @Html.ActionLink("Back to decks", "Index", "Deck", null, new { @class = "btn main-btn" })
             </div>
 
-            <div class="option">
+            <div>
                 @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
                 @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
             </div>
 
-            <div class="option">
+            <div>
                 @if (Model.IsPublic == false)
                 {
                     <p>This deck is visible only to you.</p>
@@ -35,7 +40,7 @@
                 }
             </div>
 
-            <div class="option">
+            <div>
 
                 @using (Html.BeginForm("ChangeDeckName", "Deck"))
                 {
@@ -48,7 +53,7 @@
         </div>
     </div>
 
-    <div class="editdeck-right">
+    <div class="editdeck-right module">
         @if (Model.Tags().Count > 0)
         {
             <div class="tag-container">
@@ -90,7 +95,7 @@
         </div>
 
 
-        <div class="option">
+        <div>
             <h4 class="bold">Create a new tag for this deck:</h4>
 
             @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
@@ -115,10 +120,10 @@
     <div class="container-header">
 
         <h2 class="view-title">Cards in this deck:</h2>
-        <div class="option">
+        <div>
             @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
         </div>
-        <div class="option">
+        <div>
             @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
         </div>
     </div>
@@ -142,12 +147,12 @@ else
         Currently no cards in this deck.
         @Html.ActionLink("Add some here", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </p>
-    <div class="option">
+    <div>
         @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </div>
 }
 
-<div class="option">
+<div>
     <button class="btn delete-btn delete-init">Delete This Deck</button>
 
     @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))

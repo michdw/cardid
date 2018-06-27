@@ -4,10 +4,27 @@
     ViewBag.Title = "CardsInDeck";
 }
 
-<h1 class="view-title">View Cards In Deck: @Model.DeckName</h1>
-<p>Shared by @Model.Creator().DisplayName</p>
+<h2 class="view-title">
+    View Cards in Deck |
+    <span class="large-type">
+        @Model.DeckName
+    </span>
+</h2>
 
-<div class="option">
+<p>This deck was shared by <strong>@Model.Creator().DisplayName</strong></p>
+
+@if (Model.Tags().Count > 0)
+{
+    <div>
+        <p class="at-bottom">Tags with this deck:</p>
+        @foreach (Tag tag in Model.Tags())
+        {
+            @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+        }
+    </div>
+}
+
+<div>
     @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
     @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
 </div>
@@ -16,17 +33,10 @@
     @foreach (Card thisCard in Model.Cards())
     {
         <div class="card-bothsides">
-            <div class="front-field">@thisCard.Front</div>
-            <div class="back-field">@thisCard.Back</div>
+            <div class="card-field">@thisCard.Front</div>
+            <div class="card-field">@thisCard.Back</div>
             @Html.ActionLink("Add to a different deck", "ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn card-button" })
         </div>
     }
 </div>
 
-<div class="tag-container">
-    <h4 class="bold">Tags</h4>
-    @foreach (Tag tag in Model.Tags())
-    {
-        <span class="deck-tag">@tag.TagName</span>
-    }
-</div>

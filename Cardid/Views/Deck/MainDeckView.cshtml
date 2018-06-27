@@ -5,22 +5,39 @@
     List<Tag> tagsByName = ViewBag.TagsByName;
     List<Tag> tagsByPopularity = ViewBag.TagsByPopularity;
     string userID = ViewBag.UserID;
-    int counter = 0;
+    bool userDecks = false;
+    bool publicDecks = false;
+
+    foreach (Deck deck in Model)
+    {
+        if (deck.UserID == userID)
+        {
+            userDecks = true;
+        }
+        if (deck.UserID != userID && deck.Cards().Count > 0)
+        {
+            publicDecks = true;
+        }
+    }
 }
 
 
 
 @if (ViewBag.SearchName != null)
 {
-    <h1 class="view-title">Search results for "@ViewBag.SearchName":</h1>
+    <h1 class="view-title">
+        Search results for "@ViewBag.SearchName":
+    </h1>
 }
 
 else if (ViewBag.SearchTag != null)
 {
-    <h1 class="view-title" : inline-block">
-        Tag Search Results:
-    </h1>
-    <span class="tag active-tag">@ViewBag.SearchTag</span>
+    <h2 class="view-title" : inline-block">
+        Tag search results for:
+        <span class="large-type">
+            @ViewBag.SearchTag
+        </span>
+    </h2>
 }
 
 else
@@ -31,12 +48,13 @@ else
 
 <div class="flex flex-baseline">
     <div class="deck-column">
-        <div class="option">
+        <div>
+            @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
+            {
+                @Html.ActionLink("View all available decks", "Index", "Deck", null, new { @class="btn main-btn"})
+            }
 
             @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
-        </div>
-
-        <div class="option">
 
             @using (Html.BeginForm("SearchDeckNames", "Deck"))
             {
@@ -45,8 +63,8 @@ else
             }
         </div>
 
-        <div class="option">
-            <h4 class="bold">Search decks by tag</h4>
+        <div class="option module">
+            <p class="bold large-type tagsearch-heading">Search decks by tag</p>
 
             <div class="tagviews">
                 <p class="tagview-pop bold">sort by popularity</p>
@@ -79,150 +97,87 @@ else
             }
 
         </div>
-
     </div>
+
 
     <div class="deck-column">
-        <div class="deck-list">
+
+        @if (Model.Count == 0 || (userDecks == false && publicDecks == false))
+        {
+            if (ViewBag.SearchName != null)
+            {
+                <div class="module">
+                    No decks found matching that name.
+                </div>
+            }
+            else if (ViewBag.SearchTag != null)
+            {
+                <div class="module">
+                    No decks found with that tag.
+                </div>
+            }
+        }
+
+
+        @if (userDecks)
+        {
             <h2 class="view-title deck-heading">Your decks</h2>
 
-            @if (Model.Count > 0)
+            foreach (Deck deck in Model)
             {
-
-                foreach (Deck deck in Model)
-                {
-                    if (deck.UserID == userID)
-                    {
-                        counter++;
-                        <div class="deck-listing">
-
-                            @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
-
-                            <div class="deck-info">
-                                <span class="small-type">
-                                    @deck.Cards().Count cards
-                                </span>
-                            </div>
-                            @if (deck.Cards().Count > 0)
-                            {
-                                @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
-                                @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
-                            }
-                        </div>
-                    }
-                }
-                if (counter == 0)
-                {
-                    if (ViewBag.SearchName != null)
-                    {
-                        <div class="deck-listing">
-                            No decks matching that name.
-                        </div>
-                    }
-                    else if (ViewBag.SearchTag != null)
-                    {
-                        <div class="deck-listing">
-                            No decks with that tag.
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="deck-listing">
-                            <span>You don't have any decks yet...</span>
-                            @Html.ActionLink("Create one here!", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn float-right" })
-                        </div>
-                    }
-                }
-            }
-            else
-            {
-                if (ViewBag.SearchName != null)
+                if (deck.UserID == userID)
                 {
                     <div class="deck-listing">
-                        No decks matching that name.
-                    </div>
-                }
-                else if (ViewBag.SearchTag != null)
-                {
-                    <div class="deck-listing">
-                        No decks with that tag.
+
+                        @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
+
+                        <div class="deck-info">
+                            <span class="small-type">
+                                @deck.Cards().Count cards
+                            </span>
+                        </div>
+                        @if (deck.Cards().Count > 0)
+                        {
+                            @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
+                            @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                        }
                     </div>
                 }
             }
-        </div>
+        }
 
 
-        <div class="deck-list">
+        @if (publicDecks)
+        {
             <h2 class="view-title deck-heading">Public decks</h2>
-
-            @if (Model.Count > 0)
+            foreach (Deck deck in Model)
             {
-
-                counter = 0;
-                foreach (Deck deck in Model)
-                {
-                    if (deck.UserID != userID)
-                    {
-                        counter++;
-                        <div class="deck-listing">
-
-                            @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
-
-                            <div class="deck-info">
-                                <p class="small-type narrow-line">
-                                    @deck.Cards().Count cards
-                                </p>
-                                <p class="narrow-line">
-                                    <span class="small-type">Shared by</span> @deck.Creator().DisplayName
-                                </p>
-                            </div>
-
-                            @if (deck.Cards().Count > 0)
-                            {
-                                <div>
-                                    @Html.ActionLink("Study Back->Front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
-                                    @Html.ActionLink("Study Front->Back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
-                                </div>
-                            }
-                        </div>
-                    }
-                }
-                if (counter == 0)
-                {
-                    if (ViewBag.SearchName != null)
-                    {
-                        <div class="deck-listing">
-                            No public decks matching that name.
-                        </div>
-                    }
-                    else if (ViewBag.SearchTag != null)
-                    {
-                        <div class="deck-listing">
-                            No public decks with that tag.
-                        </div>
-                    }
-                }
-            }
-            else
-            {
-                if (ViewBag.SearchName != null)
+                if (deck.UserID != userID)
                 {
                     <div class="deck-listing">
-                        No public decks matching that name.
-                    </div>
-                }
-                else if (ViewBag.SearchTag != null)
-                {
-                    <div class="deck-listing">
-                        No public decks with that tag.
+
+                        @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
+
+                        <div class="deck-info">
+                            <p class="small-type narrow-line">
+                                @deck.Cards().Count cards
+                            </p>
+                            <p class="narrow-line">
+                                <span class="small-type">Shared by</span> @deck.Creator().DisplayName
+                            </p>
+                        </div>
+
+                        <div>
+                            @Html.ActionLink("Study Back->Front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
+                            @Html.ActionLink("Study Front->Back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                        </div>
                     </div>
                 }
             }
-        </div>
+        }
+
     </div>
 </div>
-
-
 
 
 <script type="text/javascript" src="../../Content/deckTags.js"></script>

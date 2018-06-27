@@ -30,7 +30,7 @@ namespace Cardid.DAL
             + "GROUP BY tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
         private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
         private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
-            + "WHERE deck_tag.DeckID = @deckID ORDER BY tags.TagName ASC";
+            + "WHERE deck_tag.DeckID = @deckID ORDER BY tags.TagName DESC";
         private string getTagsByUserID = "SELECT * FROM [tags] WHERE UserID = @userID";
         private string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
         private string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";
