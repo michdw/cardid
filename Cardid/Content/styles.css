@@ -1,4 +1,16 @@
 ﻿
+/*imported fonts*/
+
+@font-face {
+    font-family: icons;
+    src: url('Icomoon/fonts/icomoon.ttf');
+}
+
+.icons {
+    font-family: icons;
+}
+
+
 /* general styles */
 
 body {

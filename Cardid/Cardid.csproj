@@ -182,6 +182,12 @@
     <Content Include="Content\deckTags.js" />
     <Content Include="Content\editCard.js" />
     <Content Include="Content\editDeck.js" />
+    <Content Include="Content\Icomoon\demo-files\demo.css" />
+    <Content Include="Content\Icomoon\demo-files\demo.js" />
+    <Content Include="Content\Icomoon\demo.html" />
+    <Content Include="Content\Icomoon\fonts\icomoon.svg" />
+    <Content Include="Content\Icomoon\Read Me.txt" />
+    <Content Include="Content\Icomoon\style.css" />
     <Content Include="Content\studySession.js" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
@@ -190,6 +196,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Icomoon\fonts\icomoon.eot" />
+    <Content Include="Content\Icomoon\fonts\icomoon.ttf" />
+    <Content Include="Content\Icomoon\fonts\icomoon.woff" />
+    <Content Include="Content\Icomoon\selection.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
