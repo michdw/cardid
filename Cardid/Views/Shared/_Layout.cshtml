@@ -34,7 +34,7 @@
             <div class="top-menu">
                 @Html.ActionLink("Home", "Index", "Home", null, new { @class = "header-option" })
                 @Html.ActionLink("Decks", "Index", "Deck", null, new { @class = "header-option" })
-                @Html.ActionLink("Cards", "Index", "Card", null, new { @class = "header-option" })
+                @Html.ActionLink("Search", "Index", "Card", null, new { @class = "header-option" })
                 @if (Session["userid"] == null)
         {
             @Html.ActionLink("Login", "Login", "Home", null, new { @class = "header-option" })

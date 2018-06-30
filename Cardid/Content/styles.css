@@ -8,6 +8,8 @@
 
 .icons {
     font-family: icons;
+    display: inline-block;
+    transform: translateY(1px);
 }
 
 
@@ -217,7 +219,7 @@ a {
     position: absolute;
     top: 0;
     left: 0;
-    padding: .5em 1em;
+    padding: 1em 2em;
     background: #333;
     color: #fff;
     font-size: .9em;
@@ -271,6 +273,7 @@ textarea {
     cursor: pointer;
     user-select: none;
     display: inline-block;
+    margin-top: 1em;
     padding: 8px 12px;
     font-size: 14px;
     border-radius: 4px;
@@ -288,14 +291,13 @@ textarea {
     margin-bottom: 0;
 }
 
-.top-btn, .main-btn, .card-button {
-    margin-top: 1em;
+.top-btn, .main-btn {
     background: #333;
     color: #fff;
     border: 1px solid #fff;
 }
 
-    .top-btn:hover, .main-btn:hover, .card-button:hover {
+    .top-btn:hover, .main-btn:hover {
         background: #fff;
         color: #333;
         border: 1px solid #333;
@@ -397,7 +399,6 @@ textarea {
 .tag-listing-left {
     margin-left: 1em;
     margin-right: .5em;
-
 }
 
 .tag-listing-right {
@@ -433,13 +434,10 @@ textarea {
 .card-listing {
     background: #fff;
     opacity: .7;
-    margin-bottom: 8px;
     padding: 4px;
 }
 
 .card-options {
-    clear: both;
-    overflow: auto;
     margin-bottom: 1em;
 }
 
@@ -487,19 +485,20 @@ textarea {
         margin-top: 0;
     }
 
-.deck-info {
-    padding: .5em .6em;
-    margin-top: 4px;
-}
-
 .deck-listing {
+    display: block;
     clear: both;
     overflow: auto;
     background: rgba(0,0,0,.3);
     border: 1px solid rgba(255,255,255,.3);
     color: #fff;
     margin-top: 1em;
-    padding: 1em;
+    padding: 1em 1.5em;
+}
+
+.deck-listing:hover {
+    background: rgba(0,0,0,.44);
+    cursor: pointer;
 }
 
     .deck-listing:last-of-type {
@@ -507,26 +506,16 @@ textarea {
     }
 
 .deckname-listing {
+    display: inline-block;
+    margin-bottom: 1em;
     font-size: 1.2em;
-    padding: .5em;
-    margin: 0;
-    border-radius: 4px;
 }
 
-    .deckname-listing:hover {
-        background: rgba(0,0,0,.3);
-    }
 
-.remove-card {
-}
-
-    .remove-card:hover {
-        color: #993737;
-    }
 
 .delete-submit {
     display: none;
-    padding: 10px;
+    padding: 1em 2em;
     background: rgba(0,0,0,.5);
     color: #fff;
 }
@@ -578,14 +567,30 @@ textarea {
     padding: 4px;
 }
 
-.active-tag {
-    background: #394272;
+.active-tag, .search-tag {
+    background: #000;
+}
+
+.search-tag:hover {
+    background: #fff;
+    color: #000;
 }
 
 .inactive-tag {
-    background: #777;
+    background: #555;
 }
 
+    .inactive-tag:hover {
+        background: #333;
+    }
+
+.delete-tag {
+    color: #ccc;
+}
+
+    .delete-tag:hover {
+        color: #fff;
+    }
 
 /* study session */
 

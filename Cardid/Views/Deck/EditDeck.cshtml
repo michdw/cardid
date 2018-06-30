@@ -15,28 +15,73 @@
 
 <div class="flex flex-left">
 
+
     <div class="editdeck-left">
+
+        <a href="@Url.Action("CreateCardInitD", "Card", new { deckID = Model.DeckID })" , class="btn main-btn">
+            <span class="icons">
+                &#xe900;
+            </span>
+            <span class="tab"></span>
+            Add a card to this deck
+        </a>
 
         <div>
             <div>
-                @Html.ActionLink("Back to decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+                <a href="@Url.Action("Index", "Deck")" class="btn main-btn">
+                    <span class="icons">
+                        &#xe922;
+                    </span>
+                    Back to decks
+                </a>
             </div>
 
             <div>
-                @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
-                @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
+                <div>
+                    Study:
+                </div>
+                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+                    <span class="icons">
+                        &#xe915;&nbsp;
+                    </span>
+                    Front first
+                </a>
+                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
+                    <span class="icons">
+                        &#xe915;&nbsp;
+                    </span>
+                    Back first
+                </a>
             </div>
 
             <div>
                 @if (Model.IsPublic == false)
                 {
-                    <p>This deck is visible only to you.</p>
-                    @Html.ActionLink("Make public", "MakeDeckPublic", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                    <p>
+                        <span class="icons">
+                            &#xe910;
+                        </span>
+                        This deck is visible only to you.
+                    </p>
+                    <a href="@Url.Action("MakeDeckPublic", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
+                        <span class="icons">&#xe911;</span>
+                        <span class="tab"></span>
+                        Make public
+                    </a>
                 }
                 else
                 {
-                    <p>This deck is visible to everyone.</p>
-                    @Html.ActionLink("Make private", "MakeDeckPrivate", "Deck", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+                    <p>
+                        <span class="icons">
+                            &#xe911;
+                        </span>
+                        This deck is visible to everyone.
+                    </p>
+                    <a href="@Url.Action("MakeDeckPrivate", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
+                        <span class="icons">&#xe910;</span>
+                        <span class="tab"></span>
+                        Make private
+                    </a>
                 }
             </div>
 
@@ -44,9 +89,9 @@
 
                 @using (Html.BeginForm("ChangeDeckName", "Deck"))
                 {
+                    <button type="submit" class="btn main-btn">Rename deck</button>
                     @Html.HiddenFor(m => m.DeckID)
                     @Html.TextBoxFor(m => m.DeckName)
-                    <button type="submit" class="btn main-btn">Rename deck</button>
                 }
 
             </div>
@@ -63,7 +108,11 @@
                 {
                     <span>
                         <span class="tag active-tag">@tag.TagName</span>
-                        @Html.ActionLink("X", "RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, null)
+                        <a href="@Url.Action("RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID })">
+                            <span class="icons delete-tag">
+                                &#xe904;
+                            </span>
+                        </a>
                         <span class="tab"></span>
                     </span>
                 }
@@ -105,7 +154,11 @@
                 @Html.HiddenFor(m => Model.DeckID)
 
                 <button type="submit" class="btn main-btn">
-                    Add new tag
+                    <span class="icons">
+                        &#xe900;
+                    </span>
+                    <span class="tab"></span>
+                    Add tag
                 </button>
             }
         </div>
@@ -121,10 +174,22 @@
 
         <h2 class="view-title">Cards in this deck:</h2>
         <div>
-            @Html.ActionLink("Find more cards to add", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+            <a href="@Url.Action("ChooseCardsInit", "Card", new { deckID = Model.DeckID })" class="btn main-btn">
+                <span class="icons">
+                    &#xe90f;
+                </span>
+                <span class="tab"></span>
+                Find more cards to add
+            </a>
         </div>
         <div>
-            @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
+            <a href="@Url.Action("CreateCardInitD", "Card", new { deckID = Model.DeckID })" class="btn main-btn">
+                <span class="icons">
+                    &#xe900;
+                </span>
+                <span class="tab"></span>
+                Create card for this deck
+            </a>
         </div>
     </div>
 
@@ -135,8 +200,20 @@
             <div class="card-bothsides">
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
-                @Html.ActionLink("Edit this card", "EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "btn main-btn", @id = "edit-link" })
-                @Html.ActionLink("X", "RemoveCardFromDeck", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID }, new { @class = "remove-card" })
+                <a href="@Url.Action("EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
+                    <span class="icons">
+                        &#xe90d;
+                    </span>
+                    <span class="tab"></span>
+                    Edit this card
+                </a>
+                <a href="@Url.Action("RemoveCardFromDeck", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
+                    <span class="icons">
+                        &#xe914;
+                    </span>
+                    <span class="tab"></span>
+                    Remove from this deck
+                </a>
             </div>
         }
     </div>
@@ -148,18 +225,35 @@ else
         @Html.ActionLink("Add some here", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </p>
     <div>
-        @Html.ActionLink("Create a new card for this deck", "CreateCardInitD", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
     </div>
 }
 
 <div>
-    <button class="btn delete-btn delete-init">Delete This Deck</button>
+    <button class="btn delete-btn delete-init">
+        <span class="icons">
+            &#xe914;
+        </span>
+        <span class="tab"></span>
+        Delete This Deck
+    </button>
 
     @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
     {
-        <p>Deleting a deck will also delete all cards that exist only in that deck. Continue?</p>
-        <button type="submit" class="btn delete-btn">Confirm Delete</button>
-        <button type="reset" class="btn main-btn cancel-btn">Cancel</button>
+        <span>Deleting a deck will also delete all cards that exist only in that deck. Continue?</span>
+        <div>
+            <button type="reset" class="btn main-btn">
+                <span class="icons">
+                    &#xe922;
+                </span>
+                Cancel
+            </button>
+            <button type="submit" class="btn delete-btn">
+                <span class="icons">
+                    &#xe914;
+                </span>
+                Confirm Delete
+            </button>
+        </div>
     }
 </div>
 

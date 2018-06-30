@@ -2,7 +2,7 @@
 @model List<Card>
 @{
     ViewBag.Title = "MainCardView";
-    int userDecksCount = ViewBag.DecksCount;
+    int userDecksCount = (int)TempData["deckscount"];
 }
 
 
@@ -25,10 +25,6 @@ else
 
     <div class="card-column">
 
-        <div>
-            @Html.ActionLink("Create a new card", "CreateCardInit", "Card", null, new { @class = "btn main-btn" })
-        </div>
-
         @if (Model.Count > 0)
         {
             <div>
@@ -38,11 +34,28 @@ else
                         <input type="text" name="searchString" />
                     </div>
                     <div>
-                        <button type="submit" class="btn main-btn">Search for text in cards</button>
+                        <button type="submit" class="btn main-btn">
+                            <span class="icons">
+                                &#xe90f;
+                            </span>
+                            <span class="tab"></span>
+                            Search for text in cards
+                        </button>
                     </div>
                 }
             </div>
         }
+
+        <div>
+            <a href="@Url.Action("CreateCardInit", "Card")" class="btn main-btn">
+                <span class="icons">
+                    &#xe900;
+                </span>
+                <span class="tab"></span>
+                Create a new card
+            </a>
+        </div>
+
     </div>
 </div>
 
@@ -59,7 +72,7 @@ else
         {
             <h4 class="bold">No cards found containing "@ViewBag.SearchString"</h4>
         }
-        @Html.ActionLink("View all your cards", "Index", "Card", null, new { @class = "btn main-btn" })
+
     </div>
 }
 
@@ -74,13 +87,26 @@ else
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
                 <div class="card-options">
-                    @Html.ActionLink("Edit", "EditCardInit", "Card", new { cardID = thisCard.CardID }, new { @class = "btn float-left card-button", @id = "edit-link" })
-                    @{
-                        int decks = thisCard.Decks().Count;
+                    @if (thisCard.UserID == Session["userid"].ToString())
+                    {
+                        <div>
+                            <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
+                                <span class="icons">&#xe90d;</span>
+                                <span class="tab"></span>
+                                Edit card
+                            </a>
+                        </div>
                     }
+
                     @if (userDecksCount > thisCard.Decks().Count)
                     {
-                        @Html.ActionLink("Add to decks", "ChooseDecksInit", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn float-right card-button" })
+                        <div>
+                            <a href="@Url.Action("ChooseDecksInit", "Deck", new { cardID = thisCard.CardID })" class="btn main-btn">
+                                <span class="icons">&#xe90e;</span>
+                                <span class="tab"></span>
+                                Add to your decks
+                            </a>
+                        </div>
                     }
                 </div>
                 <div class="card-decks">
@@ -88,7 +114,16 @@ else
                     {
                         <p class="small-type at-bottom">Currently in:</p>
                         Deck deck = thisCard.Decks()[i];
-                        @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+                        if (deck.UserID == Session["userid"].ToString())
+                        {
+                            @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+                        }
+
                     }
                 </div>
             </div>

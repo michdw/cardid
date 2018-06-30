@@ -6,78 +6,139 @@
 @if (TempData["card-added"] != null)
 {
     Card card = TempData["card-added"] as Card;
-    <div class="view-msg">Card for successfully added to deck</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Card successfully added to deck
+    </div>
+}
+
+@if (TempData["card-created"] != null)
+{
+    Card card = TempData["card-created"] as Card;
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Card created successfully
+    </div>
 }
 
 @if (TempData["card-removed"] != null)
 {
-    <div class="view-msg long-msg">Card removed from deck, but kept in your user collection</div>
+    <div class="view-msg long-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Card removed from deck, but kept in your user collection
+    </div>
 }
 
 @if (TempData["card-deleted"] != null)
 {
-    <div class="view-msg">Card has been deleted</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Card has been deleted
+    </div>
 }
 
 @if (TempData["deck-created"] != null)
 {
-    <div class="view-msg">New deck created</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        New deck created
+    </div>
 }
 
 @if (TempData["deck-deleted"] != null)
 {
-    <div class="view-msg">Deck has been deleted</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Deck has been deleted
+    </div>
 }
 
 @if (TempData["deckname-changed"] != null)
 {
-    <div class="view-msg">Deck name has been changed</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Deck name has been changed
+    </div>
 }
 
 @if (TempData["deckname-missing"] != null)
 {
-    <div class="view-msg">Please enter a name for your deck</div>
+    <div class="view-msg">
+        <span class="icons">&#xe917;</span>
+        <span class="tab"></span>
+        Please enter a name for your deck
+    </div>
 }
 
 @if (TempData["tag-added"] != null)
 {
-    <div class="view-msg">Tag successfully added to your deck</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Tag successfully added to your deck
+    </div>
 }
 
 @if (TempData["tag-created"] != null)
 {
-    <div class="view-msg">Tag has been created</div>
+
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Tag has been created
+    </div>
 }
 
 @if (TempData["tag-deleted"] != null)
 {
-    <div class="view-msg">Tag has been deleted</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Tag has been deleted
+    </div>
 }
 
 @if (TempData["tag-exists"] != null)
 {
-    <div class="view-msg">The tag already exists</div>
+    <div class="view-msg">
+        <span class="icons">&#xe917;</span>
+        <span class="tab"></span>
+        The tag already exists
+    </div>
 }
 
 @if (TempData["user-login"] != null)
 {
-    <div class="view-msg">Login successful</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Login successful
+    </div>
 }
 else if (TempData["new-user"] != null)
 {
-    <div class="view-msg">Registration successful</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        Registration successful
+    </div>
 }
 
-
-@if (ViewBag.AddedCard != null)
-{
-    Card card = ViewBag.AddedCard;
-    <div class="view-msg">Card for created successfully</div>
-}
 
 @if (ViewBag.LoggedOut == true)
 {
-    <div class="view-msg">You have been logged out</div>
+    <div class="view-msg">
+        <span class="icons">&#xe902;</span>
+        <span class="tab"></span>
+        You have been logged out
+    </div>
 }
 
 

@@ -39,7 +39,7 @@ $(document).ready(function () {
 
     $('.delete-init').on('click', function () {
         $(this).hide();
-        $("html, body").animate({ scrollTop: $(document).height() }, 400);
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
         $('.delete-submit').css('display', 'inline-block');
     });
 

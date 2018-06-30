@@ -31,15 +31,32 @@
         {
             Deck currentDeck = Session["currentDeck"] as Deck;
 
-            @Html.ActionLink("Return to deck", "EditDeck", "Deck", new { deckID = currentDeck.DeckID }, new { @class = "btn main-btn" })
+            <a href="@Url.Action("EditDeck", "Deck", new { deckID = currentDeck.DeckID })" class="btn main-btn">
+                <span class="icons">
+                    &#xe922;&nbsp;
+                </span>
+                Return to deck
+            </a>
         }
         else
         {
-            @Html.ActionLink("Return to cards", "Index", "Card", null, new { @class = "btn main-btn" })
+            <a href="@Url.Action("Index", "Card")" class="btn main-btn">
+                <span class="icons">
+                    &#xe922;
+                </span>
+                Return to cards
+            </a>
         }
 
         <p class="small-type">All changes saved automatically</p>
-        @Html.ActionLink("Delete this card", "DeleteCard", "Card", new { cardID = Model.CardID }, new { @class = "btn delete-btn" })
+
+        <a href="@Url.Action("DeleteCard", "Card", new { cardID = Model.CardID })" class="btn delete-btn">
+            <span class="icons">
+                &#xe914;
+            </span>
+            <span class="tab"></span>
+            Delete this card
+        </a>
 
     </div>
 

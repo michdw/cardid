@@ -4,6 +4,7 @@
     ViewBag.Title = "CardsInDeck";
 }
 
+
 <h2 class="view-title">
     View Cards in Deck |
     <span class="large-type">
@@ -13,20 +14,27 @@
 
 <p>This deck was shared by <strong>@Model.Creator().DisplayName</strong></p>
 
-@if (Model.Tags().Count > 0)
-{
-    <div>
-        <p class="at-bottom">Tags with this deck:</p>
-        @foreach (Tag tag in Model.Tags())
-        {
-            @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
-        }
-    </div>
-}
+<div class="flex flex-center">
 
-<div>
-    @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
-    @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
+    <div class="module">
+
+        <div class="large-type">
+            Study this deck:
+        </div>
+        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+            <span class="icons">
+                &#xe915;&nbsp;
+            </span>
+            Front first
+        </a>
+        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
+            <span class="icons">
+                &#xe915;&nbsp;
+            </span>
+            Back first
+        </a>
+    </div>
+
 </div>
 
 <div class="flex flex-left">
@@ -35,7 +43,13 @@
         <div class="card-bothsides">
             <div class="card-field">@thisCard.Front</div>
             <div class="card-field">@thisCard.Back</div>
-            @Html.ActionLink("Add to a different deck", "ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID }, new { @class = "btn card-button" })
+            <a href="@Url.Action("ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID })" class="btn main-btn">
+                <span class="icons">
+                    &#xe90e;
+                </span>
+                <span class="tab"></span>
+                Add to a different deck
+            </a>
         </div>
     }
 </div>

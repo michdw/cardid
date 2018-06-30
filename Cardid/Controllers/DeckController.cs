@@ -284,6 +284,10 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckNames(string searchString)
         {
+            if (searchString.Length == 0)
+            {
+                return RedirectToAction("Index");
+            }
             string userID = GetUser();
             ViewBag.UserID = userID;
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
@@ -338,7 +342,13 @@ namespace Cardid.Controllers
                 study.TimeOf = DateTime.Now;
                 studySql.LogStudySession(study);
             }
-            return View("StudyComplete", study);
+            return RedirectToAction("StudyComplete", study);
+        }
+
+
+        public ActionResult StudyComplete(Study study)
+        {
+            return View(study);
         }
 
 

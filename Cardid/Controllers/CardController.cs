@@ -31,7 +31,7 @@ namespace Cardid.Controllers
             string userID = GetUser();
 
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
-            ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
+            TempData["deckscount"] = deckSql.GetDecksByUserID(userID).Count;
             return View("MainCardView", userCards);
         }
 
@@ -84,9 +84,9 @@ namespace Cardid.Controllers
             newCard = cardSql.CreateCard(newCard, userID);
 
             List<Card> userCards = cardSql.GetCardsByUserID(userID);
-            ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
-            ViewBag.AddedCard = newCard;
-            return View("MainCardView", userCards);
+            TempData["deckscount"] = deckSql.GetDecksByUserID(userID).Count;
+            TempData["card-created"] = newCard;
+            return RedirectToAction("Index");
         }
 
 
@@ -174,7 +174,7 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
 
-            ViewBag.DecksCount = deckSql.GetDecksByUserID(userID).Count;
+            TempData["deckscount"] = deckSql.GetDecksByUserID(userID).Count;
 
             List<Card> matchingCards = cardSql.SearchCardsForText(searchString);
             ViewBag.SearchString = searchString;

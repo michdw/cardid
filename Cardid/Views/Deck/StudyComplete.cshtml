@@ -13,19 +13,50 @@
     </div>
     @if (Model.ToRedo == null)
     {
-        <div>Congratulations!</div>
+        <div>
+            <span class="icons">
+                &#xe913;
+            </span>
+            Congratulations!
+        </div>
     }
     else
     {
         <div>
-            @Html.ActionLink("Review the cards you got incorrect", "StudyRedo", "Deck", new { redo = Model.ToRedo, deckID = Model.DeckID, frontFirst = Model.FrontFirst }, new { @class = "btn main-btn" })
+            <a href="@Url.Action("StudyRedo", "Deck", new { redo = Model.ToRedo, deckID = Model.DeckID, frontFirst = Model.FrontFirst })" class="btn main-btn">
+                <span class="icons">
+                    &#xe906;
+                </span>
+                <span class="tab"></span>
+                Review your incorrect answers
+            </a>
         </div>
     }
+
     <div>
-        @Html.ActionLink("Study the whole deck again front -> back", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true }, new { @class = "btn main-btn" })
-        @Html.ActionLink("Study the whole deck again back -> front", "StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false }, new { @class = "btn main-btn" })
+        Study the whole deck again:
     </div>
     <div>
-        @Html.ActionLink("Return to your decks", "Index", "Deck", new { @class = "btn main-btn" })
+        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+            <span class="icons">
+                &#xe915;&nbsp;
+            </span>
+            Front first
+        </a>
+        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
+            <span class="icons">
+                &#xe915;&nbsp;
+            </span>
+            Back first
+        </a>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Index", "Deck")" class="btn main-btn">
+            <span class="icons">
+                &#xe922;&nbsp;
+            </span>
+            Return to your decks
+        </a>
     </div>
 </div>

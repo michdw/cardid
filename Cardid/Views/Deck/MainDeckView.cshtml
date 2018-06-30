@@ -51,16 +51,32 @@ else
         <div>
             @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
             {
-                @Html.ActionLink("View all available decks", "Index", "Deck", null, new { @class="btn main-btn"})
+                @Html.ActionLink("View all available decks", "Index", "Deck", null, new { @class = "btn main-btn" })
             }
-
-            @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "btn main-btn" })
 
             @using (Html.BeginForm("SearchDeckNames", "Deck"))
             {
-                <input type="text" name="searchString" />
-                <button type="submit" class="btn main-btn">Search by deck name</button>
+                <div>
+                    <input type="text" name="searchString" />
+                </div>
+
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe90f;
+                    </span>
+                    <span class="tab"></span>
+                    Search decks by name
+                </button>
             }
+
+            <a href="@Url.Action("CreateDeckInit", "Deck")" , class="btn main-btn">
+                <span class="icons">
+                    &#xe900;
+                </span>
+                <span class="tab"></span>
+                Create a new deck
+            </a>
+
         </div>
 
         <div class="option module">
@@ -77,7 +93,7 @@ else
 
                     @foreach (Tag tag in tagsByPopularity)
                     {
-                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
                     }
                 </div>
 
@@ -85,15 +101,24 @@ else
 
                     @foreach (Tag tag in tagsByName)
                     {
-                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag active-tag" });
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
                     }
                 </div>
 
             </div>
             @using (Html.BeginForm("CreateTag", "Deck"))
             {
-                <input type="text" name="tagName" />
-                <button type="submit" class="btn main-btn">Create a new tag</button>
+                <div>
+                    <input type="text" name="tagName" />
+                </div>
+
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe900;
+                    </span>
+                    <span class="tab"></span>
+                    Create a new tag
+                </button>
             }
 
         </div>
@@ -129,17 +154,33 @@ else
                 {
                     <div class="deck-listing">
 
-                        @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
+                        @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing bold" })
 
-                        <div class="deck-info">
+                        <div>
                             <span class="small-type">
                                 @deck.Cards().Count cards
                             </span>
                         </div>
                         @if (deck.Cards().Count > 0)
                         {
-                            @Html.ActionLink("Study back -> front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
-                            @Html.ActionLink("Study front -> back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
+                            <div>
+                                <span>
+                                    Study:
+                                    <span class="tab"></span>
+                                </span>
+                                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true })" class="btn main-btn">
+                                    <span class="icons">
+                                        &#xe915;&nbsp;
+                                    </span>
+                                    Front first
+                                </a>
+                                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false })" class="btn main-btn">
+                                    <span class="icons">
+                                        &#xe915;&nbsp;
+                                    </span>
+                                    Back first
+                                </a>
+                            </div>
                         }
                     </div>
                 }
@@ -156,21 +197,41 @@ else
                 {
                     <div class="deck-listing">
 
-                        @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing" })
+                        @Html.ActionLink(@deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing bold" })
 
-                        <div class="deck-info">
+                        <div>
                             <p class="small-type narrow-line">
                                 @deck.Cards().Count cards
                             </p>
                             <p class="narrow-line">
-                                <span class="small-type">Shared by</span> @deck.Creator().DisplayName
+                                <span class="small-type">Shared by</span>
+                                <span class="bold">
+                                    @deck.Creator().DisplayName
+                                </span>
                             </p>
                         </div>
 
-                        <div>
-                            @Html.ActionLink("Study Back->Front", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false }, new { @class = "btn main-btn float-right" })
-                            @Html.ActionLink("Study Front->Back", "StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true }, new { @class = "btn main-btn float-right" })
-                        </div>
+                        @if (deck.Cards().Count > 0)
+                        {
+                            <div>
+                                <span>
+                                    Study:
+                                    <span class="tab"></span>
+                                </span>
+                                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = true })" class="btn main-btn">
+                                    <span class="icons">
+                                        &#xe915;&nbsp;
+                                    </span>
+                                    Front first
+                                </a>
+                                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = deck.DeckID, frontFirst = false })" class="btn main-btn">
+                                    <span class="icons">
+                                        &#xe915;&nbsp;
+                                    </span>
+                                    Back first
+                                </a>
+                            </div>
+                        }
                     </div>
                 }
             }
@@ -181,3 +242,13 @@ else
 
 
 <script type="text/javascript" src="../../Content/deckTags.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.deck-listing').on('click', function () {
+            $(this).find('.deckname-listing')[0].click();
+        });
+    });
+
+</script>

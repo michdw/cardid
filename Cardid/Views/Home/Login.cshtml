@@ -6,25 +6,29 @@
 
 <h1 class="view-title">Login</h1>
 
-<div class="module">
-    @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
-    {
-        @Html.ValidationMessage("invalid-credentials")
-        if (ViewBag.RegisterInstead == true)
+<div class="flex flex-baseline">
+
+    <div class="module">
+        @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
         {
-            @Html.ActionLink(" Sign up here", "BeginRegister", "Home");
+            @Html.ValidationMessage("invalid-credentials")
+            if (ViewBag.RegisterInstead == true)
+            {
+                @Html.ActionLink(" Sign up here", "BeginRegister", "Home");
+            }
+
+            <div class="formValidationGroup">
+                @Html.LabelFor(m => m.Email)
+                @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
+            </div>
+
+            <div class="formValidationGroup">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </div>
+
+            <button type="submit" class="btn main-btn float-right">Login<span class="icons"> &nbsp;&#xe923;</span></button>
         }
+    </div>
 
-        <div class="formValidationGroup">
-            @Html.LabelFor(m => m.Email)
-            @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
-        </div>
-
-        <div class="formValidationGroup">
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password)
-        </div>
-
-        <button type="submit" class="btn main-btn float-right">Login</button>
-    }
 </div>
