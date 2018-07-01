@@ -11,6 +11,7 @@ namespace Cardid.Controllers
 {
     public class HomeController : Controller
     {
+        CardSqlDAL cardSql = new CardSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         StudySqlDAL studySql = new StudySqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
@@ -107,8 +108,8 @@ namespace Cardid.Controllers
 
             switch (Session["anon"].ToString())
             {
-                case "Card":
-                    return RedirectToAction("Index", "Card");
+                case "Search":
+                    return RedirectToAction("SearchText", "Home");
                 case "Deck":
                     return RedirectToAction("Index", "Deck");
                 default:
@@ -304,6 +305,59 @@ namespace Cardid.Controllers
             Session["anon"] = "Home";
             ViewBag.LoggedOut = true;
             return View("Index");
+        }
+
+
+        public ActionResult SearchText(string searchString)
+        {
+            if (Session["userid"] == null)
+            {
+                Session["anon"] = "Search";
+                return RedirectToAction("Login", "Home");
+            }
+
+            string userID = GetUser();
+
+            Search search = new Search()
+            {
+                SearchString = searchString,
+                UserID = userID,
+                UserCards = false,
+                UserDecks = false,
+                PublicCards = false,
+                PublicDecks = false
+            };
+
+            if (searchString != null)
+            {
+                search.MatchingCards = cardSql.SearchCardsForText(searchString);
+                search.MatchingDecks = deckSql.SearchDecksByName(searchString);
+                search.MatchingTags = tagSql.SearchTagsByName(searchString);
+                foreach (Card card in search.MatchingCards)
+                {
+                    if (card.UserID == userID)
+                    {
+                        search.UserCards = true;
+                    }
+                    else
+                    {
+                        search.PublicCards = true;
+                    }
+                }
+                foreach (Deck deck in search.MatchingDecks)
+                {
+                    if (deck.UserID == userID)
+                    {
+                        search.UserDecks = true;
+                    }
+                    else
+                    {
+                        search.PublicDecks = true;
+                    }
+                }
+            }
+
+            return View(search);
         }
     }
 }

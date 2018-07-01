@@ -35,6 +35,7 @@ namespace Cardid.DAL
         private string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
         private string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";
         private string removeTagFromAllDecks = "DELETE FROM [deck_tag] WHERE TagID = @tagID";
+        private string searchTagsByName = "SELECT * FROM tags WHERE TagName LIKE @text";
 
 
         public void AddTagToDeck(string deckID, string tagID)
@@ -178,6 +179,16 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(removeTagFromDeck, new { deckID, tagID });
+            }
+        }
+
+
+        public List<Tag> SearchTagsByName(string text)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Tag> list = db.Query<Tag>(searchTagsByName, new { text = "%" + text + "%" }).ToList<Tag>();
+                return list;
             }
         }
 

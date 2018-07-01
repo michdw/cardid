@@ -1,0 +1,227 @@
+﻿
+@using Cardid.Models
+@model Search
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.SearchString == null)
+{
+    <h1 class="view-title">
+        Search for text in cards, decks, and tags
+    </h1>
+}
+else
+{
+    <h2 class="view-title">
+        Search results for
+        <span class="large-type">@Model.SearchString</span>
+    </h2>
+}
+
+<div>
+
+    @using (Html.BeginForm("SearchText", "Home", null, FormMethod.Get, new { @class = "vertical-form" }))
+    {
+        <div>
+            <input type="text" name="searchString" />
+        </div>
+        <div>
+            <button type="submit" class="btn main-btn">
+                <span class="icons">
+                    &#xe90f;
+                </span>
+                <span class="tab"></span>
+                New search
+            </button>
+        </div>
+    }
+</div>
+
+
+@if (Model.SearchString != null)
+{
+    <div>
+        <div class="results-container">
+
+            <h2 class="view-title">
+                Cards:
+            </h2>
+
+            @if (Model.MatchingCards.Count == 0)
+            {
+                <p>
+                    No cards found containing that text.
+                </p>
+            }
+            else
+            {
+                <div>
+                    <p>
+                        @Model.MatchingCards.Count matches found
+                    </p>
+
+                    <span class="btn main-btn show-btn">show</span>
+                </div>
+
+                <div class="results-section hidden">
+
+                    @if (Model.UserCards == true)
+                    {
+                        <div class="results-subsection flex flex-left">
+                            <h2 class="view-title results-title">Your Cards</h2>
+
+                            @foreach (Card thisCard in Model.MatchingCards)
+                            {
+                                if (thisCard.UserID == Model.UserID)
+                                {
+                                    <div class="card-bothsides">
+                                        <div class="card-field">@thisCard.Front</div>
+                                        <div class="card-field">@thisCard.Back</div>
+                                        <div class="card-options">
+                                            @if (thisCard.UserID == Session["userid"].ToString())
+                                            {
+                                                <div>
+                                                    <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
+                                                        <span class="icons">&#xe90d;</span>
+                                                        <span class="tab"></span>
+                                                        Edit card
+                                                    </a>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <div class="card-decks">
+                                            @for (int i = 0; i < thisCard.Decks().Count; i++)
+                                            {
+                                                <p class="small-type at-bottom">Currently in:</p>
+                                                Deck deck = thisCard.Decks()[i];
+                                                if (deck.UserID == Session["userid"].ToString())
+                                                {
+                                                    @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
+                    @if (Model.PublicCards == true)
+                    {
+                        <div class="results-subsection flex flex-left">
+                            <h2 class="view-title results-title">Public Cards</h2>
+
+                            @foreach (Card thisCard in Model.MatchingCards)
+                            {
+                                if (thisCard.UserID != Model.UserID)
+                                {
+                                    <div class="card-bothsides">
+                                        <div class="card-field">@thisCard.Front</div>
+                                        <div class="card-field">@thisCard.Back</div>
+                                        <a href="@Url.Action("ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID })" class="btn main-btn">
+                                            <span class="icons">
+                                                &#xe90e;
+                                            </span>
+                                            <span class="tab"></span>
+                                            Add to a different deck
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                    }
+
+                    <button class="btn main-btn hide-btn">Hide</button>
+                </div>
+            }
+        </div>
+
+
+
+        <div class="results-container">
+
+            <h2 class="view-title">
+                Decks:
+            </h2>
+
+            @if (Model.MatchingDecks.Count > 0)
+            {
+                <div>
+                    <p>
+                        @Model.MatchingDecks.Count matches found
+                    </p>
+
+                    <span class="btn main-btn show-btn">show</span>
+                </div>
+
+
+                <div class="results-section hidden">
+
+                    @foreach (Deck thisDeck in Model.MatchingDecks)
+                    {
+                        <div class="deck-listing">
+                            <p class="deckname-listing">@thisDeck.DeckName</p>
+                        </div>
+                    }
+
+                    <button class="btn main-btn hide-btn">Hide</button>
+                </div>
+
+            }
+            else
+            {
+                <p>
+                    No decks found containing that text.
+                </p>
+            }
+        </div>
+
+
+
+        <div class="results-container">
+
+            <h2 class="view-title">
+                Tags:
+            </h2>
+
+            @if (Model.MatchingTags.Count > 0)
+            {
+                <div>
+                    <p>
+                        @Model.MatchingTags.Count matches found
+                    </p>
+
+                    <span class="btn main-btn show-btn">Show</span>
+                </div>
+
+
+                <div class="results-section hidden">
+
+                    @foreach (Tag thisTag in Model.MatchingTags)
+                    {
+                        @Html.ActionLink(thisTag.TagName, "SearchDeckTags", "Deck", new { searchString = thisTag.TagName }, new { @class = "tag search-tag" });
+                    }
+                    <button class="btn main-btn hide-btn">Hide</button>
+                </div>
+
+            }
+            else
+            {
+                <p>
+                    No tags found containing that text
+                </p>
+            }
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript" src="../../Content/searchText.js"></script>

@@ -442,7 +442,6 @@ textarea {
 }
 
 .card-decks {
-    margin: 0 4px;
 }
 
 .deck-incard {
@@ -496,10 +495,10 @@ textarea {
     padding: 1em 1.5em;
 }
 
-.deck-listing:hover {
-    background: rgba(0,0,0,.44);
-    cursor: pointer;
-}
+    .deck-listing:hover {
+        background: rgba(0,0,0,.44);
+        cursor: pointer;
+    }
 
     .deck-listing:last-of-type {
         margin-bottom: 2em;
@@ -571,10 +570,10 @@ textarea {
     background: #000;
 }
 
-.search-tag:hover {
-    background: #fff;
-    color: #000;
-}
+    .search-tag:hover {
+        background: #fff;
+        color: #000;
+    }
 
 .inactive-tag {
     background: #555;
@@ -591,6 +590,35 @@ textarea {
     .delete-tag:hover {
         color: #fff;
     }
+
+
+/* search */
+
+.results-container {
+}
+
+.results-section {
+    position: relative;
+    padding: 2em 0;
+}
+
+.results-subsection {
+    position: relative;
+    padding: 2em 0;
+}
+
+.results-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hide-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 
 /* study session */
 
@@ -669,8 +697,4 @@ textarea {
     padding: 10px;
     background: #333;
     color: #fff;
-}
-
-.resultsFrame a {
-    color: #000;
 }
