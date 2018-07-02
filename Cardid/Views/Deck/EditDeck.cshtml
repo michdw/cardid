@@ -108,7 +108,7 @@
                 {
                     <span>
                         <span class="tag active-tag">@tag.TagName</span>
-                        <a href="@Url.Action("RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID })">
+                        <a href="@Url.Action("RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID, newDeck = false })">
                             <span class="icons delete-tag">
                                 &#xe904;
                             </span>
@@ -130,7 +130,7 @@
 
                 @foreach (Tag tag in Model.OtherTagsByPopularity())
                 {
-                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
+                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID, newDeck = false }, new { @class = "tag inactive-tag" });
                 }
             </div>
 
@@ -138,7 +138,7 @@
 
                 @foreach (Tag tag in Model.OtherTagsByName())
                 {
-                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag inactive-tag" });
+                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { searchString = tag.TagName, newDeck = false }, new { @class = "tag inactive-tag" });
                 }
             </div>
         </div>
@@ -162,8 +162,8 @@
                 </button>
             }
         </div>
-
     </div>
+
 </div>
 
 

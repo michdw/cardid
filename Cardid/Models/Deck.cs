@@ -14,6 +14,8 @@ namespace Cardid.Models
         public string DeckName { get; set; }
         public bool IsPublic { get; set; }
 
+        public string NewCardFront { get; set; }
+        public string NewCardBack { get; set; }
         public Tag NewTag { get; set; }
 
         public Deck TrimValues()

@@ -36,6 +36,27 @@ namespace Cardid.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult CardToNewDeck(Deck deck)
+        {
+            string userID = GetUser();
+
+            Card newCard = new Card()
+            {
+                UserID = userID,
+                Front = deck.NewCardFront,
+                Back = deck.NewCardBack
+            };
+
+            newCard = cardSql.CreateCard(newCard, userID);
+            cardSql.AddCardToDeck(newCard, deck.DeckID);
+
+            deck = deckSql.GetDeckByID(deck.DeckID);
+
+            return RedirectToAction("CreateDeckContinue", "Deck", new { deckID = deck.DeckID });
+        }
+
+
         public ActionResult ChooseCardsInit(string deckID)
         {
             GetUser();
@@ -53,7 +74,7 @@ namespace Cardid.Controllers
             cardSql.AddCardToDeck(card, deckID);
 
             TempData["card-added"] = card;
-            return RedirectToAction("EditDeck", new { deckID });
+            return RedirectToAction("EditDeck", "Deck", new { deckID });
         }
 
 

@@ -55,7 +55,7 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult AddDeckTag(string deckID, string tagID)
+        public ActionResult AddDeckTag(string deckID, string tagID, bool newDeck)
         {
             GetUser();
 
@@ -64,6 +64,11 @@ namespace Cardid.Controllers
 
             Tag tag = tagSql.GetTagByID(tagID);
             TempData["tag-added"] = tag;
+
+            if (newDeck)
+            {
+                return RedirectToAction("CreateDeckContinue", new { deckID });
+            }
 
             return RedirectToAction("EditDeck", new { deckID });
         }
@@ -126,26 +131,42 @@ namespace Cardid.Controllers
 
         public ActionResult CreateDeckInit()
         {
-            GetUser();
-            return View("CreateDeck");
+            string userID = GetUser();
+            Deck newDeck = new Deck
+            {
+                UserID = userID
+            };
+
+            return View("CreateDeck", newDeck);
+        }
+
+
+        public ActionResult CreateDeckContinue(string deckID)
+        {
+            Deck deck = deckSql.GetDeckByID(deckID);
+
+            return View("CreateDeck", deck);
         }
 
 
         [HttpPost]
-        public ActionResult CreateDeckSubmit(Deck newDeck)
+        public ActionResult CreateDeckSubmit(Deck deck, bool exit)
         {
             string userID = GetUser();
 
-            if (newDeck.DeckName == null)
+            if (exit)
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (deck.DeckName == null)
             {
                 TempData["deckname-missing"] = true;
                 return View("CreateDeck");
             }
 
-            newDeck = deckSql.CreateDeck(newDeck.DeckName, userID);
-
-            TempData["deck-created"] = true;
-            return RedirectToAction("EditDeck", new { deckID = newDeck.DeckID });
+            deck = deckSql.CreateDeck(deck.DeckName, userID);
+            return View("CreateDeck", deck);
         }
 
 
@@ -270,7 +291,7 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult RemoveDeckTag(string deckID, string tagID)
+        public ActionResult RemoveDeckTag(string deckID, string tagID, bool newDeck)
         {
             GetUser();
 
@@ -278,6 +299,10 @@ namespace Cardid.Controllers
             Tag tag = tagSql.GetTagByID(tagID);
             tagSql.RemoveTagFromDeck(deckID, tagID);
 
+            if (newDeck)
+            {
+                return RedirectToAction("CreateDeckContinue", new { deckID });
+            }
             return RedirectToAction("EditDeck", new { deckID });
         }
 
