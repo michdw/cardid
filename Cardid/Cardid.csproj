@@ -234,7 +234,6 @@
     <Content Include="Views\Card\MainCardView.cshtml" />
     <Content Include="Views\Deck\CardsInDeck.cshtml" />
     <Content Include="Views\Deck\ChooseDecks.cshtml" />
-    <Content Include="Views\Deck\CreateDeck.cshtml" />
     <Content Include="Views\Deck\EditDeck.cshtml" />
     <Content Include="Views\Deck\MainDeckView.cshtml" />
     <Content Include="Views\Deck\Study.cshtml" />
@@ -251,6 +250,7 @@
     <Content Include="Views\Home\Account.cshtml" />
     <Content Include="Views\Deck\TagView.cshtml" />
     <Content Include="Views\Home\SearchText.cshtml" />
+    <Content Include="Views\Deck\CreateDeck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,15 +78,7 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult CreateCardInit()
-        {
-            GetUser();
-
-            return View("CreateCard");
-        }
-
-
-        public ActionResult CreateCardInitD(string deckID)
+        public ActionResult CreateCardInit(string deckID)
         {
             GetUser();
 
@@ -96,23 +88,7 @@ namespace Cardid.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateCardSubmit(Card newCard)
-        {
-            GetUser();
-
-            string userID = Session["userid"].ToString();
-
-            newCard = cardSql.CreateCard(newCard, userID);
-
-            List<Card> userCards = cardSql.GetCardsByUserID(userID);
-            TempData["deckscount"] = deckSql.GetDecksByUserID(userID).Count;
-            TempData["card-created"] = newCard;
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
-        public ActionResult CreateCardSubmitD(Card newCard, string deckID)
+        public ActionResult CreateCardSubmit(Card newCard, string deckID)
         {
             GetUser();
 

@@ -141,23 +141,10 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult CreateDeckContinue(string deckID)
-        {
-            Deck deck = deckSql.GetDeckByID(deckID);
-
-            return View("CreateDeck", deck);
-        }
-
-
         [HttpPost]
-        public ActionResult CreateDeckSubmit(Deck deck, bool exit)
+        public ActionResult CreateDeckSubmit(Deck deck)
         {
             string userID = GetUser();
-
-            if (exit)
-            {
-                return RedirectToAction("Index");
-            }
 
             if (deck.DeckName == null)
             {
@@ -166,7 +153,7 @@ namespace Cardid.Controllers
             }
 
             deck = deckSql.CreateDeck(deck.DeckName, userID);
-            return View("CreateDeck", deck);
+            return View("EditDeck", deck);
         }
 
 
