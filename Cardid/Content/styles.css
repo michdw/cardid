@@ -423,6 +423,12 @@ textarea {
     padding: 1em;
 }
 
+.card-blank {
+    width: 20%;
+    min-width: 200px;
+    padding: 1em;
+}
+
 .card-field {
     user-select: none;
     margin: 8px 0;

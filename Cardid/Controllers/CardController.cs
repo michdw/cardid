@@ -37,7 +37,7 @@ namespace Cardid.Controllers
 
 
         [HttpPost]
-        public ActionResult CardToNewDeck(Deck deck)
+        public ActionResult AddCardToDeck(Deck deck)
         {
             string userID = GetUser();
 
@@ -53,7 +53,8 @@ namespace Cardid.Controllers
 
             deck = deckSql.GetDeckByID(deck.DeckID);
 
-            return RedirectToAction("CreateDeckContinue", "Deck", new { deckID = deck.DeckID });
+            TempData["card-added"] = true;
+            return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
         }
 
 

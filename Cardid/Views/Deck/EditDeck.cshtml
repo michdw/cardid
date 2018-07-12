@@ -15,26 +15,9 @@
 
 <div class="flex flex-left">
 
-
     <div class="editdeck-left">
 
-        <a href="@Url.Action("CreateCardInit", "Card", new { deckID = Model.DeckID })" , class="btn main-btn">
-            <span class="icons">
-                &#xe900;
-            </span>
-            <span class="tab"></span>
-            Add a card to this deck
-        </a>
-
         <div>
-            <div>
-                <a href="@Url.Action("Index", "Deck")" class="btn main-btn">
-                    <span class="icons">
-                        &#xe922;
-                    </span>
-                    Back to decks
-                </a>
-            </div>
 
             <div>
                 <div>
@@ -55,6 +38,7 @@
             </div>
 
             <div>
+
                 @if (Model.IsPublic == false)
                 {
                     <p>
@@ -83,13 +67,20 @@
                         Make private
                     </a>
                 }
+
             </div>
 
             <div>
 
                 @using (Html.BeginForm("ChangeDeckName", "Deck"))
                 {
-                    <button type="submit" class="btn main-btn">Rename deck</button>
+                    <button type="submit" class="btn main-btn">
+                        <span class="icons">
+                            &#xe90d;
+                        </span>
+                        <span class="tab"></span>
+                        Rename deck
+                    </button>
                     @Html.HiddenFor(m => m.DeckID)
                     @Html.TextBoxFor(m => m.DeckName)
                 }
@@ -99,6 +90,7 @@
     </div>
 
     <div class="editdeck-right module">
+
         @if (Model.Tags().Count > 0)
         {
             <div class="tag-container">
@@ -116,86 +108,109 @@
                         <span class="tab"></span>
                     </span>
                 }
+
             </div>
         }
 
-        <h4 class="bold at-top">Add Tags</h4>
-        <div class="tagviews">
-            <span class="bold tagview-pop">sort by popularity</span>
-            <span class="pointer tagview-alph">sort alphabetically</span>
-        </div>
+        <h4 class="bold at-top">
+            Add Tags
+        </h4>
 
-        <div class="tag-container">
-            <div class="tags-pop">
+        <div class="partial-tags">
+            <div class="tag-container">
 
-                @foreach (Tag tag in Model.OtherTagsByPopularity())
+                @for (int i = 0; i < 10; i++)
                 {
-                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID, newDeck = false }, new { @class = "tag inactive-tag" });
+                    Tag tag = Model.OtherTagsByPopularity()[i];
+                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
                 }
-            </div>
 
-            <div class="tags-alph hidden">
-
-                @foreach (Tag tag in Model.OtherTagsByName())
-                {
-                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { searchString = tag.TagName, newDeck = false }, new { @class = "tag inactive-tag" });
-                }
             </div>
         </div>
 
+        <span class="expand pointer">See all</span>
 
-        <div>
-            <h4 class="bold">Create a new tag for this deck:</h4>
+        <div class="full-tags hidden">
 
-            @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
-            {
-                @Html.TextBoxFor(m => m.NewTag.TagName)
+            <div class="tagviews">
+                <span class="bold tagview-pop">sort by popularity</span>
+                <span class="pointer tagview-alph">sort alphabetically</span>
+            </div>
 
-                @Html.HiddenFor(m => Model.DeckID)
+            <div class="tag-container">
+                <div class="tags-pop">
 
-                <button type="submit" class="btn main-btn">
-                    <span class="icons">
-                        &#xe900;
-                    </span>
-                    <span class="tab"></span>
-                    Add tag
-                </button>
-            }
+                    @foreach (Tag tag in Model.OtherTagsByPopularity())
+                    {
+                        @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
+                    }
+                </div>
+
+                <div class="tags-alph hidden">
+
+                    @foreach (Tag tag in Model.OtherTagsByName())
+                    {
+                        @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { searchString = tag.TagName }, new { @class = "tag inactive-tag" });
+                    }
+                </div>
+            </div>
+
+            <div>
+                <h4 class="bold">Create a new tag for this deck:</h4>
+
+                @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
+                {
+                    @Html.TextBoxFor(m => m.NewTag.TagName)
+
+                    @Html.HiddenFor(m => Model.DeckID)
+
+                    <button type="submit" class="btn main-btn">
+                        <span class="icons">
+                            &#xe900;
+                        </span>
+                        <span class="tab"></span>
+                        Add tag
+                    </button>
+                }
+
+            </div>
+
+            <span class="collapse pointer hidden">Hide</span>
+
         </div>
     </div>
 
 </div>
 
 
+<h2 class="view-title">Cards:</h2>
 
-@if (Model.Cards().Count != 0)
-{
-    <div class="container-header">
 
-        <h2 class="view-title">Cards in this deck:</h2>
-        <div>
-            <a href="@Url.Action("ChooseCardsInit", "Card", new { deckID = Model.DeckID })" class="btn main-btn">
-                <span class="icons">
-                    &#xe90f;
-                </span>
-                <span class="tab"></span>
-                Find more cards to add
-            </a>
-        </div>
-        <div>
-            <a href="@Url.Action("CreateCardInit", "Card", new { deckID = Model.DeckID })" class="btn main-btn">
-                <span class="icons">
-                    &#xe900;
-                </span>
-                <span class="tab"></span>
-                Create card for this deck
-            </a>
-        </div>
+<div class="flex flex-left">
+
+    <div class="card-blank">
+        <span class="bold">Create a new card for this deck:</span>
+
+        @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
+        {
+            @Html.TextBoxFor(m => m.NewCardFront)
+            @Html.TextBoxFor(m => m.NewCardBack)
+            <div>
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe900;
+                    </span>
+                    <span class="tab"></span>
+                    Add card
+                </button>
+
+            </div>
+        }
     </div>
 
-    <div class="flex flex-left">
-
-        @foreach (Card thisCard in Model.Cards())
+    @if (Model.Cards().Count != 0)
+    {
+        foreach (Card thisCard in Model.Cards())
         {
             <div class="card-bothsides">
                 <div class="card-field">@thisCard.Front</div>
@@ -212,21 +227,15 @@
                         &#xe914;
                     </span>
                     <span class="tab"></span>
-                    Remove from this deck
+                    Remove from deck
                 </a>
             </div>
         }
-    </div>
-}
-else
-{
-    <p>
-        Currently no cards in this deck.
-        @Html.ActionLink("Add some here", "ChooseCardsInit", "Card", new { deckID = Model.DeckID }, new { @class = "btn main-btn" })
-    </p>
-    <div>
-    </div>
-}
+    }
+
+
+</div>
+
 
 <div>
     <button class="btn delete-btn delete-init">

@@ -228,7 +228,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Card\ChooseCards.cshtml" />
     <Content Include="Views\Card\CreateCard.cshtml" />
     <Content Include="Views\Card\EditCard.cshtml" />
     <Content Include="Views\Card\MainCardView.cshtml" />
