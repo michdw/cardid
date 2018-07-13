@@ -228,11 +228,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Card\CreateCard.cshtml" />
-    <Content Include="Views\Card\EditCard.cshtml" />
-    <Content Include="Views\Card\MainCardView.cshtml" />
-    <Content Include="Views\Deck\CardsInDeck.cshtml" />
-    <Content Include="Views\Deck\ChooseDecks.cshtml" />
     <Content Include="Views\Deck\EditDeck.cshtml" />
     <Content Include="Views\Deck\MainDeckView.cshtml" />
     <Content Include="Views\Deck\Study.cshtml" />
@@ -250,6 +245,9 @@
     <Content Include="Views\Deck\TagView.cshtml" />
     <Content Include="Views\Home\SearchText.cshtml" />
     <Content Include="Views\Deck\CreateDeck.cshtml" />
+    <Content Include="Views\Card\EditCard.cshtml" />
+    <Content Include="Views\Deck\ViewDeck.cshtml" />
+    <Content Include="Views\Card\ChooseDecks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

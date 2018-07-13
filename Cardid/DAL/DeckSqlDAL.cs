@@ -34,7 +34,6 @@ namespace Cardid.DAL
         private string removeAllSessionsWithDeck = "DELETE FROM [sessions] WHERE DeckID = @deckID";
         private string removeAllTagsFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
-        private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
         private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
         private string searchDecksByName = "SELECT * FROM decks WHERE DeckName LIKE @text";
         private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
@@ -173,13 +172,6 @@ namespace Cardid.DAL
             }
         }
 
-        public void RemoveCardFromDeck(string cardID, string deckID)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                db.Execute(removeCardFromDeck, new { cardID, deckID });
-            }
-        }
 
         public List<Deck> SearchDecksByName(string text)
         {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using Cardid.DAL;
 
 namespace Cardid.Models
 {
@@ -17,5 +19,12 @@ namespace Cardid.Models
         public bool PublicCards { get; set; }
         public bool PublicDecks { get; set; }
 
+        //private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+        //public int DecksCount()
+        //{
+        //    UserSqlDAL userSql = new UserSqlDAL(connectionString);
+        //    User user = userSql.GetUserByID(UserID);
+        //    return user.Decks().Count;
+        //}
     }
 }

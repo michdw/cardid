@@ -15,9 +15,6 @@
         </div>
         <div class="home-headcolumn">
             <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", new { @class = "link-inline-dark" })
-            </p>
-            <p>
                 @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", new { @class = "link-inline-dark" })
             </p>
             <p>
@@ -41,9 +38,6 @@ else if (TempData["user-login"] != null)
             </p>
         </div>
         <div class="home-headcolumn">
-            <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create some cards", "CreateCardInit", "Card", null, new { @class = "link-inline-dark" })
-            </p>
             <p>
                 @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "link-inline-dark" })
             </p>
@@ -92,7 +86,7 @@ else if (TempData["user-login"] != null)
                     Deck deck = kvp.Key;
                     <p class="leaderboard-listing">
                         <span class="listing-left">
-                            @Html.ActionLink(deck.DeckName, "CardsInDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
+                            @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
                         </span>
                         <span class="listing-right">
                             @kvp.Value

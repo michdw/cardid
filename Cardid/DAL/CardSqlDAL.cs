@@ -26,8 +26,8 @@ namespace Cardid.DAL
             + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
         private string getUserCardsByName = "SELECT * FROM [cards] WHERE UserID = @userID ORDER BY Front ASC";
         private string getNewUserCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
-        private string removeDecksFromCard = "DELETE FROM [card_deck] WHERE CardID = @cardID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
+        private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
         private string searchCardsForText = "SELECT * FROM cards WHERE Front LIKE @text OR Back LIKE @text";
 
 
@@ -65,15 +65,6 @@ namespace Cardid.DAL
             }
         }
 
-
-        public void DeleteCard(string cardID)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                db.Execute(removeDecksFromCard, new { cardID });
-                db.Execute(removeCard, new { cardID });
-            }
-        }
 
 
         public void EditCard(Card card)
@@ -118,6 +109,24 @@ namespace Cardid.DAL
                     card.TrimValues();
                 }
                 return list;
+            }
+        }
+
+
+        public void RemoveCardFromDeck(string cardID, string deckID)
+        {
+            Card card = GetCardByID(cardID);
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                if (card.Decks().Count == 1)
+                {
+                    db.Execute(removeCardFromDeck, new { cardID, deckID });
+                    db.Execute(removeCard, new { cardID });
+                }
+                else
+                {
+                    db.Execute(removeCardFromDeck, new { cardID, deckID });
+                }
             }
         }
 

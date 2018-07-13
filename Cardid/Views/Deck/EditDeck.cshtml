@@ -17,28 +17,31 @@
 
     <div class="editdeck-left">
 
-        <div>
-            <p class="at-top at-bottom">
-                <span class="icons">
-                    &#xe915;
-                </span>
-                Study:
-            </p>
+        @if (Model.Cards().Count > 0)
+        {
             <div>
-                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+                <p class="at-top at-bottom">
                     <span class="icons">
-                        &#xe915;&nbsp;
+                        &#xe915;
                     </span>
-                    Front first
-                </a>
-                <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
-                    <span class="icons">
-                        &#xe915;&nbsp;
-                    </span>
-                    Back first
-                </a>
+                    Study:
+                </p>
+                <div>
+                    <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+                        <span class="icons">
+                            &#xe915;&nbsp;
+                        </span>
+                        Front first
+                    </a>
+                    <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
+                        <span class="icons">
+                            &#xe915;&nbsp;
+                        </span>
+                        Back first
+                    </a>
+                </div>
             </div>
-        </div>
+        }
 
         <div>
 
@@ -261,14 +264,14 @@
             <div class="card-bothsides">
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
-                <a href="@Url.Action("EditCardInitD", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
+                <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
                     <span class="icons">
                         &#xe90d;
                     </span>
                     <span class="tab"></span>
                     Edit this card
                 </a>
-                <a href="@Url.Action("RemoveCardFromDeck", "Deck", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
+                <a href="@Url.Action("RemoveCardFromDeck", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
                     <span class="icons">
                         &#xe914;
                     </span>

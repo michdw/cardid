@@ -69,15 +69,6 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult CardsInDeck(string deckID)
-        {
-            GetUser();
-
-            Deck deck = deckSql.GetDeckByID(deckID);
-            return View(deck);
-        }
-
-
         public ActionResult ChangeDeckName(Deck deck)
         {
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
@@ -86,41 +77,6 @@ namespace Cardid.Controllers
 
             TempData["deckname-changed"] = true;
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
-        }
-
-
-        public ActionResult ChooseDecksInit(string cardID)
-        {
-            GetUser();
-
-            Card card = cardSql.GetCardByID(cardID);
-            return View("ChooseDecks", card);
-        }
-
-
-        public ActionResult ChooseDecksSubmit(string cardID, string deckID)
-        {
-            GetUser();
-
-            Card card = cardSql.GetCardByID(cardID);
-            cardSql.AddCardToDeck(card, deckID);
-
-            TempData["card-added"] = card;
-            return RedirectToAction("EditDeck", new { deckID });
-        }
-
-
-        public ActionResult ChooseOtherDeck(string cardID)
-        {
-            string userID = GetUser();
-            Card publicCard = cardSql.GetCardByID(cardID);
-            Card userCard = new Card
-            {
-                Front = publicCard.Front,
-                Back = publicCard.Back
-            };
-            userCard = cardSql.CreateCard(userCard, userID);
-            return RedirectToAction("ChooseDecksInit", new { cardID = userCard.CardID });
         }
 
 
@@ -208,16 +164,16 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            List<Card> cardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
+            List<Card> ViewDeck = cardSql.GetCardsByDeckID(deck.DeckID);
 
-            foreach (Card card in cardsInDeck)
+            foreach (Card card in ViewDeck)
             {
                 if (card.Decks().Count > 1)
                 {
-                    cardsInDeck.Remove(card);
+                    ViewDeck.Remove(card);
                 }
             }
-            deckSql.DeleteDeck(deckID, cardsInDeck);
+            deckSql.DeleteDeck(deckID, ViewDeck);
             TempData["deck-deleted"] = true;
             return RedirectToAction("Index");
         }
@@ -258,25 +214,6 @@ namespace Cardid.Controllers
 
             deckSql.MakeDeckPublic(deckID);
 
-            return RedirectToAction("EditDeck", new { deckID });
-        }
-
-
-        public ActionResult RemoveCardFromDeck(string cardID, string deckID)
-        {
-            GetUser();
-
-            Card card = cardSql.GetCardByID(cardID);
-            if (card.Decks().Count == 1)
-            {
-                cardSql.DeleteCard(cardID);
-            }
-            else
-            {
-                deckSql.RemoveCardFromDeck(cardID, deckID);
-            }
-
-            TempData["card-removed"] = true;
             return RedirectToAction("EditDeck", new { deckID });
         }
 
@@ -383,7 +320,6 @@ namespace Cardid.Controllers
         }
 
 
-
         public ActionResult TagView(string userID)
         {
             GetUser();
@@ -392,6 +328,15 @@ namespace Cardid.Controllers
             List<Tag> userTags = user.Tags();
 
             return View("TagView", userTags);
+        }
+
+
+        public ActionResult ViewDeck(string deckID)
+        {
+            GetUser();
+
+            Deck deck = deckSql.GetDeckByID(deckID);
+            return View(deck);
         }
 
     }

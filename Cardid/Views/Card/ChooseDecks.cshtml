@@ -30,7 +30,7 @@
             <div class="deck-listing">
                 @thisDeck.DeckName
                 <div>
-                    <a href="@Url.Action("ChooseDecksSubmit", "Deck", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
+                    <a href="@Url.Action("ChooseDeckSubmit", "Card", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
                         <span class="icons">&#xe900;</span>
                         Add
                     </a>
@@ -40,3 +40,4 @@
     </div>
 
 </div>
+

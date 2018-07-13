@@ -1,7 +1,7 @@
 ﻿@using Cardid.Models
 @model Deck
 @{
-    ViewBag.Title = "CardsInDeck";
+    ViewBag.Title = "ViewDeck";
 }
 
 
@@ -37,13 +37,13 @@
 
 </div>
 
-<div class="flex flex-left">
+<div class="flex flex-center">
     @foreach (Card thisCard in Model.Cards())
     {
         <div class="card-bothsides">
             <div class="card-field">@thisCard.Front</div>
             <div class="card-field">@thisCard.Back</div>
-            <a href="@Url.Action("ChooseOtherDeck", "Deck", new { cardID = thisCard.CardID })" class="btn main-btn">
+            <a href="@Url.Action("ChooseOtherDeck", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
                 <span class="icons">
                     &#xe90e;
                 </span>
@@ -53,4 +53,5 @@
         </div>
     }
 </div>
+
 
