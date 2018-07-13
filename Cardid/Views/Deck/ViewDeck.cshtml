@@ -6,7 +6,11 @@
 
 
 <h2 class="view-title">
-    View Cards in Deck |
+    View Cards in Deck
+    <span class="icons">
+        &#xe90e;
+    </span>
+    <span class="tab"></span>
     <span class="large-type">
         @Model.DeckName
     </span>
@@ -18,7 +22,7 @@
 
     <div class="module">
 
-        <div class="large-type">
+        <div class="bold">
             Study this deck:
         </div>
         <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">

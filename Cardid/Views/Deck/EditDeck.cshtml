@@ -6,7 +6,11 @@
 
 
 <h2 class="view-title">
-    Edit Your Deck |
+    Edit Your Deck
+    <span class="icons">
+        &#xe90e;
+    </span>
+    <span class="tab"></span>
     <span class="large-type">
         @Model.DeckName
     </span>
@@ -120,7 +124,7 @@
                 <div>
                     <button type="reset" class="btn main-btn cancel-btn">
                         <span class="icons">
-                            &#xe922;
+                            &#xe932;
                         </span>
                         &nbsp;Cancel
                     </button>
@@ -140,7 +144,14 @@
 
         @if (Model.Tags().Count > 0)
         {
-            <h4 class="bold at-top at-bottom">Tags</h4>
+            <p class="at-top at-bottom">
+                <span class="icons">
+                    &#xe93d;&nbsp;
+                </span>
+                <span class="bold">
+                    Tags
+                </span>
+            </p>
             <div class="tag-container">
 
                 @foreach (Tag tag in Model.Tags())
@@ -159,14 +170,19 @@
             </div>
         }
 
-        <h4 class="bold at-top at-bottom">
-            Add Tags
-        </h4>
+        <p class="at-top at-bottom">
+            <span class="icons">
+                &#xe900;&nbsp;
+            </span>
+            <span class="bold">
+                Add Tags
+            </span>
+        </p>
 
         <div class="partial-tags">
             <div class="tag-container">
 
-                @for (int i = 0; i < 10; i++)
+                @for (int i = 0; i < 14; i++)
                 {
                     Tag tag = Model.OtherTagsByPopularity()[i];
                     @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
@@ -175,13 +191,28 @@
             </div>
         </div>
 
-        <span class="expand pointer">See all</span>
+        <p class="expand pointer at-top at-bottom">
+            <span class="icons">
+                &#xe931;&nbsp;
+            </span>
+            See all
+        </p>
 
         <div class="full-tags hidden">
 
             <div class="tagviews">
-                <span class="bold tagview-pop">sort by popularity</span>
-                <span class="pointer tagview-alph">sort alphabetically</span>
+                <span class="bold tagview-pop">
+                    sort by popularity
+                </span>
+                <span class="icons pointer large-type toggle-left">
+                    &#xe93e;
+                </span>
+                <span class="icons pointer large-type toggle-right hidden">
+                    &#xe93f;
+                </span>
+                <span class="pointer tagview-alph">
+                    sort alphabetically
+                </span>
             </div>
 
             <div class="tag-container">
@@ -222,7 +253,12 @@
 
             </div>
 
-            <span class="collapse pointer hidden">Hide</span>
+            <span class="collapse pointer at-top at-bottom hidden">
+                <span class="icons">
+                    &#xe934;&nbsp;
+                </span>
+                Collapse
+            </span>
 
         </div>
     </div>
@@ -238,7 +274,7 @@
 <div class="flex flex-center">
 
     <div class="card-blank">
-        <span class="small-type">Create a new card for this deck:</span>
+        <span class="bold small-type">Create a new card for this deck:</span>
 
         @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
         {

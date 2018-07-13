@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?6pt3yz');
-  src:  url('fonts/icomoon.eot?6pt3yz#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?6pt3yz') format('truetype'),
-    url('fonts/icomoon.woff?6pt3yz') format('woff'),
-    url('fonts/icomoon.svg?6pt3yz#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?22x859');
+  src:  url('fonts/icomoon.eot?22x859#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?22x859') format('truetype'),
+    url('fonts/icomoon.woff?22x859') format('woff'),
+    url('fonts/icomoon.svg?22x859#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,57 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrow-down-circle:before {
+  content: "\e92c";
+}
+.icon-arrow-left-circle:before {
+  content: "\e92d";
+}
+.icon-arrow-right-circle:before {
+  content: "\e92e";
+}
+.icon-arrow-up-circle:before {
+  content: "\e92f";
+}
+.icon-check-circle:before {
+  content: "\e930";
+}
+.icon-chevrons-down:before {
+  content: "\e931";
+}
+.icon-chevrons-left:before {
+  content: "\e932";
+}
+.icon-chevrons-right:before {
+  content: "\e933";
+}
+.icon-chevrons-up:before {
+  content: "\e934";
+}
+.icon-delete:before {
+  content: "\e935";
+}
+.icon-eye:before {
+  content: "\e936";
+}
+.icon-eye-off:before {
+  content: "\e937";
+}
+.icon-fast-forward:before {
+  content: "\e938";
+}
+.icon-rewind:before {
+  content: "\e939";
+}
+.icon-toggle-left:before {
+  content: "\e93e";
+}
+.icon-toggle-right:before {
+  content: "\e93f";
+}
+.icon-trash-2:before {
+  content: "\e92b";
+}
 .icon-add-outline:before {
   content: "\e900";
 }
@@ -41,6 +92,12 @@
 }
 .icon-close-solid:before {
   content: "\e905";
+}
+.icon-reply-all:before {
+  content: "\e93a";
+}
+.icon-send:before {
+  content: "\e93b";
 }
 .icon-arrow-sync:before {
   content: "\e906";
@@ -69,14 +126,20 @@
 .icon-media-rewind-outline:before {
   content: "\e90c";
 }
-.icon-trash:before {
-  content: "\e92b";
-}
 .icon-pencil:before {
   content: "\e90d";
 }
 .icon-stack:before {
   content: "\e90e";
+}
+.icon-price-tag:before {
+  content: "\e93c";
+}
+.icon-price-tags:before {
+  content: "\e93d";
+}
+.icon-spinner11:before {
+  content: "\e984";
 }
 .icon-search:before {
   content: "\e90f";

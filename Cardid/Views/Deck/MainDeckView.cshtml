@@ -83,8 +83,18 @@ else
             <p class="bold large-type tagsearch-heading">Search decks by tag</p>
 
             <div class="tagviews">
-                <p class="tagview-pop bold">sort by popularity</p>
-                <p class="tagview-alph pointer">sort alphabetically</p>
+                <span class="bold tagview-pop">
+                    sort by popularity
+                </span>
+                <span class="icons pointer large-type toggle-left">
+                    &#xe93e;
+                </span>
+                <span class="icons pointer large-type toggle-right hidden">
+                    &#xe93f;
+                </span>
+                <span class="pointer tagview-alph">
+                    sort alphabetically
+                </span>
             </div>
 
             <div class="tag-container">
@@ -92,34 +102,34 @@ else
                 <div class="tags-pop">
 
                     @foreach (Tag tag in tagsByPopularity)
-                    {
-                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-                    }
+            {
+                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
+    }
                 </div>
 
                 <div class="tags-alph hidden">
 
                     @foreach (Tag tag in tagsByName)
-                    {
-                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-                    }
+            {
+                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
+    }
                 </div>
 
             </div>
             @using (Html.BeginForm("CreateTag", "Deck"))
-            {
-                <div>
-                    <input type="text" name="tagName" />
-                </div>
+    {
+        <div>
+            <input type="text" name="tagName" />
+        </div>
 
-                <button type="submit" class="btn main-btn">
-                    <span class="icons">
-                        &#xe900;
-                    </span>
-                    <span class="tab"></span>
-                    Create a new tag
-                </button>
-            }
+        <button type="submit" class="btn main-btn">
+            <span class="icons">
+                &#xe900;
+            </span>
+            <span class="tab"></span>
+            Create a new tag
+        </button>
+}
 
         </div>
     </div>
@@ -146,7 +156,13 @@ else
 
         @if (userDecks)
         {
-            <h2 class="view-title deck-heading">Your decks</h2>
+            <h2 class="view-title deck-heading">
+                Your decks
+            </h2>
+            <span class="tab"></span>
+            <span class="bold white small-type">
+                Click to view cards and edit
+            </span>
 
             foreach (Deck deck in Model)
             {
@@ -192,7 +208,14 @@ else
 
         @if (publicDecks)
         {
-            <h2 class="view-title deck-heading">Public decks</h2>
+            <h2 class="view-title deck-heading">
+                Public decks
+            </h2>
+            <span class="tab"></span>
+            <span class="bold white small-type">
+                Click to view cards
+            </span>
+
             foreach (Deck deck in Model)
             {
                 if (deck.UserID != userID)

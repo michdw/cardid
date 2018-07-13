@@ -33,17 +33,26 @@ else if (TempData["user-login"] != null)
             <p>
                 You currently have
                 <strong> @user.Cards().Count </strong>cards, and
-                <strong> @user.Decks().Count </strong>decks, and have logged
-                <strong> @user.Sessions().Count </strong>study sessions.
+                <strong> @user.Decks().Count </strong>decks.
             </p>
+            @if (user.Sessions().Count > 0)
+            {
+                <p>
+                    You've logged
+                    <strong> @user.Sessions().Count </strong>study sessions.
+                    @Html.ActionLink("Study some more!", "Index", "Deck", null, new { @class = "underline" })
+                </p>
+            }
+            else
+            {
+                <p>
+                    No study sessions yet.
+                    @Html.ActionLink("Get started", "Index", "Deck", null, new { @class = "underline" })
+                </p>
+            }
         </div>
         <div class="home-headcolumn">
-            <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "link-inline-dark" })
-            </p>
-            <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + " View and study decks", "Index", "Deck", null, new { @class = "link-inline-dark" })
-            </p>
+
         </div>
     </div>
 }
