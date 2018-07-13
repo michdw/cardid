@@ -1,42 +1,7 @@
 ﻿
-//function deactivate(buttons) {
-//    buttons.prop('disabled', true);
-
-//    buttons.css({
-//        background: '#777',
-//        color: '#aaa',
-//        border: '1px solid #777'
-//    });
-
-//    buttons.hover(function () {
-//        $(this).css({
-//            opacity: '1',
-//            cursor: 'default'
-//        });
-//    });
-//}
-
-//function reactivate(buttons) {
-//    buttons.prop('disabled', true);
-
-//    otherButtons.prop('disabled', false);
-//    otherButtons.css({
-//        background: '#333',
-//        color: '#fff',
-//        border: '1px solid #fff'
-//    });
-
-//    otherButtons.hover(function () {
-//        $(this).css({
-//            opacity: '.7',
-//            cursor: 'pointer'
-//        });
-//    });
-//}
-
-
 $(document).ready(function () {
 
+    //expand and collapse tag view
     $('.expand').on('click', function () {
         $(this).addClass('hidden');
         $('.partial-tags').addClass('hidden');
@@ -51,9 +16,9 @@ $(document).ready(function () {
         $('.expand').removeClass('hidden');
     });
 
+    //show and hide delete option
     $('.delete-init').on('click', function () {
         $(this).hide();
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
         $('.delete-submit').css('display', 'inline-block');
     });
 
@@ -61,4 +26,11 @@ $(document).ready(function () {
         $('.delete-submit').css('display', 'none');
         $('.delete-init').show();
     });
+
+    //show rename option
+    $('.rename-init').on('click', function () {
+        $(this).hide();
+        $('.rename-submit').removeClass('hidden');
+    });
+
 });

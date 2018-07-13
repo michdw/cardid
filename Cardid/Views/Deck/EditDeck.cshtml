@@ -13,16 +13,18 @@
 </h2>
 
 
-<div class="flex flex-left">
+<div class="flex flex-baseline">
 
     <div class="editdeck-left">
 
         <div>
-
+            <p class="at-top at-bottom">
+                <span class="icons">
+                    &#xe915;
+                </span>
+                Study:
+            </p>
             <div>
-                <div>
-                    Study:
-                </div>
                 <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
                     <span class="icons">
                         &#xe915;&nbsp;
@@ -36,41 +38,53 @@
                     Back first
                 </a>
             </div>
+        </div>
 
-            <div>
+        <div>
 
-                @if (Model.IsPublic == false)
-                {
-                    <p>
-                        <span class="icons">
-                            &#xe910;
-                        </span>
-                        This deck is visible only to you.
-                    </p>
-                    <a href="@Url.Action("MakeDeckPublic", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
-                        <span class="icons">&#xe911;</span>
-                        <span class="tab"></span>
-                        Make public
-                    </a>
-                }
-                else
-                {
-                    <p>
-                        <span class="icons">
-                            &#xe911;
-                        </span>
-                        This deck is visible to everyone.
-                    </p>
-                    <a href="@Url.Action("MakeDeckPrivate", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
-                        <span class="icons">&#xe910;</span>
-                        <span class="tab"></span>
-                        Make private
-                    </a>
-                }
+            @if (Model.IsPublic == false)
+            {
+                <p class="at-bottom">
+                    <span class="icons">
+                        &#xe910;
+                    </span>
+                    This deck is visible only to you.
+                </p>
+                <a href="@Url.Action("MakeDeckPublic", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
+                    <span class="icons">&#xe911;</span>
+                    <span class="tab"></span>
+                    Make public
+                </a>
+            }
+            else
+            {
+                <p class="at-bottom">
+                    <span class="icons">
+                        &#xe911;
+                    </span>
+                    This deck is visible to everyone.
+                </p>
+                <a href="@Url.Action("MakeDeckPrivate", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
+                    <span class="icons">&#xe910;</span>
+                    <span class="tab"></span>
+                    Make private
+                </a>
+            }
 
+        </div>
+
+        <div>
+            <div class="rename-init">
+                <span class="btn main-btn">
+                    <span class="icons">
+                        &#xe90d;
+                    </span>
+                    <span class="tab"></span>
+                    Rename deck
+                </span>
             </div>
 
-            <div>
+            <div class="rename-submit hidden">
 
                 @using (Html.BeginForm("ChangeDeckName", "Deck"))
                 {
@@ -82,19 +96,49 @@
                         Rename deck
                     </button>
                     @Html.HiddenFor(m => m.DeckID)
-                    @Html.TextBoxFor(m => m.DeckName)
+                    @Html.TextBoxFor(m => m.DeckName, new { @class = "popup" })
                 }
-
             </div>
+
         </div>
+
+        <div>
+            <div class="btn delete-btn delete-init">
+                <span class="icons">
+                    &#xe914;
+                </span>
+                <span class="tab"></span>
+                Delete This Deck
+            </div>
+
+            @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
+            {
+                <span>Deleting a deck will also delete all cards that exist only in that deck. Continue?</span>
+                <div>
+                    <button type="reset" class="btn main-btn cancel-btn">
+                        <span class="icons">
+                            &#xe922;
+                        </span>
+                        &nbsp;Cancel
+                    </button>
+                    <button type="submit" class="btn delete-btn">
+                        <span class="icons">
+                            &#xe914;
+                        </span>
+                        Confirm Delete
+                    </button>
+                </div>
+            }
+        </div>
+
     </div>
 
     <div class="editdeck-right module">
 
         @if (Model.Tags().Count > 0)
         {
+            <h4 class="bold at-top at-bottom">Tags</h4>
             <div class="tag-container">
-                <h4 class="bold at-top">Tags</h4>
 
                 @foreach (Tag tag in Model.Tags())
                 {
@@ -112,7 +156,7 @@
             </div>
         }
 
-        <h4 class="bold at-top">
+        <h4 class="bold at-top at-bottom">
             Add Tags
         </h4>
 
@@ -183,18 +227,20 @@
 </div>
 
 
+
+<div class="spacer"></div>
 <h2 class="view-title">Cards:</h2>
 
 
-<div class="flex flex-left">
+<div class="flex flex-center">
 
     <div class="card-blank">
-        <span class="bold">Create a new card for this deck:</span>
+        <span class="small-type">Create a new card for this deck:</span>
 
         @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
         {
-            @Html.TextBoxFor(m => m.NewCardFront)
-            @Html.TextBoxFor(m => m.NewCardBack)
+            @Html.TextBoxFor(m => m.NewCardFront, new { placeholder = "front" })
+            @Html.TextBoxFor(m => m.NewCardBack, new { placeholder = "back" })
             <div>
                 <button type="submit" class="btn main-btn">
                     <span class="icons">
@@ -237,34 +283,7 @@
 </div>
 
 
-<div>
-    <button class="btn delete-btn delete-init">
-        <span class="icons">
-            &#xe914;
-        </span>
-        <span class="tab"></span>
-        Delete This Deck
-    </button>
 
-    @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
-    {
-        <span>Deleting a deck will also delete all cards that exist only in that deck. Continue?</span>
-        <div>
-            <button type="reset" class="btn main-btn">
-                <span class="icons">
-                    &#xe922;
-                </span>
-                Cancel
-            </button>
-            <button type="submit" class="btn delete-btn">
-                <span class="icons">
-                    &#xe914;
-                </span>
-                Confirm Delete
-            </button>
-        </div>
-    }
-</div>
 
 
 <script type="text/javascript" src="../../Content/editDeck.js"></script>

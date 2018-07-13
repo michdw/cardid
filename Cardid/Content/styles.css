@@ -104,8 +104,16 @@ a {
     cursor: pointer;
 }
 
+/*.popup {
+    width: 100%;
+}*/
+
 .small-type {
     font-size: .9em;
+}
+
+.spacer {
+    height: 1em;
 }
 
 .tab {
@@ -238,8 +246,9 @@ a {
 /* forms */
 
 input {
-    padding: 6px;
-    margin: 4px 0;
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255,255,255,.5);
     border: 1px solid rgba(0,0,0,.4);
 }
 
@@ -252,10 +261,19 @@ label {
 
 textarea {
     display: block;
+    width: 95%;
+    max-width: 95%;
+    height: 3em;
+    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(0,0,0,.4);
 }
 
 .card-content label {
     text-align: left;
+}
+
+.popup {
+    width: 90%;
 }
 
 .wide-label {
@@ -427,6 +445,7 @@ textarea {
     width: 20%;
     min-width: 200px;
     padding: 1em;
+    padding-top: 0;
 }
 
 .card-field {
@@ -512,7 +531,6 @@ textarea {
 
 .deckname-listing {
     display: inline-block;
-    margin-bottom: 1em;
     font-size: 1.2em;
 }
 
@@ -521,6 +539,7 @@ textarea {
 .delete-submit {
     display: none;
     padding: 1em 2em;
+    margin: .5em 0;
     background: rgba(0,0,0,.5);
     color: #fff;
 }
@@ -531,8 +550,23 @@ textarea {
 }
 
 .editdeck-right {
+    display: inline-table;
     width: 60%;
     min-width: 250px;
+}
+
+@media screen and (max-width: 890px) {
+    .editdeck-left, .editdeck-right {
+        width: 100%;
+    }
+}
+
+.listing-section {
+    margin-top: 1em;
+}
+
+.listing-subsection {
+    display: inline-block;
 }
 
 /* tags */
@@ -558,7 +592,7 @@ textarea {
 .tag-container {
     clear: both;
     overflow: auto;
-    padding: 1em 0;
+    padding: .5em 0;
 }
 
 .tags-alph, .tags-pop {
