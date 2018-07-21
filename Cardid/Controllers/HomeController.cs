@@ -328,6 +328,12 @@ namespace Cardid.Controllers
                 PublicDecks = false
             };
 
+            if (searchString != null && searchString.Length == 0)
+            {
+                TempData["searchstring-missing"] = true;
+                search.SearchString = null;
+            }
+
             if (searchString != null)
             {
                 search.MatchingCards = cardSql.SearchCardsForText(searchString);

@@ -111,6 +111,12 @@ namespace Cardid.Controllers
         public ActionResult CreateTag(string tagName)
         {
             string userID = GetUser();
+            if (tagName == null || tagName.Length == 0)
+            {
+                TempData["tagname-missing"] = true;
+                return RedirectToAction("Index");
+            }
+
             tagName = tagName.ToLower();
 
             //check if tag name exists already
@@ -234,6 +240,7 @@ namespace Cardid.Controllers
         {
             if (searchString.Length == 0)
             {
+                TempData["searchstring-missing"] = true;
                 return RedirectToAction("Index");
             }
             string userID = GetUser();

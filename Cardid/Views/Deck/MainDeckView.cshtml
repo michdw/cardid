@@ -51,22 +51,27 @@ else
         <div>
             @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
             {
-                @Html.ActionLink("View all available decks", "Index", "Deck", null, new { @class = "btn main-btn" })
+                <a href="@Url.Action("Index", "Deck")", style="margin-top:0;margin-bottom:1em"class="btn main-btn">
+                    <span class="icons">
+                        &#xe932;
+                    </span>
+                    View all available decks
+                </a>
             }
 
             @using (Html.BeginForm("SearchDeckNames", "Deck"))
             {
                 <div>
-                    <input type="text" name="searchString" />
+                    <input type="text" name="searchString" class="single-input" placeholder="deck name" />
                 </div>
 
-                <button type="submit" class="btn main-btn">
+                <div class="btn main-btn submit-btn">
                     <span class="icons">
                         &#xe90f;
                     </span>
                     <span class="tab"></span>
                     Search decks by name
-                </button>
+                </div>
             }
 
             <a href="@Url.Action("CreateDeckInit", "Deck")" , class="btn main-btn">
@@ -102,34 +107,34 @@ else
                 <div class="tags-pop">
 
                     @foreach (Tag tag in tagsByPopularity)
-            {
-                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-    }
+                    {
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
+                    }
                 </div>
 
                 <div class="tags-alph hidden">
 
                     @foreach (Tag tag in tagsByName)
-            {
-                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-    }
+                    {
+                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
+                    }
                 </div>
 
             </div>
             @using (Html.BeginForm("CreateTag", "Deck"))
-    {
-        <div>
-            <input type="text" name="tagName" />
-        </div>
+            {
+                <div>
+                    <input type="text" name="tagName" class="single-input" placeholder="new tag name" />
+                </div>
 
-        <button type="submit" class="btn main-btn">
-            <span class="icons">
-                &#xe900;
-            </span>
-            <span class="tab"></span>
-            Create a new tag
-        </button>
-}
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe900;
+                    </span>
+                    <span class="tab"></span>
+                    Create a new tag
+                </button>
+            }
 
         </div>
     </div>
@@ -161,6 +166,9 @@ else
             </h2>
             <span class="tab"></span>
             <span class="bold white small-type">
+                <span class="icons">
+                    &#xe931;
+                </span>
                 Click to view cards and edit
             </span>
 
@@ -213,6 +221,9 @@ else
             </h2>
             <span class="tab"></span>
             <span class="bold white small-type">
+                <span class="icons">
+                    &#xe931;
+                </span>
                 Click to view cards
             </span>
 
@@ -276,6 +287,11 @@ else
         $('.deck-listing').on('click', function () {
             $(this).find('.deckname-listing')[0].click();
         });
+
+        $('.submit-btn').on('click', function () {
+            $(this).closest('form').submit();
+        });
     });
+
 
 </script>
