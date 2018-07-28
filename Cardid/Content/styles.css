@@ -23,7 +23,8 @@ body {
     background: url('Backgrounds/arrowbg5.png') no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    overflow-x: hidden;
+    background-position: center;
+    overflow: hidden;
     font-family: 'Encode Sans Semi Expanded', sans-serif;
 }
 
