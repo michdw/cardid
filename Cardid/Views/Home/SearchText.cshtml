@@ -14,7 +14,7 @@
 else
 {
     <h2 class="view-title">
-        Search results for
+        Search results for:
         <span class="large-type">@Model.SearchString</span>
     </h2>
 }
@@ -24,7 +24,7 @@ else
     @using (Html.BeginForm("SearchText", "Home", null, FormMethod.Get, new { @class = "vertical-form" }))
     {
         <div>
-            <input type="text" name="searchString" class="single-input" />
+            <input type="text" name="searchString" class="single-input" placeholder="text to search for" />
         </div>
         <div>
             <button type="submit" class="btn main-btn">
@@ -50,25 +50,39 @@ else
 
             @if (Model.MatchingCards.Count == 0)
             {
-                <p>
+                <p class="at-bottom at-top">
                     No cards found containing that text.
                 </p>
             }
             else
             {
                 <div>
-                    <p>
+                    <p class="at-top">
                         @Model.MatchingCards.Count matches found
                     </p>
 
-                    <span class="btn main-btn show-btn">show</span>
+                    <button class="btn main-btn show-btn">
+                        <span class="icons">
+                            &#xe931;
+                        </span>
+                        Show
+                    </button>
                 </div>
 
                 <div class="results-section hidden">
 
+                    <button class="btn main-btn hide-btn">
+                        <span class="icons">
+                            &#xe934;
+                        </span>
+                        Hide
+                    </button>
+
                     @if (Model.UserCards == true)
                     {
                         <div class="results-subsection flex flex-left">
+
+
                             <h2 class="view-title results-title">Your Cards</h2>
 
                             @foreach (Card thisCard in Model.MatchingCards)
@@ -149,7 +163,6 @@ else
 
                     }
 
-                    <button class="btn main-btn hide-btn">Hide</button>
                 </div>
             }
         </div>
@@ -165,30 +178,59 @@ else
             @if (Model.MatchingDecks.Count > 0)
             {
                 <div>
-                    <p>
+                    <p class="at-top">
                         @Model.MatchingDecks.Count matches found
                     </p>
 
-                    <span class="btn main-btn show-btn">show</span>
+                    <button class="btn main-btn show-btn">
+                        <span class="icons">
+                            &#xe931;
+                        </span>
+                        Show
+                    </button>
                 </div>
 
 
                 <div class="results-section hidden">
 
+                    <button class="btn main-btn hide-btn">
+                        <span class="icons">
+                            &#xe934;
+                        </span>
+                        Hide
+                    </button>
+
                     @foreach (Deck thisDeck in Model.MatchingDecks)
                     {
-                        <div class="deck-listing">
-                            <p class="deckname-listing">@thisDeck.DeckName</p>
-                        </div>
+                        if (Model.UserID == thisDeck.UserID)
+                        {
+                            <a href="@Url.Action("EditDeck", "Deck", new { deckID = thisDeck.DeckID })" class="deck-listing">
+                                <span class="icons large-type">
+                                    &#xe90e;
+                                </span>
+                                <span class="tab"></span>
+                                <p class="deckname-listing">@thisDeck.DeckName</p>
+                            </a>
+                        }
+
+                        else
+                        {
+                            <a href="@Url.Action("ViewDeck", "Deck", new { deckID = thisDeck.DeckID })" class="deck-listing">
+                                <span class="icons large-type">
+                                    &#xe90e;
+                                </span>
+                                <span class="tab"></span>
+                                <p class="deckname-listing">@thisDeck.DeckName</p>
+                            </a>
+                        }
                     }
 
-                    <button class="btn main-btn hide-btn">Hide</button>
                 </div>
 
             }
             else
             {
-                <p>
+                <p class="at-bottom at-top">
                     No decks found containing that text.
                 </p>
             }
@@ -205,27 +247,41 @@ else
             @if (Model.MatchingTags.Count > 0)
             {
                 <div>
-                    <p>
+                    <p class="at-top">
                         @Model.MatchingTags.Count matches found
                     </p>
 
-                    <span class="btn main-btn show-btn">Show</span>
+                    <button class="btn main-btn show-btn">
+                        <span class="icons">
+                            &#xe931;
+                        </span>
+                        Show
+                    </button>
                 </div>
 
 
                 <div class="results-section hidden">
 
-                    @foreach (Tag thisTag in Model.MatchingTags)
-                    {
-                        @Html.ActionLink(thisTag.TagName, "SearchDeckTags", "Deck", new { searchString = thisTag.TagName }, new { @class = "tag search-tag" });
-                    }
-                    <button class="btn main-btn hide-btn">Hide</button>
+                    <button class="btn main-btn hide-btn">
+                        <span class="icons">
+                            &#xe934;
+                        </span>
+                        Hide
+                    </button>
+
+                    <div>
+                        @foreach (Tag thisTag in Model.MatchingTags)
+                        {
+                            @Html.ActionLink(thisTag.TagName, "SearchDeckTags", "Deck", new { searchString = thisTag.TagName }, new { @class = "tag search-tag" });
+                        }
+                    </div>
+
                 </div>
 
             }
             else
             {
-                <p>
+                <p class="at-bottom at-top">
                     No tags found containing that text
                 </p>
             }
