@@ -6,7 +6,9 @@
     ViewBag.Title = "Your Account: " + Model.DisplayName;
 }
 
-<h2 class="view-title">@Model.DisplayName</h2>
+<h1 class="view-title">
+    @Model.DisplayName
+</h1>
 
 <div>
     <a href=@Url.Action("ChangeInfoInit", "Home") class="btn main-btn">
@@ -44,7 +46,7 @@
         </span>
         Show
     </div>
-    <div class="btn main-btn hide-btn hidden">
+    <div class="btn main-btn hide-btn" style="display:none">
         <span class="icons">
             &#xe934;
         </span>
@@ -71,14 +73,14 @@
     $(document).ready(function () {
 
         $('.show-btn').on('click', function () {
-            $(this).addClass('hidden');
-            $('.hide-btn').removeClass('hidden');
+            $(this).css('display', 'none');
+            $('.hide-btn').css('display', 'inline-block');
             $('.study-list').removeClass('hidden');
         });
 
         $('.hide-btn').on('click', function () {
-            $(this).addClass('hidden');
-            $('.show-btn').removeClass('hidden');
+            $(this).css('display', 'none');
+            $('.show-btn').css('display', 'inline-block');
             $('.study-list').addClass('hidden');
         });
 
