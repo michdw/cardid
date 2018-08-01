@@ -603,8 +603,8 @@ textarea {
         color: #fff;
     }
 
-.full-tags {
-    margin-top: 1em;
+.deck-tags {
+    margin-top: .5em;
 }
 
 .tag {

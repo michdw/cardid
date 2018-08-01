@@ -7,10 +7,10 @@
 
 <h2 class="view-title">
     Edit Your Deck
+    <span class="tab"></span>
     <span class="icons">
         &#xe90e;
     </span>
-    <span class="tab"></span>
     <span class="large-type">
         @Model.DeckName
     </span>
@@ -170,7 +170,7 @@
             </div>
         }
 
-        <p class="at-top at-bottom">
+        <p class="at-bottom">
             <span class="icons">
                 &#xe900;&nbsp;
             </span>
@@ -179,26 +179,7 @@
             </span>
         </p>
 
-        <div class="partial-tags">
-            <div class="tag-container">
-
-                @for (int i = 0; i < 14; i++)
-                {
-                    Tag tag = Model.OtherTagsByPopularity()[i];
-                    @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
-                }
-
-            </div>
-        </div>
-
-        <p class="expand pointer at-top at-bottom">
-            <span class="icons">
-                &#xe931;&nbsp;
-            </span>
-            See all
-        </p>
-
-        <div class="full-tags hidden">
+        <div class="deck-tags">
 
             <div class="tagviews">
                 <span class="bold tagview-pop">
@@ -233,32 +214,25 @@
                 </div>
             </div>
 
-            <div>
-                <h4 class="bold">Create a new tag for this deck:</h4>
+        </div>
 
-                @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
-                {
-                    @Html.TextBoxFor(m => m.NewTag.TagName)
+        <div>
+            <h4 class="bold at-bottom">Create a new tag for this deck:</h4>
 
-                    @Html.HiddenFor(m => Model.DeckID)
+            @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
+            {
+                @Html.TextBoxFor(m => m.NewTag.TagName, new { @placeholder = "new tag name" })
 
-                    <button type="submit" class="btn main-btn">
-                        <span class="icons">
-                            &#xe900;
-                        </span>
-                        <span class="tab"></span>
-                        Add tag
-                    </button>
-                }
+                @Html.HiddenFor(m => Model.DeckID)
 
-            </div>
-
-            <span class="collapse pointer at-top at-bottom hidden">
-                <span class="icons">
-                    &#xe934;&nbsp;
-                </span>
-                Collapse
-            </span>
+                <button type="submit" class="btn main-btn" style="margin:0;margin-left:1em">
+                    <span class="icons">
+                        &#xe900;
+                    </span>
+                    <span class="tab"></span>
+                    Add tag
+                </button>
+            }
 
         </div>
     </div>
@@ -325,7 +299,6 @@
 
 
 
-<script type="text/javascript" src="../../Content/editDeck.js"></script>
 <script type="text/javascript" src="../../Content/deckTags.js"></script>
 <script type="text/javascript" src="../../Content/cardView.js"></script>
 
