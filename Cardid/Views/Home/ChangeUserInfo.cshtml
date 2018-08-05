@@ -55,7 +55,47 @@
     </div>
 }
 
-@using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post))
+<div class="btn delete-btn delete-init">
+    <span class="icons">
+        &#xe904;
+    </span>
+    &nbsp;Delete Account
+</div>
+
+@using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post, new { @class = "delete-submit" }))
 {
-    <button type="submit" class="btn delete-btn">Delete account</button>
+    <div>
+        <span>Are you sure you want to delete your account? This cannot be undone.</span>
+        <div>
+            <button type="reset" class="btn main-btn cancel-btn">
+                <span class="icons">
+                    &#xe932;
+                </span>
+                &nbsp;Cancel
+            </button>
+            <span class="tab"></span>
+            <button type="submit" class="btn delete-btn">
+                <span class="icons">
+                    &#xe904;
+                </span>
+                &nbsp;Confirm Delete
+            </button>
+        </div>
+    </div>
 }
+
+<script>
+
+    $(document).ready(function () {
+        $('.delete-init').on('click', function () {
+            $(this).hide();
+            $('.delete-submit').css('display', 'inline-block');
+        });
+
+        $('.cancel-btn').on('click', function () {
+            $('.delete-submit').css('display', 'none');
+            $('.delete-init').show();
+        });
+    });
+
+</script>
