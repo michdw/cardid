@@ -287,6 +287,12 @@ namespace Cardid.Controllers
         }
 
 
+        public ActionResult StudyComplete(Study study)
+        {
+            return View(study);
+        }
+
+
         [HttpPost]
         public ActionResult StudyLog(Study study)
         {
@@ -298,12 +304,6 @@ namespace Cardid.Controllers
                 studySql.LogStudySession(study);
             }
             return RedirectToAction("StudyComplete", study);
-        }
-
-
-        public ActionResult StudyComplete(Study study)
-        {
-            return View(study);
         }
 
 

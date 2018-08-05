@@ -22,9 +22,9 @@
         @Html.HiddenFor(m => m.UserID)
         @Html.LabelFor(m => m.DisplayName)
         @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
-    </div>
 
-    <button type="submit">Submit</button>
+        <button type="submit" class="btn inline-btn">Submit</button>
+    </div>
 }
 
 @using (Html.BeginForm("ChangeEmail", "Home", FormMethod.Post))
@@ -33,9 +33,9 @@
         @Html.HiddenFor(m => m.UserID)
         @Html.LabelFor(m => m.Email)
         @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
-    </div>
 
-    <button type="submit">Submit</button>
+        <button type="submit" class="btn inline-btn">Submit</button>
+    </div>
 }
 
 @using (Html.BeginForm("ChangePassword", "Home", FormMethod.Post))
@@ -50,12 +50,12 @@
     <div class="formValidationGroup">
         @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
         @Html.PasswordFor(m => m.ConfirmPassword)
-    </div>
 
-    <button type="submit">Submit</button>
+        <button type="submit" class="btn inline-btn">Submit</button>
+    </div>
 }
 
 @using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post))
 {
-    <button type="submit">Delete account</button>
+    <button type="submit" class="btn delete-btn">Delete account</button>
 }

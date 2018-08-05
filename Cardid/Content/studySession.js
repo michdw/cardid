@@ -70,6 +70,7 @@ $(document).ready(function () {
         toRedo += cardID + ',';
     });
 
+
     $('.mark-right, .mark-wrong').click(function () {
         totalViewed++;
 

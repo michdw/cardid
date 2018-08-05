@@ -300,7 +300,6 @@ textarea {
     cursor: pointer;
     user-select: none;
     display: inline-block;
-    margin-top: .5em;
     padding: 8px 12px;
     font-size: 14px;
     border-radius: 4px;
@@ -312,6 +311,12 @@ textarea {
         opacity: .7;
     }
 
+.inline-btn, .main-btn, .top-btn {
+    background: #333;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
 .top-btn {
     width: 10vw;
     margin: 10px;
@@ -319,12 +324,10 @@ textarea {
 }
 
 .top-btn, .main-btn {
-    background: #333;
-    color: #fff;
-    border: 1px solid #fff;
+    margin-top: .5em;
 }
 
-    .top-btn:hover, .main-btn:hover {
+    .inline-btn:hover, .top-btn:hover, .main-btn:hover {
         background: #fff;
         color: #333;
         border: 1px solid #333;
@@ -334,6 +337,7 @@ textarea {
     background: #993737;
     color: #fff;
     border: 1px solid #fff;
+    margin-top: .5em;
 }
 
     .delete-btn:hover {
@@ -341,6 +345,7 @@ textarea {
         color: #993737;
         border: 1px solid #993737;
     }
+
 
 /* homepage */
 
@@ -628,10 +633,10 @@ textarea {
     margin-top: 0;
 }
 
-    .tagviews > p {
-        margin-top: 0;
-        float: left;
-    }
+.tagviews > p {
+    margin-top: 0;
+    float: left;
+}
 
 .tagview-alph {
     margin-left: 1em;

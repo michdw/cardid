@@ -51,7 +51,7 @@ else
         <div>
             @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
             {
-                <a href="@Url.Action("Index", "Deck")", style="margin-top:0;margin-bottom:1em"class="btn main-btn">
+                <a href="@Url.Action("Index", "Deck")" , style="margin-top:0;margin-bottom:1em" class="btn main-btn">
                     <span class="icons">
                         &#xe932;
                     </span>
@@ -123,11 +123,9 @@ else
             </div>
             @using (Html.BeginForm("CreateTag", "Deck"))
             {
-                <div>
-                    <input type="text" name="tagName" class="single-input" placeholder="new tag name" />
-                </div>
-
-                <button type="submit" class="btn main-btn">
+                <input type="text" name="tagName" class="single-input" placeholder="new tag name" />
+                <span class="tab"></span>
+                <button type="submit" class="btn inline-btn">
                     <span class="icons">
                         &#xe900;
                     </span>
