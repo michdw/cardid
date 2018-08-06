@@ -15,6 +15,7 @@
 
 /* general styles */
 
+
 body {
     margin: 0;
     padding: 0;
@@ -247,8 +248,8 @@ a {
 /* forms */
 
 input {
+    width: 178px;
     padding: 8px 10px;
-    margin: 10px 0;
     background: rgba(255,255,255,.7);
     border: 1px solid rgba(0,0,0,.4);
 }
@@ -273,12 +274,32 @@ textarea {
     text-align: left;
 }
 
+.formValidationGroup {
+    margin: 10px 0;
+}
+
 .popup {
     width: 90%;
 }
 
+.right-column {
+    margin-left: 164px;
+}
+
 .single-input {
     margin-bottom: 0;
+}
+
+.user-attr {
+    font-weight: bold;
+    width: 200px;
+    padding: 4px 3px;
+}
+
+.userinfo-result {
+    padding: .5em 1em;
+    color: #fff;
+    background: rgba(0,0,0,.3);
 }
 
 .vertical-form {
@@ -323,8 +344,8 @@ textarea {
     margin-bottom: 0;
 }
 
-.top-btn, .main-btn {
-    margin-top: .5em;
+.top-btn, .main-btn, .delete-btn {
+    margin-top: 10px;
 }
 
     .inline-btn:hover, .top-btn:hover, .main-btn:hover {
@@ -337,7 +358,6 @@ textarea {
     background: #993737;
     color: #fff;
     border: 1px solid #fff;
-    margin-top: .5em;
 }
 
     .delete-btn:hover {
