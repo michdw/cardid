@@ -51,7 +51,7 @@ namespace Cardid.Controllers
 
             List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
             Dictionary<Tag, int> popularTags = new Dictionary<Tag, int>();
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Tag tag = popularTagsSql[i];
                 int decksUsing = tag.Decks().Count;

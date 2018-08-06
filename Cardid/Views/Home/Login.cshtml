@@ -14,7 +14,7 @@
             @Html.ValidationMessage("invalid-credentials")
             if (ViewBag.RegisterInstead == true)
             {
-                @Html.ActionLink(" Sign up here", "BeginRegister", "Home");
+                @Html.ActionLink(" Sign up here", "BeginRegister", "Home", new { @class = "bold" });
             }
 
             <div class="formValidationGroup">

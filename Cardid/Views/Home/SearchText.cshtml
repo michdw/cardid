@@ -7,9 +7,10 @@
 
 @if (Model.SearchString == null)
 {
-    <h1 class="view-title">
-        Search for text in cards, decks, and tags
-    </h1>
+    <h2 class="view-title">
+        Search cards, decks & tags
+    </h2>
+    <div class="spacer"></div>
 }
 else
 {
@@ -17,6 +18,7 @@ else
         Search results for:
         <span class="large-type">@Model.SearchString</span>
     </h2>
+    <div class="spacer"></div>
 }
 
 <div>
@@ -57,7 +59,7 @@ else
             else
             {
                 <div>
-                    <p class="at-top">
+                    <p class="at-top at-bottom">
                         @Model.MatchingCards.Count matches found
                     </p>
 
@@ -77,6 +79,7 @@ else
                         </span>
                         Hide
                     </button>
+                    <div class="spacer"></div>
 
                     @if (Model.UserCards == true)
                     {
@@ -178,7 +181,7 @@ else
             @if (Model.MatchingDecks.Count > 0)
             {
                 <div>
-                    <p class="at-top">
+                    <p class="at-top at-bottom">
                         @Model.MatchingDecks.Count matches found
                     </p>
 
@@ -247,7 +250,7 @@ else
             @if (Model.MatchingTags.Count > 0)
             {
                 <div>
-                    <p class="at-top">
+                    <p class="at-top at-bottom">
                         @Model.MatchingTags.Count matches found
                     </p>
 
@@ -268,8 +271,9 @@ else
                         </span>
                         Hide
                     </button>
+                    <div class="spacer"></div>
 
-                    <div>
+                    <div class="tag-results">
                         @foreach (Tag thisTag in Model.MatchingTags)
                         {
                             @Html.ActionLink(thisTag.TagName, "SearchDeckTags", "Deck", new { searchString = thisTag.TagName }, new { @class = "tag search-tag" });

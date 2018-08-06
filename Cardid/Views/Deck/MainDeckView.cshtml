@@ -62,7 +62,7 @@ else
             @using (Html.BeginForm("SearchDeckNames", "Deck"))
             {
                 <div>
-                    <input type="text" name="searchString" class="single-input" placeholder="deck name to search for" />
+                    <input type="text" name="searchString" class="single-input" placeholder="deck name" />
                 </div>
 
                 <div class="btn main-btn submit-btn">
@@ -87,7 +87,7 @@ else
         <div class="option module">
             <p class="bold large-type tagsearch-heading">Search decks by tag</p>
 
-            <div class="tagviews">
+            <div class="tagviews small-type">
                 <span class="bold tagview-pop">
                     sort by popularity
                 </span>
@@ -127,7 +127,7 @@ else
                 <span class="tab"></span>
                 <button type="submit" class="btn inline-btn">
                     <span class="icons">
-                        &#xe900;
+                        &#xe93d;
                     </span>
                     <span class="tab"></span>
                     Create a new tag
@@ -159,6 +159,10 @@ else
 
         @if (userDecks)
         {
+            <span class="icons large-type white">
+                &#xe90e;
+            </span>
+            <span class="tab"></span>
             <h2 class="view-title deck-heading">
                 Your decks
             </h2>
@@ -176,7 +180,7 @@ else
                 {
                     <div class="deck-listing">
 
-                        @Html.ActionLink(@deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing bold" })
+                        @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing bold" })
 
                         <div class="listing-section">
                             <span class="small-type">
@@ -214,6 +218,10 @@ else
 
         @if (publicDecks)
         {
+            <span class="icons large-type white">
+                &#xe90e;
+            </span>
+            <span class="tab"></span>
             <h2 class="view-title deck-heading">
                 Public decks
             </h2>

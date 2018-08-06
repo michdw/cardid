@@ -6,11 +6,8 @@
 
 
 <h2 class="view-title">
-    Edit Your Deck
+    Edit Your Deck:
     <span class="tab"></span>
-    <span class="icons">
-        &#xe90e;
-    </span>
     <span class="large-type">
         @Model.DeckName
     </span>
@@ -150,7 +147,7 @@
                     &#xe93d;&nbsp;
                 </span>
                 <span class="bold">
-                    Tags
+                    Tags in this deck:
                 </span>
             </p>
             <div class="tag-container">
@@ -182,7 +179,7 @@
 
         <div class="deck-tags">
 
-            <div class="tagviews">
+            <div class="tagviews small-type">
                 <span class="bold tagview-pop">
                     sort by popularity
                 </span>
@@ -218,7 +215,7 @@
         </div>
 
         <div>
-            <h4 class="bold at-bottom">Create a new tag for this deck:</h4>
+            <h4 class="bold" style="margin-bottom:.75em">Create a new tag for this deck:</h4>
 
             @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
             {
@@ -243,7 +240,7 @@
 
 
 <div class="spacer"></div>
-<h2 class="view-title">Cards:</h2>
+<h2 class="view-title">Cards in this deck:</h2>
 
 
 <div class="flex flex-center">
