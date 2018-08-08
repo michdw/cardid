@@ -3,6 +3,8 @@
 @model Stats
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int listLength = 0;
 }
 
 
@@ -64,16 +66,21 @@ else if (TempData["user-login"] != null)
                 by study sessions logged:
             </p>
             <div class="leaderboard-list">
-                @foreach (KeyValuePair<string, int> kvp in Model.ActiveUsers)
-                {
-                    <p class="leaderboard-listing">
-                        <span class="listing-left">
-                            @kvp.Key
-                        </span>
-                        <span class="listing-right">
-                            @kvp.Value
-                        </span>
-                    </p>
+                @{
+                    listLength = Math.Min(10, Model.ActiveUsers.Count);
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        string name = Model.ActiveUsersOrder[i];
+
+                        <p class="leaderboard-listing">
+                            <span class="listing-left">
+                                @name
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveUsers[name]
+                            </span>
+                        </p>
+                    }
                 }
             </div>
         </div>
@@ -85,17 +92,20 @@ else if (TempData["user-login"] != null)
                 by number of times studied:
             </p>
             <div class="leaderboard-list">
-                @foreach (KeyValuePair<Deck, int> kvp in Model.ActiveDecks)
-                {
-                    Deck deck = kvp.Key;
-                    <p class="leaderboard-listing">
-                        <span class="listing-left">
-                            @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
-                        </span>
-                        <span class="listing-right">
-                            @kvp.Value
-                        </span>
-                    </p>
+                @{
+                    listLength = Math.Min(10, Model.ActiveDecks.Count);
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Deck deck = Model.ActiveDecksOrder[i];
+                        <p class="leaderboard-listing">
+                            <span class="listing-left">
+                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveDecks[deck]
+                            </span>
+                        </p>
+                    }
                 }
             </div>
         </div>
@@ -107,16 +117,21 @@ else if (TempData["user-login"] != null)
                 by number of decks:
             </p>
             <div class="leaderboard-list">
-                @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
-                {
-                    <p class="leaderboard-listing">
-                        <span class="listing-left">
-                            @Html.ActionLink(kvp.Key.TagName, "SearchDeckTags", "Deck", new { searchString = kvp.Key.TagName }, new { @class = "link-inline" })
-                        </span>
-                        <span class="listing-right">
-                            @kvp.Value
-                        </span>
-                    </p>
+                @{
+                    listLength = Math.Min(10, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <p class="leaderboard-listing">
+                            <span class="listing-left">
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                            </span>
+                            <span class="listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                        </p>
+                    }
                 }
             </div>
         </div>
@@ -124,25 +139,28 @@ else if (TempData["user-login"] != null)
 
         <div class="tag-leaderboard">
             <h2 class="view-title">Most Popular Tags</h2>
-            <p class="small-type">
+            <p class="small-type at-top">
                 by number of decks:
             </p>
             <div class="leaderboard-list">
-                @foreach (KeyValuePair<Tag, int> kvp in Model.PopularTags)
-                {
-                    <div class="tag-listing">
-                        <span class="tag-listing-left">
-                            @Html.ActionLink(kvp.Key.TagName, "SearchDeckTags", "Deck", new { searchString = kvp.Key.TagName }, new { @class = "link-inline" })
-                        </span>
-                        <span class="tag-listing-right">
-                            @kvp.Value
-                        </span>
-                    </div>
+                @{
+                    listLength = Math.Min(10, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <p class="leaderboard-listing">
+                            <span class="tag-listing-left">
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                            </span>
+                            <span class="tag-listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                        </p>
+                    }
                 }
             </div>
         </div>
-
-
 
     }
 </div>
