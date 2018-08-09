@@ -45,7 +45,7 @@
     {
         <div class="validation-group">
             @Html.HiddenFor(m => m.UserID)
-            @Html.LabelFor(m => m.DisplayName, "Display Name:")
+            @Html.LabelFor(m => m.DisplayName, "Display Name:", new { @class = "small-type" })
 
             <span class="userinfo-inactive">
                 <span class="user-attr">
@@ -78,7 +78,7 @@
     {
         <div class="validation-group">
             @Html.HiddenFor(m => m.UserID)
-            @Html.LabelFor(m => m.Email, "Email:")
+            @Html.LabelFor(m => m.Email, "Email:", new { @class = "small-type" })
 
             <span class="userinfo-inactive">
                 <span class="user-attr">

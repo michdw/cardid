@@ -803,3 +803,19 @@ textarea {
     background: #333;
     color: #fff;
 }
+
+.study-list {
+}
+
+.study-listing {
+    margin: 5px 0;
+    background: rgba(0,0,0,.2);
+    padding: 1px 1em;
+}
+
+.study-score {
+    display: inline-block;
+    background: rgba(0,0,0,.5);
+    padding: 5px 10px;
+    transform: translateX(-5px);
+}

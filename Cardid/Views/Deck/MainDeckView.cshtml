@@ -51,12 +51,14 @@ else
         <div>
             @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
             {
-                <a href="@Url.Action("Index", "Deck")" , style="margin-top:0;margin-bottom:1em" class="btn main-btn">
-                    <span class="icons">
-                        &#xe932;
-                    </span>
-                    View all available decks
-                </a>
+                <div>
+                    <a href="@Url.Action("Index", "Deck")" , style="margin-top:0;margin-bottom:10px" class="btn main-btn">
+                        <span class="icons">
+                            &#xe932;
+                        </span>
+                        View all available decks
+                    </a>
+                </div>
             }
 
             <a href="@Url.Action("CreateDeckInit", "Deck")" , class="btn main-btn">

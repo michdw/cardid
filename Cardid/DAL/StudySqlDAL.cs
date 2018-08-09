@@ -16,7 +16,7 @@ namespace Cardid.DAL
             this.connectionString = connectionString;
         }
 
-        private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID";
+        private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID order by TimeOf DESC";
         private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
         private string mostActiveDecks = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "

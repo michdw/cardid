@@ -7,11 +7,22 @@
 }
 
 <div>
-    <h2 class="view-title">
+    <h1 class="view-title">
         @Model.DisplayName
-    </h2>
+    </h1>
 </div>
 
+<div class="spacer"></div>
+<div>
+    <a href=@Url.Action("ChangeInfoInit", "Home") class="btn main-btn">
+        <span class="icons">
+            &#xe90d;
+        </span>
+        <span class="tab"></span>
+        Change info (name, email, password)
+    </a>
+</div>
+<div class="spacer"></div>
 
 <div class="module">
 
@@ -29,7 +40,7 @@
     @if (Model.Tags().Count() > 0)
     {
         <div>
-            <span class="icons large-type" style="width:40px">
+            <span class="icons" style="width:40px">
                 &#xe93d;
             </span>
             You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "TagView", "Deck", new { userID = Model.UserID }, null)
@@ -46,7 +57,7 @@
 
     @if (Model.Sessions().Count > 0)
     {
-        <div class="btn main-btn show-btn">
+        <div class="btn main-btn show-btn" style="margin-left:44px">
             <span class="icons">
                 &#xe931;
             </span>
@@ -65,24 +76,23 @@
 
         @foreach (Study session in Model.Sessions())
         {
-            <div>
-                @session.DeckName()
-                @session.Percentage() %
-                @session.TimeOf
+            <div class="study-listing">
+                <p class="at-top at-bottom">
+                    <span class="study-score">
+                        @session.Percentage() 
+                        <span class="small-type">
+                            %
+                        </span>
+                    </span>
+                    @Html.ActionLink(session.DeckName(), "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
+                </p>
+                <p class="small-type">
+                    @session.TimeOf.ToString("dd MMMM yyyy - hh:mm tt")
+                </p>
             </div>
         }
     </div>
 
-</div>
-
-<div>
-    <a href=@Url.Action("ChangeInfoInit", "Home") class="btn main-btn">
-        <span class="icons">
-            &#xe90d;
-        </span>
-        <span class="tab"></span>
-        Change user info (name, email, password)
-    </a>
 </div>
 
 <script>
