@@ -141,6 +141,15 @@
     </div>
 }
 
+@if (TempData["tag-removed"] != null)
+{
+    <div class="view-msg">
+        <span class="icons large-type">&#xe902;</span>
+        <span class="tab"></span>
+        Tag removed from deck
+    </div>
+}
+
 @if (TempData["tagname-missing"] != null)
 {
     <div class="view-msg">

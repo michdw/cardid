@@ -248,6 +248,8 @@ namespace Cardid.Controllers
             Tag tag = tagSql.GetTagByID(tagID);
             tagSql.RemoveTagFromDeck(deckID, tagID);
 
+            TempData["tag-removed"] = true;
+
             return RedirectToAction("EditDeck", new { deckID });
         }
 

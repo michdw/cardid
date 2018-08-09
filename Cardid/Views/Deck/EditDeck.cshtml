@@ -278,6 +278,16 @@
                     <span class="tab"></span>
                     Edit this card
                 </a>
+                @if (thisCard.AvailableDecks().Count > 0)
+                {
+                    <a href="@Url.Action("ChooseDeckInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
+                        <span class="icons">
+                            &#xe90e;
+                        </span>
+                        <span class="tab"></span>
+                        Add to a different deck
+                    </a>
+                }
                 <a href="@Url.Action("RemoveCardFromDeck", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
                     <span class="icons">
                         &#xe914;
