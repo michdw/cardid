@@ -74,11 +74,9 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult EditCardInit(string cardID, string deckID)
+        public ActionResult EditCardInit(string cardID)
         {
             GetUser();
-
-            Session["currentdeck"] = deckSql.GetDeckByID(deckID);
 
             Card card = cardSql.GetCardByID(cardID);
 
@@ -92,11 +90,9 @@ namespace Cardid.Controllers
         {
             GetUser();
 
-            Deck deck = Session["currentdeck"] as Deck;
-
             cardSql.EditCard(newValues);
 
-            return RedirectToAction("EditCardInit", new { cardID = newValues.CardID, deckID = deck.DeckID });
+            return RedirectToAction("EditCardInit", new { cardID = newValues.CardID });
         }
 
 
