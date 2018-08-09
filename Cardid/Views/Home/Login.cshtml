@@ -6,7 +6,7 @@
 
 <h1 class="view-title">Login</h1>
 
-<div class="flex flex-baseline">
+<div>
 
     <div class="module">
         @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
@@ -17,12 +17,12 @@
                 @Html.ActionLink(" Sign up here", "BeginRegister", "Home", new { @class = "bold" });
             }
 
-            <div class="formValidationGroup">
+            <div class="validation-group">
                 @Html.LabelFor(m => m.Email)
                 @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
             </div>
 
-            <div class="formValidationGroup">
+            <div class="validation-group">
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
             </div>

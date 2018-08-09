@@ -5,36 +5,34 @@
 }
 
 
-<h2 class="view-title">
-    View Cards in Deck:
-    <span class="tab"></span>
-    <span class="large-type">
-        @Model.DeckName
+<h1 class="view-title">
+
+    <span class="icons">
+        &#xe90e;
     </span>
-</h2>
+    <span class="half-tab"></span>
+    @Model.DeckName
+</h1>
 
-<p>This deck was shared by <strong>@Model.Creator().DisplayName</strong></p>
 
-<div class="flex flex-center">
+<div>
 
-    <div class="module">
-
-        <div class="bold">
-            Study this deck:
-        </div>
-        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
-            <span class="icons">
-                &#xe915;&nbsp;
-            </span>
-            Front first
-        </a>
-        <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
-            <span class="icons">
-                &#xe915;&nbsp;
-            </span>
-            Back first
-        </a>
+    <p class="at-top">Shared by <strong>@Model.Creator().DisplayName</strong></p>
+    <div class="large-type bold">
+        Study this deck:
     </div>
+    <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
+        <span class="icons">
+            &#xe915;&nbsp;
+        </span>
+        Front first
+    </a>
+    <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = false })" class="btn main-btn">
+        <span class="icons">
+            &#xe915;&nbsp;
+        </span>
+        Back first
+    </a>
 
 </div>
 

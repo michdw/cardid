@@ -59,21 +59,6 @@ else
                 </a>
             }
 
-            @using (Html.BeginForm("SearchDeckNames", "Deck"))
-            {
-                <div>
-                    <input type="text" name="searchString" class="single-input" placeholder="deck name" />
-                </div>
-
-                <div class="btn main-btn submit-btn">
-                    <span class="icons">
-                        &#xe90f;
-                    </span>
-                    <span class="tab"></span>
-                    Search decks by name
-                </div>
-            }
-
             <a href="@Url.Action("CreateDeckInit", "Deck")" , class="btn main-btn">
                 <span class="icons">
                     &#xe900;
@@ -81,6 +66,20 @@ else
                 <span class="tab"></span>
                 Create a new deck
             </a>
+            <div class="spacer"></div>
+
+            @using (Html.BeginForm("SearchDeckNames", "Deck"))
+            {
+                <div class="btn inline-btn submit-btn">
+                    <span class="icons">
+                        &#xe90f;
+                    </span>
+                    <span class="tab"></span>
+                    Search decks by name
+                </div>
+                <span class="half-tab"></span>
+                <input type="text" name="searchString" class="single-input" placeholder="deck name" />
+            }
 
         </div>
 
@@ -123,8 +122,6 @@ else
             </div>
             @using (Html.BeginForm("CreateTag", "Deck"))
             {
-                <input type="text" name="tagName" class="single-input" placeholder="new tag name" />
-                <span class="tab"></span>
                 <button type="submit" class="btn inline-btn">
                     <span class="icons">
                         &#xe93d;
@@ -132,6 +129,8 @@ else
                     <span class="tab"></span>
                     Create a new tag
                 </button>
+                <span class="half-tab"></span>
+                <input type="text" name="tagName" class="single-input" placeholder="new tag name" />
             }
 
         </div>

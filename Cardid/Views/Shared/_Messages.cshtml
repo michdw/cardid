@@ -28,7 +28,7 @@
     <div class="view-msg long-msg">
         <span class="icons large-type">&#xe902;</span>
         <span class="tab"></span>
-        Card has been removed
+        Card removed from deck
     </div>
 }
 
@@ -83,6 +83,15 @@
         <span class="icons large-type">&#xe917;</span>
         <span class="tab"></span>
         Please enter a name for your deck
+    </div>
+}
+
+@if (TempData["register-info-missing"] != null)
+{
+    <div class="view-msg">
+        <span class="icons large-type">&#xe917;</span>
+        <span class="tab"></span>
+        Please complete all the fields to register
     </div>
 }
 

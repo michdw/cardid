@@ -6,6 +6,7 @@
     ViewBag.Title = "ChangeUserInfo";
 }
 
+
 @if (TempData["change-error"] != null)
 {
     <div>
@@ -34,138 +35,148 @@
     <div class="spacer"></div>
 }
 
-<h2 class="view-title">Change User Info</h2>
-
-
-@using (Html.BeginForm("ChangeName", "Home", FormMethod.Post))
-{
-    <div class="formValidationGroup">
-        @Html.HiddenFor(m => m.UserID)
-        @Html.LabelFor(m => m.DisplayName, "Display Name:")
-
-        <span class="userinfo-inactive">
-            <span class="user-attr">
-                @Model.DisplayName
-            </span>
-            <span class="btn inline-btn userinfo-change">
-                <span class="icons">
-                    &#xe90d;
-                </span>
-                <span class="tab"></span>
-                Change
-            </span>
-        </span>
-
-        <span class="userinfo-active hidden">
-            @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
-
-            <button type="submit" class="btn inline-btn">
-                Submit
-                <span class="icons">
-                    &#xe933;
-                </span>
-            </button>
-        </span>
-    </div>
-}
-
-@using (Html.BeginForm("ChangeEmail", "Home", FormMethod.Post))
-{
-    <div class="formValidationGroup">
-        @Html.HiddenFor(m => m.UserID)
-        @Html.LabelFor(m => m.Email, "Email:")
-
-        <span class="userinfo-inactive">
-            <span class="user-attr">
-                @Model.Email
-            </span>
-            <span class="btn inline-btn userinfo-change">
-                <span class="icons">
-                    &#xe90d;
-                </span>
-                <span class="tab"></span>
-                Change
-            </span>
-        </span>
-
-        <span class="userinfo-active hidden">
-            @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
-
-            <button type="submit" class="btn inline-btn">
-                Submit
-                <span class="icons">
-                    &#xe933;
-                </span>
-            </button>
-        </span>
-
-    </div>
-}
-
-@using (Html.BeginForm("ChangePassword", "Home", FormMethod.Post))
-{
-    <div class="userinfo-inactive">
-        <span class="btn inline-btn userinfo-change right-column">
-            <span class="icons">
-                &#xe90d;
-            </span>
-            <span class="tab"></span>
-            Change Password
-        </span>
-    </div>
-
-    <div class="userinfo-active hidden">
-
-        <div class="formValidationGroup">
-            @Html.HiddenFor(m => m.UserID)
-            @Html.LabelFor(m => m.Password, "Password:")
-            @Html.PasswordFor(m => m.Password)
-        </div>
-
-        <div class="formValidationGroup">
-            @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password:")
-            @Html.PasswordFor(m => m.ConfirmPassword)
-
-            <button type="submit" class="btn inline-btn">
-                Submit
-                <span class="icons">
-                    &#xe933;
-                </span>
-            </button>
-        </div>
-
-    </div>
-}
-
-<div class="btn delete-btn delete-init right-column">
-    <span class="icons">
-        &#xe904;
-    </span>
-    <span class="tab"></span>
-    Delete Account
+<div>
+    <h2 class="view-title">Change User Info</h2>
 </div>
 
-@using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post, new { @class = "delete-submit" }))
-{
-    <div>
-        <span>Are you sure you want to delete your account? This cannot be undone.</span>
-        <div>
-            <button type="reset" class="btn main-btn cancel-btn">
-                <span class="icons">
-                    &#xe932;
+<div class="module">
+
+    @using (Html.BeginForm("ChangeName", "Home", FormMethod.Post))
+    {
+        <div class="validation-group">
+            @Html.HiddenFor(m => m.UserID)
+            @Html.LabelFor(m => m.DisplayName, "Display Name:")
+
+            <span class="userinfo-inactive">
+                <span class="user-attr">
+                    @Model.DisplayName
                 </span>
-                &nbsp;Cancel
-            </button>
-            <span class="tab"></span>
-            <button type="submit" class="btn delete-btn">
-                <span class="icons">
-                    &#xe904;
+                <span class="half-tab"></span>
+                <span class="btn inline-btn userinfo-change">
+                    <span class="icons">
+                        &#xe90d;
+                    </span>
+                    <span class="tab"></span>
+                    Change
                 </span>
-                &nbsp;Confirm Delete
-            </button>
+            </span>
+
+            <span class="userinfo-active hidden">
+                @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
+
+                <button type="submit" class="btn inline-btn">
+                    Submit
+                    <span class="icons">
+                        &#xe933;
+                    </span>
+                </button>
+            </span>
         </div>
+    }
+
+    @using (Html.BeginForm("ChangeEmail", "Home", FormMethod.Post))
+    {
+        <div class="validation-group">
+            @Html.HiddenFor(m => m.UserID)
+            @Html.LabelFor(m => m.Email, "Email:")
+
+            <span class="userinfo-inactive">
+                <span class="user-attr">
+                    @Model.Email
+                </span>
+                <span class="half-tab"></span>
+                <span class="btn inline-btn userinfo-change">
+                    <span class="icons">
+                        &#xe90d;
+                    </span>
+                    <span class="tab"></span>
+                    Change
+                </span>
+            </span>
+
+            <span class="userinfo-active hidden">
+                @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
+
+                <button type="submit" class="btn inline-btn">
+                    Submit
+                    <span class="icons">
+                        &#xe933;
+                    </span>
+                </button>
+            </span>
+
+        </div>
+    }
+
+    @using (Html.BeginForm("ChangePassword", "Home", FormMethod.Post))
+    {
+        <div class="userinfo-inactive">
+            <span class="btn inline-btn userinfo-change right-column">
+                <span class="icons">
+                    &#xe90d;
+                </span>
+                <span class="tab"></span>
+                Change Password
+            </span>
+        </div>
+
+        <div class="userinfo-active hidden">
+
+            <div class="validation-group">
+                @Html.HiddenFor(m => m.UserID)
+                @Html.LabelFor(m => m.Password, "Password:")
+                @Html.PasswordFor(m => m.Password)
+            </div>
+
+            <div class="validation-group">
+                @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password:")
+                @Html.PasswordFor(m => m.ConfirmPassword)
+
+                <button type="submit" class="btn inline-btn">
+                    Submit
+                    <span class="icons">
+                        &#xe933;
+                    </span>
+                </button>
+            </div>
+
+        </div>
+    }
+
+    <div class="btn delete-btn delete-init right-column">
+        <span class="icons">
+            &#xe904;
+        </span>
+        <span class="tab"></span>
+        Delete Account
     </div>
-}
+</div>
+
+<div>
+    @using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post, new { @class = "delete-submit" }))
+    {
+        <div>
+            <span>Are you sure you want to delete your account? This cannot be undone.</span>
+            <div>
+                <button type="reset" class="btn main-btn cancel-btn">
+                    <span class="icons">
+                        &#xe932;
+                    </span>
+                    &nbsp;Cancel
+                </button>
+                <span class="tab"></span>
+                <button type="submit" class="btn delete-btn">
+                    <span class="icons">
+                        &#xe904;
+                    </span>
+                    &nbsp;Confirm Delete
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+
 
 <script>
 

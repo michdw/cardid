@@ -51,9 +51,13 @@ namespace Cardid.Controllers
 
         public ActionResult ChooseDeckInit(string cardID)
         {
-            GetUser();
+            string userID = GetUser();
 
             Card card = cardSql.GetCardByID(cardID);
+            if (card.UserID != userID)
+            {
+                ViewBag.UserDecks = deckSql.GetDecksByUserID(userID);
+            }
             return View("ChooseDecks", card);
         }
 

@@ -58,6 +58,11 @@ a {
     font-weight: bold;
 }
 
+.dark-hover:hover {
+    background: rgba(0,0,0,.7);
+    outline: 8px solid rgba(0,0,0,.7);
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;
@@ -88,6 +93,11 @@ a {
     float: right;
 }
 
+.half-tab {
+    display: inline-block;
+    width: .5em;
+}
+
 .hidden {
     display: none;
 }
@@ -101,13 +111,12 @@ a {
     outline: 8px solid rgba(0,0,0,.2);
 }
 
-.link-inline-dark:hover {
-    background: rgba(0,0,0,.7);
-    outline: 8px solid rgba(0,0,0,.7);
-}
-
 .narrow-line {
     margin: 0;
+}
+
+.near-top {
+    margin-top: .5em;
 }
 
 .pointer:hover {
@@ -280,10 +289,6 @@ textarea {
     text-align: left;
 }
 
-.formValidationGroup {
-    margin: 10px 0;
-}
-
 .popup {
     width: 90%;
 }
@@ -293,19 +298,24 @@ textarea {
 }
 
 .single-input {
-    margin-bottom: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .user-attr {
     font-weight: bold;
     width: 200px;
-    padding: 4px 3px;
+    padding: 4px 8px;
 }
 
 .userinfo-result {
     padding: .5em 1em;
     color: #fff;
     background: rgba(0,0,0,.3);
+}
+
+.validation-group {
+    margin: 5px 0;
 }
 
 .vertical-form {
@@ -315,6 +325,16 @@ textarea {
 .wide-label {
     width: auto;
 }
+
+.x-button {
+    position: absolute;
+    top: .5em;
+    left: .5em;
+}
+
+    .x-button:hover {
+        cursor: pointer;
+    }
 
 
 /* buttons */
@@ -342,6 +362,11 @@ textarea {
     background: #333;
     color: #fff;
     border: 1px solid #fff;
+}
+
+.inline-btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .top-btn {
@@ -376,9 +401,9 @@ textarea {
 /* homepage */
 
 .home-header {
+    position: relative;
     display: flex;
     padding: 0 1em;
-    padding-left: 4em;
     background: rgba(0,0,0,.7);
     border-bottom: 1px solid rgba(255,255,255,.3);
     width: 100%;
@@ -395,6 +420,10 @@ textarea {
     min-width: 250px;
     padding: 1em;
 }
+
+    .leaderboard-expand:hover, .leaderboard-collapse:hover {
+        cursor: pointer;
+    }
 
 @media screen and (min-width: 1140px) {
     .tag-leaderboard {
@@ -440,6 +469,7 @@ textarea {
 .listing-right {
     font-weight: bold;
     vertical-align: top;
+    width: 40px;
     margin: 0 1.5em;
     padding: 4px 1em;
     background: rgba(0,0,0,.7);
@@ -459,6 +489,10 @@ textarea {
     margin-right: 1em;
     background: rgba(0,0,0, .7);
     padding: 4px 1em;
+}
+
+.welcome-msg {
+    margin-left: 5em;
 }
 
 
@@ -483,10 +517,6 @@ textarea {
     padding: 1em;
     padding-top: 0;
 }
-
-    .card-blank input {
-        margin-top: .5em;
-    }
 
 .card-field {
     user-select: none;
@@ -633,10 +663,6 @@ textarea {
     .delete-tag:hover {
         color: #fff;
     }
-
-.deck-tags {
-    margin-top: .5em;
-}
 
 .tag {
     display: inline-block;

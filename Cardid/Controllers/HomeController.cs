@@ -130,6 +130,12 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CompleteRegister(User newUser)
         {
+            if (newUser.DisplayName == null || newUser.Email == null || newUser.Password == null || newUser.ConfirmPassword == null)
+            {
+                TempData["register-info-missing"] = true;
+                return RedirectToAction("BeginRegister");
+            }
+
             newUser.Email = newUser.Email.ToLower();
             bool emailExists = userSql.CheckForEmail(newUser.Email);
             bool nameExists = userSql.CheckForName(newUser.DisplayName);
@@ -298,6 +304,7 @@ namespace Cardid.Controllers
             }
 
             userSql.RemoveUser(userID);
+            TempData["account-deleted"] = true;
             return RedirectToAction("Logout");
         }
 
@@ -309,7 +316,10 @@ namespace Cardid.Controllers
             Session["username"] = null;
             Session["currentdeck"] = null;
             Session["anon"] = "Home";
-            ViewBag.LoggedOut = true;
+            if (TempData["account-deleted"] == null)
+            {
+                ViewBag.LoggedOut = true;
+            }
             return View("Index");
         }
 

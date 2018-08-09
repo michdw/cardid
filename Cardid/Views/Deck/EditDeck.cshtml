@@ -5,13 +5,13 @@
 }
 
 
-<h2 class="view-title">
-    Edit Your Deck:
-    <span class="tab"></span>
-    <span class="large-type">
-        @Model.DeckName
+<h1 class="view-title">
+    <span class="icons">
+        &#xe90e;
     </span>
-</h2>
+    <span class="half-tab"></span>
+    @Model.DeckName
+</h1>
 
 
 <div class="flex flex-baseline">
@@ -22,10 +22,9 @@
         {
             <div>
                 <p class="at-top at-bottom">
-                    <span class="icons">
-                        &#xe915;
+                    <span class="bold large-type">
+                        Study this deck:
                     </span>
-                    Study:
                 </p>
                 <div>
                     <a href="@Url.Action("StudyBegin", "Deck", new { deckID = Model.DeckID, frontFirst = true })" class="btn main-btn">
@@ -100,7 +99,7 @@
                         Rename deck
                     </button>
                     @Html.HiddenFor(m => m.DeckID)
-                    @Html.TextBoxFor(m => m.DeckName, new { @class = "popup" })
+                    @Html.TextBoxFor(m => m.DeckName, new { @class = "popup near-top" })
                 }
             </div>
 
@@ -177,7 +176,7 @@
             </span>
         </p>
 
-        <div class="deck-tags">
+        <div class="near-top">
 
             <div class="tagviews small-type">
                 <span class="bold tagview-pop">
@@ -250,8 +249,8 @@
 
         @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
         {
-            @Html.TextBoxFor(m => m.NewCardFront, new { placeholder = "front" })
-            @Html.TextBoxFor(m => m.NewCardBack, new { placeholder = "back" })
+            @Html.TextBoxFor(m => m.NewCardFront, new { placeholder = "front", @class = "near-top" })
+            @Html.TextBoxFor(m => m.NewCardBack, new { placeholder = "back", @class = "near-top" })
             <div>
                 <button type="submit" class="btn main-btn">
                     <span class="icons">
