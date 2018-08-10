@@ -16,6 +16,9 @@ namespace Cardid.Models
         public string Front { get; set; }
         public string Back { get; set; }
 
+        public string CurrentDeckID { get; set; }
+        public string CurrentSearchString { get; set; }
+
         public Card TrimValues()
         {
             CardID = CardID.Trim();

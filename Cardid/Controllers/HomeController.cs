@@ -314,7 +314,6 @@ namespace Cardid.Controllers
             TempData["login-name"] = null;
             Session["userid"] = null;
             Session["username"] = null;
-            Session["currentdeck"] = null;
             Session["anon"] = "Home";
             if (TempData["account-deleted"] == null)
             {

@@ -101,7 +101,7 @@ else
                                         <div class="card-options">
 
                                             <div>
-                                                <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
+                                                <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, searchString = Model.SearchString })" class="btn main-btn">
                                                     <span class="icons">&#xe90d;</span>
                                                     <span class="tab"></span>
                                                     Edit card

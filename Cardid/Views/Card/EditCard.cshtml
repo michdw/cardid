@@ -3,7 +3,6 @@
 @model Card
 @{
     ViewBag.Title = "EditCard";
-    string formAction = ViewBag.FormAction;
 }
 
 
@@ -14,7 +13,7 @@
 
     <div class="card-bothsides">
 
-        @using (Html.BeginForm(formAction, "Card", FormMethod.Post))
+        @using (Html.BeginForm("EditCardSubmit", "Card", FormMethod.Post))
         {
             @Html.HiddenFor(m => m.CardID)
             <div class="edit-field">
@@ -27,24 +26,23 @@
             </div>
         }
 
-        @if (Session["currentdeck"] != null)
+        @if (Model.CurrentDeckID != null)
         {
-            Deck currentDeck = Session["currentDeck"] as Deck;
 
-            <a href="@Url.Action("EditDeck", "Deck", new { deckID = currentDeck.DeckID })" class="btn main-btn">
+            <a href="@Url.Action("EditDeck", "Deck", new { deckID = Model.CurrentDeckID })" class="btn main-btn">
                 <span class="icons">
                     &#xe932;&nbsp;
                 </span>
                 Return to deck
             </a>
         }
-        else
+        else if (Model.CurrentSearchString != null)
         {
-            <a href="@Url.Action("Index", "Card")" class="btn main-btn">
+            <a href="@Url.Action("SearchText", "Home", new { searchString = Model.CurrentSearchString })" class="btn main-btn">
                 <span class="icons">
                     &#xe932;
                 </span>
-                Return to cards
+                Back to search results 
             </a>
         }
 

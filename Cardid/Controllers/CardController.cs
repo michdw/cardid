@@ -74,13 +74,20 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult EditCardInit(string cardID)
+        public ActionResult EditCardInit(string cardID, string deckID, string searchString)
         {
             GetUser();
 
             Card card = cardSql.GetCardByID(cardID);
 
-            ViewBag.FormAction = "EditCardSubmit";
+            if (deckID != null)
+            {
+                card.CurrentDeckID = deckID;
+            }
+            else if (searchString != null)
+            {
+                card.CurrentSearchString = searchString;
+            }
             return View("EditCard", card);
         }
 
