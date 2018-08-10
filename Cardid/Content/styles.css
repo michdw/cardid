@@ -305,7 +305,7 @@ textarea {
 .user-attr {
     font-weight: bold;
     width: 200px;
-    padding: 4px 8px;
+    padding: 4px 2px;
 }
 
 .userinfo-result {
@@ -397,19 +397,19 @@ textarea {
         border: 1px solid #993737;
     }
 
-.round-btn {
+/*.round-btn {
     width: 1em;
     height: 1em;
     padding: .5em;
     border-radius: 50%;
-    background: #993737;
+    background: #111;
 }
 
     .round-btn:hover {
         cursor: pointer;
         background: #fff;
         color: #993737;
-    }
+    }*/
 
 /* homepage */
 
@@ -438,33 +438,51 @@ textarea {
     cursor: pointer;
 }
 
+.leaderboard-icon {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding-right: 1em;
+}
+
 @media screen and (min-width: 1140px) {
-    .tag-leaderboard {
+    .taglist-inline {
         display: none;
     }
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (min-width: 670px) and (max-width: 1140px) {
 
     .leaderboard {
         width: 40%;
         min-width: 250px;
     }
 
-        .leaderboard:nth-of-type(3) {
-            display: none;
-        }
-
     .tag-leaderboard {
-        display: block;
         width: 90%;
+    }
+
+    .taglist-block {
+        display: none;
+    }
+
+    .taglist-inline {
+        display: block;
         min-width: 250px;
     }
 }
 
 @media screen and (max-width: 670px) {
 
-    .leaderboard, .tag-leaderboard {
+    .taglist-block {
+        display: block;
+    }
+
+    .taglist-inline {
+        display: none;
+    }
+
+    .leaderboard {
         width: 100%;
     }
 }
@@ -474,17 +492,20 @@ textarea {
 }
 
 .listing-left {
-    width: 70%;
     text-align: right;
     display: inline-block;
+    vertical-align: middle;
+    width: 70%;
 }
 
 .listing-right {
+    text-align: center;
+    display: inline-block;
     font-weight: bold;
     vertical-align: top;
-    width: 40px;
-    margin: 0 1.5em;
-    padding: 4px 1em;
+    width: 30px;
+    margin: 0 4px;
+    padding: 2px 0;
     background: rgba(0,0,0,.7);
 }
 
@@ -693,6 +714,14 @@ textarea {
     overflow: auto;
     padding: .5em 0;
 }
+
+.tag-delete {
+    text-shadow: 0 0 5px #111;
+}
+
+    .tag-delete:hover {
+        color: #993737;
+    }
 
 .tag-results {
     width: 30%;

@@ -8,6 +8,10 @@
 
 <div>
     <h1 class="view-title">
+        <span class="icons">
+            &#xe908;
+        </span>
+        <span class="half-tab"></span>
         @Model.DisplayName
     </h1>
 </div>
@@ -32,7 +36,7 @@
             <span class="icons large-type" style="width:40px">
                 &#xe90e;
             </span>
-            You currently have @Model.Cards().Count cards in @Html.ActionLink(Model.Decks().Count.ToString() + " decks", "Index", "Deck")
+            You currently have @Model.Cards().Count cards in @Html.ActionLink(Model.Decks().Count.ToString() + " decks", "Index", "Deck", null, new { @class = "underline" })
         </div>
         <div class="spacer"></div>
     }
@@ -41,9 +45,9 @@
     {
         <div>
             <span class="icons" style="width:40px">
-                &#xe93d;
+                &#xe91b;
             </span>
-            You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, null)
+            You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
         </div>
         <div class="spacer"></div>
     }
