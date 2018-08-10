@@ -62,7 +62,7 @@ else if (TempData["user-login"] != null)
 
 
 
-<div class="flex flex-baseline list-container-short">
+<div class="flex flex-baseline list-container">
 
     @if (Session["userid"] != null)
     {
@@ -82,7 +82,7 @@ else if (TempData["user-login"] != null)
                 </div>
             </div>
 
-            <div class="leaderboard-list">
+            <div class="leaderboard-list-short">
                 @{
                     listLength = Math.Min(10, Model.ActiveUsers.Count);
                     for (int i = 0; i < listLength; i++)
@@ -99,13 +99,42 @@ else if (TempData["user-login"] != null)
                         </p>
                     }
                 }
-            </div>
-            <span class="leaderboard-expand small-type dark-hover">
-                Show more
-                <span class="icons">
-                    &#xe931;
+
+                <span class="leaderboard-expand small-type dark-hover">
+                    Show more
+                    <span class="icons">
+                        &#xe931;
+                    </span>
                 </span>
-            </span>
+            </div>
+
+            <div class="leaderboard-list-long hidden">
+                @{
+                    listLength = Math.Min(25, Model.ActiveUsers.Count);
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        string name = Model.ActiveUsersOrder[i];
+
+                        <p class="leaderboard-listing">
+                            <span class="listing-left">
+                                @name
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveUsers[name]
+                            </span>
+                        </p>
+                    }
+                }
+
+                <span class="leaderboard-collapse small-type dark-hover">
+                    Show less
+                    <span class="icons">
+                        &#xe934;
+                    </span>
+                </span>
+
+            </div>
+
         </div>
 
 
@@ -125,7 +154,7 @@ else if (TempData["user-login"] != null)
                 </div>
             </div>
 
-            <div class="leaderboard-list">
+            <div class="leaderboard-list-short">
                 @{
                     listLength = Math.Min(10, Model.ActiveDecks.Count);
                     for (int i = 0; i < listLength; i++)
@@ -141,13 +170,42 @@ else if (TempData["user-login"] != null)
                         </p>
                     }
                 }
-            </div>
-            <span class="leaderboard-expand small-type dark-hover">
-                Show more
-                <span class="icons">
-                    &#xe931;
+
+                <span class="leaderboard-expand small-type dark-hover">
+                    Show more
+                    <span class="icons">
+                        &#xe931;
+                    </span>
                 </span>
-            </span>
+
+            </div>
+
+            <div class="leaderboard-list-long hidden">
+                @{
+                    listLength = Math.Min(25, Model.ActiveDecks.Count);
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Deck deck = Model.ActiveDecksOrder[i];
+                        <p class="leaderboard-listing">
+                            <span class="listing-left">
+                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveDecks[deck]
+                            </span>
+                        </p>
+                    }
+                }
+
+                <span class="leaderboard-collapse small-type dark-hover">
+                    Show less
+                    <span class="icons">
+                        &#xe934;
+                    </span>
+                </span>
+
+            </div>
+
         </div>
 
 
@@ -167,74 +225,130 @@ else if (TempData["user-login"] != null)
                 </div>
             </div>
 
-            <div class="leaderboard-list taglist-block">
-                @{
-                    listLength = Math.Min(10, Model.PopularTags.Count);
+            <div class="leaderboard-list-short">
 
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        Tag tag = Model.PopularTagsOrder[i];
-                        <p class="leaderboard-listing">
-                            <span class="listing-left">
-                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
-                            </span>
-                            <span class="listing-right">
-                                @Model.PopularTags[tag]
-                            </span>
-                        </p>
+                <div class="taglist-block">
+
+                    @{
+                        listLength = Math.Min(10, Model.PopularTags.Count);
+
+                        for (int i = 0; i < listLength; i++)
+                        {
+                            Tag tag = Model.PopularTagsOrder[i];
+                            <p class="leaderboard-listing">
+                                <span class="listing-left">
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
+                                </span>
+                            </p>
+                        }
                     }
-                }
-            </div>
+                </div>
 
-            <div class="leaderboard-list taglist-inline">
-                @{
-                    listLength = Math.Min(10, Model.PopularTags.Count);
+                <div class="taglist-inline">
+                    <div class="spacer"></div>
 
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        Tag tag = Model.PopularTagsOrder[i];
-                        <span class="tag-listing">
-                            <span>
-                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                    @{
+                        listLength = Math.Min(10, Model.PopularTags.Count);
+
+                        for (int i = 0; i < listLength; i++)
+                        {
+                            Tag tag = Model.PopularTagsOrder[i];
+                            <span class="tag-listing">
+                                <span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
+                                </span>
+                                <span class="tab"></span>
                             </span>
-                            <span class="listing-right">
-                                @Model.PopularTags[tag]
-                            </span>
-                            <span class="tab"></span>
-                        </span>
+                        }
                     }
-                }
-            </div>
+                </div>
 
-            <span class="leaderboard-expand small-type dark-hover">
-                Show more
-                <span class="icons">
-                    &#xe931;
+                <span class="leaderboard-expand small-type dark-hover">
+                    Show more
+                    <span class="icons">
+                        &#xe931;
+                    </span>
                 </span>
-            </span>
+
+            </div>
+
+
+            <div class="leaderboard-list-long hidden">
+
+                <div class="taglist-block">
+                    @{
+                        listLength = Math.Min(25, Model.PopularTags.Count);
+
+                        for (int i = 0; i < listLength; i++)
+                        {
+                            Tag tag = Model.PopularTagsOrder[i];
+                            <p class="leaderboard-listing">
+                                <span class="listing-left">
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
+                                </span>
+                            </p>
+                        }
+                    }
+                </div>
+
+                <div class="taglist-inline">
+                    <div class="spacer"></div>
+
+                    @{
+                        listLength = Math.Min(25, Model.PopularTags.Count);
+
+                        for (int i = 0; i < listLength; i++)
+                        {
+                            Tag tag = Model.PopularTagsOrder[i];
+                            <span class="tag-listing">
+                                <span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
+                                </span>
+                                <span class="tab"></span>
+                            </span>
+                        }
+                    }
+                </div>
+
+                <span class="leaderboard-collapse small-type dark-hover">
+                    Show less
+                    <span class="icons">
+                        &#xe934;
+                    </span>
+                </span>
+
+            </div>
+
+
         </div>
 
     }
 </div>
 
-<span class="leaderboard-collapse small-type dark-hover">
-    Show less
-    <span class="icons">
-        &#xe934;
-    </span>
-</span>
 
 
 <script>
 
     $(document).ready(function () {
         $('.leaderboard-expand').on('click', function () {
-            $('.list-container-short').addClass('hidden');
-            $('.list-container-long').removeClass('hidden');
+            $('.leaderboard-list-short').addClass('hidden');
+            $('.leaderboard-list-long').removeClass('hidden');
         });
         $('.leaderboard-collapse').on('click', function () {
-            $('.list-container-long').addClass('hidden');
-            $('.list-container-short').removeClass('hidden');
+            $('.leaderboard-list-long').addClass('hidden');
+            $('.leaderboard-list-short').removeClass('hidden');
         });
         $('.x-button').on('click', function () {
             $('.home-header').slideUp(250);
