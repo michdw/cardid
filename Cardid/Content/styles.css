@@ -397,6 +397,19 @@ textarea {
         border: 1px solid #993737;
     }
 
+.round-btn {
+    width: 1em;
+    height: 1em;
+    padding: .5em;
+    border-radius: 50%;
+    background: #993737;
+}
+
+    .round-btn:hover {
+        cursor: pointer;
+        background: #fff;
+        color: #993737;
+    }
 
 /* homepage */
 
@@ -421,9 +434,9 @@ textarea {
     padding: 1em;
 }
 
-    .leaderboard-expand:hover, .leaderboard-collapse:hover {
-        cursor: pointer;
-    }
+.leaderboard-expand:hover, .leaderboard-collapse:hover {
+    cursor: pointer;
+}
 
 @media screen and (min-width: 1140px) {
     .tag-leaderboard {

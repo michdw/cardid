@@ -186,16 +186,6 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult DeleteTag(string tagID)
-        {
-            string userID = GetUser();
-
-            tagSql.DeleteTag(tagID);
-            TempData["tag-deleted"] = true;
-            return RedirectToAction("TagView", new { userID });
-        }
-
-
         public ActionResult EditDeck(string deckID)
         {
             GetUser();
@@ -342,17 +332,6 @@ namespace Cardid.Controllers
                 WholeDeck = false
             };
             return View("Study", study);
-        }
-
-
-        public ActionResult TagView(string userID)
-        {
-            GetUser();
-
-            User user = userSql.GetUserByID(userID);
-            List<Tag> userTags = user.Tags();
-
-            return View("TagView", userTags);
         }
 
 

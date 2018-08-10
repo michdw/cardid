@@ -242,12 +242,12 @@
     <Content Include="Views\Home\ChangeUserInfo.cshtml" />
     <Content Include="Views\Shared\_Messages.cshtml" />
     <Content Include="Views\Home\Account.cshtml" />
-    <Content Include="Views\Deck\TagView.cshtml" />
     <Content Include="Views\Home\SearchText.cshtml" />
     <Content Include="Views\Deck\CreateDeck.cshtml" />
     <Content Include="Views\Card\EditCard.cshtml" />
     <Content Include="Views\Deck\ViewDeck.cshtml" />
     <Content Include="Views\Card\ChooseDecks.cshtml" />
+    <Content Include="Views\Home\UserTags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

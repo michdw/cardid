@@ -43,7 +43,7 @@
             <span class="icons" style="width:40px">
                 &#xe93d;
             </span>
-            You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "TagView", "Deck", new { userID = Model.UserID }, null)
+            You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, null)
         </div>
         <div class="spacer"></div>
     }
@@ -65,7 +65,7 @@
         </div>
     }
 
-    <div class="btn main-btn hide-btn" style="display:none">
+    <div class="btn main-btn hide-btn" style="display:none;margin-left:44px">
         <span class="icons">
             &#xe934;
         </span>
@@ -74,19 +74,22 @@
 
     <div class="study-list hidden">
 
+        <div class="spacer"></div>
+
         @foreach (Study session in Model.Sessions())
         {
             <div class="study-listing">
                 <p class="at-top at-bottom">
                     <span class="study-score">
-                        @session.Percentage() 
+                        @session.Percentage()
                         <span class="small-type">
                             %
                         </span>
                     </span>
                     @Html.ActionLink(session.DeckName(), "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
                 </p>
-                <p class="small-type">
+
+                <p class="small-type at-top">
                     @session.TimeOf.ToString("dd MMMM yyyy - hh:mm tt")
                 </p>
             </div>

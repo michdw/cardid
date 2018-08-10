@@ -1,0 +1,63 @@
+﻿
+@using Cardid.Models
+@model List<Tag>
+
+@{
+    ViewBag.Title = "Tags";
+}
+
+<div>
+    <h1 class="view-title">
+        <span class="icons">
+            &#xe93d;
+        </span>
+        <span class="half-tab"></span>
+        All Your Tags
+    </h1>
+</div>
+
+<div class="module">
+
+    <p>All tags that you create are available for others to use.</p>
+    <p>You can delete tags that you have created if no other users have added them to their decks.</p>
+
+    <div class="tag-container">
+
+        @foreach (Tag tag in Model)
+        {
+            <div>
+
+                @if (tag.Decks().Count > 0)
+                {
+                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchstring = tag.TagName }, new { @class = "tag active-tag search-tag" })
+                }
+                else
+                {
+                    <span class="tag inactive-tag">@tag.TagName</span>
+                }
+
+                @if (tag.CurrentUserIDs().Count == 1)
+                {
+                    <a href="@Url.Action("DeleteTag", "Home", new { tagID = tag.TagID })" class="delete-init">
+                        <span class="icons round-btn">
+                            &#xe914;
+                        </span>
+                    </a>
+                }
+
+            </div>
+            <div class="spacer"></div>
+
+        }
+
+    </div>
+
+    <a href="@Url.Action("Account", "Home")" class="btn main-btn">
+        <span class="icons">
+            &#xe932;
+        </span>
+        <span class="tab"></span>
+        Go back
+    </a>
+
+</div>

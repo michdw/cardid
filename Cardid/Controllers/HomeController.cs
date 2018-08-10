@@ -291,6 +291,16 @@ namespace Cardid.Controllers
         }
 
 
+        public ActionResult DeleteTag(string tagID)
+        {
+            string userID = GetUser();
+
+            tagSql.DeleteTag(tagID);
+            TempData["tag-deleted"] = true;
+            return RedirectToAction("UserTags", new { userID });
+        }
+
+
         [HttpPost]
         public ActionResult RemoveUser(string userID)
         {
@@ -379,6 +389,17 @@ namespace Cardid.Controllers
             }
 
             return View(search);
+        }
+
+
+        public ActionResult UserTags(string userID)
+        {
+            GetUser();
+
+            User user = userSql.GetUserByID(userID);
+            List<Tag> userTags = user.Tags();
+
+            return View(userTags);
         }
     }
 }
