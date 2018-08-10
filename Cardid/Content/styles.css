@@ -397,20 +397,6 @@ textarea {
         border: 1px solid #993737;
     }
 
-/*.round-btn {
-    width: 1em;
-    height: 1em;
-    padding: .5em;
-    border-radius: 50%;
-    background: #111;
-}
-
-    .round-btn:hover {
-        cursor: pointer;
-        background: #fff;
-        color: #993737;
-    }*/
-
 /* homepage */
 
 .home-header {
@@ -622,7 +608,7 @@ textarea {
     color: #fff;
     margin-top: 1em;
     padding: 1em 1.5em;
-    max-width: 750px;
+    max-width: 500px;
 }
 
     .deck-listing:hover {

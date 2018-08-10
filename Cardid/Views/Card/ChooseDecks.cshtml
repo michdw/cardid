@@ -4,63 +4,71 @@
     ViewBag.Title = "Choose Decks For Card";
 }
 
-<h1 class="view-title">Add Card to Deck</h1>
-<div class="spacer"></div>
+<h1 class="view-title">
+    <span class="icons">
+        &#xe90e;
+    </span>
+    <span class="half-tab"></span>
+    Add Card to Deck
+</h1>
 
+<div class="spacer"></div>
 <div class="card-bothsides">
     <p class="card-listing">@Model.Front</p>
     <p class="card-listing">@Model.Back</p>
 </div>
-<div class="spacer"></div>
 
-<h2 class="view-title">Available decks:</h2>
-<div class="spacer"></div>
+<div style="margin-top:3em">
+    <h2 class="view-title">Available decks:</h2>
 
-@if (ViewBag.UserDecks != null)
-{
-    foreach (Deck thisDeck in ViewBag.UserDecks)
+    @if (ViewBag.UserDecks != null)
     {
-        <div class="deck-listing">
+        foreach (Deck thisDeck in ViewBag.UserDecks)
+        {
+            <div class="deck-listing">
 
-            <span class="icons">
-                &#xe90e;&nbsp;
-            </span>
+                @thisDeck.DeckName
 
-            @thisDeck.DeckName
+                <div>
+                    <a href="@Url.Action("ChooseDeckSubmit", "Card", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
+                        <span class="icons">&#xe900;</span>
+                        <span class="tab"></span>
+                        Add to this deck
+                    </a>
+                </div>
 
-            <div>
-                <a href="@Url.Action("ChooseDeckSubmit", "Card", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
-                    <span class="icons">&#xe900;</span>
-                    <span class="tab"></span>
-                    Add to this deck
-                </a>
             </div>
-
-        </div>
+        }
     }
-}
-else
-{
-    foreach (Deck thisDeck in Model.AvailableDecks())
+    else
     {
-        <div class="deck-listing">
+        foreach (Deck thisDeck in Model.AvailableDecks())
+        {
+            <div class="deck-listing">
 
-            <span class="icons">
-                &#xe90e;&nbsp;
-            </span>
+                <span class="icons">
+                    &#xe90e;&nbsp;
+                </span>
 
-            @thisDeck.DeckName
+                @thisDeck.DeckName
 
-            <div>
-                <a href="@Url.Action("ChooseDeckSubmit", "Card", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
-                    <span class="icons">&#xe900;</span>
-                    <span class="tab"></span>
-                    Add to this deck
-                </a>
+                <div>
+                    <a href="@Url.Action("ChooseDeckSubmit", "Card", new { cardID = Model.CardID, deckID = thisDeck.DeckID })" class="btn main-btn">
+                        <span class="icons">&#xe900;</span>
+                        <span class="tab"></span>
+                        Add to this deck
+                    </a>
+                </div>
+
             </div>
-
-        </div>
+        }
     }
-}
+
+</div>
+
+
+
+
+
 
 
