@@ -6,8 +6,6 @@
 }
 
 
-
-
 <h1 class="view-title">
     <span class="icons">
         &#xe915;
@@ -31,27 +29,27 @@
         @{
             foreach (Card currentCard in Model.Cards)
             {
-                <div class="studycard new-card">
+                <div class="study-card new-card">
                     <div hidden class="card-ID">
                         @currentCard.CardID
                     </div>
                     @if (Model.FrontFirst == true)
                     {
-                        <div class="front-view">
-                            <p>@currentCard.Front</p>
-                        </div>
-                        <div class="back-view hidden">
-                            <p>@currentCard.Back</p>
-                        </div>
+                        <p class="front-text">
+                            @currentCard.Front
+                        </p>
+                        <p class="back-text hidden">
+                            @currentCard.Back
+                        </p>
                     }
                     else
                     {
-                        <div class="front-view hidden">
-                            <p>@currentCard.Front</p>
-                        </div>
-                        <div class="back-view">
-                            <p>@currentCard.Back</p>
-                        </div>
+                        <p class="front-text hidden">
+                            @currentCard.Front
+                        </p>
+                        <p class="back-text">
+                            @currentCard.Back
+                        </p>
                     }
                 </div>
             }
@@ -80,7 +78,6 @@
 }
 
 <div hidden id="cardCount" data-name="@Model.Cards.Count"></div>
-
 
 
 <script type="text/javascript" src="../../Content/studySession.js"></script>

@@ -1,28 +1,34 @@
 ﻿
 function viewFront() {
-    $('.back-view').addClass('hidden');
-    $('.front-view').removeClass('hidden');
+    $('.back-text').addClass('hidden');
+    $('.front-text').removeClass('hidden');
 }
 
 function viewBack() {
-    $('.front-view').addClass('hidden');
-    $('.back-view').removeClass('hidden');
+    $('.front-text').addClass('hidden');
+    $('.back-text').removeClass('hidden');
 }
 
 
 function flipCard() {
-    if ($('.back-view').hasClass('hidden')) {
-        viewBack();
-    } else {
-        viewFront();
-    }
+    $('.active-card').css('transform', 'rotateX(-180deg)');
+
+    setTimeout(function () {
+        $('.active-card p').css('transform', 'rotateX(-180deg)');
+        if ($('.back-text').hasClass('hidden')) {
+            viewBack();
+        } else {
+            viewFront();
+        }
+    }, 150);
+
     $('.flip').addClass('hidden');
     $('.mark-frame').removeClass('hidden');
 }
 
 
 function nextCard() {
-    if ($('.front-view').hasClass('hidden')) {
+    if ($('.front-text').hasClass('hidden')) {
         viewFront();
     } else {
         viewBack();
@@ -33,7 +39,7 @@ function nextCard() {
     var thisCard = $('.active-card');
     var nextCard = thisCard.next();
 
-    thisCard.removeClass('active-card').addClass('old-card');
+    thisCard.css('transform', 'rotateX(-180deg) translateX(-100vw)').removeClass('active-card').addClass('old-card');
     nextCard.removeClass('new-card').addClass('active-card');
 }
 
@@ -54,9 +60,11 @@ $(document).ready(function () {
 
     updateScore(totalCorrect, totalViewed);
 
-    $('.studycard').first().removeClass('new-card').addClass('active-card');
+    $('.study-card').first().removeClass('new-card').addClass('active-card');
+
 
     $('.flip').click(function () {
+
         flipCard();
         flipped = true;
     });

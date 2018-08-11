@@ -770,9 +770,11 @@ textarea {
     max-width: 90vw;
     height: 350px;
     max-height: 60vw;
+    perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
-.studycard {
+.study-card {
     position: absolute;
     display: flex;
     align-items: center;
@@ -783,7 +785,7 @@ textarea {
     background: rgba(255,255,255,0.8);
     color: #000;
     font-size: 2em;
-    transition: all .3s ease;
+    transition: all .3s linear;
 }
 
 .new-card {
