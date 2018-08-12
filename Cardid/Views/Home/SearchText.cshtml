@@ -112,16 +112,6 @@ else
                                                 </a>
                                             </div>
 
-                                            @if (thisCard.AvailableDecks().Count > 0)
-                                            {
-                                                <a href="@Url.Action("ChooseDeckInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
-                                                    <span class="icons">
-                                                        &#xe90e;
-                                                    </span>
-                                                    <span class="tab"></span>
-                                                    Add to a different deck
-                                                </a>
-                                            }
 
                                         </div>
 

@@ -49,31 +49,6 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult ChooseDeckInit(string cardID)
-        {
-            string userID = GetUser();
-
-            Card card = cardSql.GetCardByID(cardID);
-            if (card.UserID != userID)
-            {
-                ViewBag.UserDecks = deckSql.GetDecksByUserID(userID);
-            }
-            return View("ChooseDecks", card);
-        }
-
-
-        public ActionResult ChooseDeckSubmit(string cardID, string deckID)
-        {
-            GetUser();
-
-            Card card = cardSql.GetCardByID(cardID);
-            cardSql.AddCardToDeck(card, deckID);
-
-            TempData["card-added"] = card;
-            return RedirectToAction("EditDeck", "Deck", new { deckID });
-        }
-
-
         public ActionResult EditCardInit(string cardID, string deckID, string searchString)
         {
             GetUser();

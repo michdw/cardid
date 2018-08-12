@@ -36,11 +36,5 @@ namespace Cardid.Models
             return deckSql.GetDecksByCardID(CardID);
         }
 
-        public List<Deck> AvailableDecks()
-        {
-            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-            return deckSql.DecksNotWithCard(CardID, UserID);
-        }
-
     }
 }
