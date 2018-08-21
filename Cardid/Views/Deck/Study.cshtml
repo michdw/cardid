@@ -14,15 +14,32 @@
     @Model.DeckName()
 </h1>
 
+<p class="total-remaining near-top">
+    <span class="study-number"></span>
+    cards to go
+</p>
+
 
 <div class="study-frame">
 
     <div>
-        <div class="flip studynav">Flip card</div>
-        <div class="mark-frame hidden">
-            <div class="mark-wrong studynav">Mark wrong</div>
-            <div class="mark-right studynav">Mark right</div>
+
+        <div class="flip-card studynav icons bold">
+            &#xea2e;
         </div>
+
+        <div class="mark-frame hidden">
+
+            <div class="mark-wrong studynav icons">
+                &#xe91b;
+            </div>
+
+            <div class="mark-right studynav icons bold">
+                &#xe91c;
+            </div>
+
+        </div>
+
     </div>
 
     <div class="card-frame">
@@ -56,11 +73,17 @@
         }
     </div>
 
-    <div class="score">
-        <div class="total-correct"></div>
-        <span>of</span>
-        <div class="total-viewed"></div>
-        <span>correct-</span>
+    <div class="score-pane">
+        <div>
+            <span class="total-correct study-number"></span>
+            <span>
+                of
+            </span>
+            <span class="total-viewed study-number"></span>
+            <span>
+                correct
+            </span>
+        </div>
     </div>
 
 </div>

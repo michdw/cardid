@@ -1,6 +1,30 @@
 ﻿
+/* animations */
 
-/*imported fonts*/
+@keyframes flash-fade {
+    0% {
+        opacity: 1;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .2;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* imported fonts */
 
 @font-face {
     font-family: icons;
@@ -755,6 +779,12 @@ textarea {
 
 /* study session */
 
+.total-remaining {
+    position: absolute;
+    top: 3.5em;
+    left: 5.25em;
+}
+
 .study-frame {
     display: flex;
     align-items: center;
@@ -785,7 +815,7 @@ textarea {
     background: rgba(255,255,255,0.8);
     color: #000;
     font-size: 2em;
-    transition: all .3s linear;
+    transition: all .2s linear;
 }
 
 .new-card {
@@ -800,36 +830,60 @@ textarea {
     text-decoration-style: none;
     background: #333;
     color: #fff;
-    margin: 10px;
+    margin: 10px 20px;
+    padding: 15px;
+    outline: 1px solid rgba(255,255,255,.5);
 }
 
     .studynav:hover, .finish:hover {
         cursor: pointer;
     }
 
-.flip {
-    padding: 10px;
+.flip-card {
+    animation: flash-fade 1s infinite;
 }
+
+    .flip-card:hover {
+        background: rgba(255,255,255,.8);
+        color: rgba(0,0,0,.7);
+        outline: 1px solid rgba(0,0,0,.7);
+    }
 
 .mark-frame div {
     display: inline-block;
-    padding: 10px;
 }
 
+    .mark-frame div:hover {
+        color: #fff;
+        outline: 1px solid rgba(0,0,0,.7);
+        animation: flash-fade 1s infinite;
+    }
+
 .mark-right:hover {
-    background: #379937;
-    color: #fff;
+    background: #1d6000;
 }
 
 .mark-wrong:hover {
-    background: #993737;
+    background: #790000;
+}
+
+.score-pane {
+    margin-top: 1em;
+    padding: 0 1em;
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(0,0,0,.2);
     color: #fff;
 }
 
-.score div {
+.score-pane div {
+    margin: 1em 0;
+}
+
+.study-number {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px;
+    text-align: center;
+    width: 40px;
+    padding: 10px 0;
     background: #333;
     color: #fff;
 }

@@ -22,7 +22,7 @@ function flipCard() {
         }
     }, 150);
 
-    $('.flip').addClass('hidden');
+    $('.flip-card').addClass('hidden');
     $('.mark-frame').removeClass('hidden');
 }
 
@@ -33,7 +33,7 @@ function nextCard() {
     } else {
         viewBack();
     }
-    $('.flip').removeClass('hidden');
+    $('.flip-card').removeClass('hidden');
     $('.mark-frame').addClass('hidden');
 
     var thisCard = $('.active-card');
@@ -49,21 +49,29 @@ function updateScore(totalCorrect, totalViewed) {
     $('.total-viewed').text(totalViewed);
 }
 
+function updateProgress(cardsRemaining) {
+    $('.total-remaining .study-number').text(cardsRemaining);
+}
+
 
 $(document).ready(function () {
 
     var cardCount = parseInt($('#cardCount').data('name'));
+    var cardsRemaining = cardCount;
     var flipped = false;
     var totalCorrect = 0;
     var totalViewed = 0;
     var toRedo = '';
 
     updateScore(totalCorrect, totalViewed);
+    updateProgress(cardsRemaining);
 
     $('.study-card').first().removeClass('new-card').addClass('active-card');
 
 
-    $('.flip').click(function () {
+    $('.flip-card').click(function () {
+        cardsRemaining--;
+        updateProgress(cardsRemaining);
 
         flipCard();
         flipped = true;
