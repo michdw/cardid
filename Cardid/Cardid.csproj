@@ -179,6 +179,11 @@
     <Content Include="Content\Backgrounds\arrowbg7.png" />
     <Content Include="Content\Backgrounds\arrowbg8.png" />
     <Content Include="Content\Backgrounds\arrowbg9.png" />
+    <Content Include="Content\Backgrounds\bg1.png" />
+    <Content Include="Content\Backgrounds\bg2.png" />
+    <Content Include="Content\Backgrounds\bg3.png" />
+    <Content Include="Content\Backgrounds\bg4.png" />
+    <Content Include="Content\Backgrounds\bg5.png" />
     <Content Include="Content\cardView.js" />
     <Content Include="Content\deckTags.js" />
     <Content Include="Content\editCard.js" />

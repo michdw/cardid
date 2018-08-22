@@ -46,14 +46,14 @@ else if (TempData["user-login"] != null)
                 <p>
                     You've logged
                     <strong> @user.Sessions().Count </strong>study sessions.&nbsp;&nbsp;
-                    @Html.ActionLink("Click here to study some more", "Index", "Deck", null, new { @class = "bold dark-hover" })
+                    @Html.ActionLink("Click here to study some more!", "Index", "Deck", null, new { @class = "underline dark-hover" })
                 </p>
             }
             else
             {
                 <p>
                     No study sessions yet -&nbsp;&nbsp;
-                    @Html.ActionLink("  Click here to get started", "Index", "Deck", null, new { @class = "bold dark-hover" })
+                    @Html.ActionLink("  Click here to get started!", "Index", "Deck", null, new { @class = "underline dark-hover" })
                 </p>
             }
         </div>
