@@ -575,9 +575,6 @@ textarea {
     margin-bottom: 1em;
 }
 
-.card-decks {
-}
-
 .deck-incard {
     display: inline-block;
     background: rgba(0,0,0,.15);

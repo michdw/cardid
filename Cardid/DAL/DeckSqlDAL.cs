@@ -20,7 +20,7 @@ namespace Cardid.DAL
         private string createDeck = "INSERT INTO [decks] (DeckName, IsPublic, UserID) VALUES (@deckName, @isPublic, @userID)";
         private string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID) ORDER BY DeckName ASC";
         private string getDeckByID = "SELECT * FROM [decks] WHERE DeckID = @deckID";
-        private string getDecksByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
+        private string getDeckByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
             + "WHERE CardID = @cardID";
         private string getDecksByUserID = "SELECT * FROM [decks] WHERE (UserID = @userID)";
         private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID "
@@ -58,14 +58,14 @@ namespace Cardid.DAL
         }
 
 
-        public void DeleteDeck(string deckID, List<Card> cardsOnlyInDeck)
+        public void DeleteDeck(string deckID, List<Card> cardsInDeck)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(removeAllCardsFromDeck, new { deckID });
                 db.Execute(removeAllSessionsWithDeck, new { deckID });
                 db.Execute(removeAllTagsFromDeck, new { deckID });
-                foreach (Card card in cardsOnlyInDeck)
+                foreach (Card card in cardsInDeck)
                 {
                     db.Execute(removeCard, new { cardID = card.CardID });
                 }
@@ -97,16 +97,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Deck> GetDecksByCardID(string cardID)
+        public Deck GetDeckByCardID(string cardID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(getDecksByCardID, new { cardID }).ToList<Deck>();
-                foreach (Deck deck in list)
-                {
-                    deck.TrimValues();
-                }
-                return list;
+                return db.Query<Deck>(getDeckByCardID, new { cardID }).ToList().FirstOrDefault<Deck>().TrimValues();
             }
         }
 

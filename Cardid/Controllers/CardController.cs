@@ -53,7 +53,7 @@ namespace Cardid.Controllers
 
             cardSql.EditCard(newValues);
 
-            return RedirectToAction("EditCardInit", new { cardID = newValues.CardID });
+            return RedirectToAction("EditCardInit", new { cardID = newValues.CardID, deckID = newValues.CurrentDeckID, searchString = newValues.CurrentSearchString });
         }
 
 

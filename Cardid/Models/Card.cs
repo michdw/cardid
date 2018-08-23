@@ -30,10 +30,10 @@ namespace Cardid.Models
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
 
-        public List<Deck> Decks()
+        public Deck GetDeck()
         {
             DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-            return deckSql.GetDecksByCardID(CardID);
+            return deckSql.GetDeckByCardID(CardID);
         }
 
     }

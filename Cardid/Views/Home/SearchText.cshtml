@@ -95,19 +95,19 @@ else
                     {
                         <div class="results-subsection flex flex-center">
 
-
                             <h2 class="view-title results-title">Your Cards</h2>
 
                             @foreach (Card thisCard in Model.MatchingCards)
                             {
                                 if (thisCard.UserID == Model.UserID)
                                 {
+                                    Deck cardDeck = thisCard.GetDeck();
+
                                     <div class="card-bothsides">
                                         <div class="card-field">@thisCard.Front</div>
                                         <div class="card-field">@thisCard.Back</div>
 
                                         <div class="card-options">
-
                                             <div>
                                                 <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, searchString = Model.SearchString })" class="btn main-btn">
                                                     <span class="icons">&#xe90d;</span>
@@ -115,25 +115,11 @@ else
                                                     Edit card
                                                 </a>
                                             </div>
-
-
                                         </div>
 
-                                        <div class="card-decks">
+                                        <div class="card-deck">
                                             <p class="small-type at-bottom">Currently in:</p>
-                                            @for (int i = 0; i < thisCard.Decks().Count; i++)
-                                            {
-                                                Deck deck = thisCard.Decks()[i];
-                                                if (deck.UserID == Session["userid"].ToString())
-                                                {
-                                                    @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
-
-                                                }
-                                                else
-                                                {
-                                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
-                                                }
-                                            }
+                                            @Html.ActionLink(cardDeck.DeckName, "EditDeck", "Deck", new { deckId = cardDeck.DeckID }, new { @class = "deck-incard small-type" })
                                         </div>
 
                                     </div>
@@ -151,25 +137,14 @@ else
                             {
                                 if (thisCard.UserID != Model.UserID)
                                 {
+                                    Deck cardDeck = thisCard.GetDeck();
                                     <div class="card-bothsides">
                                         <div class="card-field">@thisCard.Front</div>
                                         <div class="card-field">@thisCard.Back</div>
 
-                                        <div class="card-decks">
+                                        <div class="card-deck">
                                             <p class="small-type at-bottom">Currently in:</p>
-                                            @for (int i = 0; i < thisCard.Decks().Count; i++)
-                                            {
-                                                Deck deck = thisCard.Decks()[i];
-                                                if (deck.UserID == Session["userid"].ToString())
-                                                {
-                                                    @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
-
-                                                }
-                                                else
-                                                {
-                                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckId = deck.DeckID }, new { @class = "deck-incard small-type" })
-                                                }
-                                            }
+                                            @Html.ActionLink(cardDeck.DeckName, "EditDeck", "Deck", new { deckId = cardDeck.DeckID }, new { @class = "deck-incard small-type" })
                                         </div>
                                     </div>
                                 }

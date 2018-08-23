@@ -118,15 +118,8 @@ namespace Cardid.DAL
             Card card = GetCardByID(cardID);
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                if (card.Decks().Count == 1)
-                {
-                    db.Execute(removeCardFromDeck, new { cardID, deckID });
-                    db.Execute(removeCard, new { cardID });
-                }
-                else
-                {
-                    db.Execute(removeCardFromDeck, new { cardID, deckID });
-                }
+                db.Execute(removeCardFromDeck, new { cardID, deckID });
+                db.Execute(removeCard, new { cardID });
             }
         }
 

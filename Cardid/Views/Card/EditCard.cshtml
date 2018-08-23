@@ -16,6 +16,8 @@
         @using (Html.BeginForm("EditCardSubmit", "Card", FormMethod.Post))
         {
             @Html.HiddenFor(m => m.CardID)
+            @Html.HiddenFor(m => m.CurrentDeckID)
+            @Html.HiddenFor(m => m.CurrentSearchString)
             <div class="edit-field">
                 @Html.LabelFor(m => m.Front, "Front of Card:")
                 @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })

@@ -191,17 +191,9 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            List<Card> CardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
-            List<Card> CardsOnlyInDeck = new List<Card>();
+            List<Card> cardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
 
-            foreach (Card card in CardsInDeck)
-            {
-                if (card.Decks().Count == 1)
-                {
-                    CardsOnlyInDeck.Add(card);
-                }
-            }
-            deckSql.DeleteDeck(deckID, CardsOnlyInDeck);
+            deckSql.DeleteDeck(deckID, cardsInDeck);
             TempData["deck-deleted"] = true;
             return RedirectToAction("Index");
         }
