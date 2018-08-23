@@ -14,7 +14,9 @@
 {
     Card card = TempData["card-added"] as Card;
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+        &#xe902;
+        </span>
         <span class="tab"></span>
         Card added to deck
     </div>
@@ -24,7 +26,9 @@
 {
     Card card = TempData["card-created"] as Card;
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+        &#xe902;
+        </span>
         <span class="tab"></span>
         Card created successfully
     </div>
@@ -33,7 +37,9 @@
 @if (TempData["card-removed"] != null)
 {
     <div class="view-msg long-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+        &#xe902;
+        </span>
         <span class="tab"></span>
         Card removed from deck
     </div>
@@ -42,16 +48,47 @@
 @if (TempData["card-deleted"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Card has been deleted
     </div>
 }
 
+@if (TempData["change-error"] != null)
+{
+    <div>
+        <span class="view-msg">
+            <span class="icons large-type">
+                &#xe917;
+            </span>
+            <span class="tab"></span>
+            @TempData["change-error"].ToString()
+        </span>
+    </div>
+}
+
+@if (TempData["change-success"] != null)
+{
+    <div>
+        <span class="view-msg">
+            <span class="icons large-type">
+                &#xe902;
+            </span>
+            <span class="tab"></span>
+            @TempData["change-success"].ToString()
+        </span>
+    </div>
+    <div class="spacer"></div>
+}
+
 @if (TempData["deck-created"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         New deck created
     </div>
@@ -60,7 +97,9 @@
 @if (TempData["deck-deleted"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Deck has been deleted
     </div>
@@ -69,7 +108,9 @@
 @if (TempData["deck-searchstring-missing"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Please enter a deck name to search for
     </div>
@@ -78,7 +119,9 @@
 @if (TempData["deckname-changed"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Deck name has been changed
     </div>
@@ -87,7 +130,9 @@
 @if (TempData["deckname-missing"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Please enter a name for your deck
     </div>
@@ -96,7 +141,9 @@
 @if (TempData["register-info-missing"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Please complete all the fields to register
     </div>
@@ -105,7 +152,9 @@
 @if (TempData["searchstring-missing"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Please enter text to search for
     </div>
@@ -114,7 +163,9 @@
 @if (TempData["tag-added"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Tag added to your deck
     </div>
@@ -124,7 +175,9 @@
 {
 
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Tag has been created
     </div>
@@ -133,7 +186,9 @@
 @if (TempData["tag-deleted"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Tag has been deleted
     </div>
@@ -142,7 +197,9 @@
 @if (TempData["tag-exists"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Tag already exists
     </div>
@@ -151,7 +208,9 @@
 @if (TempData["tag-removed"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         Tag removed from deck
     </div>
@@ -160,7 +219,9 @@
 @if (TempData["tagname-missing"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe917;</span>
+        <span class="icons large-type">
+            &#xe917;
+        </span>
         <span class="tab"></span>
         Please enter a tag name
     </div>
@@ -169,7 +230,9 @@
 @if (TempData["user-login"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         You have been logged in
     </div>
@@ -177,17 +240,20 @@
 else if (TempData["new-user"] != null)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         You have been registered
     </div>
 }
 
-
 @if (ViewBag.LoggedOut == true)
 {
     <div class="view-msg">
-        <span class="icons large-type">&#xe902;</span>
+        <span class="icons large-type">
+            &#xe902;
+        </span>
         <span class="tab"></span>
         You have been logged out
     </div>

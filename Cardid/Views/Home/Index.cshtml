@@ -8,25 +8,6 @@
 }
 
 
-@*@if (TempData["new-user"] != null)
-    {
-        <div class="home-header">
-            <span class="icons large-type dark-hover x-button">
-                &#xe904;
-            </span>
-            <div class="welcome-msg">
-                <h3 class="bold near-top">Welcome, @TempData["new-user"].ToString()!</h3>
-                <p>Here's how you can get started:</p>
-                <p>
-                    @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "dark-hover" })
-                </p>
-                <p>
-                    @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  View and study decks that other users have shared", "Index", "Deck", null, new { @class = "dark-hover" })
-                </p>
-            </div>
-        </div>
-    }*@
-
 @if (TempData["user-login"] != null || TempData["new-user"] != null)
 {
 
