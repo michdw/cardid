@@ -17,7 +17,7 @@
 <div class="module">
     <div class="final-score">
         <p class="at-top at-bottom">
-            You got @Model.TotalScore out of @Model.PossibleScore correct.
+            You got @Model.TotalScore out of @Model.PossibleScore correct (@Model.Percentage()%).
         </p>
     </div>
     @if (Model.ToRedo == null)

@@ -113,7 +113,7 @@ namespace Cardid.DAL
         }
 
 
-        public void RemoveCardFromDeck(string cardID, string deckID)
+        public void RemoveCard(string cardID, string deckID)
         {
             Card card = GetCardByID(cardID);
             using (SqlConnection db = new SqlConnection(connectionString))

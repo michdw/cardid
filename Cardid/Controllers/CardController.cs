@@ -19,33 +19,18 @@ namespace Cardid.Controllers
             return Session["userid"].ToString();
         }
 
+        private string GetBackground()
+        {
+            Background bg = new Background();
+            return bg.Path();
+        }
+
 
         public ActionResult Index()
         {
             GetUser();
+            Session["background"] = GetBackground();
             return RedirectToAction("Index", "Home");
-        }
-
-
-        [HttpPost]
-        public ActionResult AddCardToDeck(Deck deck)
-        {
-            string userID = GetUser();
-
-            Card newCard = new Card()
-            {
-                UserID = userID,
-                Front = deck.NewCardFront,
-                Back = deck.NewCardBack
-            };
-
-            newCard = cardSql.CreateCard(newCard, userID);
-            cardSql.AddCardToDeck(newCard, deck.DeckID);
-
-            deck = deckSql.GetDeckByID(deck.DeckID);
-
-            TempData["card-added"] = true;
-            return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
         }
 
 
@@ -57,12 +42,15 @@ namespace Cardid.Controllers
 
             if (deckID != null)
             {
+                Session["background"] = GetBackground();
                 card.CurrentDeckID = deckID;
             }
             else if (searchString != null)
             {
+                Session["background"] = GetBackground();
                 card.CurrentSearchString = searchString;
             }
+
             return View("EditCard", card);
         }
 
@@ -78,11 +66,11 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult RemoveCardFromDeck(string cardID, string deckID)
+        public ActionResult RemoveCard(string cardID, string deckID)
         {
             GetUser();
 
-            cardSql.RemoveCardFromDeck(cardID, deckID);
+            cardSql.RemoveCard(cardID, deckID);
 
             TempData["card-removed"] = true;
             return RedirectToAction("EditDeck", "Deck", new { deckID });

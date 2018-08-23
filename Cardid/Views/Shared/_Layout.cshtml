@@ -4,6 +4,16 @@
     {
         ViewBag.UserName = Session["username"].ToString();
     }
+
+    string imgPath;
+    if (Session["background"] == null)
+    {
+        imgPath = "../../Content/Backgrounds/bg1.png";
+    }
+    else
+    {
+        imgPath = "../../Content/Backgrounds/" + Session["background"].ToString();
+    }
 }
 
 <!DOCTYPE html>
@@ -22,7 +32,7 @@
 
 </head>
 <body style="
-    background: url('../../Content/Backgrounds/bg5.png') no-repeat;
+    background: url(@imgPath) no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
