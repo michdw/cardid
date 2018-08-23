@@ -25,9 +25,22 @@ namespace Cardid.Controllers
 
         private string GetBackground()
         {
+            if (Session["background"] == null)
+            {
+                Session["background"] = "";
+            }
+            string currentPath = Session["background"].ToString();
+            string newPath = currentPath;
+
             Background bg = new Background();
-            return bg.Path();
+
+            while (newPath == currentPath)
+            {
+                newPath = bg.Path();
+            }
+            return newPath;
         }
+
 
         private List<Card> CardsToRedo(string redo)
         {
@@ -112,7 +125,6 @@ namespace Cardid.Controllers
             }
 
             deck = deckSql.CreateDeck(deck.DeckName, userID);
-            Session["background"] = GetBackground();
             return View("EditDeck", deck);
         }
 
@@ -195,15 +207,11 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult EditDeck(string deckID, bool switchView)
+        public ActionResult EditDeck(string deckID)
         {
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            if (switchView)
-            {
-                Session["background"] = GetBackground();
-            }
             return View(deck);
         }
 
@@ -214,7 +222,7 @@ namespace Cardid.Controllers
             Deck deck = deckSql.GetDeckByID(deckID);
             if (deck.UserID == userID)
             {
-                return RedirectToAction("EditDeck", new { deckID, switchView = true });
+                return RedirectToAction("EditDeck", new { deckID });
             }
             else
             {
@@ -229,7 +237,7 @@ namespace Cardid.Controllers
 
             deckSql.MakeDeckPrivate(deckID);
 
-            return RedirectToAction("EditDeck", new { deckID, switchView = false });
+            return RedirectToAction("EditDeck", new { deckID });
         }
 
 
@@ -239,7 +247,7 @@ namespace Cardid.Controllers
 
             deckSql.MakeDeckPublic(deckID);
 
-            return RedirectToAction("EditDeck", new { deckID, switchView = false });
+            return RedirectToAction("EditDeck", new { deckID });
         }
 
 
@@ -253,7 +261,7 @@ namespace Cardid.Controllers
 
             TempData["tag-removed"] = true;
 
-            return RedirectToAction("EditDeck", new { deckID, switchView = false });
+            return RedirectToAction("EditDeck", new { deckID });
         }
 
 
@@ -273,7 +281,6 @@ namespace Cardid.Controllers
             List<Deck> matchingDecks = deckSql.SearchDecksByName(searchString);
 
             ViewBag.SearchName = searchString;
-            Session["background"] = GetBackground();
             return View("MainDeckView", matchingDecks);
         }
 
@@ -350,7 +357,6 @@ namespace Cardid.Controllers
                 WholeDeck = false
             };
 
-            Session["background"] = GetBackground();
             return View("Study", study);
         }
 
@@ -360,7 +366,6 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            Session["background"] = GetBackground();
             return View(deck);
         }
 

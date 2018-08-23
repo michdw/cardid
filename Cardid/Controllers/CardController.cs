@@ -19,17 +19,10 @@ namespace Cardid.Controllers
             return Session["userid"].ToString();
         }
 
-        private string GetBackground()
-        {
-            Background bg = new Background();
-            return bg.Path();
-        }
-
 
         public ActionResult Index()
         {
             GetUser();
-            Session["background"] = GetBackground();
             return RedirectToAction("Index", "Home");
         }
 
@@ -42,12 +35,10 @@ namespace Cardid.Controllers
 
             if (deckID != null)
             {
-                Session["background"] = GetBackground();
                 card.CurrentDeckID = deckID;
             }
             else if (searchString != null)
             {
-                Session["background"] = GetBackground();
                 card.CurrentSearchString = searchString;
             }
 

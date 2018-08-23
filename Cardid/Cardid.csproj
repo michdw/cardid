@@ -168,23 +168,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Backgrounds\arrowbg1.png" />
-    <Content Include="Content\Backgrounds\arrowbg10.png" />
-    <Content Include="Content\Backgrounds\arrowbg11.png" />
-    <Content Include="Content\Backgrounds\arrowbg12.png" />
-    <Content Include="Content\Backgrounds\arrowbg2.png" />
-    <Content Include="Content\Backgrounds\arrowbg3.png" />
-    <Content Include="Content\Backgrounds\arrowbg4.png" />
-    <Content Include="Content\Backgrounds\arrowbg5.png" />
-    <Content Include="Content\Backgrounds\arrowbg6.png" />
-    <Content Include="Content\Backgrounds\arrowbg7.png" />
-    <Content Include="Content\Backgrounds\arrowbg8.png" />
-    <Content Include="Content\Backgrounds\arrowbg9.png" />
     <Content Include="Content\Backgrounds\bg1.png" />
     <Content Include="Content\Backgrounds\bg2.png" />
     <Content Include="Content\Backgrounds\bg3.png" />
     <Content Include="Content\Backgrounds\bg4.png" />
     <Content Include="Content\Backgrounds\bg5.png" />
+    <Content Include="Content\Backgrounds\bg6.png" />
+    <Content Include="Content\Backgrounds\bg7.png" />
+    <Content Include="Content\Backgrounds\bg8.png" />
+    <Content Include="Content\Backgrounds\bg9.png" />
     <Content Include="Content\cardView.js" />
     <Content Include="Content\deckTags.js" />
     <Content Include="Content\editCard.js" />
@@ -199,7 +191,6 @@
     <Content Include="Content\studySession.js" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -256,15 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,8 +24,20 @@ namespace Cardid.Controllers
 
         private string GetBackground()
         {
+            if (Session["background"] == null)
+            {
+                Session["background"] = "";
+            }
+            string currentPath = Session["background"].ToString();
+            string newPath = currentPath;
+
             Background bg = new Background();
-            return bg.Path();
+
+            while (newPath == currentPath)
+            {
+                newPath = bg.Path();
+            }
+            return newPath;
         }
 
 
@@ -81,7 +93,6 @@ namespace Cardid.Controllers
         {
             User model = new User();
 
-            Session["background"] = GetBackground();
             return View("Login");
         }
 
@@ -132,7 +143,6 @@ namespace Cardid.Controllers
         {
             User model = new User();
 
-            Session["background"] = GetBackground();
             return View("Register", model);
         }
 
@@ -208,7 +218,6 @@ namespace Cardid.Controllers
             string userID = GetUser();
             User user = userSql.GetUserByID(userID);
 
-            Session["background"] = GetBackground();
             return View("ChangeUserInfo", user);
         }
 
@@ -343,7 +352,6 @@ namespace Cardid.Controllers
                 ViewBag.LoggedOut = true;
             }
 
-            Session["background"] = GetBackground();
             return View("Index");
         }
 
@@ -402,8 +410,11 @@ namespace Cardid.Controllers
                     }
                 }
             }
+            else
+            {
+                Session["background"] = GetBackground();
+            }
 
-            Session["background"] = GetBackground();
             return View(search);
         }
 
@@ -415,7 +426,6 @@ namespace Cardid.Controllers
             User user = userSql.GetUserByID(userID);
             List<Tag> userTags = user.Tags();
 
-            Session["background"] = GetBackground();
             return View(userTags);
         }
     }
