@@ -28,7 +28,7 @@ namespace Cardid.DAL
         private string getNewUserCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
-        private string searchCardsForText = "SELECT * FROM cards WHERE Front LIKE @text OR Back LIKE @text";
+        private string searchCardsForText = "SELECT * FROM [cards] WHERE Front LIKE @text OR Back LIKE @text ORDER BY Front ASC";
 
 
 

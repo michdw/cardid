@@ -53,7 +53,7 @@ else
 
 @if (Model.SearchString != null)
 {
-    <div class="flex flex-center">
+    <div class="flex flex-center flex-space">
         <div class="results-container">
 
             <h2 class="view-title">
@@ -63,7 +63,7 @@ else
             @if (Model.MatchingCards.Count == 0)
             {
                 <p class="at-bottom at-top">
-                    No cards found containing that text.
+                    No cards found
                 </p>
             }
             else
@@ -93,7 +93,7 @@ else
 
                     @if (Model.UserCards == true)
                     {
-                        <div class="results-subsection flex flex-center">
+                        <div class="results-subsection flex flex-center flex-space">
 
                             <h2 class="view-title results-title">Your Cards</h2>
 
@@ -118,8 +118,15 @@ else
                                         </div>
 
                                         <div class="card-deck">
-                                            <p class="small-type at-bottom">Currently in:</p>
-                                            @Html.ActionLink(cardDeck.DeckName, "EditDeck", "Deck", new { deckId = cardDeck.DeckID }, new { @class = "deck-incard small-type" })
+                                            <a href="@Url.Action("EditDeck", "Deck", new { deckId = cardDeck.DeckID })" class="deck-incard">
+                                                <span class="icons large-type float-left">
+                                                    &#xe90e;
+                                                    <span class="half-tab"></span>
+                                                </span>
+                                                <span class="deckname-incard float-left">
+                                                    @cardDeck.DeckName
+                                                </span>
+                                            </a>
                                         </div>
 
                                     </div>
@@ -130,7 +137,8 @@ else
 
                     @if (Model.PublicCards == true)
                     {
-                        <div class="results-subsection flex flex-center">
+                        <div class="spacer"></div>
+                        <div class="results-subsection flex flex-center flex-space">
                             <h2 class="view-title results-title">Public Cards</h2>
 
                             @foreach (Card thisCard in Model.MatchingCards)
@@ -143,9 +151,17 @@ else
                                         <div class="card-field">@thisCard.Back</div>
 
                                         <div class="card-deck">
-                                            <p class="small-type at-bottom">Currently in:</p>
-                                            @Html.ActionLink(cardDeck.DeckName, "EditDeck", "Deck", new { deckId = cardDeck.DeckID }, new { @class = "deck-incard small-type" })
+                                            <a href="@Url.Action("ViewDeck", "Deck", new { deckId = cardDeck.DeckID })" class="deck-incard">
+                                                <span class="icons large-type float-left">
+                                                    &#xe90e;
+                                                    <span class="half-tab"></span>
+                                                </span>
+                                                <span class="deckname-incard float-left">
+                                                    @cardDeck.DeckName
+                                                </span>
+                                            </a>
                                         </div>
+
                                     </div>
                                 }
                             }
@@ -221,7 +237,7 @@ else
             else
             {
                 <p class="at-bottom at-top">
-                    No decks found containing that text.
+                    No decks found
                 </p>
             }
         </div>
@@ -273,7 +289,7 @@ else
             else
             {
                 <p class="at-bottom at-top">
-                    No tags found containing that text
+                    No tags found
                 </p>
             }
         </div>

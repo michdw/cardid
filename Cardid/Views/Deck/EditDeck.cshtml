@@ -242,7 +242,7 @@
 <h2 class="view-title">Cards in this deck:</h2>
 
 
-<div class="flex flex-center">
+<div class="flex flex-center flex-space">
 
     <div class="card-blank">
         <div class="spacer"></div>
@@ -272,20 +272,24 @@
             <div class="card-bothsides">
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
-                <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
-                    <span class="icons">
-                        &#xe90d;
-                    </span>
-                    <span class="tab"></span>
-                    Edit this card
-                </a>
-                <a href="@Url.Action("RemoveCard", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
-                    <span class="icons">
-                        &#xe914;
-                    </span>
-                    <span class="tab"></span>
-                    Remove from deck
-                </a>
+                <div>
+                    <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
+                        <span class="icons">
+                            &#xe90d;
+                        </span>
+                        <span class="tab"></span>
+                        Edit
+                    </a>
+                </div>
+                <div>
+                    <a href="@Url.Action("RemoveCard", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn">
+                        <span class="icons">
+                            &#xe914;
+                        </span>
+                        <span class="tab"></span>
+                        Remove
+                    </a>
+                </div>
             </div>
         }
     }

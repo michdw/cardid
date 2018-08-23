@@ -100,8 +100,8 @@ a {
     justify-content: flex-start;
 }
 
-.flex > div {
-    margin: 12px;
+.flex-space > div {
+    margin: 10px;
 }
 
 .float-left {
@@ -576,16 +576,20 @@ textarea {
 }
 
 .deck-incard {
+    position: relative;
     display: inline-block;
-    background: rgba(0,0,0,.15);
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(0,0,0,.3);
     color: #fff;
     padding: 4px 12px;
-    margin: 8px;
-    margin-left: 0;
 }
 
     .deck-incard:hover {
-        background: rgba(0,0,0,.25);
+        background: rgba(0,0,0,.45);
+    }
+
+    .deckname-incard {
+        width: 70%;
     }
 
 .edit-field {
@@ -676,7 +680,7 @@ textarea {
 /* tags */
 
 .active-tag, .search-tag {
-    background: #111;
+    background: rgba(0,0,0,.9);
 }
 
     .search-tag:hover {
@@ -685,11 +689,11 @@ textarea {
     }
 
 .inactive-tag {
-    background: #555;
+    background: rgba(0,0,0,.3);
 }
 
     .inactive-tag:hover {
-        background: #333;
+        background: rgba(0,0,0,.7);
     }
 
 .delete-tag {
