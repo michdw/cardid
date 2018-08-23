@@ -245,7 +245,8 @@
 <div class="flex flex-center">
 
     <div class="card-blank">
-        <span class="bold small-type">Create a new card for this deck:</span>
+        <div class="spacer"></div>
+        <span class="bold white">Add a new card:</span>
 
         @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
         {

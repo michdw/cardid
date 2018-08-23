@@ -93,7 +93,6 @@ a {
 }
 
 .flex-center {
-    align-items: center;
     justify-content: center;
 }
 
@@ -729,11 +728,6 @@ textarea {
         color: #993737;
     }
 
-.tag-results {
-    width: 30%;
-    min-width: 300px;
-}
-
 .tagsearch-heading {
     margin-top: 0;
 }
@@ -882,9 +876,6 @@ textarea {
     padding: 10px 0;
     background: #333;
     color: #fff;
-}
-
-.study-list {
 }
 
 .study-listing {

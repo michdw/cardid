@@ -27,29 +27,33 @@ else
     </div>
 }
 
-<div class="module">
+<div class="flex flex-center">
 
-    @using (Html.BeginForm("SearchText", "Home", null, FormMethod.Get, new { @class = "vertical-form" }))
-    {
-        <div>
-            <input type="text" name="searchString" class="single-input" placeholder="text to search for" />
-        </div>
-        <div>
-            <button type="submit" class="btn main-btn">
-                <span class="icons">
-                    &#xe90f;
-                </span>
-                <span class="tab"></span>
-                New search
-            </button>
-        </div>
-    }
+
+    <div class="module">
+
+        @using (Html.BeginForm("SearchText", "Home", null, FormMethod.Get, new { @class = "vertical-form" }))
+        {
+            <div>
+                <input type="text" name="searchString" class="single-input" placeholder="text to search for" />
+            </div>
+            <div>
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe90f;
+                    </span>
+                    <span class="tab"></span>
+                    New search
+                </button>
+            </div>
+        }
+    </div>
+
 </div>
-
 
 @if (Model.SearchString != null)
 {
-    <div>
+    <div class="flex flex-center">
         <div class="results-container">
 
             <h2 class="view-title">
@@ -89,7 +93,7 @@ else
 
                     @if (Model.UserCards == true)
                     {
-                        <div class="results-subsection flex flex-left">
+                        <div class="results-subsection flex flex-center">
 
 
                             <h2 class="view-title results-title">Your Cards</h2>
@@ -140,7 +144,7 @@ else
 
                     @if (Model.PublicCards == true)
                     {
-                        <div class="results-subsection flex flex-left">
+                        <div class="results-subsection flex flex-center">
                             <h2 class="view-title results-title">Public Cards</h2>
 
                             @foreach (Card thisCard in Model.MatchingCards)
@@ -150,18 +154,6 @@ else
                                     <div class="card-bothsides">
                                         <div class="card-field">@thisCard.Front</div>
                                         <div class="card-field">@thisCard.Back</div>
-
-                                        <div class="card-options">
-
-                                            <a href="@Url.Action("ChooseDeckInit", "Card", new { cardID = thisCard.CardID })" class="btn main-btn">
-                                                <span class="icons">
-                                                    &#xe90e;
-                                                </span>
-                                                <span class="tab"></span>
-                                                Add to a different deck
-                                            </a>
-
-                                        </div>
 
                                         <div class="card-decks">
                                             <p class="small-type at-bottom">Currently in:</p>
@@ -261,7 +253,7 @@ else
 
 
 
-        <div class="results-container">
+        <div class="results-container" style="max-width:300px">
 
             <h2 class="view-title">
                 Tags:

@@ -4,6 +4,8 @@
 
 @{
     ViewBag.Title = "Your Account: " + Model.DisplayName;
+
+    int visibleSessions = Math.Min(5, Model.Sessions().Count);
 }
 
 <div>
@@ -47,7 +49,7 @@
             <span class="icons" style="width:40px">
                 &#xe93d;
             </span>
-            You currently have @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
+            You have created @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
         </div>
         <div class="spacer"></div>
     }
@@ -59,24 +61,32 @@
         Study sessions logged: @Model.Sessions().Count
     </div>
 
-    @if (Model.Sessions().Count > 0)
-    {
-        <div class="btn main-btn show-btn" style="margin-left:44px">
-            <span class="icons">
-                &#xe931;
-            </span>
-            Show
-        </div>
-    }
+    <div class="study-list-top ">
 
-    <div class="btn main-btn hide-btn" style="display:none;margin-left:44px">
-        <span class="icons">
-            &#xe934;
-        </span>
-        Hide
+        <p class="small-type at-bottom">Most recent:</p>
+
+        @for (int i = 0; i < visibleSessions; i++)
+        {
+            Study session = Model.Sessions()[i];
+
+            <div class="study-listing">
+                <p class="at-top at-bottom">
+                    <span class="study-score">
+                        @session.Percentage()
+                        <span class="small-type">
+                            %
+                        </span>
+                    </span>
+                    @Html.ActionLink(session.DeckName(), "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
+                </p>
+
+                <p class="small-type at-top">
+                    @session.TimeOf.ToString("dd MMMM yyyy - hh:mm tt")
+                </p>
+            </div>
+        }
     </div>
-
-    <div class="study-list hidden">
+    <div class="study-list-full hidden">
 
         <div class="spacer"></div>
 
@@ -100,6 +110,24 @@
         }
     </div>
 
+    @if (Model.Sessions().Count > 5)
+    {
+        <div class="btn main-btn show-btn">
+            <span class="icons">
+                &#xe931;
+            </span>
+            Show all
+        </div>
+    }
+
+    <div class="btn main-btn hide-btn" style="display:none">
+        <span class="icons">
+            &#xe934;
+        </span>
+        Show less
+    </div>
+
+
 </div>
 
 <script>
@@ -110,13 +138,15 @@
         $('.show-btn').on('click', function () {
             $(this).css('display', 'none');
             $('.hide-btn').css('display', 'inline-block');
-            $('.study-list').removeClass('hidden');
+            $('.study-list-top').addClass('hidden');
+            $('.study-list-full').removeClass('hidden');
         });
 
         $('.hide-btn').on('click', function () {
             $(this).css('display', 'none');
             $('.show-btn').css('display', 'inline-block');
-            $('.study-list').addClass('hidden');
+            $('.study-list-full').addClass('hidden');
+            $('.study-list-top').removeClass('hidden');
         });
 
     });
