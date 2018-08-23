@@ -180,7 +180,7 @@ a {
 .container {
     position: relative;
     padding: 1em;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .page-footer {
@@ -264,7 +264,7 @@ a {
     top: 0;
     left: 0;
     padding: 1em 2em;
-    background: #333;
+    background: rgba(0,0,0,.8);
     color: #fff;
     font-size: .9em;
 }
