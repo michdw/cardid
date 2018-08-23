@@ -8,56 +8,94 @@
 }
 
 
-@if (TempData["new-user"] != null)
-{
-    <div class="home-header">
-        <span class="icons large-type dark-hover x-button">
-            &#xe904;
-        </span>
-        <div class="welcome-msg">
-            <h3 class="bold near-top">Welcome, @TempData["new-user"].ToString()!</h3>
-            <p>Here's how you can get started:</p>
-            <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "dark-hover" })
-            </p>
-            <p>
-                @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  View and study decks that other users have shared", "Index", "Deck", null, new { @class = "dark-hover" })
-            </p>
+@*@if (TempData["new-user"] != null)
+    {
+        <div class="home-header">
+            <span class="icons large-type dark-hover x-button">
+                &#xe904;
+            </span>
+            <div class="welcome-msg">
+                <h3 class="bold near-top">Welcome, @TempData["new-user"].ToString()!</h3>
+                <p>Here's how you can get started:</p>
+                <p>
+                    @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "dark-hover" })
+                </p>
+                <p>
+                    @Html.ActionLink(HttpUtility.HtmlDecode("&#9679;") + "  View and study decks that other users have shared", "Index", "Deck", null, new { @class = "dark-hover" })
+                </p>
+            </div>
         </div>
-    </div>
-}
-else if (TempData["user-login"] != null)
-{
-    User user = TempData["user-login"] as User;
+    }*@
 
-    <div class="home-header">
-        <span class="icons large-type dark-hover x-button">
+@if (TempData["user-login"] != null || TempData["new-user"] != null)
+{
+
+    <div class="welcome-header flex flex-left">
+
+        <div class="x-button icons large-type dark-hover">
             &#xe904;
-        </span>
-        <div class="welcome-msg">
-            <h3 class="bold near-top">Welcome back, @user.DisplayName!</h3>
-            <p>
-                You currently have
-                <strong> @user.Cards().Count </strong>cards, and
-                <strong> @user.Decks().Count </strong>decks.
-            </p>
-            @if (user.Sessions().Count > 0)
-            {
-                <p>
-                    You've logged
-                    <strong> @user.Sessions().Count </strong>study sessions.&nbsp;&nbsp;
-                    @Html.ActionLink("Click here to study some more!", "Index", "Deck", null, new { @class = "underline dark-hover" })
-                </p>
-            }
-            else
-            {
-                <p>
-                    No study sessions yet -&nbsp;&nbsp;
-                    @Html.ActionLink("  Click here to get started!", "Index", "Deck", null, new { @class = "underline dark-hover" })
-                </p>
-            }
         </div>
+
+        <div class="welcome-body flex flex-left">
+            @if (TempData["user-login"] != null)
+            {
+                User user = TempData["user-login"] as User;
+                <div class="welcome-greeting large-type">
+                    Welcome back, @user.DisplayName!
+                </div>
+
+            }
+            else if (TempData["new-user"] != null)
+            {
+                <div class="welcome-greeting">
+                    <div>
+                        <p class="large-type at-top at-bottom">
+                            Welcome, @TempData["new-user"].ToString()!
+                        </p>
+                        <p class="small-type at-top at-bottom">
+                            Here's how you can get started:
+                        </p>
+                    </div>
+                </div>
+            }
+            <div class="welcome-options">
+                <div>
+                    <a href="@Url.Action("CreateDeckInit", "Deck")" class=" dark-hover link-inline" style="display:block;margin:.5em 0;">
+                        <span class="icons">
+                            &#xe900;
+                        </span>
+                        <span class="half-tab"></span>
+                        <span class="underline">
+                            Create a new deck
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Index", "Deck")" class=" dark-hover link-inline" style="display:block;margin:.5em 0;">
+                        <span class="icons">
+                            &#xe915;
+                        </span>
+                        <span class="half-tab"></span>
+                        <span class="underline">
+                            Find a deck to study
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+
+    @*<div class="welcome-msg flex flex-center">
+            <div class="large-type at-top at-bottom"></div>
+        </div>
+        <div class="welcome-options">
+            <div>
+                @Html.ActionLink("Create a new deck", "CreateDeckInit", "Deck", null, new { @class = "underline dark-hover link-inline" })
+            </div>
+            <div>
+                @Html.ActionLink("Find a deck to study", "Index", "Deck", null, new { @class = "underline dark-hover link-inline" })
+            </div>
+        </div>*@
 }
 
 

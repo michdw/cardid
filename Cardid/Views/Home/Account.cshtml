@@ -34,6 +34,10 @@
 
 
     <div class="module">
+        <h2 class="view-title">
+            Activity:
+        </h2>
+        <div class="spacer"></div>
 
         @if (Model.Decks().Count() > 0)
         {
@@ -66,7 +70,10 @@
 
         <div class="study-list-top ">
 
-            <p class="small-type at-bottom">Most recent:</p>
+            @if (Model.Sessions().Count > 1)
+            {
+                <p class="small-type at-bottom">Most recent:</p>
+            }
 
             @for (int i = 0; i < visibleSessions; i++)
             {
@@ -113,22 +120,22 @@
             }
         </div>
 
-    @if (Model.Sessions().Count > 5)
-    {
-        <div class="btn main-btn show-btn">
-            <span class="icons">
-                &#xe931;
-            </span>
-            Show all
-        </div>
-    }
+        @if (Model.Sessions().Count > 5)
+        {
+            <div class="btn main-btn show-btn">
+                <span class="icons">
+                    &#xe931;
+                </span>
+                Show all
+            </div>
+        }
 
-    <div class="btn main-btn hide-btn" style="display:none">
-        <span class="icons">
-            &#xe934;
-        </span>
-        Show less
-    </div>
+        <div class="btn main-btn hide-btn" style="display:none">
+            <span class="icons">
+                &#xe934;
+            </span>
+            Show less
+        </div>
 
     </div>
 

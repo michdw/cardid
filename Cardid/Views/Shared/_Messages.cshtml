@@ -3,6 +3,13 @@
 
 
 
+@if (TempData["account-deleted"] != null)
+{
+    <div class="view-msg">
+        Account has been deleted
+    </div>
+}
+
 @if (TempData["card-added"] != null)
 {
     Card card = TempData["card-added"] as Card;

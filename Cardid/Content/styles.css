@@ -347,8 +347,6 @@ textarea {
 
 .x-button {
     position: absolute;
-    top: .5em;
-    left: .5em;
 }
 
     .x-button:hover {
@@ -418,18 +416,6 @@ textarea {
 
 /* homepage */
 
-.home-header {
-    position: relative;
-    display: flex;
-    padding: 0 1em;
-    background: rgba(0,0,0,.7);
-    border-bottom: 1px solid rgba(255,255,255,.3);
-    width: 100%;
-    color: #fff;
-    transform: translate(-1em, -1em);
-    justify-content: space-between;
-}
-
 .leaderboard, .tag-leaderboard {
     background: rgba(0,0,0,.4);
     border: 1px solid rgba(0,0,0,.2);
@@ -465,6 +451,7 @@ textarea {
 
     .tag-leaderboard {
         width: 90%;
+        margin-top: 2em;
     }
 
     .taglist-block {
@@ -530,9 +517,31 @@ textarea {
     padding: 4px 1em;
 }
 
-.welcome-msg {
+.welcome-header {
+    padding: .5em;
+    background: rgba(0,0,0,.65);
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    width: 100vw;
+    color: #fff;
+    transform: translate(-1em, -1em);
+}
+
+.welcome-body {
     margin-left: 5em;
 }
+
+.welcome-body > div {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-greeting {
+    margin-right: 3em;
+}
+
+.welcome-options {
+}
+
 
 
 /* cards */
