@@ -68,9 +68,8 @@ else
                 <span class="tab"></span>
                 Create a new deck
             </a>
-            <div class="spacer"></div>
 
-            @using (Html.BeginForm("SearchDeckNames", "Deck"))
+            @using (Html.BeginForm("SearchDeckNames", "Deck", FormMethod.Get, new { @class = "line-form" }))
             {
                 <div class="btn inline-btn submit-btn">
                     <span class="icons">
@@ -80,13 +79,13 @@ else
                     Search decks by name
                 </div>
                 <span class="half-tab"></span>
-                <input type="text" name="searchString" class="single-input" placeholder="deck name" />
+                <input type="text" name="searchString" placeholder="deck name" />
             }
 
         </div>
 
         <div class="option module">
-            <p class="bold large-type tagsearch-heading">Search decks by tag</p>
+            <p class="bold large-type at-top">Search decks by tag</p>
 
             <div class="tagviews small-type">
                 <span class="bold tagview-pop">
@@ -110,7 +109,7 @@ else
                     @foreach (Tag tag in tagsByPopularity)
                     {
                         @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-                    }
+                        }
                 </div>
 
                 <div class="tags-alph hidden">
@@ -160,7 +159,7 @@ else
 
         @if (userDecks)
         {
-            <span class="icons large-type white">
+            <span class="icons white large-type">
                 &#xe90e;
             </span>
             <span class="tab"></span>
@@ -168,7 +167,7 @@ else
                 Your decks
             </h2>
             <span class="tab"></span>
-            <span class="bold white small-type">
+            <span class="bold white small-type nowrap">
                 <span class="icons">
                     &#xe931;
                 </span>
@@ -219,7 +218,7 @@ else
 
         @if (publicDecks)
         {
-            <span class="icons large-type white">
+            <span class="icons white large-type">
                 &#xe90e;
             </span>
             <span class="tab"></span>
@@ -227,7 +226,7 @@ else
                 Public decks
             </h2>
             <span class="tab"></span>
-            <span class="bold white small-type">
+            <span class="bold white small-type nowrap">
                 <span class="icons">
                     &#xe931;
                 </span>

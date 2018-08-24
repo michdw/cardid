@@ -32,7 +32,7 @@ else
 
     <div class="module">
 
-        @using (Html.BeginForm("SearchText", "Home", null, FormMethod.Get, new { @class = "vertical-form" }))
+        @using (Html.BeginForm("SearchText", "Home"))
         {
             <div>
                 <input type="text" name="searchString" class="single-input" placeholder="text to search for" />
@@ -69,7 +69,7 @@ else
             else
             {
                 <div>
-                    <p class="at-top at-bottom">
+                    <p class="narrow-line">
                         @Model.MatchingCards.Count matches found
                     </p>
 
@@ -184,7 +184,7 @@ else
             @if (Model.MatchingDecks.Count > 0)
             {
                 <div>
-                    <p class="at-top at-bottom">
+                    <p class="narrow-line">
                         @Model.MatchingDecks.Count matches found
                     </p>
 
@@ -253,7 +253,7 @@ else
             @if (Model.MatchingTags.Count > 0)
             {
                 <div>
-                    <p class="at-top at-bottom">
+                    <p class="narrow-line">
                         @Model.MatchingTags.Count matches found
                     </p>
 

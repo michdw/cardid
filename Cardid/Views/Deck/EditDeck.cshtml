@@ -21,7 +21,7 @@
         @if (Model.Cards().Count > 0)
         {
             <div>
-                <p class="at-top at-bottom">
+                <p class="narrow-line">
                     <span class="bold large-type">
                         Study this deck:
                     </span>
@@ -78,31 +78,32 @@
 
         <div>
             <div class="rename-init">
-                <span class="btn main-btn">
+                <button class="btn main-btn">
                     <span class="icons">
                         &#xe90d;
                     </span>
                     <span class="tab"></span>
                     Rename deck
-                </span>
+                </button>
             </div>
 
             <div class="rename-submit hidden">
 
-                @using (Html.BeginForm("ChangeDeckName", "Deck"))
+                @using (Html.BeginForm("ChangeDeckName", "Deck", FormMethod.Get, new { @class = "line-form" }))
                 {
-                    <button type="submit" class="btn main-btn">
+                    <button class="btn inline-btn submit-btn">
                         <span class="icons">
-                            &#xe90d;
+                            &#xe90f;
                         </span>
                         <span class="tab"></span>
                         Rename deck
                     </button>
+                    <span class="half-tab"></span>
+
+                    @Html.TextBoxFor(m => m.DeckName, new { @class = "inline-input" })
                     @Html.HiddenFor(m => m.DeckID)
-                    @Html.TextBoxFor(m => m.DeckName, new { @class = "popup near-top" })
                 }
             </div>
-
         </div>
 
         <div>
@@ -141,7 +142,7 @@
 
         @if (Model.Tags().Count > 0)
         {
-            <p class="at-top at-bottom">
+            <p class="narrow-line">
                 <span class="icons">
                     &#xe93d;&nbsp;
                 </span>
@@ -214,9 +215,9 @@
         </div>
 
         <div>
-            <h4 class="bold" style="margin-bottom:.75em">Create a new tag for this deck:</h4>
+            <h4 class="bold at-bottom">Create a new tag for this deck:</h4>
 
-            @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post))
+            @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post, new { @class = "line-form" }))
             {
                 @Html.TextBoxFor(m => m.NewTag.TagName, new { @placeholder = "new tag name" })
 

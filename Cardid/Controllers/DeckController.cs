@@ -92,10 +92,14 @@ namespace Cardid.Controllers
         public ActionResult ChangeDeckName(Deck deck)
         {
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
-            deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
-            deck = deckSql.GetDeckByID(deck.DeckID);
+            if (deck.DeckName != currentDeck.DeckName)
+            {
+                deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
+                TempData["deckname-changed"] = true;
+            }
 
-            TempData["deckname-changed"] = true;
+            //deck = deckSql.GetDeckByID(deck.DeckID);
+
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
         }
 

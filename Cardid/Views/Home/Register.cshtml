@@ -15,51 +15,53 @@
     </h1>
 </div>
 
-<div class="module">
+<div class="flex flex-center">
 
-    @using (Html.BeginForm("CompleteRegister", "Home", FormMethod.Post))
-    {
-        @Html.ValidationMessage("invalid-credentials")
-        if (ViewBag.LoginInstead == true)
+    <div class="module">
+
+        @using (Html.BeginForm("CompleteRegister", "Home", FormMethod.Post))
         {
-            @Html.ActionLink(" Login here", "Login", "Home");
+            @Html.ValidationMessage("invalid-credentials")
+            if (ViewBag.LoginInstead == true)
+            {
+                @Html.ActionLink(" Login here", "Login", "Home");
+            }
+
+
+
+
+            <div class="validation-group">
+                @Html.LabelFor(m => m.DisplayName, "Username")
+                @Html.TextBoxFor(m => m.DisplayName, new { autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.DisplayName)
+            </div>
+
+            <div class="validation-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.EditorFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div class="validation-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <div class="validation-group">
+                @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+
+            <button type="submit" class="btn main-btn float-right">
+                Register&nbsp;
+                <span class="icons">
+                    &#xe933;
+                </span>
+            </button>
         }
 
-
-
-
-        <div class="validation-group">
-            @Html.LabelFor(m => m.DisplayName, "Username")
-            @Html.TextBoxFor(m => m.DisplayName, new { autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.DisplayName)
-        </div>
-
-        <div class="validation-group">
-            @Html.LabelFor(m => m.Email)
-            @Html.EditorFor(m => m.Email)
-            @Html.ValidationMessageFor(m => m.Email)
-        </div>
-
-        <div class="validation-group">
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </div>
-
-        <div class="validation-group">
-            @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
-            @Html.PasswordFor(m => m.ConfirmPassword)
-            @Html.ValidationMessageFor(m => m.ConfirmPassword)
-        </div>
-
-
-
-        <button type="submit" class="btn main-btn right-column">
-            Register&nbsp;
-            <span class="icons">
-                &#xe933;
-            </span>
-        </button>
-    }
+    </div>
 
 </div>

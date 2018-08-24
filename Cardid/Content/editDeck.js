@@ -24,6 +24,10 @@
 
     $(document).ready(function () {
 
+        $('.submit-btn').on('click', function () {
+            $(this).closest('form').submit();
+        });
+
         $('.tagview-pop, .tagview-alph, .toggle-left, .toggle-right').on('click', function () {
             switchView();
         });
