@@ -2,7 +2,7 @@
 @using Cardid.Models
 @model Study
 @{
-    ViewBag.Title = "Study Session" + Model.DeckName();
+    ViewBag.Title = "Study Session" + Model.DeckName;
 }
 
 
@@ -11,7 +11,7 @@
         &#xe915;
     </span>
     <span class="half-tab"></span>
-    @Model.DeckName()
+    @Model.DeckName
 </h1>
 
 <p class="total-remaining near-top">

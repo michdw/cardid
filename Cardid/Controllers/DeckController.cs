@@ -36,7 +36,7 @@ namespace Cardid.Controllers
 
             while (newPath == currentPath)
             {
-                newPath = bg.Path();
+                newPath = bg.Path;
             }
             return newPath;
         }
@@ -299,7 +299,7 @@ namespace Cardid.Controllers
             string userID = GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
-            List<Card> cards = deck.Cards();
+            List<Card> cards = deck.Cards;
             cards.Shuffle();
 
             Study study = new Study

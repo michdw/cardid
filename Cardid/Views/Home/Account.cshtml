@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "Your Account: " + Model.DisplayName;
 
-    int visibleSessions = Math.Min(5, Model.Sessions().Count);
+    int visibleSessions = Math.Min(5, Model.Sessions.Count);
 }
 
 <div>
@@ -37,24 +37,24 @@
         </h2>
         <div class="spacer"></div>
 
-        @if (Model.Decks().Count() > 0)
+        @if (Model.Decks.Count() > 0)
         {
             <div>
                 <span class="icons large-type" style="width:40px">
                     &#xe90e;
                 </span>
-                You currently have @Model.Cards().Count cards in @Html.ActionLink(Model.Decks().Count.ToString() + " decks", "Index", "Deck", null, new { @class = "underline" })
+                You currently have @Model.Cards.Count cards in @Html.ActionLink(Model.Decks.Count.ToString() + " decks", "Index", "Deck", null, new { @class = "underline" })
             </div>
             <div class="spacer"></div>
         }
 
-        @if (Model.Tags().Count() > 0)
+        @if (Model.Tags.Count() > 0)
         {
             <div>
                 <span class="icons" style="width:40px">
                     &#xe93d;
                 </span>
-                You have created @Html.ActionLink(" " + Model.Tags().Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
+                You have created @Html.ActionLink(" " + Model.Tags.Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
             </div>
             <div class="spacer"></div>
         }
@@ -63,29 +63,29 @@
             <span class="icons large-type" style="width:40px">
                 &#xe915;
             </span>
-            Study sessions logged: @Model.Sessions().Count
+            Study sessions logged: @Model.Sessions.Count
         </div>
 
         <div class="study-list-top ">
 
-            @if (Model.Sessions().Count > 1)
+            @if (Model.Sessions.Count > 1)
             {
                 <p class="small-type at-bottom">Most recent:</p>
             }
 
             @for (int i = 0; i < visibleSessions; i++)
             {
-                Study session = Model.Sessions()[i];
+                Study session = Model.Sessions[i];
 
                 <div class="study-listing">
                     <p class="narrow-line">
                         <span class="study-score">
-                            @session.Percentage()
+                            @session.PercentScore
                             <span class="small-type">
                                 %
                             </span>
                         </span>
-                        @Html.ActionLink(session.DeckName(), "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
+                        @Html.ActionLink(session.DeckName, "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
                     </p>
 
                     <p class="small-type at-top">
@@ -98,17 +98,17 @@
 
             <div class="spacer"></div>
 
-            @foreach (Study session in Model.Sessions())
+            @foreach (Study session in Model.Sessions)
             {
                 <div class="study-listing">
                     <p class="narrow-line">
                         <span class="study-score">
-                            @session.Percentage()
+                            @session.PercentScore
                             <span class="small-type">
                                 %
                             </span>
                         </span>
-                        @Html.ActionLink(session.DeckName(), "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
+                        @Html.ActionLink(session.DeckName, "ListingToDeck", "Deck", new { deckID = session.DeckID }, new { @class = "underline" })
                     </p>
 
                     <p class="small-type at-top">
@@ -118,7 +118,7 @@
             }
         </div>
 
-        @if (Model.Sessions().Count > 5)
+        @if (Model.Sessions.Count > 5)
         {
             <div class="btn main-btn show-btn float-right">
                 <span class="icons">

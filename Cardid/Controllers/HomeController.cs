@@ -35,7 +35,7 @@ namespace Cardid.Controllers
 
             while (newPath == currentPath)
             {
-                newPath = bg.Path();
+                newPath = bg.Path;
             }
             return newPath;
         }
@@ -72,7 +72,7 @@ namespace Cardid.Controllers
             for (int i = 0; i < popularTagsSql.Count; i++)
             {
                 Tag tag = popularTagsSql[i];
-                int decksUsing = tag.Decks().Count;
+                int decksUsing = tag.DecksUsing.Count;
                 popularTags.Add(tag, decksUsing);
             }
 
@@ -329,7 +329,7 @@ namespace Cardid.Controllers
             List<Tag> userTags = tagSql.GetTagsByUserID(userID);
             foreach (Tag tag in userTags)
             {
-                if (tag.CurrentUserIDs().Count <= 1)
+                if (tag.UserIDs.Count <= 1)
                 {
                     tagSql.DeleteTag(tag.TagID);
                 }
@@ -424,7 +424,7 @@ namespace Cardid.Controllers
             GetUser();
 
             User user = userSql.GetUserByID(userID);
-            List<Tag> userTags = user.Tags();
+            List<Tag> userTags = user.Tags;
 
             return View(userTags);
         }

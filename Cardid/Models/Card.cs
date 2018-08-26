@@ -19,14 +19,6 @@ namespace Cardid.Models
         public string CurrentDeckID { get; set; }
         public string CurrentSearchString { get; set; }
 
-        public Card TrimValues()
-        {
-            CardID = CardID.Trim();
-            UserID = UserID.Trim();
-            Front = Front.Trim();
-            Back = Back.Trim();
-            return this;
-        }
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
 
@@ -36,5 +28,13 @@ namespace Cardid.Models
             return deckSql.GetDeckByCardID(CardID);
         }
 
+        public Card TrimValues()
+        {
+            CardID = CardID.Trim();
+            UserID = UserID.Trim();
+            Front = Front.Trim();
+            Back = Back.Trim();
+            return this;
+        }
     }
 }

@@ -17,7 +17,7 @@
 
 <div>
 
-    <p class="at-top white">Shared by <strong>@Model.Creator().DisplayName</strong></p>
+    <p class="at-top white">Shared by <strong>@Model.Creator.DisplayName</strong></p>
     <div class="large-type bold">
         Study this deck:
     </div>
@@ -38,7 +38,7 @@
 <div class="spacer"></div>
 
 <div class="flex flex-center flex-space">
-    @foreach (Card thisCard in Model.Cards())
+    @foreach (Card thisCard in Model.Cards)
     {
         <div class="card-bothsides">
             <div class="card-field">@thisCard.Front</div>

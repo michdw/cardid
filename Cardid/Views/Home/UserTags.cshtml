@@ -27,7 +27,7 @@
         {
             <div>
 
-                @if (tag.Decks().Count > 0)
+                @if (tag.DecksUsing.Count > 0)
                 {
                     @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchstring = tag.TagName }, new { @class = "tag active-tag search-tag" })
                 }
@@ -36,7 +36,7 @@
                     <span class="tag inactive-tag">@tag.TagName</span>
                 }
 
-                @if (tag.CurrentUserIDs().Count == 1)
+                @if (tag.UserIDs.Count == 1)
                 {
                     <a href="@Url.Action("DeleteTag", "Home", new { tagID = tag.TagID })" class="delete-init">
                         <span class="icons delete-tag">

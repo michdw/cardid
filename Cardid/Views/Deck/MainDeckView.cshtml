@@ -14,7 +14,7 @@
         {
             userDecks = true;
         }
-        if (deck.UserID != userID && deck.Cards().Count > 0)
+        if (deck.UserID != userID && deck.Cards.Count > 0)
         {
             publicDecks = true;
         }
@@ -184,10 +184,10 @@ else
 
                         <div class="listing-section">
                             <span class="small-type">
-                                @deck.Cards().Count cards
+                                @deck.Cards.Count cards
                             </span>
                         </div>
-                        @if (deck.Cards().Count > 0)
+                        @if (deck.Cards.Count > 0)
                         {
                             <div class="listing-section">
                                 <div class="listing-subsection">
@@ -243,17 +243,17 @@ else
 
                         <div class="listing-section">
                             <p class="small-type narrow-line">
-                                @deck.Cards().Count cards
+                                @deck.Cards.Count cards
                             </p>
                             <p class="narrow-line">
                                 <span class="small-type">Shared by</span>
                                 <span class="bold">
-                                    @deck.Creator().DisplayName
+                                    @deck.Creator.DisplayName
                                 </span>
                             </p>
                         </div>
 
-                        @if (deck.Cards().Count > 0)
+                        @if (deck.Cards.Count > 0)
                         {
                             <div class="listing-section">
                                 <div class="listing-subsection">

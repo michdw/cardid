@@ -28,38 +28,51 @@ namespace Cardid.Models
         public string ConfirmPassword { get; set; }
 
 
+        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+
+        public List<Card> Cards
+        {
+            get
+            {
+                CardSqlDAL cardSql = new CardSqlDAL(connectionString);
+                return cardSql.GetCardsByUserID(UserID);
+            }
+        }
+
+        public List<Deck> Decks
+        {
+            get
+            {
+                DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+                return deckSql.GetDecksByUserID(UserID);
+            }
+        }
+
+        public List<Tag> Tags
+        {
+            get
+            {
+                TagSqlDAL tagSql = new TagSqlDAL(connectionString);
+                return tagSql.GetTagsByUserID(UserID);
+            }
+
+        }
+
+        public List<Study> Sessions
+        {
+            get
+            {
+                StudySqlDAL studySql = new StudySqlDAL(connectionString);
+                return studySql.GetSessionsByUserID(UserID);
+            }
+        }
+
         public User TrimValues()
         {
             DisplayName = DisplayName.Trim();
             Email = Email.Trim();
             Password = Password.Trim();
             return this;
-        }
-
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
-
-        public List<Card> Cards()
-        {
-            CardSqlDAL cardSql = new CardSqlDAL(connectionString);
-            return cardSql.GetCardsByUserID(UserID);
-        }
-
-        public List<Deck> Decks()
-        {
-            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-            return deckSql.GetDecksByUserID(UserID);
-        }
-
-        public List<Tag> Tags()
-        {
-            TagSqlDAL tagSql = new TagSqlDAL(connectionString);
-            return tagSql.GetTagsByUserID(UserID);
-        }
-
-        public List<Study> Sessions()
-        {
-            StudySqlDAL studySql = new StudySqlDAL(connectionString);
-            return studySql.GetSessionsByUserID(UserID);
         }
 
     }

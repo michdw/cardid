@@ -21,17 +21,26 @@ namespace Cardid.Models
         public List<Card> Cards { get; set; }
         public string ToRedo { get; set; }
 
-        public int Percentage()
-        {
-            return (int)(Decimal.Divide(TotalScore, PossibleScore) * 100);
-        }
 
         private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
-        public string DeckName()
+
+        public int PercentScore
         {
-            DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
-            Deck deck = deckSql.GetDeckByID(DeckID);
-            return deck.DeckName;
+            get
+            {
+                return (int)(Decimal.Divide(TotalScore, PossibleScore) * 100);
+            }
         }
+
+        public string DeckName
+        {
+            get
+            {
+                DeckSqlDAL deckSql = new DeckSqlDAL(connectionString);
+                Deck deck = deckSql.GetDeckByID(DeckID);
+                return deck.DeckName;
+            }
+        }
+
     }
 }

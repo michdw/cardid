@@ -13,18 +13,23 @@ namespace Cardid.Models
             "bg2.png",
             "bg3.png",
             "bg4.png",
-            "bg5.png",            
+            "bg5.png",
             "bg6.png",
             "bg7.png",
             "bg8.png",
             "bg9.png"
         };
 
-        public string Path()
+        public string Path
         {
-            AllPaths.Shuffle();
-            return AllPaths[0];
+            get
+            {
+                AllPaths.Shuffle();
+                return AllPaths[0];
+            }
+            set { }
         }
+
     }
 
 
@@ -46,5 +51,7 @@ namespace Cardid.Models
                 list[n] = value;
             }
         }
+
     }
+
 }
