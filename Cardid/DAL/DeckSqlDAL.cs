@@ -25,7 +25,7 @@ namespace Cardid.DAL
         private string getDecksByUserID = "SELECT * FROM [decks] WHERE (UserID = @userID)";
         private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID "
             + "WHERE deck_tag.TagID = @tagID";
-        private string getNewUserDeck = "SELECT TOP 1 * FROM [decks] WHERE UserID = @userID ORDER BY DeckID DESC";
+        private string getNewDeck = "SELECT TOP 1 * FROM [decks] WHERE UserID = @userID ORDER BY DeckID DESC";
         private string makeDeckPrivate = "UPDATE [decks] set IsPublic = 0 WHERE DeckID = @deckID";
         private string makeDeckPublic = "UPDATE [decks] set IsPublic = 1 WHERE DeckID = @deckID";
         private string removeAllCardsFromDeck = "DELETE FROM [card_deck] WHERE DeckID = @deckID";
@@ -52,7 +52,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createDeck, new { deckName, isPublic = 0, userID });
-                Deck newDeck = db.Query<Deck>(getNewUserDeck, new { userID }).ToList().FirstOrDefault<Deck>();
+                Deck newDeck = db.Query<Deck>(getNewDeck, new { userID }).ToList().FirstOrDefault<Deck>();
                 return newDeck.TrimValues();
             }
         }

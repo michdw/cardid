@@ -17,15 +17,12 @@ namespace Cardid.DAL
         }
 
         private string addCardToDeck = "INSERT INTO card_deck (CardID, DeckID) VALUES (@cardID, @deckID);";
-        private string cardsNotWithDeck = "SELECT * FROM [cards] WHERE CardID NOT IN (SELECT CardID FROM [card_deck] "
-            + "WHERE DeckID = @deckID) AND UserID = @userID";
         private string createCard = "INSERT INTO [cards] (Front, Back, UserID) VALUES (@front, @back, @userID);";
         private string editCard = "UPDATE [cards] SET Front = @front, Back = @back WHERE CardID = @cardID";
         private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
         private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
             + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
-        private string getUserCardsByName = "SELECT * FROM [cards] WHERE UserID = @userID ORDER BY Front ASC";
-        private string getNewUserCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
+        private string getNewCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
         private string searchCardsForText = "SELECT * FROM [cards] WHERE Front LIKE @text OR Back LIKE @text ORDER BY Front ASC";
@@ -41,26 +38,12 @@ namespace Cardid.DAL
         }
 
 
-        public List<Card> CardsNotWithDeck(string deckID, string userID)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                List<Card> list = db.Query<Card>(cardsNotWithDeck, new { deckID, userID }).ToList<Card>();
-                foreach (Card card in list)
-                {
-                    card.TrimValues();
-                }
-                return list;
-            }
-        }
-
-
         public Card CreateCard(Card card, string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createCard, new { front = card.Front, back = card.Back, userID });
-                Card newCard = db.Query<Card>(getNewUserCard, new { userID }).ToList().FirstOrDefault<Card>();
+                Card newCard = db.Query<Card>(getNewCard, new { userID }).ToList().FirstOrDefault<Card>();
                 return newCard.TrimValues();
             }
         }
@@ -90,20 +73,6 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 List<Card> list = db.Query<Card>(getCardsByDeckID, new { deckID }).ToList<Card>();
-                foreach (Card card in list)
-                {
-                    card.TrimValues();
-                }
-                return list;
-            }
-        }
-
-
-        public List<Card> GetCardsByUserID(string userID)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                List<Card> list = db.Query<Card>(getUserCardsByName, new { userID }).ToList<Card>();
                 foreach (Card card in list)
                 {
                     card.TrimValues();

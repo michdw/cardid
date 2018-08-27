@@ -11,6 +11,11 @@ namespace Cardid.DAL
     public class UserSqlDAL
     {
         private string connectionString;
+        public UserSqlDAL(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         private string checkForName = "SELECT * FROM [users] WHERE DisplayName = @name;";
         private string getAllUsers = "SELECT * FROM [users]";
         private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
@@ -20,17 +25,12 @@ namespace Cardid.DAL
         private string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
         private string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
 
-        //steps to remove user
+        //steps to remove user account
         private string removeUserCardDecks = "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; ";
         private string removeUserCards = "DELETE FROM [cards] WHERE UserID = @userID; ";
         private string removeUserDecks = "DELETE FROM [decks] WHERE UserID = @userID; ";
         private string removeUserSessions = "DELETE FROM [sessions] WHERE UserID = @userID; ";
         private string removeUser = "DELETE FROM [users] WHERE UserID = @userID;";
-
-        public UserSqlDAL(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
 
 
         public bool CheckForEmail(string email)

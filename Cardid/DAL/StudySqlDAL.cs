@@ -25,6 +25,13 @@ namespace Cardid.DAL
             + "GROUP BY UserID ORDER BY COUNT(UserID) DESC";
 
 
+        public List<Study> GetSessionsByUserID(string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                return db.Query<Study>(getSessionsByUserID, new { userID }).ToList();
+            }
+        }
 
         public Dictionary<int, int> MostActiveDecks()
         {
@@ -46,14 +53,6 @@ namespace Cardid.DAL
             }
         }
 
-        public List<Study> GetSessionsByUserID(string userID)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                return db.Query<Study>(getSessionsByUserID, new { userID }).ToList();
-            }
-        }
-
         public void LogStudySession(Study study)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
@@ -68,5 +67,6 @@ namespace Cardid.DAL
                 });
             }
         }
+
     }
 }
