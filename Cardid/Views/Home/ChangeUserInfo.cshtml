@@ -149,26 +149,5 @@
 </div>
 
 
+<script type="text/javascript" src="../../Content/searchText.js"></script>
 
-<script>
-
-    $(document).ready(function () {
-
-        $('.delete-init').on('click', function () {
-            $(this).hide();
-            $('.delete-submit').css('display', 'inline-block');
-        });
-
-        $('.cancel-btn').on('click', function () {
-            $('.delete-submit').css('display', 'none');
-            $('.delete-init').show();
-        });
-
-        $('.userinfo-change').on('click', function () {
-            $(this).closest('.userinfo-inactive').addClass('hidden');
-            $(this).closest('form').find('.userinfo-active').removeClass('hidden');
-        });
-
-    });
-
-</script>

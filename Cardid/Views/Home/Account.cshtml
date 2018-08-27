@@ -120,7 +120,7 @@
 
         @if (Model.Sessions.Count > 5)
         {
-            <div class="btn main-btn show-btn float-right">
+            <div class="btn main-btn float-right" id="show-sessions">
                 <span class="icons">
                     &#xe931;
                 </span>
@@ -128,7 +128,7 @@
             </div>
         }
 
-        <div class="btn main-btn hide-btn float-right" style="display:none">
+        <div class="btn main-btn float-right" id="hide-sessions" style="display:none">
             <span class="icons">
                 &#xe934;
             </span>
@@ -139,26 +139,5 @@
 
 </div>
 
-<script>
 
-
-    $(document).ready(function () {
-
-        $('.show-btn').on('click', function () {
-            $(this).css('display', 'none');
-            $('.hide-btn').css('display', 'inline-block');
-            $('.study-list-top').addClass('hidden');
-            $('.study-list-full').removeClass('hidden');
-        });
-
-        $('.hide-btn').on('click', function () {
-            $(this).css('display', 'none');
-            $('.show-btn').css('display', 'inline-block');
-            $('.study-list-full').addClass('hidden');
-            $('.study-list-top').removeClass('hidden');
-        });
-
-    });
-
-
-</script>
+<script type="text/javascript" src="../../Content/miscScript.js"></script>

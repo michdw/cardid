@@ -43,7 +43,6 @@ function nextCard() {
     nextCard.removeClass('new-card').addClass('active-card');
 }
 
-
 function updateScore(totalCorrect, totalViewed) {
     $('.total-correct').text(totalCorrect);
     $('.total-viewed').text(totalViewed);

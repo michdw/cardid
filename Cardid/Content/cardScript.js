@@ -1,6 +1,12 @@
 ﻿
 $(document).ready(function () {
 
+    //double-clicking on card fields in EditDeck opens EditCard view
+    $('.card-field').dblclick(function () {
+        $(this).closest('.card-bothsides').find('#edit-link')[0].click();
+    });
+
+    //changing text in EditCard
     $('.submit-change').on('focus', function () {
 
         $('.btn').css({

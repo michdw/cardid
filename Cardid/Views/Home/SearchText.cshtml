@@ -51,6 +51,9 @@ else
 
 </div>
 
+
+@* results *@
+
 @if (Model.SearchString != null)
 {
     <div class="flex flex-center flex-space">
@@ -73,7 +76,7 @@ else
                         @Model.MatchingCards.Count matches found
                     </p>
 
-                    <button class="btn main-btn show-btn">
+                    <button class="btn main-btn" id="show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -83,7 +86,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn hide-btn">
+                    <button class="btn main-btn" id="hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -188,7 +191,7 @@ else
                         @Model.MatchingDecks.Count matches found
                     </p>
 
-                    <button class="btn main-btn show-btn">
+                    <button class="btn main-btn" id="show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -199,7 +202,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn hide-btn">
+                    <button class="btn main-btn" id="hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -257,7 +260,7 @@ else
                         @Model.MatchingTags.Count matches found
                     </p>
 
-                    <button class="btn main-btn show-btn">
+                    <button class="btn main-btn" id="show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -268,7 +271,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn hide-btn">
+                    <button class="btn main-btn" id="hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -277,10 +280,12 @@ else
                     <div class="spacer"></div>
 
                     <div class="tag-results">
+
                         @foreach (Tag thisTag in Model.MatchingTags)
                         {
                             @Html.ActionLink(thisTag.TagName, "SearchDeckTags", "Deck", new { searchString = thisTag.TagName }, new { @class = "tag search-tag" });
                         }
+
                     </div>
 
                 </div>
@@ -296,5 +301,6 @@ else
 
     </div>
 }
+
 
 <script type="text/javascript" src="../../Content/searchText.js"></script>

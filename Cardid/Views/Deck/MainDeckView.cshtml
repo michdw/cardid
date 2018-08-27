@@ -33,6 +33,10 @@
 else if (ViewBag.SearchTag != null)
 {
     <h2 class="view-title" : inline-block">
+        <span class="icons large-type">
+            &#xe93c;
+        </span>
+        <span class="half-tab"></span>
         Tag search results for:
         <span class="large-type">
             @ViewBag.SearchTag
@@ -52,10 +56,11 @@ else
             @if (ViewBag.SearchName != null || ViewBag.SearchTag != null)
             {
                 <div>
-                    <a href="@Url.Action("Index", "Deck")" , style="margin-top:0;margin-bottom:10px" class="btn main-btn">
+                    <a href="@Url.Action("Index", "Deck")" class="btn main-btn">
                         <span class="icons">
                             &#xe932;
                         </span>
+                        <span class="half-tab"></span>
                         View all available decks
                     </a>
                 </div>
@@ -109,7 +114,7 @@ else
                     @foreach (Tag tag in tagsByPopularity)
                     {
                         @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "tag search-tag" });
-                        }
+                    }
                 </div>
 
                 <div class="tags-alph hidden">
@@ -285,19 +290,5 @@ else
 </div>
 
 
-<script type="text/javascript" src="../../Content/deckTags.js"></script>
+<script type="text/javascript" src="../../Content/deckScript.js"></script>
 
-<script>
-
-    $(document).ready(function () {
-        $('.deck-listing').on('click', function () {
-            $(this).find('.deckname-listing')[0].click();
-        });
-
-        $('.submit-btn').on('click', function () {
-            $(this).closest('form').submit();
-        });
-    });
-
-
-</script>

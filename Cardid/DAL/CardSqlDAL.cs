@@ -22,6 +22,7 @@ namespace Cardid.DAL
         private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
         private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
             + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
+        private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID";
         private string getNewCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
@@ -73,6 +74,18 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 List<Card> list = db.Query<Card>(getCardsByDeckID, new { deckID }).ToList<Card>();
+                foreach (Card card in list)
+                {
+                    card.TrimValues();
+                }
+                return list;
+            }
+        }
+        public List<Card> GetCardsByUserID(string userID)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                List<Card> list = db.Query<Card>(getCardsByDeckID, new { userID }).ToList<Card>();
                 foreach (Card card in list)
                 {
                     card.TrimValues();
