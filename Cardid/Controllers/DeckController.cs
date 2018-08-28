@@ -18,9 +18,16 @@ namespace Cardid.Controllers
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
-        private string GetUser()
+        private List<Card> CardsToRedo(string redo)
         {
-            return Session["userid"].ToString();
+            List<string> redoList = redo.Split(',').ToList();
+            List<Card> redoCards = new List<Card>();
+            foreach (string cardID in redoList)
+            {
+                Card card = cardSql.GetCardByID(cardID);
+                redoCards.Add(card);
+            }
+            return redoCards;
         }
 
         private string GetBackground()
@@ -41,17 +48,9 @@ namespace Cardid.Controllers
             return newPath;
         }
 
-
-        private List<Card> CardsToRedo(string redo)
+        private string GetUser()
         {
-            List<string> redoList = redo.Split(',').ToList();
-            List<Card> redoCards = new List<Card>();
-            foreach (string cardID in redoList)
-            {
-                Card card = cardSql.GetCardByID(cardID);
-                redoCards.Add(card);
-            }
-            return redoCards;
+            return Session["userid"].ToString();
         }
 
 
@@ -64,14 +63,11 @@ namespace Cardid.Controllers
                 return RedirectToAction("Login", "Home");
             }
             string userID = GetUser();
-            ViewBag.UserID = userID;
 
-            ViewBag.TagsByName = tagSql.GetAllTagsByName();
-            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
-
-            List<Deck> allDecks = deckSql.GetAllDecks(userID);
+            List<Deck> displayDecks = deckSql.GetAllDecks(userID);
+            TempData["display-decks"] = displayDecks;
             Session["background"] = GetBackground();
-            return View("MainDeckView", allDecks);
+            return RedirectToAction("ShowDecks");
         }
 
 
@@ -91,14 +87,14 @@ namespace Cardid.Controllers
 
         public ActionResult ChangeDeckName(Deck deck)
         {
+            GetUser();
+
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
             if (deck.DeckName != currentDeck.DeckName)
             {
                 deckSql.ChangeDeckName(deck.DeckName, deck.DeckID);
                 TempData["deckname-changed"] = true;
             }
-
-            //deck = deckSql.GetDeckByID(deck.DeckID);
 
             return RedirectToAction("EditDeck", new { deckID = deck.DeckID });
         }
@@ -216,6 +212,7 @@ namespace Cardid.Controllers
         {
             string userID = GetUser();
             Deck deck = deckSql.GetDeckByID(deckID);
+
             if (deck.UserID == userID)
             {
                 return RedirectToAction("EditDeck", new { deckID });
@@ -269,28 +266,41 @@ namespace Cardid.Controllers
                 return RedirectToAction("Index");
             }
 
-            string userID = GetUser();
-            ViewBag.UserID = userID;
-            ViewBag.TagsByName = tagSql.GetAllTagsByName();
-            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
+            List<Deck> displayDecks = deckSql.SearchDecksByName(searchString);
+            TempData["display-decks"] = displayDecks;
 
-            List<Deck> matchingDecks = deckSql.SearchDecksByName(searchString);
-
-            ViewBag.SearchName = searchString;
-            return View("MainDeckView", matchingDecks);
+            TempData["search-name"] = searchString;
+            return RedirectToAction("ShowDecks", new { displayDecks });
         }
 
 
         public ActionResult SearchDeckTags(string searchString)
         {
+            List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString);
+            TempData["display-decks"] = displayDecks;
+
+            TempData["search-tag"] = searchString;
+            return RedirectToAction("ShowDecks", new { displayDecks });
+        }
+
+
+        public ActionResult ShowDecks()
+        {
             string userID = GetUser();
             ViewBag.UserID = userID;
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
             ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
+            if (TempData["search-name"] != null)
+            {
+                ViewBag.SearchName = TempData["search-name"].ToString();
+            }
+            if (TempData["search-tag"] != null)
+            {
+                ViewBag.SearchTag = TempData["search-tag"].ToString();
+            }
 
-            List<Deck> matchingDecks = deckSql.SearchDecksByTag(searchString);
-            ViewBag.SearchTag = searchString;
-            return View("MainDeckView", matchingDecks);
+            List<Deck> displayDecks = TempData["display-decks"] as List<Deck>;
+            return View("MainDeckView", displayDecks);
         }
 
 

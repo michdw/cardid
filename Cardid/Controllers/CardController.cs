@@ -19,12 +19,12 @@ namespace Cardid.Controllers
             return Session["userid"].ToString();
         }
 
-
         public ActionResult Index()
         {
             GetUser();
             return RedirectToAction("Index", "Home");
         }
+
 
 
         public ActionResult EditCardInit(string cardID, string deckID, string searchString)

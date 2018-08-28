@@ -50,7 +50,6 @@ namespace Cardid.DAL
         }
 
 
-
         public void EditCard(Card card)
         {
             using (SqlConnection db = new SqlConnection(connectionString))

@@ -17,11 +17,6 @@ namespace Cardid.Controllers
         TagSqlDAL tagSql = new TagSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         UserSqlDAL userSql = new UserSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
-        private string GetUser()
-        {
-            return Session["userid"].ToString();
-        }
-
         private string GetBackground()
         {
             if (Session["background"] == null)
@@ -38,6 +33,11 @@ namespace Cardid.Controllers
                 newPath = bg.Path;
             }
             return newPath;
+        }
+
+        private string GetUser()
+        {
+            return Session["userid"].ToString();
         }
 
 
