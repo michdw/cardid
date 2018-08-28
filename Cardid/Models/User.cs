@@ -53,7 +53,7 @@ namespace Cardid.Models
             get
             {
                 TagSqlDAL tagSql = new TagSqlDAL(connectionString);
-                return tagSql.GetTagsByUserID(UserID);
+                return tagSql.GetTagsByCreatorID(UserID);
             }
 
         }

@@ -84,7 +84,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(getCardsByDeckID, new { userID }).ToList<Card>();
+                List<Card> list = db.Query<Card>(getCardsByUserID, new { userID }).ToList<Card>();
                 foreach (Card card in list)
                 {
                     card.TrimValues();

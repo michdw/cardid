@@ -65,18 +65,18 @@ else
 
             @if (Model.MatchingCards.Count == 0)
             {
-                <p class="at-bottom at-top">
+                <p class="narrow-line bold">
                     No cards found
                 </p>
             }
             else
             {
                 <div>
-                    <p class="narrow-line">
+                    <p class="narrow-line bold">
                         @Model.MatchingCards.Count matches found
                     </p>
 
-                    <button class="btn main-btn" id="show-results">
+                    <button class="btn main-btn show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -86,7 +86,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn" id="hide-results">
+                    <button class="btn main-btn hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -120,7 +120,7 @@ else
                                             </div>
                                         </div>
 
-                                        <div class="card-deck">
+                                        <div>
                                             <a href="@Url.Action("EditDeck", "Deck", new { deckId = cardDeck.DeckID })" class="deck-incard">
                                                 <span class="icons large-type float-left">
                                                     &#xe90e;
@@ -153,7 +153,7 @@ else
                                         <div class="card-field">@thisCard.Front</div>
                                         <div class="card-field">@thisCard.Back</div>
 
-                                        <div class="card-deck">
+                                        <div>
                                             <a href="@Url.Action("ViewDeck", "Deck", new { deckId = cardDeck.DeckID })" class="deck-incard">
                                                 <span class="icons large-type float-left">
                                                     &#xe90e;
@@ -187,11 +187,11 @@ else
             @if (Model.MatchingDecks.Count > 0)
             {
                 <div>
-                    <p class="narrow-line">
+                    <p class="narrow-line bold">
                         @Model.MatchingDecks.Count matches found
                     </p>
 
-                    <button class="btn main-btn" id="show-results">
+                    <button class="btn main-btn show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -202,7 +202,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn" id="hide-results">
+                    <button class="btn main-btn hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -239,7 +239,7 @@ else
             }
             else
             {
-                <p class="at-bottom at-top">
+                <p class="narrow-line bold">
                     No decks found
                 </p>
             }
@@ -256,11 +256,11 @@ else
             @if (Model.MatchingTags.Count > 0)
             {
                 <div>
-                    <p class="narrow-line">
+                    <p class="narrow-line bold">
                         @Model.MatchingTags.Count matches found
                     </p>
 
-                    <button class="btn main-btn" id="show-results">
+                    <button class="btn main-btn show-results">
                         <span class="icons">
                             &#xe931;
                         </span>
@@ -271,7 +271,7 @@ else
 
                 <div class="results-section hidden">
 
-                    <button class="btn main-btn" id="hide-results">
+                    <button class="btn main-btn hide-results">
                         <span class="icons">
                             &#xe934;
                         </span>
@@ -293,7 +293,7 @@ else
             }
             else
             {
-                <p class="at-bottom at-top">
+                <p class="narrow-line bold">
                     No tags found
                 </p>
             }
@@ -303,4 +303,4 @@ else
 }
 
 
-<script type="text/javascript" src="../../Content/searchText.js"></script>
+<script type="text/javascript" src="../../Content/miscScript.js"></script>

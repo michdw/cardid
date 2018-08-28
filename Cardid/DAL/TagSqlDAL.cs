@@ -31,7 +31,7 @@ namespace Cardid.DAL
         private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
         private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
             + "WHERE deck_tag.DeckID = @deckID ORDER BY tags.TagName DESC";
-        private string getTagsByUserID = "SELECT * FROM [tags] WHERE UserID = @userID";
+        private string getTagsByCreatorID = "SELECT * FROM [tags] WHERE UserID = @userID";
         private string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
         private string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";
         private string removeTagFromAllDecks = "DELETE FROM [deck_tag] WHERE TagID = @tagID";
@@ -52,7 +52,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createTag, new { tagName, userID });
-                List<Tag> userTags = db.Query<Tag>(getTagsByUserID, new { userID }).ToList();
+                List<Tag> userTags = db.Query<Tag>(getTagsByCreatorID, new { userID }).ToList();
                 Tag newTag = userTags.Last();
                 newTag.TagName = newTag.TagName.Trim();
                 return newTag;
@@ -160,11 +160,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Tag> GetTagsByUserID(string userID)
+        public List<Tag> GetTagsByCreatorID(string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Tag> list = db.Query<Tag>(getTagsByUserID, new { userID }).ToList();
+                List<Tag> list = db.Query<Tag>(getTagsByCreatorID, new { userID }).ToList();
                 foreach (Tag tag in list)
                 {
                     tag.TagName = tag.TagName.Trim();

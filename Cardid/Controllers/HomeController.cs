@@ -167,7 +167,7 @@ namespace Cardid.Controllers
             }
             else if (nameExists)
             {
-                ModelState.AddModelError("invalid-credentials", "That name is already in use by a different user.");
+                ModelState.AddModelError("invalid-credentials", "That name is already in use; please choose a different name.");
                 ViewBag.LoginInstead = true;
                 return View("Register", newUser);
             }
@@ -239,7 +239,7 @@ namespace Cardid.Controllers
             {
                 if (user.DisplayName != oldInfo.DisplayName)
                 {
-                    TempData["change-error"] = "That name is already in use by a different user.";
+                    TempData["change-error"] = "Sorry, that name is already in use by a different user.";
                 }
                 return View("ChangeUserInfo", oldInfo);
             }
@@ -254,9 +254,9 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(User user)
         {
-            user.Email = user.Email.ToLower();
             string userID = GetUser();
             User oldInfo = userSql.GetUserByID(userID);
+            user.Email = user.Email.ToLower();
             bool emailExists = userSql.CheckForEmail(user.Email);
 
             var userEmail = ModelState["Email"];
@@ -326,7 +326,8 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult RemoveUser(string userID)
         {
-            List<Tag> userTags = tagSql.GetTagsByUserID(userID);
+            //delete all tags user has created, unless adopted by another user
+            List<Tag> userTags = tagSql.GetTagsByCreatorID(userID);
             foreach (Tag tag in userTags)
             {
                 if (tag.UserIDs.Count <= 1)
@@ -376,14 +377,21 @@ namespace Cardid.Controllers
                 PublicDecks = false
             };
 
-            if (searchString != null && searchString.Length == 0)
-            {
-                TempData["searchstring-missing"] = true;
-                search.SearchString = null;
-            }
+            //if (searchString != null && searchString.Length == 0)
+            //{
+            //    TempData["searchstring-missing"] = true;
+            //    search.SearchString = null;
+            //}
 
             if (searchString != null)
             {
+                if (searchString.Length == 0)
+                {
+                    TempData["searchstring-missing"] = true;
+                    search.SearchString = null;
+                    return View(search);
+                }
+
                 search.MatchingCards = cardSql.SearchCardsForText(searchString);
                 search.MatchingDecks = deckSql.SearchDecksByName(searchString);
                 search.MatchingTags = tagSql.SearchTagsByName(searchString);
