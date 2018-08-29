@@ -125,7 +125,7 @@
 </div>
 
 <div>
-    @using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post, new { @class = "delete-submit" }))
+    @using (Html.BeginForm("RemoveUser", "Home", new { userID = Model.UserID }, FormMethod.Post, new { @class = "delete-submit hidden" }))
     {
         <div>
             <span>Are you sure you want to delete your account? This cannot be undone.</span>

@@ -26,7 +26,9 @@ namespace Cardid.DAL
         private string getNewCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
-        private string searchCardsForText = "SELECT * FROM [cards] WHERE Front LIKE @text OR Back LIKE @text ORDER BY Front ASC";
+        private string searchCardsForText = "SELECT * FROM[cards] JOIN[card_deck] ON card_deck.CardID = cards.CardID "
+            + "JOIN[decks] ON decks.DeckID = card_deck.DeckID WHERE (IsPublic = 1 OR decks.UserID = @userID) "
+            + "AND (Front LIKE @text OR Back LIKE @text) ORDER BY Front ASC";
 
 
 
@@ -107,11 +109,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Card> SearchCardsForText(string text)
+        public List<Card> SearchCardsForText(string text, string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(searchCardsForText, new { text = "%" + text + "%" }).ToList<Card>();
+                List<Card> list = db.Query<Card>(searchCardsForText, new { text = "%" + text + "%", userID }).ToList<Card>();
                 foreach (Card card in list)
                 {
                     card.TrimValues();

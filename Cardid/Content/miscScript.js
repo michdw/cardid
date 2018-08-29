@@ -18,7 +18,7 @@ $(document).ready(function () {
     $('.show-results').on('click', function () {
         $(this).hide();
         var currentSection = $(this).closest('.results-container').find('.results-section');
-        $('.results-section').not(currentSection).find('.hide-btn').click();
+        $('.results-section').not(currentSection).find('.hide-results').click();
         currentSection.removeClass('hidden');
     });
 

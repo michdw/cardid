@@ -26,6 +26,33 @@ namespace Cardid.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult AddCardToDeck(Deck deck)
+        {
+            string userID = GetUser();
+
+            if (deck.NewCardFront == null || deck.NewCardBack == null)
+            {
+                TempData["empty-card"] = true;
+                return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
+            }
+
+            Card newCard = new Card()
+            {
+                UserID = userID,
+                Front = deck.NewCardFront,
+                Back = deck.NewCardBack
+            };
+
+            newCard = cardSql.CreateCard(newCard, userID);
+            cardSql.AddCardToDeck(newCard, deck.DeckID);
+
+            deck = deckSql.GetDeckByID(deck.DeckID);
+
+            TempData["card-added"] = true;
+            return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
+        }
+
 
         public ActionResult EditCardInit(string cardID, string deckID, string searchString)
         {

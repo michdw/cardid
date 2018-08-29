@@ -201,9 +201,14 @@ namespace Cardid.Controllers
 
         public ActionResult EditDeck(string deckID)
         {
-            GetUser();
+            string userID = GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
+
+            if (deck.UserID != userID)
+            {
+                return RedirectToAction("Index", "Error");
+            }
             return View(deck);
         }
 
@@ -260,13 +265,15 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckNames(string searchString)
         {
+            string userID = GetUser();
+
             if (searchString.Length == 0)
             {
                 TempData["searchstring-missing"] = true;
                 return RedirectToAction("Index");
             }
 
-            List<Deck> displayDecks = deckSql.SearchDecksByName(searchString);
+            List<Deck> displayDecks = deckSql.SearchDecksByName(searchString, userID);
             TempData["display-decks"] = displayDecks;
 
             TempData["search-name"] = searchString;
@@ -276,7 +283,9 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckTags(string searchString)
         {
-            List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString);
+            string userID = GetUser();
+
+            List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString, userID);
             TempData["display-decks"] = displayDecks;
 
             TempData["search-tag"] = searchString;
@@ -372,6 +381,11 @@ namespace Cardid.Controllers
             GetUser();
 
             Deck deck = deckSql.GetDeckByID(deckID);
+
+            if (deck.IsPublic == false)
+            {
+                return RedirectToAction("Index", "Error");
+            }
             return View(deck);
         }
 

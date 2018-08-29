@@ -15,7 +15,7 @@
     Card card = TempData["card-added"] as Card;
     <div class="view-msg">
         <span class="icons large-type">
-        &#xe902;
+            &#xe902;
         </span>
         <span class="tab"></span>
         Card added to deck
@@ -27,7 +27,7 @@
     Card card = TempData["card-created"] as Card;
     <div class="view-msg">
         <span class="icons large-type">
-        &#xe902;
+            &#xe902;
         </span>
         <span class="tab"></span>
         Card created successfully
@@ -38,7 +38,7 @@
 {
     <div class="view-msg long-msg">
         <span class="icons large-type">
-        &#xe902;
+            &#xe902;
         </span>
         <span class="tab"></span>
         Card removed from deck
@@ -138,6 +138,17 @@
     </div>
 }
 
+@if (TempData["empty-card"] != null)
+{
+    <div class="view-msg">
+        <span class="icons large-type">
+            &#xe917;
+        </span>
+        <span class="tab"></span>
+        Cards must have front and back text
+    </div>
+}
+
 @if (TempData["register-info-missing"] != null)
 {
     <div class="view-msg">
@@ -226,27 +237,6 @@
         Please enter a tag name
     </div>
 }
-
-@*@if (TempData["user-login"] != null)
-{
-    <div class="view-msg">
-        <span class="icons large-type">
-            &#xe902;
-        </span>
-        <span class="tab"></span>
-        You have been logged in
-    </div>
-}
-else if (TempData["new-user"] != null)
-{
-    <div class="view-msg">
-        <span class="icons large-type">
-            &#xe902;
-        </span>
-        <span class="tab"></span>
-        You have been registered
-    </div>
-}*@
 
 @if (ViewBag.LoggedOut == true)
 {

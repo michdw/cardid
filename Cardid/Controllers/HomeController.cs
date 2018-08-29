@@ -377,12 +377,6 @@ namespace Cardid.Controllers
                 PublicDecks = false
             };
 
-            //if (searchString != null && searchString.Length == 0)
-            //{
-            //    TempData["searchstring-missing"] = true;
-            //    search.SearchString = null;
-            //}
-
             if (searchString != null)
             {
                 if (searchString.Length == 0)
@@ -392,8 +386,8 @@ namespace Cardid.Controllers
                     return View(search);
                 }
 
-                search.MatchingCards = cardSql.SearchCardsForText(searchString);
-                search.MatchingDecks = deckSql.SearchDecksByName(searchString);
+                search.MatchingCards = cardSql.SearchCardsForText(searchString, userID);
+                search.MatchingDecks = deckSql.SearchDecksByName(searchString, userID);
                 search.MatchingTags = tagSql.SearchTagsByName(searchString);
                 foreach (Card card in search.MatchingCards)
                 {

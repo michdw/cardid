@@ -188,7 +188,7 @@ a {
 
 .wide-tab {
     display: inline-block;
-    width: 1.5em;
+    width: 32px;
 }
 
 
@@ -474,6 +474,10 @@ textarea {
 
 .leaderboard-list {
     margin-top: 2em;
+}
+
+.leaderboard-listing {
+    margin: .7em 0;
 }
 
 .listing-left {

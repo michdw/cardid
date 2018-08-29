@@ -33,9 +33,9 @@ namespace Cardid.DAL
         private string removeAllTagsFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID";
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
-        private string searchDecksByName = "SELECT * FROM decks WHERE DeckName LIKE @text";
+        private string searchDecksByName = "SELECT * FROM decks WHERE (IsPublic = 1 OR UserID = @userID) AND DeckName LIKE @text";
         private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
-            + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE tags.TagName = @text";
+            + "JOIN [tags] ON tags.TagID = deck_tag.TagID  WHERE (IsPublic = 1 OR UserID = @userID) AND tags.TagName = @text";
 
 
         public void ChangeDeckName(string deckName, string deckID)
@@ -152,11 +152,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Deck> SearchDecksByName(string text)
+        public List<Deck> SearchDecksByName(string text, string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(searchDecksByName, new { text = "%" + text + "%" }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(searchDecksByName, new { text = "%" + text + "%", userID }).ToList<Deck>();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
@@ -166,11 +166,11 @@ namespace Cardid.DAL
         }
 
 
-        public List<Deck> SearchDecksByTag(string text)
+        public List<Deck> SearchDecksByTag(string text, string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(searchDecksByTag, new { text }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(searchDecksByTag, new { text, userID }).ToList<Deck>();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();

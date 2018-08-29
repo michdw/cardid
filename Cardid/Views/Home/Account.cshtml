@@ -27,7 +27,6 @@
         Change info (name, email, password)
     </a>
 </div>
-<div class="spacer"></div>
 
 <div class="flex flex-center">
 
@@ -51,7 +50,7 @@
         @if (Model.Tags.Count() > 0)
         {
             <div>
-                <span class="icons large-type wide-tab">
+                <span class="icons wide-tab">
                     &#xe93d;
                 </span>
                 You have created @Html.ActionLink(" " + Model.Tags.Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })

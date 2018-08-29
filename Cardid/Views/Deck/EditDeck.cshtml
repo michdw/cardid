@@ -51,7 +51,12 @@
                     <span class="icons">
                         &#xe910;
                     </span>
-                    This deck is visible only to you.
+                    <span class="bold">
+                        Private
+                    </span>
+                </p>
+                <p class="narrow-line">
+                    (this deck is visible only to you)
                 </p>
                 <a href="@Url.Action("MakeDeckPublic", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
                     <span class="icons">&#xe911;</span>
@@ -65,7 +70,12 @@
                     <span class="icons">
                         &#xe911;
                     </span>
-                    This deck is visible to everyone.
+                    <span class="bold">
+                        Public
+                    </span>
+                </p>
+                <p class="narrow-line">
+                    (this deck visible to everyone)
                 </p>
                 <a href="@Url.Action("MakeDeckPrivate", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
                     <span class="icons">&#xe910;</span>
@@ -239,7 +249,6 @@
 
 
 
-<div class="spacer"></div>
 <h2 class="view-title">Cards in this deck:</h2>
 
 
