@@ -33,6 +33,21 @@ namespace Cardid.DAL
             }
         }
 
+        public void LogStudySession(Study study)
+        {
+            using (SqlConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute(logStudySession, new
+                {
+                    deckID = study.DeckID,
+                    userID = study.UserID,
+                    totalScore = study.TotalScore,
+                    possibleScore = study.PossibleScore,
+                    timeOf = study.TimeOf
+                });
+            }
+        }
+
         public Dictionary<int, int> MostActiveDecks()
         {
             using (SqlConnection db = new SqlConnection(connectionString))
@@ -50,21 +65,6 @@ namespace Cardid.DAL
                 return db.Query(mostActiveUsers).ToDictionary(
                     row => (int)row.UserID,
                     row => (int)row.Count);
-            }
-        }
-
-        public void LogStudySession(Study study)
-        {
-            using (SqlConnection db = new SqlConnection(connectionString))
-            {
-                db.Execute(logStudySession, new
-                {
-                    deckID = study.DeckID,
-                    userID = study.UserID,
-                    totalScore = study.TotalScore,
-                    possibleScore = study.PossibleScore,
-                    timeOf = study.TimeOf
-                });
             }
         }
 

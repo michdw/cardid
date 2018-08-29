@@ -80,6 +80,8 @@ namespace Cardid.DAL
                 return list;
             }
         }
+
+
         public List<Card> GetCardsByUserID(string userID)
         {
             using (SqlConnection db = new SqlConnection(connectionString))
