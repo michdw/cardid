@@ -40,7 +40,7 @@
         @if (Model.Decks.Count() > 0)
         {
             <div>
-                <span class="icons large-type" style="width:40px">
+                <span class="icons large-type wide-tab">
                     &#xe90e;
                 </span>
                 You currently have @Model.Cards.Count cards in @Html.ActionLink(Model.Decks.Count.ToString() + " decks", "Index", "Deck", null, new { @class = "underline" })
@@ -51,7 +51,7 @@
         @if (Model.Tags.Count() > 0)
         {
             <div>
-                <span class="icons" style="width:40px">
+                <span class="icons large-type wide-tab">
                     &#xe93d;
                 </span>
                 You have created @Html.ActionLink(" " + Model.Tags.Count.ToString() + " tags", "UserTags", "Home", new { userID = Model.UserID }, new { @class = "underline" })
@@ -60,7 +60,7 @@
         }
 
         <div>
-            <span class="icons large-type" style="width:40px">
+            <span class="icons large-type wide-tab">
                 &#xe915;
             </span>
             Study sessions logged: @Model.Sessions.Count
@@ -128,7 +128,7 @@
             </div>
         }
 
-        <div class="btn main-btn float-right" id="hide-sessions" style="display:none">
+        <div class="hidden main-btn float-right" id="hide-sessions">
             <span class="icons">
                 &#xe934;
             </span>

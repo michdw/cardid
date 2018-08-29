@@ -115,7 +115,7 @@
                 Delete This Deck
             </div>
 
-            @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit" }))
+            @using (Html.BeginForm("DeleteDeck", "Deck", new { deckID = Model.DeckID }, FormMethod.Post, new { @class = "delete-submit hidden" }))
             {
                 <span>Deleting a deck will also delete all cards that exist only in that deck. Continue?</span>
                 <div>
@@ -223,7 +223,7 @@
 
                 @Html.HiddenFor(m => Model.DeckID)
 
-                <button type="submit" class="btn main-btn" style="margin:0;margin-left:1em">
+                <button type="submit" class="btn right-btn">
                     <span class="icons">
                         &#xe900;
                     </span>

@@ -29,28 +29,28 @@ $(document).ready(function () {
 
     //show and hide study sessions on account info page
     $('#show-sessions').on('click', function () {
-        $(this).css('display', 'none');
-        $('#hide-sessions').css('display', 'inline-block');
+        $(this).removeClass('btn').addClass('hidden');
+        $('#hide-sessions').addClass('btn').removeClass('hidden');
         $('.study-list-top').addClass('hidden');
         $('.study-list-full').removeClass('hidden');
     });
 
     $('#hide-sessions').on('click', function () {
-        $(this).css('display', 'none');
-        $('#show-sessions').css('display', 'inline-block');
+        $(this).removeClass('btn').addClass('hidden');
+        $('#show-sessions').addClass('btn').removeClass('hidden');
         $('.study-list-full').addClass('hidden');
         $('.study-list-top').removeClass('hidden');
     });
 
     //delete decks or account - confirm or cancel
     $('.delete-init').on('click', function () {
-        $(this).hide();
-        $('.delete-submit').css('display', 'inline-block');
+        $(this).addClass('hidden').removeClass('btn');
+        $('.delete-submit').removeClass('hidden');
     });
 
     $('.cancel-btn').on('click', function () {
-        $('.delete-submit').css('display', 'none');
-        $('.delete-init').show();
+        $('.delete-submit').addClass('hidden');
+        $('.delete-init').addClass('btn').removeClass('hidden');
     });
 
     $('.userinfo-change').on('click', function () {
