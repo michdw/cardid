@@ -24,11 +24,8 @@
             @Html.ValidationMessage("invalid-credentials")
             if (ViewBag.LoginInstead == true)
             {
-                @Html.ActionLink(" Login here", "Login", "Home");
+                @Html.ActionLink("Login here", "Login", "Home", new { @class = "underline" });
             }
-
-
-
 
             <div class="validation-group">
                 @Html.LabelFor(m => m.DisplayName, "Username")
@@ -55,7 +52,7 @@
             </div>
 
             <button type="submit" class="btn main-btn float-right">
-                Register&nbsp;
+                Get Started&nbsp;
                 <span class="icons">
                     &#xe933;
                 </span>

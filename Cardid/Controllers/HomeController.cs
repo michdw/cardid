@@ -27,11 +27,7 @@ namespace Cardid.Controllers
             string newPath = currentPath;
 
             Background bg = new Background();
-
-            while (newPath == currentPath)
-            {
-                newPath = bg.Path;
-            }
+            newPath = bg.Path;
             return newPath;
         }
 
@@ -111,7 +107,7 @@ namespace Cardid.Controllers
 
             if (currentUser.Email == null)
             {
-                ModelState.AddModelError("invalid-credentials", "That email isn't currently registered.");
+                ModelState.AddModelError("invalid-credentials", "That email isn't currently registered. ");
                 ViewBag.RegisterInstead = true;
                 return View("Login", user);
             }
@@ -161,7 +157,7 @@ namespace Cardid.Controllers
             bool nameExists = userSql.CheckForName(newUser.DisplayName);
             if (emailExists)
             {
-                ModelState.AddModelError("invalid-credentials", "That email has already been used to register on this site.");
+                ModelState.AddModelError("invalid-credentials", "That email has already been used to register on this site. ");
                 ViewBag.LoginInstead = true;
                 return View("Register", newUser);
             }

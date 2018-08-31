@@ -120,6 +120,11 @@ a {
     display: none;
 }
 
+.indented-line {
+    display: block;
+    margin-left: 1em;
+}
+
 .inline-block {
     display: inline-block;
 }
@@ -192,7 +197,7 @@ a {
 }
 
 
-/* layout */
+/* page layout */
 
 .pageview {
     position: relative;
@@ -324,6 +329,10 @@ textarea {
     padding-top: 10px;
 }
 
+.narrow-label {
+    width: 80px;
+}
+
 .popup {
     width: 90%;
 }
@@ -408,6 +417,31 @@ textarea {
 
 
 /* homepage */
+
+.landing-list {
+    list-style-type: none;
+}
+
+    .landing-list li {
+        margin: .4em 0;
+    }
+
+    .landing-list .indent {
+        display: block;
+        margin: .4em 0;
+        margin-left: 1.5em;
+    }
+
+.landing-module {
+    width: 60%;
+    min-width: 300px;
+    margin: 0 auto;
+    padding: 1em;
+    padding-right: 2em;
+    background: rgba(0,0,0,.55);
+    border: 1px solid rgba(0,0,0,.2);
+    color: #fff;
+}
 
 .leaderboard, .tag-leaderboard {
     background: rgba(0,0,0,.4);
@@ -645,17 +679,27 @@ textarea {
 }
 
 .editdeck-left {
-    width: 30%;
+    width: 25%;
     min-width: 250px;
 }
 
 .editdeck-right {
     display: inline-table;
-    width: 60%;
+    width: 70%;
     min-width: 250px;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 1000px) {
+    .editdeck-left {
+        width: 35%;
+    }
+
+    .editdeck-right {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 800px) {
     .editdeck-left, .editdeck-right {
         width: 100%;
     }

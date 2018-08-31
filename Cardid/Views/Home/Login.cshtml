@@ -17,26 +17,35 @@
 <div class="flex flex-center">
 
     <div class="module">
-        @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
-        {
-            @Html.ValidationMessage("invalid-credentials")
-            if (ViewBag.RegisterInstead == true)
+
+        <p class="small-type at-top" style="text-align: right;">
+            First time user?
+            @Html.ActionLink("Sign up here", "BeginRegister", "Home", new { @class = "underline" })
+        </p>
+
+        <div>
+            @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
             {
-                @Html.ActionLink(" Sign up here", "BeginRegister", "Home", new { @class = "bold" });
+                @Html.ValidationMessage("invalid-credentials")
+                if (ViewBag.RegisterInstead == true)
+                {
+                    @Html.ActionLink("Sign up here", "BeginRegister", "Home", new { @class = "underline" });
+                }
+
+                <div class="validation-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "narrow-label" })
+                    @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
+                </div>
+
+                <div class="validation-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "narrow-label" })
+                    @Html.PasswordFor(m => m.Password)
+                </div>
+
+                <button type="submit" class="btn main-btn float-right">Login<span class="icons">&nbsp;&#xe933;</span></button>
             }
+        </div>
 
-            <div class="validation-group">
-                @Html.LabelFor(m => m.Email)
-                @Html.EditorFor(m => m.Email, new { autofocus = "autofocus" })
-            </div>
-
-            <div class="validation-group">
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </div>
-
-            <button type="submit" class="btn main-btn float-right">Login<span class="icons"> &nbsp;&#xe933;</span></button>
-        }
     </div>
 
 </div>

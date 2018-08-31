@@ -34,7 +34,7 @@ namespace Cardid.Controllers
             if (deck.NewCardFront == null || deck.NewCardBack == null)
             {
                 TempData["empty-card"] = true;
-                return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
+                return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID, newBackground = false });
             }
 
             Card newCard = new Card()
@@ -50,7 +50,7 @@ namespace Cardid.Controllers
             deck = deckSql.GetDeckByID(deck.DeckID);
 
             TempData["card-added"] = true;
-            return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID });
+            return RedirectToAction("EditDeck", "Deck", new { deckID = deck.DeckID, newBackground = false });
         }
 
 
@@ -91,7 +91,7 @@ namespace Cardid.Controllers
             cardSql.RemoveCard(cardID, deckID);
 
             TempData["card-removed"] = true;
-            return RedirectToAction("EditDeck", "Deck", new { deckID });
+            return RedirectToAction("EditDeck", "Deck", new { deckID, newBackground = false });
         }
 
     }

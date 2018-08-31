@@ -185,7 +185,7 @@ else
                 {
                     <div class="deck-listing">
 
-                        @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "deckname-listing bold" })
+                        @Html.ActionLink(deck.DeckName, "EditDeck", "Deck", new { deckID = deck.DeckID, newBackground = true }, new { @class = "deckname-listing bold" })
 
                         <div class="listing-section">
                             <span class="small-type">

@@ -31,7 +31,7 @@
         @if (Model.CurrentDeckID != null)
         {
 
-            <a href="@Url.Action("EditDeck", "Deck", new { deckID = Model.CurrentDeckID })" class="btn main-btn">
+            <a href="@Url.Action("EditDeck", "Deck", new { deckID = Model.CurrentDeckID, newBackground = false })" class="btn main-btn">
                 <span class="icons">
                     &#xe932;&nbsp;
                 </span>
