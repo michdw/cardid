@@ -134,8 +134,11 @@ a {
 }
 
 .link-inline:hover {
+    cursor: pointer;
     background: rgba(0,0,0,.2);
-    outline: 8px solid rgba(0,0,0,.2);
+    padding-top: 4px;
+    padding-bottom: 8px;
+    outline: 2px solid rgba(0,0,0,.2)
 }
 
 .module {
@@ -419,28 +422,33 @@ textarea {
 /* homepage */
 
 .landing-list {
-    list-style-type: none;
 }
 
     .landing-list li {
-        margin: .4em 0;
+        margin: .7em 0;
     }
 
     .landing-list .indent {
         display: block;
-        margin: .4em 0;
+        margin: .7em 0;
         margin-left: 1.5em;
     }
 
 .landing-module {
-    width: 60%;
+    width: 50%;
+    max-width: 700px;
     min-width: 300px;
     margin: 0 auto;
     padding: 1em;
     padding-right: 2em;
-    background: rgba(0,0,0,.55);
+    background: rgba(0,0,0,.6);
     border: 1px solid rgba(0,0,0,.2);
     color: #fff;
+}
+
+.landing-subheader {
+    margin-top: 2em;
+    list-style-type: none;
 }
 
 .leaderboard, .tag-leaderboard {

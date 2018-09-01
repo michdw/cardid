@@ -58,5 +58,4 @@ $(document).ready(function () {
         $(this).closest('form').find('.userinfo-active').removeClass('hidden');
     });
 
-
 });

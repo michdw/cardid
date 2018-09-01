@@ -8,6 +8,8 @@
 }
 
 
+@* temporary welcome bar after login or register *@
+
 @if (TempData["user-login"] != null || TempData["new-user"] != null)
 {
     <div class="welcome-header flex flex-left">
@@ -68,8 +70,11 @@
 }
 
 
+@* landing view (before logging in) *@
+
 @if (Session["userid"] == null)
 {
+    <div class="spacer"></div>
     <div class="landing-module">
         <p class="large-type near-top" style="text-align: center;">
             <span class="icons">
@@ -78,9 +83,9 @@
             <span class="half-tab"></span>
             A simple way to learn and remember anything
         </p>
-        <ul class="at-top landing-list">
+        <ul class="at-top landing-subheader">
 
-            <li>
+            <li class="no-bullet">
                 <p class="bold narrow-line">
                     <span class="icons">
                         &#xe900;
@@ -97,7 +102,7 @@
                         Make your deck public (visible to all users), or keep it private.
                     </li>
                     <li>
-                        Organize your decks by tags for different topics
+                        Organize your decks by tags for different topics-
                         <span class="indent">
                             (Create your own tags to add, or use existing ones).
                         </span>
@@ -105,7 +110,7 @@
                 </ul>
             </li>
 
-            <li>
+            <li class="landing-subheader">
                 <p class="bold at-bottom">
                     <span class="icons">
                         &#xe90f;
@@ -124,7 +129,7 @@
                 </ul>
             </li>
 
-            <li>
+            <li class="landing-subheader">
                 <p class="bold at-bottom">
                     <span class="icons">
                         &#xe915;
@@ -150,7 +155,7 @@
                         Cards are automatically shuffled for each session.
                     </li>
                     <li>
-                        View the front of each card first and guess the back, or view the back and guess the front
+                        View the front of each card first and guess the back, or view the back and guess the front-
                         <span class="indent">
                             (Do some of both! It helps you remember things better).
                         </span>
@@ -163,7 +168,7 @@
             </li>
         </ul>
 
-        <p style="margin-left: 2.5em;">
+        <p class="landing-subheader" style="margin-left: 2.5em;">
             <span class="icons large-type">
                 &#xe933;
             </span>
@@ -176,6 +181,7 @@
     </div>
 }
 
+@* leaderboards (seen after loggin in) *@
 
 else
 {
@@ -277,11 +283,13 @@ else
                     {
                         Deck deck = Model.ActiveDecksOrder[i];
                         <p class="leaderboard-listing">
-                            <span class="listing-left">
-                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveDecks[deck]
+                            <span class="link-inline">
+                                <span class="listing-left">
+                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.ActiveDecks[deck]
+                                </span>
                             </span>
                         </p>
                     }
@@ -304,11 +312,13 @@ else
                     {
                         Deck deck = Model.ActiveDecksOrder[i];
                         <p class="leaderboard-listing">
-                            <span class="listing-left">
-                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, new { @class = "link-inline" })
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveDecks[deck]
+                            <span class="link-inline">
+                                <span class="listing-left">
+                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.ActiveDecks[deck]
+                                </span>
                             </span>
                         </p>
                     }
@@ -353,11 +363,13 @@ else
                         {
                             Tag tag = Model.PopularTagsOrder[i];
                             <p class="leaderboard-listing">
-                                <span class="listing-left">
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
+                                <span class="link-inline">
+                                    <span class="listing-left">
+                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                    </span>
+                                    <span class="listing-right">
+                                        @Model.PopularTags[tag]
+                                    </span>
                                 </span>
                             </p>
                         }
@@ -374,11 +386,13 @@ else
                         {
                             Tag tag = Model.PopularTagsOrder[i];
                             <span class="tag-listing">
-                                <span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
+                                <span class="link-inline">
+                                    <span>
+                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                    </span>
+                                    <span class="listing-right">
+                                        @Model.PopularTags[tag]
+                                    </span>
                                 </span>
                                 <span class="tab"></span>
                             </span>
@@ -406,11 +420,13 @@ else
                         {
                             Tag tag = Model.PopularTagsOrder[i];
                             <p class="leaderboard-listing">
-                                <span class="listing-left">
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
+                                <span class="link-inline">
+                                    <span class="listing-left">
+                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                    </span>
+                                    <span class="listing-right">
+                                        @Model.PopularTags[tag]
+                                    </span>
                                 </span>
                             </p>
                         }
@@ -427,11 +443,13 @@ else
                         {
                             Tag tag = Model.PopularTagsOrder[i];
                             <span class="tag-listing">
-                                <span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, new { @class = "link-inline" })
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
+                                <span class="link-inline">
+                                    <span>
+                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                    </span>
+                                    <span class="listing-right">
+                                        @Model.PopularTags[tag]
+                                    </span>
                                 </span>
                                 <span class="tab"></span>
                             </span>
