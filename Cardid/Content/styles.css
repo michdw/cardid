@@ -354,6 +354,10 @@ textarea {
     margin: 5px 0;
 }
 
+.wide-input {
+    width: 230px;
+}
+
 .wide-label {
     width: auto;
 }

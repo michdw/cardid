@@ -34,8 +34,9 @@ namespace Cardid.DAL
         private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
         private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
         private string searchDecksByName = "SELECT * FROM decks WHERE (IsPublic = 1 OR UserID = @userID) AND DeckName LIKE @text";
-        private string searchDecksByTag = "SELECT * FROM decks JOIN [deck_tag] ON deck_tag.DeckID = decks.DeckID "
-            + "JOIN [tags] ON tags.TagID = deck_tag.TagID  WHERE (IsPublic = 1 OR UserID = @userID) AND tags.TagName = @text";
+        private string searchDecksByTag = "SELECT decks.DeckID, decks.DeckName, decks.IsPublic, decks.UserID "
+            + "FROM decks JOIN[deck_tag] ON deck_tag.DeckID = decks.DeckID "
+            + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE (IsPublic = 1 OR decks.UserID = @userID) AND tags.TagName = @text";
 
 
         public void ChangeDeckName(string deckName, string deckID)

@@ -18,11 +18,6 @@
 
     <div class="module">
 
-        <p class="small-type at-top" style="text-align: right;">
-            First time user?
-            @Html.ActionLink("Sign up here", "BeginRegister", "Home", new { @class = "underline" })
-        </p>
-
         <div>
             @using (Html.BeginForm("CompleteLogin", "Home", FormMethod.Post))
             {
@@ -30,6 +25,14 @@
                 if (ViewBag.RegisterInstead == true)
                 {
                     @Html.ActionLink("Sign up here", "BeginRegister", "Home", new { @class = "underline" });
+                    <div class="spacer"></div>
+                }
+                else
+                {
+                    <p class="small-type at-top" style="text-align: right;">
+                        First time user?
+                        @Html.ActionLink("Sign up here", "BeginRegister", "Home", new { @class = "underline" })
+                    </p>
                 }
 
                 <div class="validation-group">
