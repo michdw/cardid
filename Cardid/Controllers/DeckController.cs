@@ -125,34 +125,6 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult CreateTag(string tagName)
-        {
-            string userID = GetUser();
-            if (tagName == null || tagName.Length == 0)
-            {
-                TempData["tagname-missing"] = true;
-                return RedirectToAction("Index");
-            }
-
-            tagName = tagName.ToLower();
-
-            //check if tag name exists already
-            List<Tag> allTags = tagSql.GetAllTagsByName();
-            foreach (Tag tag in allTags)
-            {
-                if (tagName == tag.TagName)
-                {
-                    TempData["tag-exists"] = tag.TagName;
-                    return RedirectToAction("Index");
-                }
-            }
-
-            tagSql.CreateTag(tagName, userID);
-            TempData["tag-added"] = tagName;
-            return RedirectToAction("Index");
-        }
-
-
         [HttpPost]
         public ActionResult CreateTagForDeck(Deck deck)
         {
@@ -161,6 +133,11 @@ namespace Cardid.Controllers
             Tag newTag = deck.NewTag;
             string tagName = newTag.TagName;
             tagName = tagName.ToLower();
+            if (tagName == null || tagName.Length == 0)
+            {
+                TempData["tagname-missing"] = true;
+                return RedirectToAction("EditDeck", new { deckID = deck.DeckID, newBackground = false });
+            }
 
             //if tag name exists already, add it to deck
             List<Tag> allTags = tagSql.GetAllTagsByName();

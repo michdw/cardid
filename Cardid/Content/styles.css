@@ -78,8 +78,8 @@ a {
 }
 
 .dark-hover:hover {
-    background: rgba(0,0,0,.7);
-    outline: 8px solid rgba(0,0,0,.7);
+    background: rgba(0,0,0,.5);
+    outline: 6px solid rgba(0,0,0,.5);
 }
 
 .flex {
