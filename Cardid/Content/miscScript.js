@@ -14,6 +14,11 @@ $(document).ready(function () {
         $('.welcome-header').slideUp(250);
     });
 
+    //double-clicking on card fields in EditDeck opens EditCard view
+    $('.card-field').dblclick(function () {
+        $(this).closest('.card-bothsides').find('.edit-link')[0].click();
+    });
+
     //show and hide text search results
     $('.show-results').on('click', function () {
         $(this).hide();

@@ -295,7 +295,7 @@
                 <div class="card-field">@thisCard.Front</div>
                 <div class="card-field">@thisCard.Back</div>
                 <div>
-                    <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn" id="edit-link">
+                    <a href="@Url.Action("EditCardInit", "Card", new { cardID = thisCard.CardID, deckID = Model.DeckID })" class="btn main-btn edit-link">
                         <span class="icons">
                             &#xe90d;
                         </span>
@@ -319,7 +319,6 @@
 </div>
 
 
-<script type="text/javascript" src="../../Content/cardScript.js"></script>
 <script type="text/javascript" src="../../Content/deckScript.js"></script>
 <script type="text/javascript" src="../../Content/miscScript.js"></script>
 

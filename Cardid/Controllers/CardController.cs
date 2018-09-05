@@ -80,6 +80,7 @@ namespace Cardid.Controllers
 
             cardSql.EditCard(newValues);
 
+            TempData["card-edited"] = true;
             return RedirectToAction("EditCardInit", new { cardID = newValues.CardID, deckID = newValues.CurrentDeckID, searchString = newValues.CurrentSearchString });
         }
 

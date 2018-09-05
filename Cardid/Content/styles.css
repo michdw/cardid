@@ -321,11 +321,19 @@ label {
 
 textarea {
     display: block;
-    width: 95%;
-    max-width: 95%;
+    width: 96%;
+    max-width: 96%;
     height: 3em;
+    font-size: 1.2em;
     background: rgba(255,255,255,.5);
     border: 1px solid rgba(0,0,0,.4);
+}
+
+.editcard-label {
+    display: inherit;
+    text-align: inherit;
+    padding-bottom: .5em;
+    width: auto;
 }
 
 .line-form {

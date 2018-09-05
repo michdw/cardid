@@ -177,7 +177,6 @@
     <Content Include="Content\Backgrounds\bg7.png" />
     <Content Include="Content\Backgrounds\bg8.png" />
     <Content Include="Content\Backgrounds\bg9.png" />
-    <Content Include="Content\cardScript.js" />
     <Content Include="Content\deckScript.js" />
     <Content Include="Content\Icomoon\demo-files\demo.css" />
     <Content Include="Content\Icomoon\demo-files\demo.js" />

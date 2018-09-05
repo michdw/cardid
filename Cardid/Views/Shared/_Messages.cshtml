@@ -22,15 +22,15 @@
     </div>
 }
 
-@if (TempData["card-created"] != null)
+@if (TempData["card-edited"] != null)
 {
-    Card card = TempData["card-created"] as Card;
+    Card card = TempData["card-edited"] as Card;
     <div class="view-msg">
         <span class="icons large-type">
             &#xe902;
         </span>
         <span class="tab"></span>
-        Card created successfully
+        Changes have been saved
     </div>
 }
 

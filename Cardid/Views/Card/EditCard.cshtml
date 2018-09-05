@@ -19,42 +19,63 @@
             @Html.HiddenFor(m => m.CurrentDeckID)
             @Html.HiddenFor(m => m.CurrentSearchString)
             <div class="edit-field">
-                @Html.LabelFor(m => m.Front, "Front of Card:")
+                @Html.LabelFor(m => m.Front, "Front of Card:", new { @class = "editcard-label" })
                 @Html.TextAreaFor(m => m.Front, new { @class = "submit-change" })
             </div>
             <div class="edit-field">
-                @Html.LabelFor(m => m.Back, "Back of Card:")
+                @Html.LabelFor(m => m.Back, "Back of Card:", new { @class = "editcard-label" })
                 @Html.TextAreaFor(m => m.Back, new { @class = "submit-change" })
             </div>
+
+            <div>
+                <button type="submit" class="btn main-btn">
+                    <span class="icons">
+                        &#xe902;
+                    </span>
+                    <span class="half-tab"></span>
+                    Save changes
+                </button>
+            </div>
+
+            <div>
+                <button type="reset" class="btn main-btn">
+                    <span class="icons">
+                        &#xe984;
+                    </span>
+                    <span class="half-tab"></span>
+                    Reset
+                </button>
+            </div>
+
+            if (Model.CurrentDeckID != null)
+            {
+
+                <a href="@Url.Action("EditDeck", "Deck", new { deckID = Model.CurrentDeckID, newBackground = false })" class="btn main-btn">
+                    <span class="icons">
+                        &#xe932;
+                    </span>
+                    <span class="half-tab"></span>
+                    Return to deck
+                </a>
+            }
+            else if (Model.CurrentSearchString != null)
+            {
+                <a href="@Url.Action("SearchText", "Home", new { searchString = Model.CurrentSearchString })" class="btn main-btn">
+                    <span class="icons">
+                        &#xe932;
+                    </span>
+                    Back to search results
+                </a>
+            }
+
         }
 
-        @if (Model.CurrentDeckID != null)
-        {
-
-            <a href="@Url.Action("EditDeck", "Deck", new { deckID = Model.CurrentDeckID, newBackground = false })" class="btn main-btn">
-                <span class="icons">
-                    &#xe932;&nbsp;
-                </span>
-                Return to deck
-            </a>
-        }
-        else if (Model.CurrentSearchString != null)
-        {
-            <a href="@Url.Action("SearchText", "Home", new { searchString = Model.CurrentSearchString })" class="btn main-btn">
-                <span class="icons">
-                    &#xe932;
-                </span>
-                Back to search results 
-            </a>
-        }
-
-        <p class="small-type at-top">All changes saved automatically</p>
 
         <a href="@Url.Action("DeleteCard", "Card", new { cardID = Model.CardID })" class="btn delete-btn">
             <span class="icons">
                 &#xe914;
             </span>
-            <span class="tab"></span>
+            <span class="half-tab"></span>
             Delete this card
         </a>
 
@@ -64,7 +85,7 @@
 </div>
 
 
-<script type="text/javascript" src="../../Content/cardScript.js"></script>
+<script type="text/javascript" src="../../Content/miscScript.js"></script>
 
 
 
