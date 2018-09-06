@@ -463,6 +463,10 @@ textarea {
     list-style-type: none;
 }
 
+.leader-rank {
+    font-size: .7em;
+}
+
 .leaderboard, .tag-leaderboard {
     background: rgba(0,0,0,.4);
     border: 1px solid rgba(0,0,0,.2);
