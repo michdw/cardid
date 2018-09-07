@@ -58,8 +58,12 @@ $(document).ready(function () {
         $('.delete-init').addClass('btn').removeClass('hidden');
     });
 
+    //change user display name + email
     $('.userinfo-change').on('click', function () {
-        $(this).closest('.userinfo-inactive').addClass('hidden');
+        var currentInactive = $(this).closest('.userinfo-inactive');
+        $('.userinfo-inactive').not(currentInactive).removeClass('hidden');
+        currentInactive.addClass('hidden');
+        $('.userinfo-active').addClass('hidden');
         $(this).closest('form').find('.userinfo-active').removeClass('hidden');
     });
 
