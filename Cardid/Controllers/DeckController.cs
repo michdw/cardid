@@ -61,7 +61,7 @@ namespace Cardid.Controllers
             string userID = GetUser();
 
             List<Deck> displayDecks = deckSql.GetAllDecks(userID);
-            TempData["display-decks"] = displayDecks;
+            Session["display-decks"] = displayDecks;
             Session["background"] = GetBackground();
             return RedirectToAction("ShowDecks");
         }
@@ -252,7 +252,7 @@ namespace Cardid.Controllers
             }
 
             List<Deck> displayDecks = deckSql.SearchDecksByName(searchString, userID);
-            TempData["display-decks"] = displayDecks;
+            Session["display-decks"] = displayDecks;
 
             TempData["search-name"] = searchString;
             return RedirectToAction("ShowDecks", new { displayDecks });
@@ -264,7 +264,7 @@ namespace Cardid.Controllers
             string userID = GetUser();
 
             List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString, userID);
-            TempData["display-decks"] = displayDecks;
+            Session["display-decks"] = displayDecks;
 
             TempData["search-tag"] = searchString;
             return RedirectToAction("ShowDecks", new { displayDecks });
@@ -286,7 +286,7 @@ namespace Cardid.Controllers
                 ViewBag.SearchTag = TempData["search-tag"].ToString();
             }
 
-            List<Deck> displayDecks = TempData["display-decks"] as List<Deck>;
+            List<Deck> displayDecks = Session["display-decks"] as List<Deck>;
             return View("MainDeckView", displayDecks);
         }
 
