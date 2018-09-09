@@ -22,8 +22,17 @@ function switchView() {
     }
 }
 
+//preserve scroll position on page refresh
+$(window).scroll(function () {
+    sessionStorage.scrollTop = $(this).scrollTop();
+});
+
 
 $(document).ready(function () {
+
+    if (sessionStorage.scrollTop != "undefined") {
+        $(window).scrollTop(sessionStorage.scrollTop);
+    }
 
     $('.deck-listing').on('click', function () {
         $(this).find('.deckname-listing')[0].click();

@@ -36,7 +36,7 @@
                     <span class="tag inactive-tag">@tag.TagName</span>
                 }
 
-                @if (tag.UserIDs.Count == 1)
+                @if (tag.UserIDs.Count <= 1)
                 {
                     <a href="@Url.Action("DeleteTag", "Home", new { tagID = tag.TagID })">
                         <span class="icons delete-tag">
