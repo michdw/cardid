@@ -133,14 +133,6 @@ a {
     font-size: 1.3em;
 }
 
-.link-inline:hover {
-    cursor: pointer;
-    background: rgba(0,0,0,.2);
-    padding-top: 4px;
-    padding-bottom: 8px;
-    outline: 2px solid rgba(0,0,0,.2)
-}
-
 .module {
     display: inline-block;
     margin: 1em 0;
@@ -531,12 +523,18 @@ textarea {
     }
 }
 
+.leaderboard-link:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,.2);
+}
+
 .leaderboard-list {
     margin-top: 2em;
 }
 
 .leaderboard-listing {
     margin: .7em 0;
+    padding: 4px 0;
 }
 
 .listing-left {

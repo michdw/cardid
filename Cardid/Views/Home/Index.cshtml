@@ -293,18 +293,16 @@ else
                     {
                         int rank = i + 1;
                         Deck deck = Model.ActiveDecksOrder[i];
-                        <p class="leaderboard-listing">
-                            <span class="link-inline">
-                                <span class="listing-left">
-                                    <span class="leader-rank">
-                                        @rank.
-                                    </span>
-                                    <span class="half-tab"></span>
-                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                        <p class="leaderboard-listing leaderboard-link">
+                            <span class="listing-left">
+                                <span class="leader-rank">
+                                    &nbsp;@rank.
                                 </span>
-                                <span class="listing-right">
-                                    @Model.ActiveDecks[deck]
-                                </span>
+                                <span class="half-tab"></span>
+                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveDecks[deck]
                             </span>
                         </p>
                     }
@@ -327,18 +325,16 @@ else
                     {
                         int rank = i + 1;
                         Deck deck = Model.ActiveDecksOrder[i];
-                        <p class="leaderboard-listing">
-                            <span class="link-inline">
-                                <span class="listing-left">
-                                    <span class="leader-rank">
-                                        @rank.
-                                    </span>
-                                    <span class="half-tab"></span>
-                                    @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                        <p class="leaderboard-listing leaderboard-link">
+                            <span class="listing-left">
+                                <span class="leader-rank">
+                                    @rank.
                                 </span>
-                                <span class="listing-right">
-                                    @Model.ActiveDecks[deck]
-                                </span>
+                                <span class="half-tab"></span>
+                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.ActiveDecks[deck]
                             </span>
                         </p>
                     }
@@ -383,18 +379,16 @@ else
                         {
                             int rank = i + 1;
                             Tag tag = Model.PopularTagsOrder[i];
-                            <p class="leaderboard-listing">
-                                <span class="link-inline">
-                                    <span class="listing-left">
-                                        <span class="leader-rank">
-                                            @rank.
-                                        </span>
-                                        <span class="half-tab"></span>
-                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            <p class="leaderboard-listing leaderboard-link">
+                                <span class="listing-left">
+                                    <span class="leader-rank">
+                                        @rank.
                                     </span>
-                                    <span class="listing-right">
-                                        @Model.PopularTags[tag]
-                                    </span>
+                                    <span class="half-tab"></span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
                                 </span>
                             </p>
                         }
@@ -410,14 +404,12 @@ else
                         for (int i = 0; i < listLength; i++)
                         {
                             Tag tag = Model.PopularTagsOrder[i];
-                            <span class="tag-listing">
-                                <span class="link-inline">
-                                    <span>
-                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                    </span>
-                                    <span class="listing-right">
-                                        @Model.PopularTags[tag]
-                                    </span>
+                            <span class="tag-listing leaderboard-link">
+                                <span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
                                 </span>
                                 <span class="tab"></span>
                             </span>
@@ -445,18 +437,16 @@ else
                         {
                             int rank = i + 1;
                             Tag tag = Model.PopularTagsOrder[i];
-                            <p class="leaderboard-listing">
-                                <span class="link-inline">
-                                    <span class="listing-left">
-                                        <span class="leader-rank">
-                                            @rank.
-                                        </span>
-                                        <span class="half-tab"></span>
-                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            <p class="leaderboard-listing leaderboard-link">
+                                <span class="listing-left">
+                                    <span class="leader-rank">
+                                        @rank.
                                     </span>
-                                    <span class="listing-right">
-                                        @Model.PopularTags[tag]
-                                    </span>
+                                    <span class="half-tab"></span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
                                 </span>
                             </p>
                         }
@@ -472,14 +462,12 @@ else
                         for (int i = 0; i < listLength; i++)
                         {
                             Tag tag = Model.PopularTagsOrder[i];
-                            <span class="tag-listing">
-                                <span class="link-inline">
-                                    <span>
-                                        @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                    </span>
-                                    <span class="listing-right">
-                                        @Model.PopularTags[tag]
-                                    </span>
+                            <span class="tag-listing leaderboard-link">
+                                <span>
+                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                                </span>
+                                <span class="listing-right">
+                                    @Model.PopularTags[tag]
                                 </span>
                                 <span class="tab"></span>
                             </span>
