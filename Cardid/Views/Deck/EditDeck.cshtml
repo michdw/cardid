@@ -75,7 +75,7 @@
                     </span>
                 </p>
                 <p class="narrow-line small-type">
-                    (this deck visible to everyone)
+                    (this deck is visible to everyone)
                 </p>
                 <a href="@Url.Action("MakeDeckPrivate", "Deck", new { deckID = Model.DeckID })" class="btn main-btn">
                     <span class="icons">&#xe910;</span>
@@ -272,8 +272,8 @@
 
         @using (Html.BeginForm("AddCardToDeck", "Card", new { deckID = Model.DeckID }, FormMethod.Post, null))
         {
-            @Html.TextBoxFor(m => m.NewCardFront, new { placeholder = "front", @class = "near-top" })
-            @Html.TextBoxFor(m => m.NewCardBack, new { placeholder = "back", @class = "near-top" })
+            @Html.TextBoxFor(m => m.NewCardFront, new { placeholder = "front", @class = "near-top newcard-input" })
+            @Html.TextBoxFor(m => m.NewCardBack, new { placeholder = "back", @class = "near-top newcard-input" })
             <div>
                 <button type="submit" class="btn main-btn">
                     <span class="icons">

@@ -1,4 +1,19 @@
-﻿
+﻿/* imported fonts */
+
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Expanded|Gugi');
+
+@font-face {
+    font-family: icons;
+    src: url('Icomoon/fonts/icomoon.ttf');
+}
+
+.icons {
+    font-family: icons;
+    display: inline-block;
+    transform: translateY(1px);
+}
+
+
 /* animations */
 
 @keyframes flash-fade {
@@ -21,20 +36,6 @@
     100% {
         opacity: 1;
     }
-}
-
-
-/* imported fonts */
-
-@font-face {
-    font-family: icons;
-    src: url('Icomoon/fonts/icomoon.ttf');
-}
-
-.icons {
-    font-family: icons;
-    display: inline-block;
-    transform: translateY(1px);
 }
 
 
@@ -613,6 +614,11 @@ textarea {
     min-width: 200px;
     padding: 1em;
     padding-top: 0;
+}
+
+.card-blank input {
+    font-size: 1.1em;
+    width: 90%;
 }
 
 .card-field {
