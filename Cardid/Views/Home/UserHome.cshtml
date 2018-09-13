@@ -1,0 +1,383 @@
+﻿
+@using Cardid.Models
+@model Stats
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int listLength = 0;
+}
+
+
+@* temporary welcome bar after login or register *@
+
+@if (TempData["user-login"] != null || TempData["new-user"] != null)
+{
+    <div class="welcome-header flex flex-left">
+
+        <div class="x-button icons large-type dark-hover">
+            &#xe904;
+        </div>
+
+        <div class="welcome-body flex flex-left">
+
+            @if (TempData["user-login"] != null)
+            {
+                User user = TempData["user-login"] as User;
+                <div class="welcome-greeting large-type">
+                    Welcome back, @user.DisplayName!
+                </div>
+            }
+            else if (TempData["new-user"] != null)
+            {
+                <div class="welcome-greeting">
+                    <div>
+                        <p class="large-type narrow-line">
+                            Welcome, @TempData["new-user"].ToString()!
+                        </p>
+                        <p class="small-type narrow-line">
+                            Here's how you can get started:
+                        </p>
+                    </div>
+                </div>
+            }
+
+            <div class="welcome-options">
+                <div>
+                    <a href="@Url.Action("CreateDeckInit", "Deck")" class="dark-hover welcome-option">
+                        <span class="icons">
+                            &#xe900;
+                        </span>
+                        <span class="half-tab"></span>
+                        <span class="underline">
+                            Create a new deck
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Index", "Deck")" class="dark-hover welcome-option">
+                        <span class="icons">
+                            &#xe915;
+                        </span>
+                        <span class="half-tab"></span>
+                        <span class="underline">
+                            Find a deck to study
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@* leaderboards *@
+
+<div class="spacer"></div>
+<div class="flex flex-baseline list-container">
+
+    <div class="leaderboard">
+
+        <div>
+            <h2 class="icons leaderboard-icon">
+                &#xe908;
+            </h2>
+            <div class="inline-block">
+                <h2 class="view-title">
+                    Top Users
+                </h2>
+                <p class="small-type narrow-line">
+                    by study sessions logged:
+                </p>
+            </div>
+        </div>
+
+        <div class="leaderboard-list-short">
+            @{
+                listLength = Math.Min(10, Model.ActiveUsers.Count);
+                for (int i = 0; i < listLength; i++)
+                {
+                    int rank = i + 1;
+                    string name = Model.ActiveUsersOrder[i];
+
+                    <p class="leaderboard-listing">
+                        <span class="listing-left">
+                            <span class="leader-rank">
+                                @rank.
+                            </span>
+                            <span class="half-tab"></span>
+                            @name
+                        </span>
+                        <span class="listing-right">
+                            @Model.ActiveUsers[name]
+                        </span>
+                    </p>
+                }
+            }
+
+            <span class="leaderboard-expand small-type dark-hover">
+                Show more
+                <span class="icons">
+                    &#xe931;
+                </span>
+            </span>
+        </div>
+
+        <div class="leaderboard-list-long hidden">
+            @{
+                listLength = Math.Min(20, Model.ActiveUsers.Count);
+                for (int i = 0; i < listLength; i++)
+                {
+                    int rank = i + 1;
+                    string name = Model.ActiveUsersOrder[i];
+
+                    <p class="leaderboard-listing">
+                        <span class="listing-left">
+                            <span class="leader-rank">
+                                @rank.
+                            </span>
+                            <span class="half-tab"></span>
+                            @name
+                        </span>
+                        <span class="listing-right">
+                            @Model.ActiveUsers[name]
+                        </span>
+                    </p>
+                }
+            }
+
+            <span class="leaderboard-collapse small-type dark-hover">
+                Show less
+                <span class="icons">
+                    &#xe934;
+                </span>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="leaderboard">
+
+        <div>
+            <h2 class="icons leaderboard-icon">
+                &#xe90e;
+            </h2>
+            <div class="inline-block">
+                <h2 class="view-title">
+                    Top Decks
+                </h2>
+                <p class="small-type narrow-line">
+                    by number of times studied:
+                </p>
+            </div>
+        </div>
+
+        <div class="leaderboard-list-short">
+            @{
+                listLength = Math.Min(10, Model.ActiveDecks.Count);
+                for (int i = 0; i < listLength; i++)
+                {
+                    int rank = i + 1;
+                    Deck deck = Model.ActiveDecksOrder[i];
+                    <p class="leaderboard-listing leaderboard-link">
+                        <span class="listing-left">
+                            <span class="leader-rank">
+                                &nbsp;@rank.
+                            </span>
+                            <span class="half-tab"></span>
+                            @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                        </span>
+                        <span class="listing-right">
+                            @Model.ActiveDecks[deck]
+                        </span>
+                    </p>
+                }
+            }
+
+            <span class="leaderboard-expand small-type dark-hover">
+                Show more
+                <span class="icons">
+                    &#xe931;
+                </span>
+            </span>
+
+        </div>
+
+
+        <div class="leaderboard-list-long hidden">
+            @{
+                listLength = Math.Min(20, Model.ActiveDecks.Count);
+                for (int i = 0; i < listLength; i++)
+                {
+                    int rank = i + 1;
+                    Deck deck = Model.ActiveDecksOrder[i];
+                    <p class="leaderboard-listing leaderboard-link">
+                        <span class="listing-left">
+                            <span class="leader-rank">
+                                @rank.
+                            </span>
+                            <span class="half-tab"></span>
+                            @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
+                        </span>
+                        <span class="listing-right">
+                            @Model.ActiveDecks[deck]
+                        </span>
+                    </p>
+                }
+            }
+
+            <span class="leaderboard-collapse small-type dark-hover">
+                Show less
+                <span class="icons">
+                    &#xe934;
+                </span>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="leaderboard tag-leaderboard">
+
+        <div>
+            <h2 class="icons leaderboard-icon">
+                &#xe93d;
+            </h2>
+            <div class="inline-block">
+                <h2 class="view-title">
+                    Top Tags
+                </h2>
+                <p class="small-type narrow-line">
+                    by number of decks:
+                </p>
+            </div>
+        </div>
+
+        <div class="leaderboard-list-short">
+
+            <div class="taglist-block">
+
+                @{
+                    listLength = Math.Min(10, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        int rank = i + 1;
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <p class="leaderboard-listing leaderboard-link">
+                            <span class="listing-left">
+                                <span class="leader-rank">
+                                    @rank.
+                                </span>
+                                <span class="half-tab"></span>
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                        </p>
+                    }
+                }
+            </div>
+
+            <div class="taglist-inline">
+                <div class="spacer"></div>
+
+                @{
+                    listLength = Math.Min(10, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <span class="tag-listing leaderboard-link">
+                            <span>
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                            <span class="tab"></span>
+                        </span>
+                    }
+                }
+            </div>
+
+            <span class="leaderboard-expand small-type dark-hover">
+                Show more
+                <span class="icons">
+                    &#xe931;
+                </span>
+            </span>
+
+        </div>
+
+
+        <div class="leaderboard-list-long hidden">
+
+            <div class="taglist-block">
+                @{
+                    listLength = Math.Min(20, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        int rank = i + 1;
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <p class="leaderboard-listing leaderboard-link">
+                            <span class="listing-left">
+                                <span class="leader-rank">
+                                    @rank.
+                                </span>
+                                <span class="half-tab"></span>
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                        </p>
+                    }
+                }
+            </div>
+
+            <div class="taglist-inline">
+                <div class="spacer"></div>
+
+                @{
+                    listLength = Math.Min(20, Model.PopularTags.Count);
+
+                    for (int i = 0; i < listLength; i++)
+                    {
+                        Tag tag = Model.PopularTagsOrder[i];
+                        <span class="tag-listing leaderboard-link">
+                            <span>
+                                @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
+                            </span>
+                            <span class="listing-right">
+                                @Model.PopularTags[tag]
+                            </span>
+                            <span class="tab"></span>
+                        </span>
+                    }
+                }
+            </div>
+
+            <span class="leaderboard-collapse small-type dark-hover">
+                Show less
+                <span class="icons">
+                    &#xe934;
+                </span>
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="spacer"></div>
+
+
+
+<script type="text/javascript" src="../../Content/miscScript.js"></script>
+
+

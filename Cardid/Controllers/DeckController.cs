@@ -60,10 +60,31 @@ namespace Cardid.Controllers
             }
             string userID = GetUser();
 
-            List<Deck> displayDecks = deckSql.GetAllDecks(userID);
-            Session["display-decks"] = displayDecks;
+            ViewBag.UserID = userID;
+            ViewBag.TagsByName = tagSql.GetAllTagsByName();
+            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
+
+            List<Deck> displayDecks = new List<Deck>();
+            if (Session["display-decks"] == null)
+            {
+                displayDecks = deckSql.GetAllDecks(userID);
+            }
+            else
+            {
+                displayDecks = Session["display-decks"] as List<Deck>;
+            }
+
+            if (Session["search-deckname"] != null)
+            {
+                ViewBag.SearchName = Session["search-deckname"].ToString();
+            }
+            if (Session["search-decktag"] != null)
+            {
+                ViewBag.SearchTag = Session["search-decktag"].ToString();
+            }
+
             Session["background"] = GetBackground();
-            return RedirectToAction("ShowDecks");
+            return View("MainDeckView", displayDecks);
         }
 
 
@@ -254,8 +275,8 @@ namespace Cardid.Controllers
             List<Deck> displayDecks = deckSql.SearchDecksByName(searchString, userID);
             Session["display-decks"] = displayDecks;
 
-            TempData["search-name"] = searchString;
-            return RedirectToAction("ShowDecks", new { displayDecks });
+            Session["search-deckname"] = searchString;
+            return RedirectToAction("Index");
         }
 
 
@@ -266,28 +287,17 @@ namespace Cardid.Controllers
             List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString, userID);
             Session["display-decks"] = displayDecks;
 
-            TempData["search-tag"] = searchString;
-            return RedirectToAction("ShowDecks", new { displayDecks });
+            Session["search-decktag"] = searchString;
+            return RedirectToAction("Index");
         }
 
 
-        public ActionResult ShowDecks()
+        public ActionResult ShowAllDecks()
         {
-            string userID = GetUser();
-            ViewBag.UserID = userID;
-            ViewBag.TagsByName = tagSql.GetAllTagsByName();
-            ViewBag.TagsByPopularity = tagSql.GetAllTagsByPopularity();
-            if (TempData["search-name"] != null)
-            {
-                ViewBag.SearchName = TempData["search-name"].ToString();
-            }
-            if (TempData["search-tag"] != null)
-            {
-                ViewBag.SearchTag = TempData["search-tag"].ToString();
-            }
-
-            List<Deck> displayDecks = Session["display-decks"] as List<Deck>;
-            return View("MainDeckView", displayDecks);
+            Session["search-deckname"] = null;
+            Session["search-decktag"] = null;
+            Session["display-decks"] = null;
+            return RedirectToAction("Index");
         }
 
 

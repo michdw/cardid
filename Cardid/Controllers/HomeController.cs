@@ -41,46 +41,9 @@ namespace Cardid.Controllers
         public ActionResult Index()
         {
             Session["anon"] = "Home";
-
-            //leaderboard
-            Dictionary<int, int> activeUsersSql = studySql.MostActiveUsers();
-            Dictionary<string, int> activeUsers = new Dictionary<string, int>();
-            foreach (KeyValuePair<int, int> kvp in activeUsersSql)
-            {
-                User user = userSql.GetUserByID(kvp.Key.ToString());
-                string name = user.DisplayName;
-                activeUsers.Add(name, kvp.Value);
-            }
-
-            Dictionary<int, int> activeDecksSql = studySql.MostActiveDecks();
-            Dictionary<Deck, int> activeDecks = new Dictionary<Deck, int>();
-            foreach (KeyValuePair<int, int> kvp in activeDecksSql)
-            {
-                Deck deck = deckSql.GetDeckByID(kvp.Key.ToString());
-                if (deck.IsPublic)
-                {
-                    activeDecks.Add(deck, kvp.Value);
-                }
-            }
-
-            List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
-            Dictionary<Tag, int> popularTags = new Dictionary<Tag, int>();
-            for (int i = 0; i < popularTagsSql.Count; i++)
-            {
-                Tag tag = popularTagsSql[i];
-                int decksUsing = tag.DecksUsing.Count;
-                popularTags.Add(tag, decksUsing);
-            }
-
-            Stats stats = new Stats
-            {
-                ActiveDecks = activeDecks,
-                ActiveUsers = activeUsers,
-                PopularTags = popularTags,
-            };
-
             Session["background"] = GetBackground();
-            return View(stats);
+
+            return View();
         }
 
 
@@ -129,7 +92,7 @@ namespace Cardid.Controllers
                 case "Deck":
                     return RedirectToAction("Index", "Deck");
                 default:
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UserHome");
             }
         }
 
@@ -186,7 +149,7 @@ namespace Cardid.Controllers
                 case "Deck":
                     return RedirectToAction("Index", "Deck");
                 default:
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UserHome");
             }
         }
 
@@ -414,6 +377,55 @@ namespace Cardid.Controllers
             }
 
             return View(search);
+        }
+
+
+        public ActionResult UserHome()
+        {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            //leaderboard
+            Dictionary<int, int> activeUsersSql = studySql.MostActiveUsers();
+            Dictionary<string, int> activeUsers = new Dictionary<string, int>();
+            foreach (KeyValuePair<int, int> kvp in activeUsersSql)
+            {
+                User user = userSql.GetUserByID(kvp.Key.ToString());
+                string name = user.DisplayName;
+                activeUsers.Add(name, kvp.Value);
+            }
+
+            Dictionary<int, int> activeDecksSql = studySql.MostActiveDecks();
+            Dictionary<Deck, int> activeDecks = new Dictionary<Deck, int>();
+            foreach (KeyValuePair<int, int> kvp in activeDecksSql)
+            {
+                Deck deck = deckSql.GetDeckByID(kvp.Key.ToString());
+                if (deck.IsPublic)
+                {
+                    activeDecks.Add(deck, kvp.Value);
+                }
+            }
+
+            List<Tag> popularTagsSql = tagSql.GetAllTagsByPopularity();
+            Dictionary<Tag, int> popularTags = new Dictionary<Tag, int>();
+            for (int i = 0; i < popularTagsSql.Count; i++)
+            {
+                Tag tag = popularTagsSql[i];
+                int decksUsing = tag.DecksUsing.Count;
+                popularTags.Add(tag, decksUsing);
+            }
+
+            Stats stats = new Stats
+            {
+                ActiveDecks = activeDecks,
+                ActiveUsers = activeUsers,
+                PopularTags = popularTags,
+            };
+
+            Session["background"] = GetBackground();
+            return View(stats);
         }
 
 

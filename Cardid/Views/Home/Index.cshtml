@@ -3,492 +3,115 @@
 @model Stats
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    int listLength = 0;
 }
 
 
-@* temporary welcome bar after login or register *@
+<div class="spacer"></div>
+<div class="landing-module">
+    <p class="large-type near-top" style="text-align: center;">
+        <span class="icons">
+            &#xe90e;
+        </span>
+        <span class="half-tab"></span>
+        A simple way to learn and remember anything
+    </p>
+    <ul class="at-top landing-subheader">
 
-@if (TempData["user-login"] != null || TempData["new-user"] != null)
-{
-    <div class="welcome-header flex flex-left">
-
-        <div class="x-button icons large-type dark-hover">
-            &#xe904;
-        </div>
-
-        <div class="welcome-body flex flex-left">
-
-            @if (TempData["user-login"] != null)
-            {
-                User user = TempData["user-login"] as User;
-                <div class="welcome-greeting large-type">
-                    Welcome back, @user.DisplayName!
-                </div>
-            }
-            else if (TempData["new-user"] != null)
-            {
-                <div class="welcome-greeting">
-                    <div>
-                        <p class="large-type narrow-line">
-                            Welcome, @TempData["new-user"].ToString()!
-                        </p>
-                        <p class="small-type narrow-line">
-                            Here's how you can get started:
-                        </p>
-                    </div>
-                </div>
-            }
-
-            <div class="welcome-options">
-                <div>
-                    <a href="@Url.Action("CreateDeckInit", "Deck")" class="dark-hover welcome-option">
-                        <span class="icons">
-                            &#xe900;
-                        </span>
-                        <span class="half-tab"></span>
-                        <span class="underline">
-                            Create a new deck
-                        </span>
-                    </a>
-                    <a href="@Url.Action("Index", "Deck")" class="dark-hover welcome-option">
-                        <span class="icons">
-                            &#xe915;
-                        </span>
-                        <span class="half-tab"></span>
-                        <span class="underline">
-                            Find a deck to study
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-}
-
-
-@* landing view (before logging in) *@
-
-@if (Session["userid"] == null)
-{
-    <div class="spacer"></div>
-    <div class="landing-module">
-        <p class="large-type near-top" style="text-align: center;">
-            <span class="icons">
-                &#xe90e;
-            </span>
-            <span class="half-tab"></span>
-            A simple way to learn and remember anything
-        </p>
-        <ul class="at-top landing-subheader">
-
-            <li class="no-bullet">
-                <p class="bold narrow-line">
-                    <span class="icons">
-                        &#xe900;
-                    </span>
-                    <span class="half-tab"></span>
-                    Create your own decks of cards
-                </p>
-
-                <ul class="small-type landing-list">
-                    <li>
-                        Add text for the front and back of each card.
-                    </li>
-                    <li>
-                        Make your deck public (visible to all users), or keep it private.
-                    </li>
-                    <li>
-                        Organize your decks by tags for different topics-
-                        <span class="indent">
-                            (Create your own tags to add, or use existing ones).
-                        </span>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="landing-subheader">
-                <p class="bold at-bottom">
-                    <span class="icons">
-                        &#xe90f;
-                    </span>
-                    <span class="half-tab"></span>
-                    Find more decks
-                </p>
-
-                <ul class="small-type landing-list">
-                    <li>
-                        Search for deck names, or search decks by tag.
-                    </li>
-                    <li>
-                        You can also search all available cards and tags for a certain text.
-                    </li>
-                </ul>
-            </li>
-
-            <li class="landing-subheader">
-                <p class="bold at-bottom">
-                    <span class="icons">
-                        &#xe915;
-                    </span>
-                    <span class="half-tab"></span>
-                    Start studying!
-                </p>
-
-                <ul class="small-type landing-list">
-                    <li>
-                        You'll see one side of the card, and guess what's on the other side.
-                    </li>
-                    <li>
-                        Click a button to flip the card, and mark yourself right or wrong.
-                    </li>
-                    <li>
-                        Cardid keeps track of your score, and records scores for all your completed study sessions.
-                    </li>
-                    <li>
-                        At the end of a session, you can go back over your incorrect answers.
-                    </li>
-                    <li>
-                        Cards are automatically shuffled for each session.
-                    </li>
-                    <li>
-                        View the front of each card first and guess the back, or view the back and guess the front-
-                        <span class="indent">
-                            (Do some of both! It helps you remember things better).
-                        </span>
-                    </li>
-                    <li>
-                        You can also study decks that other users have made public.
-                    </li>
-                </ul>
-
-            </li>
-        </ul>
-
-        <p class="landing-subheader" style="margin-left: 2.5em;">
-            <span class="icons large-type">
-                &#xe933;
-            </span>
-            <span class="half-tab"></span>
-            To get started,
-            @Html.ActionLink("log in", "Login", "Home", null, new { @class = "underline" })
-            &nbsp;or&nbsp;
-            @Html.ActionLink("register.", "BeginRegister", "Home", null, new { @class = "underline" })
-        </p>
-    </div>
-}
-
-@* leaderboards (seen after loggin in) *@
-
-else
-{
-    <div class="spacer"></div>
-    <div class="flex flex-baseline list-container">
-
-        <div class="leaderboard">
-
-            <div>
-                <h2 class="icons leaderboard-icon">
-                    &#xe908;
-                </h2>
-                <div class="inline-block">
-                    <h2 class="view-title">
-                        Top Users
-                    </h2>
-                    <p class="small-type narrow-line">
-                        by study sessions logged:
-                    </p>
-                </div>
-            </div>
-
-            <div class="leaderboard-list-short">
-                @{
-                    listLength = Math.Min(10, Model.ActiveUsers.Count);
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        int rank = i + 1;
-                        string name = Model.ActiveUsersOrder[i];
-
-                        <p class="leaderboard-listing">
-                            <span class="listing-left">
-                                <span class="leader-rank">
-                                    @rank.
-                                </span>
-                                <span class="half-tab"></span>
-                                @name
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveUsers[name]
-                            </span>
-                        </p>
-                    }
-                }
-
-                <span class="leaderboard-expand small-type dark-hover">
-                    Show more
-                    <span class="icons">
-                        &#xe931;
-                    </span>
+        <li class="no-bullet">
+            <p class="bold narrow-line">
+                <span class="icons">
+                    &#xe900;
                 </span>
-            </div>
+                <span class="half-tab"></span>
+                Create your own decks of cards
+            </p>
 
-            <div class="leaderboard-list-long hidden">
-                @{
-                    listLength = Math.Min(20, Model.ActiveUsers.Count);
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        int rank = i + 1;
-                        string name = Model.ActiveUsersOrder[i];
-
-                        <p class="leaderboard-listing">
-                            <span class="listing-left">
-                                <span class="leader-rank">
-                                    @rank.
-                                </span>
-                                <span class="half-tab"></span>
-                                @name
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveUsers[name]
-                            </span>
-                        </p>
-                    }
-                }
-
-                <span class="leaderboard-collapse small-type dark-hover">
-                    Show less
-                    <span class="icons">
-                        &#xe934;
+            <ul class="small-type landing-list">
+                <li>
+                    Add text for the front and back of each card.
+                </li>
+                <li>
+                    Make your deck public (visible to all users), or keep it private.
+                </li>
+                <li>
+                    Organize your decks by tags for different topics-
+                    <span class="indent">
+                        (Create your own tags to add, or use existing ones).
                     </span>
+                </li>
+            </ul>
+        </li>
+
+        <li class="landing-subheader">
+            <p class="bold at-bottom">
+                <span class="icons">
+                    &#xe90f;
                 </span>
+                <span class="half-tab"></span>
+                Find more decks
+            </p>
 
-            </div>
+            <ul class="small-type landing-list">
+                <li>
+                    Search for deck names, or search decks by tag.
+                </li>
+                <li>
+                    You can also search all available cards and tags for a certain text.
+                </li>
+            </ul>
+        </li>
 
-        </div>
+        <li class="landing-subheader">
+            <p class="bold at-bottom">
+                <span class="icons">
+                    &#xe915;
+                </span>
+                <span class="half-tab"></span>
+                Start studying!
+            </p>
 
-
-        <div class="leaderboard">
-
-            <div>
-                <h2 class="icons leaderboard-icon">
-                    &#xe90e;
-                </h2>
-                <div class="inline-block">
-                    <h2 class="view-title">
-                        Top Decks
-                    </h2>
-                    <p class="small-type narrow-line">
-                        by number of times studied:
-                    </p>
-                </div>
-            </div>
-
-            <div class="leaderboard-list-short">
-                @{
-                    listLength = Math.Min(10, Model.ActiveDecks.Count);
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        int rank = i + 1;
-                        Deck deck = Model.ActiveDecksOrder[i];
-                        <p class="leaderboard-listing leaderboard-link">
-                            <span class="listing-left">
-                                <span class="leader-rank">
-                                    &nbsp;@rank.
-                                </span>
-                                <span class="half-tab"></span>
-                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveDecks[deck]
-                            </span>
-                        </p>
-                    }
-                }
-
-                <span class="leaderboard-expand small-type dark-hover">
-                    Show more
-                    <span class="icons">
-                        &#xe931;
+            <ul class="small-type landing-list">
+                <li>
+                    You'll see one side of the card, and guess what's on the other side.
+                </li>
+                <li>
+                    Click a button to flip the card, and mark yourself right or wrong.
+                </li>
+                <li>
+                    Cardid keeps track of your score, and records scores for all your completed study sessions.
+                </li>
+                <li>
+                    At the end of a session, you can go back over your incorrect answers.
+                </li>
+                <li>
+                    Cards are automatically shuffled for each session.
+                </li>
+                <li>
+                    View the front of each card first and guess the back, or view the back and guess the front-
+                    <span class="indent">
+                        (Do some of both! It helps you remember things better).
                     </span>
-                </span>
+                </li>
+                <li>
+                    You can also study decks that other users have made public.
+                </li>
+            </ul>
 
-            </div>
+        </li>
+    </ul>
 
+    <p class="landing-subheader" style="margin-left: 2.5em;">
+        <span class="icons large-type">
+            &#xe933;
+        </span>
+        <span class="half-tab"></span>
+        To get started,
+        @Html.ActionLink("log in", "Login", "Home", null, new { @class = "underline" })
+        &nbsp;or&nbsp;
+        @Html.ActionLink("register.", "BeginRegister", "Home", null, new { @class = "underline" })
+    </p>
+</div>
 
-            <div class="leaderboard-list-long hidden">
-                @{
-                    listLength = Math.Min(20, Model.ActiveDecks.Count);
-                    for (int i = 0; i < listLength; i++)
-                    {
-                        int rank = i + 1;
-                        Deck deck = Model.ActiveDecksOrder[i];
-                        <p class="leaderboard-listing leaderboard-link">
-                            <span class="listing-left">
-                                <span class="leader-rank">
-                                    @rank.
-                                </span>
-                                <span class="half-tab"></span>
-                                @Html.ActionLink(deck.DeckName, "ViewDeck", "Deck", new { deckID = deck.DeckID }, null)
-                            </span>
-                            <span class="listing-right">
-                                @Model.ActiveDecks[deck]
-                            </span>
-                        </p>
-                    }
-                }
-
-                <span class="leaderboard-collapse small-type dark-hover">
-                    Show less
-                    <span class="icons">
-                        &#xe934;
-                    </span>
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="leaderboard tag-leaderboard">
-
-            <div>
-                <h2 class="icons leaderboard-icon">
-                    &#xe93d;
-                </h2>
-                <div class="inline-block">
-                    <h2 class="view-title">
-                        Top Tags
-                    </h2>
-                    <p class="small-type narrow-line">
-                        by number of decks:
-                    </p>
-                </div>
-            </div>
-
-            <div class="leaderboard-list-short">
-
-                <div class="taglist-block">
-
-                    @{
-                        listLength = Math.Min(10, Model.PopularTags.Count);
-
-                        for (int i = 0; i < listLength; i++)
-                        {
-                            int rank = i + 1;
-                            Tag tag = Model.PopularTagsOrder[i];
-                            <p class="leaderboard-listing leaderboard-link">
-                                <span class="listing-left">
-                                    <span class="leader-rank">
-                                        @rank.
-                                    </span>
-                                    <span class="half-tab"></span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
-                                </span>
-                            </p>
-                        }
-                    }
-                </div>
-
-                <div class="taglist-inline">
-                    <div class="spacer"></div>
-
-                    @{
-                        listLength = Math.Min(10, Model.PopularTags.Count);
-
-                        for (int i = 0; i < listLength; i++)
-                        {
-                            Tag tag = Model.PopularTagsOrder[i];
-                            <span class="tag-listing leaderboard-link">
-                                <span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
-                                </span>
-                                <span class="tab"></span>
-                            </span>
-                        }
-                    }
-                </div>
-
-                <span class="leaderboard-expand small-type dark-hover">
-                    Show more
-                    <span class="icons">
-                        &#xe931;
-                    </span>
-                </span>
-
-            </div>
-
-
-            <div class="leaderboard-list-long hidden">
-
-                <div class="taglist-block">
-                    @{
-                        listLength = Math.Min(20, Model.PopularTags.Count);
-
-                        for (int i = 0; i < listLength; i++)
-                        {
-                            int rank = i + 1;
-                            Tag tag = Model.PopularTagsOrder[i];
-                            <p class="leaderboard-listing leaderboard-link">
-                                <span class="listing-left">
-                                    <span class="leader-rank">
-                                        @rank.
-                                    </span>
-                                    <span class="half-tab"></span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
-                                </span>
-                            </p>
-                        }
-                    }
-                </div>
-
-                <div class="taglist-inline">
-                    <div class="spacer"></div>
-
-                    @{
-                        listLength = Math.Min(20, Model.PopularTags.Count);
-
-                        for (int i = 0; i < listLength; i++)
-                        {
-                            Tag tag = Model.PopularTagsOrder[i];
-                            <span class="tag-listing leaderboard-link">
-                                <span>
-                                    @Html.ActionLink(tag.TagName, "SearchDeckTags", "Deck", new { searchString = tag.TagName }, null)
-                                </span>
-                                <span class="listing-right">
-                                    @Model.PopularTags[tag]
-                                </span>
-                                <span class="tab"></span>
-                            </span>
-                        }
-                    }
-                </div>
-
-                <span class="leaderboard-collapse small-type dark-hover">
-                    Show less
-                    <span class="icons">
-                        &#xe934;
-                    </span>
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="spacer"></div>
-}
 
 
 <script type="text/javascript" src="../../Content/miscScript.js"></script>

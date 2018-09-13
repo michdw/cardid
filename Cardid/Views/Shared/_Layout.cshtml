@@ -48,8 +48,8 @@
             </div>
 
             <div class="top-menu">
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "header-option" })
-                @Html.ActionLink("Decks", "Index", "Deck", null, new { @class = "header-option" })
+                @Html.ActionLink("Home", "UserHome", "Home", null, new { @class = "header-option" })
+                @Html.ActionLink("Decks", "ShowAllDecks", "Deck", null, new { @class = "header-option" })
                 @Html.ActionLink("Search", "SearchText", "Home", null, new { @class = "header-option" })
                 @if (Session["userid"] == null)
                 {

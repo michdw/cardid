@@ -241,6 +241,7 @@
     <Content Include="Views\Card\EditCard.cshtml" />
     <Content Include="Views\Deck\ViewDeck.cshtml" />
     <Content Include="Views\Home\UserTags.cshtml" />
+    <Content Include="Views\Home\UserHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -164,7 +164,7 @@
 
                 @foreach (Tag tag in Model.Tags)
                 {
-                    <span>
+                    <span class="inline-block">
                         <span class="tag active-tag">@tag.TagName</span>
                         <a href="@Url.Action("RemoveDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID, newDeck = false })">
                             <span class="icons delete-tag">
@@ -202,22 +202,22 @@
         <div class="near-top">
 
             <div class="tagviews small-type">
-                <span class="bold tagview-pop">
+                <span class="pointer tagview-pop">
                     sort by popularity
                 </span>
-                <span class="icons pointer large-type toggle-left">
+                <span class="icons pointer large-type toggle-left hidden">
                     &#xe93e;
                 </span>
-                <span class="icons pointer large-type toggle-right hidden">
+                <span class="icons pointer large-type toggle-right">
                     &#xe93f;
                 </span>
-                <span class="pointer tagview-alph">
+                <span class="bold tagview-alph">
                     sort alphabetically
                 </span>
             </div>
 
             <div class="tag-container">
-                <div class="tags-pop">
+                <div class="tags-pop hidden">
 
                     @foreach (Tag tag in Model.OtherTagsByPopularity)
                     {
@@ -225,11 +225,11 @@
                     }
                 </div>
 
-                <div class="tags-alph hidden">
+                <div class="tags-alph">
 
                     @foreach (Tag tag in Model.OtherTagsByName)
                     {
-                        @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { searchString = tag.TagName }, new { @class = "tag inactive-tag" });
+                        @Html.ActionLink(tag.TagName, "AddDeckTag", "Deck", new { deckID = Model.DeckID, tagID = tag.TagID }, new { @class = "tag inactive-tag" });
                     }
                 </div>
             </div>
