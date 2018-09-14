@@ -16,7 +16,7 @@
     </h1>
 </div>
 
-<div class="module">
+<div class="module" style="max-width:300px">
 
     <p>All tags that you create are available for others to use.</p>
     <p>You can delete tags that you have created if no other users have added them to their decks.</p>
@@ -33,7 +33,7 @@
                 }
                 else
                 {
-                    <span class="tag inactive-tag">@tag.TagName</span>
+                    <span class="tag unused-tag">@tag.TagName</span>
                 }
 
                 @if (tag.UserIDs.Count <= 1)
