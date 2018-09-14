@@ -72,7 +72,7 @@
         }
 
 
-        <a href="@Url.Action("RemoveCard", "Card", new { cardID = Model.CardID, deckID = Model.GetDeck() })" class="btn delete-btn">
+        <a href="@Url.Action("RemoveCard", "Card", new { cardID = Model.CardID, deckID = Model.GetDeck().DeckID })" class="btn delete-btn">
             <span class="icons">
                 &#xe914;
             </span>
