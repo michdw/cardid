@@ -367,6 +367,14 @@ textarea {
     width: auto;
 }
 
+.input-emdown {
+    transform: translateY(.1em);
+}
+
+.input-pxdown {
+    transform: translateY(1px);
+}
+
 .line-form {
     padding-top: 10px;
 }

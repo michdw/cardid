@@ -242,7 +242,6 @@
             @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post, new { @class = "line-form" }))
             {
                 @Html.TextBoxFor(m => m.NewTag.TagName, new { @class = "moz-pxdown", @placeholder = "new tag name" })
-
                 @Html.HiddenFor(m => Model.DeckID)
 
                 <button type="submit" class="btn right-btn">
