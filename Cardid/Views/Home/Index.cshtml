@@ -101,16 +101,19 @@
         </li>
     </ul>
 
-    <p class="landing-subheader" style="margin-left: 2.5em">
-        <span class="icons large-type">
-            &#xe933;
-        </span>
-        <span class="half-tab"></span>
-        To get started,
-        @Html.ActionLink("log in", "Login", "Home", null, new { @class = "underline" })
-        &nbsp;or&nbsp;
-        @Html.ActionLink("register.", "BeginRegister", "Home", null, new { @class = "underline" })
-    </p>
+    @if (Session["userid"] == null)
+    {
+        <p class="landing-subheader" style="margin-left: 2.5em">
+            <span class="icons large-type">
+                &#xe933;
+            </span>
+            <span class="half-tab"></span>
+            To get started,
+            @Html.ActionLink("log in", "Login", "Home", null, new { @class = "underline" })
+            &nbsp;or&nbsp;
+            @Html.ActionLink("register.", "BeginRegister", "Home", null, new { @class = "underline" })
+        </p>
+    }
 </div>
 
 
