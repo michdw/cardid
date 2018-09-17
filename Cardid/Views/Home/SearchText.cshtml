@@ -3,6 +3,7 @@
 @model Search
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Search Cards, Decks, and Tags";
 }
 
 @if (Model.SearchString == null)
@@ -246,7 +247,7 @@ else
         </div>
 
 
-        <div class="results-container" style="max-width: 300px;">
+        <div class="results-container" style="max-width: 300px">
 
             <h2 class="view-title">
                 Tags:

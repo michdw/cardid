@@ -1,7 +1,328 @@
 ﻿
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Site";
 }
 
-<h2 class="view-title">About</h2>
+<h1 class="view-title">About this site</h1>
 
+<div class="flex flex-center">
+    <div class="about-site">
+        <h3 class="view-title">
+            Origin
+        </h3>
+        <p>
+            The concept for this site is based on a group project I participated in for the
+            <a href="https://www.techelevator.com/" class="underline">Tech Elevator</a>
+            coding boot camp, in which we were assigned to create a self-study flashcard site according to a list of specifications (user stories).
+            After completing the boot camp, I decided to create my own version from the ground up, adding some additional features and
+            retooling others. My goal was to give myself the experience of putting together a full, functional website that could be useful
+            to anyone who wants to use online flashcards.
+        </p>
+        <p>
+            <a href="https://ithuvanian.github.io/portfolio/" class="dark-hover underline">
+                See my other projects
+            </a>
+        </p>
+        <div class="spacer"></div>
+
+        <h3 class="view-title">
+            Technology
+        </h3>
+        <p>
+            This site was developed and deployed using:
+            <ul>
+                <li>
+                    C# / .NET Framework
+                </li>
+                <li>
+                    Visual Studio 2017
+                </li>
+                <li>
+                    SQL Server / SSMS
+                </li>
+                <li>
+                    Dapper ORM
+                </li>
+                <li>
+                    JQuery
+                </li>
+                <li>
+                    AppHarbor
+                </li>
+            </ul>
+        </p>
+        <p>
+            <a href="https://github.com/ithuvanian/cardid" class="dark-hover underline">
+                View the code for this site on Github
+            </a>
+        </p>
+        <div class="spacer"></div>
+
+        <h3 class="view-title">
+            Summary of features
+        </h3>
+
+        <p>DESIGN</p>
+        <ul>
+            <li>
+                <p>
+                    Page background is randomly selected from a collection of different color variations upon initial loading and upon loading certain
+                    pages within the site. Backgrounds were all created by me.
+                </p>
+            </li>
+            <li>
+                <p>Custom fonts are used under license:</p>
+                <ul>
+                    <li>
+                        Text from
+                        <a href="https://www.google.com/fonts" class="underline">Google Fonts</a>
+                    </li>
+                    <li>
+                        Icons from
+                        <a href="https://icomoon.io/app" class="underline">Icomoon</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    When certain key actions are attempted (adding a tag, deleting a deck, changing a password etc.) a temporary message will appear at the
+                    top of the newly reloaded page, indicating whether the action has been completed.
+                </p>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>LOGIN / REGISTER</p>
+        <ul>
+            <li>
+                <p>A user account is necessary to use the features of this site. Most pages can only be accessed after logging in. </p>
+                <ul>
+                    <li>
+                        <p>If the user clicks on one of the links in the header (<em>Decks, Search</em>) before logging in, they are redirected to the 
+                        <em>Login </em><em>View</em>; after login, they are then directed to their previously selected link.</p>
+                    </li>
+                    <li>
+                        <p>The Login View contains a link for first-time users to go to the <em>Register View </em>instead.</p>
+                    </li>
+                    <li>
+                        <p>
+                            All actions in the code requiring a login include a method to check for a user ID. If none is found, the site redirects to an error
+                            page. This prevents users from manually typing in a url they are not authorized to access.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    When a user first logs in or registers, their homepage displays a customized welcome banner with options to create a new deck or find a deck
+                    to study.
+                </p>
+            </li>
+            <li>
+                <p>When a new user registers, the program checks to make sure their display name and email are not already associated with a different user.</p>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p>
+                    After login, the user homepage displays three leaderboard lists, with current data gleaned from the databases.
+                    The last two lists contain links to the appropriate items:
+                </p>
+                <ul>
+                    <li>
+                        <p>Most active users, according to number of study sessions completed</p>
+                    </li>
+                    <li>
+                        <p>Most active decks, by the number of times users have studied them (public decks only)</p>
+                    </li>
+                    <li>
+                        <p>Most used tags, by the number of decks asssociated with them.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p>Users can expand the leaderboards from 10 to 20 items, and collapse them back to the original size.</p>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>DECKS</p>
+        <ul>
+            <li>
+                <p>
+                    The <em>Main Deck View</em> loads all decks by default. Users can narrow the scope by searching for all or part of a deck's name, or selecting
+                    from a list of tags.
+                </p>
+            </li>
+            <li>
+                <p>Decks created by the user appear at the top, followed by public decks created by others.</p>
+                <ul>
+                    <li>
+                        <p>
+                            Each deck is displayed with the number of cards it contains, links to begin a study session, and (if it a shared public deck) the name
+                            of the user who has shared it.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>The user can click on each deck to view the cards and (if it their own) edit the deck.</p>
+            </li>
+            <li>
+                <p>In the <em>Edit Deck View,</em> users can:</p>
+                <ul>
+                    <li>
+                        <p>Change their deck between public (visible to all registered users) and private (visible only to self)</p>
+                    </li>
+                    <li>
+                        <p>Rename the deck</p>
+                    </li>
+                    <li>
+                        <p>Change tags (add, remove or create). All tags created are public and available for others to use.</p>
+                    </li>
+                    <li>
+                        <p>Delete the deck (after a final confirmation)</p>
+                    </li>
+                    <li>
+                        <p>Add or remove cards</p>
+                    </li>
+                    <li>
+                        <p>
+                            Edit the contents of each card by going to the <em>Edit Card View</em> (by clicking a button on the card, or by double clicking on
+                            the card text fields)
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>Tags are sorted alphabetically by default, but can also be sorted by popularity (with a toggle switch).</p>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>SEARCH</p>
+        <ul>
+            <li>
+                <p>The <em>Search Text View</em> returns results for any specified text contained in cards, decks, or tags.</p>
+                <ul>
+                    <li>
+                        <p>Initially, a search returns the number of matches found in each category with an option to expand and show all in that category.</p>
+                    </li>
+                    <li>
+                        <p>When one category is selected, the other two will automatically be hidden.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>ACCOUNT</p>
+        <ul>
+            <li>
+                <p>
+                    The user's <em>Account View</em> contains an option to change their display name, email, and password, or delete their account (after a final
+                    confirmation).
+                </p>
+                <ul>
+                    <li>
+                        <p>As with registering a new user, the controller actions in the code ensure that all names and emails are unique among users.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>Users can view tags that they have created. If no other user has adopted their tag, they can delete it, which will remove it from any decks.</p>
+            </li>
+            <li>
+                <p>Users can view a history of their study sessions, containing the deck studied, the date and time of the session, and the final score.</p>
+                <ul>
+                    <li>
+                        <p>Sessions are sorted by time (most recent first). The top five are displayed by default, but the list can be expanded to show all.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>STUDY SESSIONS</p>
+        <ul>
+            <li>
+                <p>Cards in a deck are shuffled (the order randomized) before each study session.</p>
+            </li>
+            <li>
+                <p>The user chooses to view text on the front of each card and guess the back, or vice versa.</p>
+            </li>
+            <li>
+                <p>Cards appear on the screen one at a time.</p>
+                <ul>
+                    <li>
+                        <p>At first, a button for flipping the card appears just above.</p>
+                    </li>
+                    <li>
+                        <p>Once the card is flipped, two buttons appear, for marking the score right or wrong.</p>
+                    </li>
+                    <li>
+                        <p>The session's progress is displayed onscreen:</p>
+                        <ul>
+                            <li>
+                                <p>Number of cards remaining in the deck</p>
+                            </li>
+                            <li>
+                                <p>Number of correct guesses so far</p>
+                            </li>
+                            <li>
+                                <p>Number of total guesses so far</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>At the end of the session:</p>
+                <ul>
+                    <li>
+                        <p>The score and percentage is displayed.</p>
+                    </li>
+                    <li>
+                        <p>Any cards marked incorrect have been temporarily stored in the program's data. The user has the option to review these cards.</p>
+                    </li>
+                    <li>
+                        <p>The user can also study the entire deck again, viewing either front or back first.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+
+        <p>DATABASES</p>
+        <ul>
+            <li>
+                <p>Databases (in SQL Server) are used to store information about:</p>
+                <ul>
+                    <li>
+                        <p>Users (display name, email, password)</p>
+                    </li>
+                    <li>
+                        <p>Decks (deck name, creator, whether it is public or private)</p>
+                    </li>
+                    <li>
+                        <p>Cards (front and back text)</p>
+                    </li>
+                    <li>
+                        <p>Tags (tag name, creator)</p>
+                    </li>
+                    <li>
+                        <p>Study sessions (user, deck, total score, possible score, date and time)</p>
+                    </li>
+                    <li>
+                        <p>Associations between decks and cards (one to many) and decks and tags (many to many)</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+
+    </div>
+</div>

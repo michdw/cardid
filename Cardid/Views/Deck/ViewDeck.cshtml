@@ -1,7 +1,7 @@
 ﻿@using Cardid.Models
 @model Deck
 @{
-    ViewBag.Title = "ViewDeck";
+    ViewBag.Title = "View Deck: " + Model.DeckName;
 }
 
 
@@ -17,7 +17,7 @@
 
 <div>
 
-    <p class="at-top white" style="margin-left: 4.25em;">Shared by <strong>@Model.Creator.DisplayName</strong></p>
+    <p class="at-top white" style="margin-left: 4.25em">Shared by <strong>@Model.Creator.DisplayName</strong></p>
     <div class="large-type bold">
         Study this deck:
     </div>
