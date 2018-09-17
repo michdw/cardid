@@ -110,7 +110,7 @@
                     </button>
                     <span class="half-tab"></span>
 
-                    @Html.TextBoxFor(m => m.DeckName, new { @class = "inline-input wide-input" })
+                    @Html.TextBoxFor(m => m.DeckName, new { @class = "moz-pxdown input-wide" })
                     @Html.HiddenFor(m => m.DeckID)
                 }
             </div>
@@ -241,7 +241,7 @@
 
             @using (Html.BeginForm("CreateTagForDeck", "Deck", FormMethod.Post, new { @class = "line-form" }))
             {
-                @Html.TextBoxFor(m => m.NewTag.TagName, new { @placeholder = "new tag name" })
+                @Html.TextBoxFor(m => m.NewTag.TagName, new { @class = "moz-pxdown", @placeholder = "new tag name" })
 
                 @Html.HiddenFor(m => Model.DeckID)
 
