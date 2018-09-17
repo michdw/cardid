@@ -34,7 +34,7 @@
             </span>
 
             <span class="userinfo-active hidden">
-                @Html.TextBoxFor(m => m.DisplayName, new { @Value = Model.DisplayName })
+                @Html.TextBoxFor(m => m.DisplayName, new { @class = "input-emdown", @Value = Model.DisplayName })
 
                 <button type="submit" class="btn inline-btn">
                     Submit
@@ -67,7 +67,7 @@
             </span>
 
             <span class="userinfo-active hidden">
-                @Html.TextBoxFor(m => m.Email, new { @Value = Model.Email })
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-emdown", @Value = Model.Email })
 
                 <button type="submit" class="btn inline-btn">
                     Submit

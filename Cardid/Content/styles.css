@@ -304,7 +304,6 @@ input {
     padding: 8px 10px;
     background: rgba(255,255,255,.7);
     border: 1px solid rgba(0,0,0,.4);
-    transform: translateY(.1em);
 }
 
 label {
@@ -329,6 +328,14 @@ textarea {
     text-align: inherit;
     padding-bottom: .5em;
     width: auto;
+}
+
+.input-pxdown {
+    transform: translateY(1px);
+}
+
+.input-emdown {
+    transform: translateY(.1em);
 }
 
 .line-form {
@@ -357,7 +364,7 @@ textarea {
     margin: 5px 0;
 }
 
-.wide-input {
+.input-wide {
     width: 230px;
 }
 
