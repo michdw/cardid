@@ -1,7 +1,7 @@
 # cardid
 A self-study flashcard site
 
-The concept for this site is based on a group project I participated in for the Tech Elevator coding boot camp, in which we were assigned to create a self-study flashcard site according to a list of specifications (user stories).
+The concept for this site is based on a group project I participated in for the Tech Elevator coding boot camp, in which we were assigned to create a self-study flashcard site according to a list of specifications.
 
 After completing the boot camp, I decided to create my own version from the ground up, adding some additional features and
 retooling others. My goal was to give myself the experience of putting together a full, functional website that could be useful
