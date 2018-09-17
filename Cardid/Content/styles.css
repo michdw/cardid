@@ -81,6 +81,20 @@ body {
     font-family: 'Encode Sans Semi Expanded', sans-serif;
 }
 
+/* browser-specific styles */
+
+.webkit-pxup {
+    -webkit-transform: translateY(-1px);
+}
+
+.moz-emdown {
+    -moz-transform: translateY(.1em);
+}
+
+.moz-pxdown {
+    -moz-transform: translateY(1px);
+}
+
 
 /* general styles */
 
@@ -379,14 +393,6 @@ textarea {
     padding-top: 10px;
 }
 
-.moz-emdown {
-    -moz-transform: translateY(.1em);
-}
-
-.moz-pxdown {
-    -moz-transform: translateY(1px);
-}
-
 .narrow-label {
     width: 80px;
 }
@@ -410,7 +416,7 @@ textarea {
 }
 
 .input-wide {
-    width: 230px;
+    width: 220px;
 }
 
 .wide-label {
