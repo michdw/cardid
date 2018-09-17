@@ -43,13 +43,20 @@
         <div class="page-header">
             @Html.Partial("_Messages")
 
-            <div class="page-title">
+            <a href=@Url.Action("Index","Home") class="page-title">
                 <h1 class="view-title">Cardid.</h1>
                 <p>Candid flashcards.</p>
-            </div>
+            </a>
 
             <div class="top-menu">
-                @Html.ActionLink("Home", "UserHome", "Home", null, new { @class = "header-option" })
+                @if (Session["userid"] == null)
+                {
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "header-option" })
+                }
+                else
+                {
+                    @Html.ActionLink("Home", "UserHome", "Home", null, new { @class = "header-option" })
+                }
                 @Html.ActionLink("Decks", "ShowAllDecks", "Deck", null, new { @class = "header-option" })
                 @Html.ActionLink("Search", "SearchText", "Home", null, new { @class = "header-option" })
                 @if (Session["userid"] == null)
