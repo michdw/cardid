@@ -330,12 +330,12 @@ textarea {
     width: auto;
 }
 
-.input-pxdown {
-    transform: translateY(1px);
-}
-
 .input-emdown {
     transform: translateY(.1em);
+}
+
+.input-pxdown {
+    transform: translateY(1px);
 }
 
 .line-form {
