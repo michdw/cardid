@@ -62,7 +62,7 @@
                 @if (Session["userid"] == null)
                 {
                     @Html.ActionLink("Login", "Login", "Home", null, new { @class = "header-option" })
-                    @Html.ActionLink("Register", "BeginRegister", "Home", null, new { @class = "header-option" })
+                    @Html.ActionLink("Register", "Register", "Home", null, new { @class = "header-option" })
                 }
                 else
                 {

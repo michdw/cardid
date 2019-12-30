@@ -32,19 +32,11 @@ namespace Cardid.Controllers
 
         private string GetBackground()
         {
-            if (Session["background"] == null)
-            {
-                Session["background"] = "";
-            }
-            string currentPath = Session["background"].ToString();
-            string newPath = currentPath;
-
             Background bg = new Background();
-            newPath = bg.Path;
-            return newPath;
+            return bg.Path;
         }
 
-        private string GetUser()
+        private string GetUserID()
         {
             return Session["userid"].ToString();
         }
@@ -58,7 +50,7 @@ namespace Cardid.Controllers
                 Session["anon"] = "Deck";
                 return RedirectToAction("Login", "Home");
             }
-            string userID = GetUser();
+            string userID = GetUserID();
 
             ViewBag.UserID = userID;
             ViewBag.TagsByName = tagSql.GetAllTagsByName();
@@ -90,7 +82,7 @@ namespace Cardid.Controllers
 
         public ActionResult AddDeckTag(string deckID, string tagID)
         {
-            GetUser();
+            GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
             tagSql.AddTagToDeck(deckID, tagID);
@@ -104,7 +96,7 @@ namespace Cardid.Controllers
 
         public ActionResult ChangeDeckName(Deck deck)
         {
-            GetUser();
+            GetUserID();
 
             Deck currentDeck = deckSql.GetDeckByID(deck.DeckID);
             if (deck.DeckName != currentDeck.DeckName)
@@ -119,7 +111,7 @@ namespace Cardid.Controllers
 
         public ActionResult CreateDeckInit()
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             Deck newDeck = new Deck
             {
                 UserID = userID
@@ -133,7 +125,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CreateDeckSubmit(Deck deck)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             if (deck.DeckName == null)
             {
@@ -149,7 +141,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult CreateTagForDeck(Deck deck)
         {
-            GetUser();
+            GetUserID();
 
             Tag newTag = deck.NewTag;
             string tagName = newTag.TagName;
@@ -182,7 +174,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult DeleteDeck(string deckID)
         {
-            GetUser();
+            GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
             List<Card> cardsInDeck = cardSql.GetCardsByDeckID(deck.DeckID);
@@ -195,7 +187,7 @@ namespace Cardid.Controllers
 
         public ActionResult EditDeck(string deckID, bool newBackground)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
 
@@ -212,9 +204,9 @@ namespace Cardid.Controllers
         }
 
 
-        public ActionResult ListingToDeck(string deckID)
+        public ActionResult AccountToDeck(string deckID)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             Deck deck = deckSql.GetDeckByID(deckID);
 
             if (deck.UserID == userID)
@@ -230,7 +222,7 @@ namespace Cardid.Controllers
 
         public ActionResult MakeDeckPrivate(string deckID)
         {
-            GetUser();
+            GetUserID();
 
             deckSql.MakeDeckPrivate(deckID);
 
@@ -240,7 +232,7 @@ namespace Cardid.Controllers
 
         public ActionResult MakeDeckPublic(string deckID)
         {
-            GetUser();
+            GetUserID();
 
             deckSql.MakeDeckPublic(deckID);
 
@@ -250,7 +242,7 @@ namespace Cardid.Controllers
 
         public ActionResult RemoveDeckTag(string deckID, string tagID)
         {
-            GetUser();
+            GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
             Tag tag = tagSql.GetTagByID(tagID);
@@ -264,7 +256,7 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckNames(string searchString)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             if (searchString.Length == 0)
             {
@@ -282,7 +274,7 @@ namespace Cardid.Controllers
 
         public ActionResult SearchDeckTags(string searchString)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             List<Deck> displayDecks = deckSql.SearchDecksByTag(searchString, userID);
             Session["display-decks"] = displayDecks;
@@ -303,7 +295,7 @@ namespace Cardid.Controllers
 
         public ActionResult StudyBegin(string deckID, bool frontFirst)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
             List<Card> cards = deck.Cards;
@@ -332,7 +324,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult StudyLog(Study study)
         {
-            GetUser();
+            GetUserID();
 
             if (study.WholeDeck)
             {
@@ -345,7 +337,7 @@ namespace Cardid.Controllers
 
         public ActionResult StudyRedo(string redo, string deckID, bool frontFirst)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
             List<Card> redoCards = CardsToRedo(redo);
@@ -366,7 +358,7 @@ namespace Cardid.Controllers
 
         public ActionResult ViewDeck(string deckID)
         {
-            GetUser();
+            GetUserID();
 
             Deck deck = deckSql.GetDeckByID(deckID);
 

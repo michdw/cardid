@@ -91,6 +91,13 @@ C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CoreCompileInp
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\source\repos\Cardid\Cardid\obj\Debug\Cardid.pdb
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\ApplicationInsights.config
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\Cardid.dll.config
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\Cardid.dll
@@ -102,18 +109,13 @@ C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\csi.exe
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\csi.exe.config
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\csi.rsp
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\Microsoft.Win32.Primitives.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.AppContext.dll
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Collections.Immutable.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Console.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Diagnostics.Process.dll
@@ -123,7 +125,6 @@ C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.I
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.IO.FileSystem.Primitives.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.IO.Pipes.dll
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Security.AccessControl.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Security.Claims.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.Security.Cryptography.Algorithms.dll
@@ -141,7 +142,6 @@ C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\System.X
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\vbc.exe
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\vbc.exe.config
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\vbc.rsp
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\Antlr3.Runtime.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\bin\Dapper.dll
@@ -183,4 +183,3 @@ C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\obj\Debug\Cardid.cs
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\obj\Debug\Cardid.pdb
-C:\Users\Micha\Documents\MEGA\code\TE\projects\Cardid\Cardid\obj\Debug\Cardid.csprojAssemblyReference.cache

@@ -93,23 +93,23 @@ else
             <p class="bold large-type at-top">Search decks by tag</p>
 
             <div class="tagviews small-type">
-                <span class="pointer tagview-pop">
+                <span class="tagview-pop noclick">
                     sort by popularity
                 </span>
-                <span class="icons pointer large-type toggle-left">
+                <span class="icons show-pointer large-type toggle-left">
                     &#xe93e;
                 </span>
-                <span class="icons pointer large-type toggle-right hidden">
+                <span class="icons show-pointer large-type toggle-right hidden">
                     &#xe93f;
                 </span>
-                <span class="bold tagview-alph">
+                <span class="tagview-alph show-pointer">
                     sort alphabetically
                 </span>
             </div>
 
             <div class="tag-container">
 
-                <div class="tags-pop hidden">
+                <div class="tags-pop">
 
                     @foreach (Tag tag in tagsByPopularity)
                     {
@@ -117,7 +117,7 @@ else
                     }
                 </div>
 
-                <div class="tags-alph">
+                <div class="tags-alph hidden">
 
                     @foreach (Tag tag in tagsByName)
                     {

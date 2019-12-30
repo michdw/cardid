@@ -24,17 +24,17 @@
 
     <div>
 
-        <div class="flip-card studynav icons bold">
+        <div class="flip-button studynav icons bold show-pointer">
             &#xea2e;
         </div>
 
         <div class="mark-frame hidden">
 
-            <div class="mark-wrong studynav inline-block icons">
+            <div class="mark-wrong studynav inline-block icons show-pointer">
                 &#xe91b;
             </div>
 
-            <div class="mark-right studynav inline-block icons bold">
+            <div class="mark-right studynav inline-block icons bold show-pointer">
                 &#xe91c;
             </div>
 
@@ -89,7 +89,7 @@
 </div>
 
 <div hidden id="cardsToRedo"></div>
-@using (Html.BeginForm("StudyLog", "Deck", FormMethod.Post, new { @id = "complete" }))
+@using (Html.BeginForm("StudyLog", "Deck", FormMethod.Post, new { @id = "studylog" }))
 {
     @Html.HiddenFor(m => m.DeckID, Model.DeckID)
     @Html.HiddenFor(m => m.UserID, Model.UserID)

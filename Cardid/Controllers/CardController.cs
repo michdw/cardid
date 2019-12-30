@@ -14,14 +14,14 @@ namespace Cardid.Controllers
         CardSqlDAL cardSql = new CardSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
         DeckSqlDAL deckSql = new DeckSqlDAL(ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString);
 
-        private string GetUser()
+        private string GetUserID()
         {
             return Session["userid"].ToString();
         }
 
         public ActionResult Index()
         {
-            GetUser();
+            GetUserID();
             return RedirectToAction("Index", "Home");
         }
 
@@ -29,7 +29,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult AddCardToDeck(Deck deck)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             if (deck.NewCardFront == null || deck.NewCardBack == null)
             {
@@ -56,7 +56,7 @@ namespace Cardid.Controllers
 
         public ActionResult EditCardInit(string cardID, string deckID, string searchString)
         {
-            GetUser();
+            GetUserID();
 
             Card card = cardSql.GetCardByID(cardID);
 
@@ -76,7 +76,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult EditCardSubmit(Card newValues)
         {
-            GetUser();
+            GetUserID();
 
             cardSql.EditCard(newValues);
 
@@ -87,7 +87,7 @@ namespace Cardid.Controllers
 
         public ActionResult RemoveCard(string cardID, string deckID)
         {
-            GetUser();
+            GetUserID();
 
             cardSql.RemoveCard(cardID, deckID);
 

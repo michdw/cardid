@@ -4,8 +4,8 @@ function switchView() {
 
     if ($('.tags-pop').hasClass('hidden')) {
 
-        $('.tagview-pop').addClass('bold').removeClass('pointer');
-        $('.tagview-alph').removeClass('bold').addClass('pointer');
+        $('.tagview-pop').removeClass('show-pointer').addClass('noclick');
+        $('.tagview-alph').addClass('show-pointer').removeClass('noclick');
         $('.tags-alph').addClass('hidden');
         $('.toggle-right').addClass('hidden');
         $('.tags-pop').removeClass('hidden');
@@ -13,8 +13,8 @@ function switchView() {
 
     } else {
 
-        $('.tagview-alph').addClass('bold').removeClass('pointer');
-        $('.tagview-pop').removeClass('bold').addClass('pointer');
+        $('.tagview-alph').removeClass('show-pointer').addClass('noclick');
+        $('.tagview-pop').addClass('show-pointer').removeClass('noclick');
         $('.tags-pop').addClass('hidden');
         $('.toggle-left').addClass('hidden');
         $('.tags-alph').removeClass('hidden');
@@ -30,7 +30,7 @@ $(window).scroll(function () {
 
 $(document).ready(function () {
 
-    if (sessionStorage.scrollTop != "undefined") {
+    if (sessionStorage.scrollTop !== "undefined") {
         $(window).scrollTop(sessionStorage.scrollTop);
     }
 

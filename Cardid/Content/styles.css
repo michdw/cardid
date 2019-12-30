@@ -200,11 +200,15 @@ a {
     margin-top: .5em;
 }
 
+.noclick {
+    pointer-events: none;
+}
+
 .nowrap {
     white-space: nowrap;
 }
 
-.pointer:hover {
+.show-pointer:hover {
     cursor: pointer;
 }
 
@@ -346,10 +350,6 @@ a {
 .x-button {
     position: absolute;
 }
-
-    .x-button:hover {
-        cursor: pointer;
-    }
 
 
 /* forms */
@@ -539,10 +539,6 @@ textarea {
     width: 28%;
     min-width: 250px;
     padding: 1em;
-}
-
-.leaderboard-expand:hover, .leaderboard-collapse:hover {
-    cursor: pointer;
 }
 
 .leaderboard-icon {
@@ -889,12 +885,12 @@ textarea {
 
 .tagview-alph {
     width: 130px;
-    margin-left: 1em;
+    margin-left: .5em;
 }
 
 .tagview-pop {
     width: 130px;
-    margin-right: 1em;
+    margin-right: .5em;
 }
 
 .toggle-left, .toggle-right {
@@ -1000,16 +996,12 @@ textarea {
     outline: 1px solid rgba(255,255,255,.5);
 }
 
-    .studynav:hover, .finish:hover {
-        cursor: pointer;
-    }
-
-.flip-card {
+.flip-button {
     -webkit-animation: flash-fade 1s infinite;
     animation: flash-fade 1s infinite;
 }
 
-    .flip-card:hover {
+    .flip-button:hover {
         background: rgba(255,255,255,.8);
         color: rgba(0,0,0,.7);
         outline: 1px solid rgba(0,0,0,.7);

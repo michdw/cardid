@@ -19,19 +19,11 @@ namespace Cardid.Controllers
 
         private string GetBackground()
         {
-            if (Session["background"] == null)
-            {
-                Session["background"] = "";
-            }
-            string currentPath = Session["background"].ToString();
-            string newPath = currentPath;
-
             Background bg = new Background();
-            newPath = bg.Path;
-            return newPath;
+            return bg.Path;
         }
 
-        private string GetUser()
+        private string GetUserID()
         {
             return Session["userid"].ToString();
         }
@@ -83,7 +75,7 @@ namespace Cardid.Controllers
             Session["background"] = GetBackground();
             Session["userid"] = currentUser.UserID;
             Session["username"] = currentUser.DisplayName;
-            TempData["user-login"] = currentUser;
+            TempData["existing-user"] = currentUser;
 
             switch (Session["anon"].ToString())
             {
@@ -98,7 +90,7 @@ namespace Cardid.Controllers
 
 
         //registration actions
-        public ActionResult BeginRegister()
+        public ActionResult Register()
         {
             User model = new User();
 
@@ -112,7 +104,7 @@ namespace Cardid.Controllers
             if (newUser.DisplayName == null || newUser.Email == null || newUser.Password == null || newUser.ConfirmPassword == null)
             {
                 TempData["register-info-missing"] = true;
-                return RedirectToAction("BeginRegister");
+                return RedirectToAction("Register");
             }
 
             newUser.Email = newUser.Email.ToLower();
@@ -126,7 +118,7 @@ namespace Cardid.Controllers
             }
             else if (nameExists)
             {
-                ModelState.AddModelError("invalid-credentials", "That name is already in use; please choose a different name.");
+                ModelState.AddModelError("invalid-credentials", "That name is already in use; please register with a different name.");
                 ViewBag.LoginInstead = true;
                 return View("Register", newUser);
             }
@@ -157,7 +149,7 @@ namespace Cardid.Controllers
         //other actions
         public ActionResult Account()
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             User user = userSql.GetUserByID(userID);
 
             Session["background"] = GetBackground();
@@ -174,7 +166,7 @@ namespace Cardid.Controllers
 
         public ActionResult ChangeInfoInit()
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             User user = userSql.GetUserByID(userID);
 
             return View("ChangeUserInfo", user);
@@ -184,7 +176,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult ChangeName(User user)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             User oldInfo = userSql.GetUserByID(userID);
             bool nameExists = userSql.CheckForName(user.DisplayName);
 
@@ -213,7 +205,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(User user)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             User oldInfo = userSql.GetUserByID(userID);
             user.Email = user.Email.ToLower();
             bool emailExists = userSql.CheckForEmail(user.Email);
@@ -244,7 +236,7 @@ namespace Cardid.Controllers
         [HttpPost]
         public ActionResult ChangePassword(User user)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
             User oldInfo = userSql.GetUserByID(userID);
 
             var password = ModelState["Password"];
@@ -274,7 +266,7 @@ namespace Cardid.Controllers
 
         public ActionResult DeleteTag(string tagID)
         {
-            string userID = GetUser();
+            string userID = GetUserID();
 
             tagSql.DeleteTag(tagID);
             TempData["tag-deleted"] = true;
@@ -324,7 +316,7 @@ namespace Cardid.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            string userID = GetUser();
+            string userID = GetUserID();
 
             Search search = new Search()
             {
@@ -431,7 +423,7 @@ namespace Cardid.Controllers
 
         public ActionResult UserTags(string userID)
         {
-            GetUser();
+            GetUserID();
 
             User user = userSql.GetUserByID(userID);
             List<Tag> userTags = user.Tags;

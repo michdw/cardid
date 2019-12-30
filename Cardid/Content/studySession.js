@@ -22,7 +22,7 @@ function flipCard() {
         }
     }, 150);
 
-    $('.flip-card').addClass('hidden');
+    $('.flip-button').addClass('hidden');
     $('.mark-frame').removeClass('hidden');
 }
 
@@ -33,7 +33,7 @@ function nextCard() {
     } else {
         viewBack();
     }
-    $('.flip-card').removeClass('hidden');
+    $('.flip-button').removeClass('hidden');
     $('.mark-frame').addClass('hidden');
 
     var thisCard = $('.active-card');
@@ -68,7 +68,7 @@ $(document).ready(function () {
     $('.study-card').first().removeClass('new-card').addClass('active-card');
 
 
-    $('.flip-card').click(function () {
+    $('.flip-button').click(function () {
         cardsRemaining--;
         updateProgress(cardsRemaining);
 
@@ -89,11 +89,11 @@ $(document).ready(function () {
     $('.mark-right, .mark-wrong').click(function () {
         totalViewed++;
 
-        if (totalViewed == cardCount) {
+        if (totalViewed === cardCount) {
             $('#totalScore').val(totalCorrect);
             $('#possibleScore').val(cardCount);
             $('#toRedo').val(toRedo.slice(0, -1));
-            $('#complete').submit();
+            $('#studylog').submit();
         }
 
         else {
