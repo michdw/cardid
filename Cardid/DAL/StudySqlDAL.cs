@@ -10,18 +10,18 @@ namespace Cardid.DAL
 {
     public class StudySqlDAL
     {
-        private string connectionString;
+        readonly string connectionString;
         public StudySqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID order by TimeOf DESC";
-        private string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
+        readonly string getSessionsByUserID = "SELECT * FROM [sessions] WHERE UserID = @userID order by TimeOf DESC";
+        readonly string logStudySession = "INSERT INTO [sessions] (DeckID, UserID, TotalScore, PossibleScore, TimeOf) "
             + "VALUES (@deckID, @userID, @totalScore, @possibleScore, @timeOf)";
-        private string mostActiveDecks = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
+        readonly string mostActiveDecks = "SELECT DeckID, COUNT(DeckID) AS Count FROM[sessions] "
             + "GROUP BY DeckID ORDER BY COUNT(DeckID) DESC";
-        private string mostActiveUsers = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
+        readonly string mostActiveUsers = "SELECT UserID, COUNT(UserID) AS Count FROM[sessions] "
             + "GROUP BY UserID ORDER BY COUNT(UserID) DESC";
 
 

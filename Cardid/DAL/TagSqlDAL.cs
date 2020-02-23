@@ -10,32 +10,32 @@ namespace Cardid.DAL
 {
     public class TagSqlDAL
     {
-        private string connectionString;
+        readonly string connectionString;
         public TagSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private string addTagToDeck = "INSERT INTO [deck_tag] (DeckID, TagID) VALUES (@deckID, @tagID)";
-        private string createTag = "INSERT INTO [tags] (TagName, UserID) VALUES (@tagName, @userID)";
-        private string getAllTagsByName = "SELECT * FROM [tags] ORDER BY TagName ASC";
-        private string getAllTagsByPopularity = "SELECT tags.TagID FROM [tags] "
+        readonly string addTagToDeck = "INSERT INTO [deck_tag] (DeckID, TagID) VALUES (@deckID, @tagID)";
+        readonly string createTag = "INSERT INTO [tags] (TagName, UserID) VALUES (@tagName, @userID)";
+        readonly string getAllTagsByName = "SELECT * FROM [tags] ORDER BY TagName ASC";
+        readonly string getAllTagsByPopularity = "SELECT tags.TagID FROM [tags] "
             + "FULL OUTER JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
             + "GROUP BY tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
-        private string getOtherTagsByName = "SELECT * FROM [tags] WHERE TagID NOT IN "
+        readonly string getOtherTagsByName = "SELECT * FROM [tags] WHERE TagID NOT IN "
             + "(SELECT TagID FROM [deck_tag] WHERE deck_tag.DeckID = @deckID) ORDER BY tags.TagName ASC";
-        private string getOtherTagsByPopularity = "SELECT tags.TagID FROM[tags] "
+        readonly string getOtherTagsByPopularity = "SELECT tags.TagID FROM[tags] "
             + "FULL OUTER JOIN[deck_tag] ON deck_tag.TagID = tags.TagID "
             + "WHERE tags.TagID NOT IN(SELECT TagID FROM[deck_tag] WHERE deck_tag.DeckID = @deckID) "
             + "GROUP BY tags.TagID ORDER BY COUNT(DeckID) DESC, TagID DESC";
-        private string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
-        private string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
+        readonly string getTagByID = "SELECT * FROM [tags] WHERE TagID = @tagID";
+        readonly string getTagsByDeckID = "SELECT * FROM [tags] JOIN [deck_tag] ON deck_tag.TagID = tags.TagID "
             + "WHERE deck_tag.DeckID = @deckID ORDER BY tags.TagName DESC";
-        private string getTagsByCreatorID = "SELECT * FROM [tags] WHERE UserID = @userID";
-        private string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
-        private string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";
-        private string removeTagFromAllDecks = "DELETE FROM [deck_tag] WHERE TagID = @tagID";
-        private string searchTagsByName = "SELECT * FROM tags WHERE TagName LIKE @text";
+        readonly string getTagsByCreatorID = "SELECT * FROM [tags] WHERE UserID = @userID";
+        readonly string removeTag = "DELETE FROM [tags] WHERE TagID = @tagID";
+        readonly string removeTagFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID AND TagID = @tagID";
+        readonly string removeTagFromAllDecks = "DELETE FROM [deck_tag] WHERE TagID = @tagID";
+        readonly string searchTagsByName = "SELECT * FROM tags WHERE TagName LIKE @text";
 
 
         public void AddTagToDeck(string deckID, string tagID)
@@ -187,7 +187,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Tag> list = db.Query<Tag>(searchTagsByName, new { text = "%" + text + "%" }).ToList<Tag>();
+                List<Tag> list = db.Query<Tag>(searchTagsByName, new { text = "%" + text + "%" }).ToList();
                 return list;
             }
         }

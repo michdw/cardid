@@ -20,7 +20,7 @@ namespace Cardid.Models
         public string CurrentSearchString { get; set; }
 
 
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+        readonly string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
 
         public Deck GetDeck()
         {

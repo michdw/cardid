@@ -10,27 +10,27 @@ namespace Cardid.DAL
 {
     public class UserSqlDAL
     {
-        private string connectionString;
+        readonly string connectionString;
         public UserSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private string checkForName = "SELECT * FROM [users] WHERE DisplayName = @name;";
-        private string getAllUsers = "SELECT * FROM [users]";
-        private string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
-        private string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
-        private string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
-        private string updateEmail = "UPDATE [users] SET Email = @email WHERE UserID = @userID";
-        private string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
-        private string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
+        readonly string checkForName = "SELECT * FROM [users] WHERE DisplayName = @name;";
+        readonly string getAllUsers = "SELECT * FROM [users]";
+        readonly string getUserByID = "SELECT * FROM [users] WHERE UserID = @userID";
+        readonly string getUserByEmail = "SELECT * FROM [users] WHERE Email = @email;";
+        readonly string registerUser = "INSERT INTO [users] (Email, Password, DisplayName) VALUES (@email, @password, @displayName);";
+        readonly string updateEmail = "UPDATE [users] SET Email = @email WHERE UserID = @userID";
+        readonly string updateName = "UPDATE [users] SET DisplayName = @displayName WHERE UserID = @userID";
+        readonly string updatePassword = "UPDATE [users] SET Password = @password WHERE UserID = @userID";
 
         //steps to remove user account
-        private string removeUserCardDecks = "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; ";
-        private string removeUserCards = "DELETE FROM [cards] WHERE UserID = @userID; ";
-        private string removeUserDecks = "DELETE FROM [decks] WHERE UserID = @userID; ";
-        private string removeUserSessions = "DELETE FROM [sessions] WHERE UserID = @userID; ";
-        private string removeUser = "DELETE FROM [users] WHERE UserID = @userID;";
+        readonly string removeUserCardDecks = "DELETE [card_deck] from [card_deck] join [cards] on card_deck.CardID = cards.CardID WHERE cards.UserID = @userID; ";
+        readonly string removeUserCards = "DELETE FROM [cards] WHERE UserID = @userID; ";
+        readonly string removeUserDecks = "DELETE FROM [decks] WHERE UserID = @userID; ";
+        readonly string removeUserSessions = "DELETE FROM [sessions] WHERE UserID = @userID; ";
+        readonly string removeUser = "DELETE FROM [users] WHERE UserID = @userID;";
 
 
         public bool CheckForEmail(string email)
@@ -65,7 +65,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<User>(getUserByID, new { userID }).ToList().FirstOrDefault<User>().TrimValues();
+                return db.Query<User>(getUserByID, new { userID }).ToList().FirstOrDefault().TrimValues();
             }
         }
 

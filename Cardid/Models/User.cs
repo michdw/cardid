@@ -28,7 +28,7 @@ namespace Cardid.Models
         public string ConfirmPassword { get; set; }
 
 
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+        readonly string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
 
         public List<Card> Cards
         {

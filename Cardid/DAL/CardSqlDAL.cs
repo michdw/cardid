@@ -10,23 +10,23 @@ namespace Cardid.DAL
 {
     public class CardSqlDAL
     {
-        private string connectionString;
+        readonly string connectionString;
         public CardSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private string addCardToDeck = "INSERT INTO card_deck (CardID, DeckID) VALUES (@cardID, @deckID);";
-        private string createCard = "INSERT INTO [cards] (Front, Back, UserID) VALUES (@front, @back, @userID);";
-        private string editCard = "UPDATE [cards] SET Front = @front, Back = @back WHERE CardID = @cardID";
-        private string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
-        private string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
+        readonly string addCardToDeck = "INSERT INTO card_deck (CardID, DeckID) VALUES (@cardID, @deckID);";
+        readonly string createCard = "INSERT INTO [cards] (Front, Back, UserID) VALUES (@front, @back, @userID);";
+        readonly string editCard = "UPDATE [cards] SET Front = @front, Back = @back WHERE CardID = @cardID";
+        readonly string getCardByID = "SELECT * FROM [cards] WHERE CardID = @cardID";
+        readonly string getCardsByDeckID = "SELECT * FROM [cards] JOIN [card_deck] ON card_deck.CardID = cards.CardID "
             + "WHERE card_deck.DeckID = @deckID ORDER BY Front ASC";
-        private string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID";
-        private string getNewCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
-        private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
-        private string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
-        private string searchCardsForText = "SELECT * FROM[cards] JOIN[card_deck] ON card_deck.CardID = cards.CardID "
+        readonly string getCardsByUserID = "SELECT * FROM [cards] WHERE UserID = @userID";
+        readonly string getNewCard = "SELECT TOP 1 * FROM [cards] WHERE UserID = @userID ORDER BY CardID DESC";
+        readonly string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
+        readonly string removeCardFromDeck = "DELETE FROM [card_deck] WHERE CardID = @cardID AND DeckID = @deckID";
+        readonly string searchCardsForText = "SELECT * FROM[cards] JOIN[card_deck] ON card_deck.CardID = cards.CardID "
             + "JOIN[decks] ON decks.DeckID = card_deck.DeckID WHERE (IsPublic = 1 OR decks.UserID = @userID) "
             + "AND (Front LIKE @text OR Back LIKE @text) ORDER BY Front ASC";
 
@@ -46,7 +46,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createCard, new { front = card.Front, back = card.Back, userID });
-                Card newCard = db.Query<Card>(getNewCard, new { userID }).ToList().FirstOrDefault<Card>();
+                Card newCard = db.Query<Card>(getNewCard, new { userID }).ToList().FirstOrDefault();
                 return newCard.TrimValues();
             }
         }
@@ -65,7 +65,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<Card>(getCardByID, new { cardID }).ToList().FirstOrDefault<Card>().TrimValues();
+                return db.Query<Card>(getCardByID, new { cardID }).ToList().FirstOrDefault().TrimValues();
             }
         }
 
@@ -74,7 +74,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(getCardsByDeckID, new { deckID }).ToList<Card>();
+                List<Card> list = db.Query<Card>(getCardsByDeckID, new { deckID }).ToList();
                 foreach (Card card in list)
                 {
                     card.TrimValues();
@@ -88,7 +88,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(getCardsByUserID, new { userID }).ToList<Card>();
+                List<Card> list = db.Query<Card>(getCardsByUserID, new { userID }).ToList();
                 foreach (Card card in list)
                 {
                     card.TrimValues();
@@ -100,7 +100,6 @@ namespace Cardid.DAL
 
         public void RemoveCard(string cardID, string deckID)
         {
-            Card card = GetCardByID(cardID);
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(removeCardFromDeck, new { cardID, deckID });
@@ -113,7 +112,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Card> list = db.Query<Card>(searchCardsForText, new { text = "%" + text + "%", userID }).ToList<Card>();
+                List<Card> list = db.Query<Card>(searchCardsForText, new { text = "%" + text + "%", userID }).ToList();
                 foreach (Card card in list)
                 {
                     card.TrimValues();

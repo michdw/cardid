@@ -22,7 +22,7 @@ namespace Cardid.Models
         public string ToRedo { get; set; }
 
 
-        private string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
+        readonly string connectionString = ConfigurationManager.ConnectionStrings["FlashCardsDB"].ConnectionString;
 
         public int PercentScore
         {

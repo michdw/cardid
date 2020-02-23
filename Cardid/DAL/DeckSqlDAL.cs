@@ -10,31 +10,31 @@ namespace Cardid.DAL
 {
     public class DeckSqlDAL
     {
-        private string connectionString;
+        readonly string connectionString;
         public DeckSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private string changeDeckName = "UPDATE [decks] SET DeckName = @deckName WHERE DeckID = @deckID";
-        private string createDeck = "INSERT INTO [decks] (DeckName, IsPublic, UserID) VALUES (@deckName, @isPublic, @userID)";
-        private string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID) ORDER BY DeckName ASC";
-        private string getDeckByID = "SELECT * FROM [decks] WHERE DeckID = @deckID";
-        private string getDeckByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
+        readonly string changeDeckName = "UPDATE [decks] SET DeckName = @deckName WHERE DeckID = @deckID";
+        readonly string createDeck = "INSERT INTO [decks] (DeckName, IsPublic, UserID) VALUES (@deckName, @isPublic, @userID)";
+        readonly string getAllDecks = "SELECT * FROM [decks] WHERE (IsPublic = 1 OR UserID = @userID) ORDER BY DeckName ASC";
+        readonly string getDeckByID = "SELECT * FROM [decks] WHERE DeckID = @deckID";
+        readonly string getDeckByCardID = "SELECT * FROM [decks] JOIN [card_deck] ON card_deck.DeckID = decks.DeckID "
             + "WHERE CardID = @cardID";
-        private string getDecksByUserID = "SELECT * FROM [decks] WHERE (UserID = @userID)";
-        private string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID "
+        readonly string getDecksByUserID = "SELECT * FROM [decks] WHERE (UserID = @userID)";
+        readonly string getDecksByTagID = "SELECT * FROM [decks] JOIN [deck_tag] on deck_tag.DeckID = decks.DeckID "
             + "WHERE deck_tag.TagID = @tagID";
-        private string getNewDeck = "SELECT TOP 1 * FROM [decks] WHERE UserID = @userID ORDER BY DeckID DESC";
-        private string makeDeckPrivate = "UPDATE [decks] set IsPublic = 0 WHERE DeckID = @deckID";
-        private string makeDeckPublic = "UPDATE [decks] set IsPublic = 1 WHERE DeckID = @deckID";
-        private string removeAllCardsFromDeck = "DELETE FROM [card_deck] WHERE DeckID = @deckID";
-        private string removeAllSessionsWithDeck = "DELETE FROM [sessions] WHERE DeckID = @deckID";
-        private string removeAllTagsFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID";
-        private string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
-        private string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
-        private string searchDecksByName = "SELECT * FROM decks WHERE (IsPublic = 1 OR UserID = @userID) AND DeckName LIKE @text";
-        private string searchDecksByTag = "SELECT decks.DeckID, decks.DeckName, decks.IsPublic, decks.UserID "
+        readonly string getNewDeck = "SELECT TOP 1 * FROM [decks] WHERE UserID = @userID ORDER BY DeckID DESC";
+        readonly string makeDeckPrivate = "UPDATE [decks] set IsPublic = 0 WHERE DeckID = @deckID";
+        readonly string makeDeckPublic = "UPDATE [decks] set IsPublic = 1 WHERE DeckID = @deckID";
+        readonly string removeAllCardsFromDeck = "DELETE FROM [card_deck] WHERE DeckID = @deckID";
+        readonly string removeAllSessionsWithDeck = "DELETE FROM [sessions] WHERE DeckID = @deckID";
+        readonly string removeAllTagsFromDeck = "DELETE FROM [deck_tag] WHERE DeckID = @deckID";
+        readonly string removeCard = "DELETE FROM [cards] WHERE CardID = @cardID";
+        readonly string removeDeck = "DELETE FROM [decks] WHERE DeckID = @deckID";
+        readonly string searchDecksByName = "SELECT * FROM decks WHERE (IsPublic = 1 OR UserID = @userID) AND DeckName LIKE @text";
+        readonly string searchDecksByTag = "SELECT decks.DeckID, decks.DeckName, decks.IsPublic, decks.UserID "
             + "FROM decks JOIN[deck_tag] ON deck_tag.DeckID = decks.DeckID "
             + "JOIN [tags] ON tags.TagID = deck_tag.TagID WHERE (IsPublic = 1 OR decks.UserID = @userID) AND tags.TagName = @text";
 
@@ -53,7 +53,7 @@ namespace Cardid.DAL
             using (SqlConnection db = new SqlConnection(connectionString))
             {
                 db.Execute(createDeck, new { deckName, isPublic = 0, userID });
-                Deck newDeck = db.Query<Deck>(getNewDeck, new { userID }).ToList().FirstOrDefault<Deck>();
+                Deck newDeck = db.Query<Deck>(getNewDeck, new { userID }).ToList().FirstOrDefault();
                 return newDeck.TrimValues();
             }
         }
@@ -79,7 +79,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(getAllDecks, new { userID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(getAllDecks, new { userID }).ToList();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
@@ -93,7 +93,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<Deck>(getDeckByID, new { deckID }).ToList().FirstOrDefault<Deck>().TrimValues();
+                return db.Query<Deck>(getDeckByID, new { deckID }).ToList().FirstOrDefault().TrimValues();
             }
         }
 
@@ -102,7 +102,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<Deck>(getDeckByCardID, new { cardID }).ToList().FirstOrDefault<Deck>().TrimValues();
+                return db.Query<Deck>(getDeckByCardID, new { cardID }).ToList().FirstOrDefault().TrimValues();
             }
         }
 
@@ -111,7 +111,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(getDecksByTagID, new { tagID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(getDecksByTagID, new { tagID }).ToList();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
@@ -125,7 +125,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(getDecksByUserID, new { userID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(getDecksByUserID, new { userID }).ToList();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
@@ -157,7 +157,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(searchDecksByName, new { text = "%" + text + "%", userID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(searchDecksByName, new { text = "%" + text + "%", userID }).ToList();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
@@ -171,7 +171,7 @@ namespace Cardid.DAL
         {
             using (SqlConnection db = new SqlConnection(connectionString))
             {
-                List<Deck> list = db.Query<Deck>(searchDecksByTag, new { text, userID }).ToList<Deck>();
+                List<Deck> list = db.Query<Deck>(searchDecksByTag, new { text, userID }).ToList();
                 foreach (Deck deck in list)
                 {
                     deck.TrimValues();
