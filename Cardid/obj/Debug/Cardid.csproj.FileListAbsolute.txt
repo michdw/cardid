@@ -272,7 +272,6 @@ C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\bin\Microsoft.AI.Server
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\bin\Microsoft.AI.Web.xml
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.csprojAssemblyReference.cache
-C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.csproj.CoreCompileInputs.cache
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.pdb
