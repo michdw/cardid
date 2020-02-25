@@ -275,3 +275,5 @@ C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.csproj
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.csproj.CopyComplete
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.dll
 C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\obj\Debug\Cardid.pdb
+C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\bin\WebDriver.dll
+C:\Users\Micha\Documents\MEGA\code\TE\post\Cardid\Cardid\bin\WebDriver.xml
