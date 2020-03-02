@@ -59,6 +59,43 @@ namespace CardidTest
             htmlBody = driverGC.FindElement(By.TagName("body"));
             Assert.IsTrue(htmlBody.Text.Contains("Welcome back, TestMember!"));
 
+            //create deck
+            driverGC.FindElement(By.CssSelector("[href='/Deck/CreateDeckInit']"))
+                .Click();
+            IWebElement deckForm = driverGC.FindElement(By.ClassName("create-deck"));
+            deckForm.FindElement(By.TagName("input"))
+                .SendKeys("testdeck");
+            deckForm.FindElement(By.TagName("button"))
+                .Click();
+
+            //add new tag to deck
+            IWebElement tagForm = driverGC.FindElement(By.CssSelector("[action='/Deck/CreateTagForDeck']"));
+            tagForm.FindElement(By.TagName("input"))
+                .SendKeys("testtag");
+            tagForm.FindElement(By.TagName("button"))
+                .Click();
+
+            //add cards
+            IWebElement cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
+            cardForm.FindElement(By.Id("NewCardFront"))
+                .SendKeys("front 1");            
+            cardForm.FindElement(By.Id("NewCardBack"))
+                .SendKeys("back 1");
+            cardForm.FindElement(By.TagName("button"))
+                .Click();
+            cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
+            cardForm.FindElement(By.Id("NewCardFront"))
+                .SendKeys("front 2");            
+            cardForm.FindElement(By.Id("NewCardBack"))
+                .SendKeys("back 2");
+            cardForm.FindElement(By.TagName("button"))
+                .Click();
+
+            //find deck by tag
+
+            //study session
+
+
             //delete account
             driverGC.FindElement(By.CssSelector("[href='/Home/Account']"))
                 .Click();
