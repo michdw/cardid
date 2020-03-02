@@ -11,20 +11,14 @@ namespace CardidTest
     {
         static IWebDriver driverFF;
         static IWebDriver driverGC;
+        string textOnPage;
+        IWebElement htmlBody;
 
         [AssemblyInitialize]
         public static void Setup(TestContext context)
         {
-            driverFF = new FirefoxDriver();
+            //driverFF = new FirefoxDriver();
             driverGC = new ChromeDriver();
-        }
-
-        [TestMethod]
-        public void TestFirefoxDriver()
-        {
-            string url = "https://cardid.apphb.com/";
-            driverFF.Navigate().GoToUrl(url);
-            driverFF.Quit();
         }
 
         [TestMethod]
@@ -32,8 +26,104 @@ namespace CardidTest
         {
             string url = "https://cardid.apphb.com/";
             driverGC.Navigate().GoToUrl(url);
+
+            //register new member
+            driverGC.FindElement(By.CssSelector("[href='/Home/BeginRegister']"))
+                .Click();
+            driverGC.FindElement(By.Id("DisplayName"))
+                .SendKeys("TestMember");
+            driverGC.FindElement(By.Id("Email"))
+                .SendKeys("testmember@cardid.co");
+            driverGC.FindElement(By.Id("Password"))
+                .SendKeys("testpw");
+            driverGC.FindElement(By.Id("ConfirmPassword"))
+                .SendKeys("testpw");
+            driverGC.FindElement(By.XPath("//button[@type='submit']"))
+                .Click();
+            textOnPage = "Welcome, TestMember!";
+            htmlBody = driverGC.FindElement(By.TagName("body"));
+            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+
+            //logout and log back in
+            driverGC.FindElement(By.CssSelector("[href='/Home/Logout']"))
+                .Click();
+            textOnPage = "You have been logged out";
+            htmlBody = driverGC.FindElement(By.TagName("body"));
+            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+
+            driverGC.FindElement(By.CssSelector("[href='/Home/Login']"))
+                .Click();
+            driverGC.FindElement(By.Id("Email"))
+                .SendKeys("testmember@cardid.co");
+            driverGC.FindElement(By.Id("Password"))
+                .SendKeys("testpw");
+            driverGC.FindElement(By.XPath("//button[@type='submit']"))
+                .Click();
+            textOnPage = "Welcome back, TestMember!";
+            htmlBody = driverGC.FindElement(By.TagName("body"));
+            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+
+            //delete account
+            driverGC.FindElement(By.CssSelector("[href='/Home/Account']"))
+                .Click();
+            driverGC.FindElement(By.CssSelector("[href='/Home/ChangeInfoInit']"))
+                .Click();
+            IWebElement userInfo = driverGC.FindElement(By.ClassName("userinfo-module"));
+            userInfo.FindElement(By.ClassName("delete-btn"))
+                .Click();
+            IWebElement deleteForm = driverGC.FindElement(By.ClassName("delete-submit"));
+            deleteForm.FindElement(By.ClassName("delete-btn"))
+                .Click();
+            textOnPage = "Account has been deleted";
+            htmlBody = driverGC.FindElement(By.TagName("body"));
+            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+
+            //close driver
             driverGC.Quit();
+
         }
+
+        //[TestMethod]
+        //public void TestFirefoxDriver()
+        //{
+        //    string url = "https://cardid.apphb.com/";
+        //    driverFF.Navigate().GoToUrl(url);
+        //    //register new member
+        //    driverFF.FindElement(By.CssSelector("[href='/Home/BeginRegister']"))
+        //        .Click();
+        //    driverFF.FindElement(By.Id("DisplayName"))
+        //        .SendKeys("TestMember");
+        //    driverFF.FindElement(By.Id("Email"))
+        //        .SendKeys("testmember@cardid.co");
+        //    driverFF.FindElement(By.Id("Password"))
+        //        .SendKeys("testpw");
+        //    driverFF.FindElement(By.Id("ConfirmPassword"))
+        //        .SendKeys("testpw");
+        //    driverFF.FindElement(By.XPath("//button[@type='submit']"))
+        //        .Click();
+        //    //logout and log back in
+        //    driverFF.FindElement(By.CssSelector("[href='/Home/Logout']"))
+        //        .Click();
+        //    driverFF.FindElement(By.CssSelector("[href='/Home/Login']"))
+        //        .Click();
+        //    driverFF.FindElement(By.Id("Email"))
+        //        .SendKeys("testmember@cardid.co");
+        //    driverFF.FindElement(By.Id("Password"))
+        //        .SendKeys("testpw");
+        //    driverFF.FindElement(By.XPath("//button[@type='submit']"))
+        //        .Click();
+        //    //delete account
+        //    driverFF.FindElement(By.CssSelector("[href='/Home/Account']"))
+        //        .Click();
+        //    driverFF.FindElement(By.CssSelector("[href='/Home/ChangeInfoInit']"))
+        //        .Click();
+        //    driverFF.FindElement(By.ClassName("delete-init"))
+        //        .Click();
+        //    driverFF.FindElement(By.ClassName("delete-submit"))
+        //        .Click();
+        //    //close driver
+        //    driverFF.Quit();
+        //}
 
     }
 }
