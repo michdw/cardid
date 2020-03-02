@@ -11,7 +11,6 @@ namespace CardidTest
     {
         static IWebDriver driverFF;
         static IWebDriver driverGC;
-        string textOnPage;
         IWebElement htmlBody;
 
         [AssemblyInitialize]
@@ -40,16 +39,14 @@ namespace CardidTest
                 .SendKeys("testpw");
             driverGC.FindElement(By.XPath("//button[@type='submit']"))
                 .Click();
-            textOnPage = "Welcome, TestMember!";
             htmlBody = driverGC.FindElement(By.TagName("body"));
-            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+            Assert.IsTrue(htmlBody.Text.Contains("Welcome, TestMember!"));
 
             //logout and log back in
             driverGC.FindElement(By.CssSelector("[href='/Home/Logout']"))
                 .Click();
-            textOnPage = "You have been logged out";
             htmlBody = driverGC.FindElement(By.TagName("body"));
-            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+            Assert.IsTrue(htmlBody.Text.Contains("You have been logged out"));
 
             driverGC.FindElement(By.CssSelector("[href='/Home/Login']"))
                 .Click();
@@ -59,9 +56,8 @@ namespace CardidTest
                 .SendKeys("testpw");
             driverGC.FindElement(By.XPath("//button[@type='submit']"))
                 .Click();
-            textOnPage = "Welcome back, TestMember!";
             htmlBody = driverGC.FindElement(By.TagName("body"));
-            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+            Assert.IsTrue(htmlBody.Text.Contains("Welcome back, TestMember!"));
 
             //delete account
             driverGC.FindElement(By.CssSelector("[href='/Home/Account']"))
@@ -74,9 +70,8 @@ namespace CardidTest
             IWebElement deleteForm = driverGC.FindElement(By.ClassName("delete-submit"));
             deleteForm.FindElement(By.ClassName("delete-btn"))
                 .Click();
-            textOnPage = "Account has been deleted";
             htmlBody = driverGC.FindElement(By.TagName("body"));
-            Assert.IsTrue(htmlBody.Text.Contains(textOnPage));
+            Assert.IsTrue(htmlBody.Text.Contains("Account has been deleted"));
 
             //close driver
             driverGC.Quit();
