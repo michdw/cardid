@@ -68,6 +68,22 @@ namespace CardidTest
             deckForm.FindElement(By.TagName("button"))
                 .Click();
 
+            //add cards
+            IWebElement cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
+            cardForm.FindElement(By.Id("NewCardFront"))
+                .SendKeys("front 1");
+            cardForm.FindElement(By.Id("NewCardBack"))
+                .SendKeys("back 1");
+            cardForm.FindElement(By.TagName("button"))
+                .Click();
+            cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
+            cardForm.FindElement(By.Id("NewCardFront"))
+                .SendKeys("front 2");
+            cardForm.FindElement(By.Id("NewCardBack"))
+                .SendKeys("back 2");
+            cardForm.FindElement(By.TagName("button"))
+                .Click();
+
             //add new tag to deck
             IWebElement tagForm = driverGC.FindElement(By.CssSelector("[action='/Deck/CreateTagForDeck']"));
             tagForm.FindElement(By.TagName("input"))
@@ -75,23 +91,19 @@ namespace CardidTest
             tagForm.FindElement(By.TagName("button"))
                 .Click();
 
-            //add cards
-            IWebElement cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
-            cardForm.FindElement(By.Id("NewCardFront"))
-                .SendKeys("front 1");            
-            cardForm.FindElement(By.Id("NewCardBack"))
-                .SendKeys("back 1");
-            cardForm.FindElement(By.TagName("button"))
-                .Click();
-            cardForm = driverGC.FindElement(By.ClassName("card-blank")).FindElement(By.TagName("form"));
-            cardForm.FindElement(By.Id("NewCardFront"))
-                .SendKeys("front 2");            
-            cardForm.FindElement(By.Id("NewCardBack"))
-                .SendKeys("back 2");
-            cardForm.FindElement(By.TagName("button"))
-                .Click();
-
             //find deck by tag
+            driverGC.FindElement(By.CssSelector("[href='/Home/SearchText']"))
+                .Click();
+            IWebElement searchForm = driverGC.FindElement(By.TagName("form"));
+            searchForm.FindElement(By.TagName("input"))
+                .SendKeys("testtag");
+            searchForm.FindElement(By.CssSelector("button"))
+                .Click();
+            IWebElement tagContainer = driverGC.FindElement(By.Id("tag-container"));
+            tagContainer.FindElement(By.TagName("button"))
+                .Click();
+            tagContainer.FindElement(By.LinkText("testtag"))
+                .Click();
 
             //study session
 
