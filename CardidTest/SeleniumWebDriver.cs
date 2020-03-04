@@ -91,22 +91,9 @@ namespace CardidTest
             tagForm.FindElement(By.TagName("button"))
                 .Click();
 
-            //find deck by tag
-            driverGC.FindElement(By.CssSelector("[href='/Home/SearchText']"))
-                .Click();
-            IWebElement searchForm = driverGC.FindElement(By.TagName("form"));
-            searchForm.FindElement(By.TagName("input"))
-                .SendKeys("testtag");
-            searchForm.FindElement(By.CssSelector("button"))
-                .Click();
-            IWebElement tagContainer = driverGC.FindElement(By.Id("tag-container"));
-            tagContainer.FindElement(By.TagName("button"))
-                .Click();
-            tagContainer.FindElement(By.LinkText("testtag"))
-                .Click();
+            ////find deck by tag
 
             //study session
-
 
             //delete account
             driverGC.FindElement(By.CssSelector("[href='/Home/Account']"))
